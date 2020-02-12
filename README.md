@@ -1,9 +1,9 @@
 # Projet PPIL, 2020
 
-# Avant de lancer le projet
+## Initialiser la base de données:
 
-Initialiser la base de données:
-Merci de creer un fichier de configuration dans **src/Config/config.ini**.
+Creer un fichier de configuration dans **src/Config/config.ini**.
+
 Un exemple de configuration est fourni dans **src/Config/config-exemple.ini**.
 
 ## L'arborescence se fait de cette manière :
