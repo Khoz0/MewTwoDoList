@@ -45,10 +45,8 @@
 	</nav>
 
 	<main role="main">
-		<section class="jumbotron text-center">
-			<div class="container">
-				<?= $contenu ?>
-			</div>
+		<section class="container">
+			<?= $contenu ?>
 		</section>
 	</main>
 
