@@ -1,5 +1,9 @@
-<h1>Accueil</h1>
+<div class="jumbotron text-center">
 
-<p><?= $helloWorld ?></p>
+	<h1>Accueil</h1>
 
-<a href="?page=blblbl">Lien page 404</a>
+	<p><?= $helloWorld ?></p>
+
+	<a href="?page=blblbl">Lien page 404</a>
+
+</div>
