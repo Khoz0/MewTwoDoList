@@ -2,4 +2,4 @@
 
 <p><?= $helloWorld ?></p>
 
-<p class="test">Texte stylisé</p>
+<a href="?page=blblbl">Lien page 404</a>
