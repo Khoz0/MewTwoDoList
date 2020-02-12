@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title><?= $titre ?></title>
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+	<link rel="stylesheet" href="cdn/bootstrap-4.3.1-dist/css/bootstrap.css">
 	<link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -53,10 +53,7 @@
 	</main>
 
 
-	<script
-	src="https://code.jquery.com/jquery-3.4.1.min.js"
-	integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-	crossorigin="anonymous"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+	<script src="cdn/jquery.js"></script>
+	<script src="cdn/bootstrap-4.3.1-dist/js/bootstrap.js"></script>
 </body>
 </html>
