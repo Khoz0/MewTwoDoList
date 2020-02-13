@@ -1,9 +1,6 @@
-<link type="text/css" rel="stylesheet" href="css/sign_in.css">
-<link type="text/css" rel="stylesheet" href="css/all.css">
-<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css">
-<script type="text/javascript" src="js/bootstrap.bundle.min.js"></script>
-<script type="text/javascript" src="js/jquery.slim.min.js"></script>
-<script src="particles.js"></script>
+
+<script type="text/javascript" src="cdn/jquery.js"> </script>
+<script type="text/javascript" src="javascript/modification_compte.js"></script>
 
 <body>
 <div class="container">
@@ -39,23 +36,21 @@
                                    required autofocus>
                         </div>
 
-                        <label for="inputPassword">Votre mot de passe</label>
-                        <div class="form-label-group">
-                            <input type="password" id="inputPassword" class="form-control" placeholder="Mot de passe"
-                                   required>
+                        <div id=mdp>
                         </div>
 
-                        <label for="inputPasswordConf">Confirmer votre mot de passe</label>
-                        <div class="form-label-group">
-                            <input type="password" id="inputPasswordConf" class="form-control" placeholder="Confirmer votre mot de passe"
-                                   required>
+                        <div id=newmdp>
                         </div>
+                        
+                        <div id=confmdp>
+                        </div>
+
 
                         <br>
-                        <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Modifier</button>
                         <hr class="my-4">
                     </form>
-                      <button class="btn btn-lg btn-primary btn-block text-uppercase" href="?page=accueil" type="submit">Retour</button>
+                      <button class="btn btn-lg btn-primary btn-block text-uppercase" id="modifier">Modifier</button>
+                      <button class="btn btn-lg btn-primary btn-block text-uppercase" href="?page=accueil">Retour</button>
                 </div>
             </div>
         </div>

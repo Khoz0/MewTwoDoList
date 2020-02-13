@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use App\Classes\Flash;
 
-class Controller {
+abstract class Controller {
 
 	/**
 	 * Rend une vue en HTML
