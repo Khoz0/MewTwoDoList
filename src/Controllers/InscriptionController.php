@@ -10,7 +10,7 @@ class InscriptionController extends Controller
         return $this->render('inscription');
     }
 
-    public function ajouterUtilisateur(){
+   /* public function ajouterUtilisateur(){
         unset($_SESSION);
         $mail = $_GET['mail'] ?? null;
         $nomUser = $_GET['nomUser'] ?? null;
@@ -76,6 +76,6 @@ class InscriptionController extends Controller
         }
 
         header("");
-    }
+    }*/
 
 }

@@ -19,6 +19,11 @@ switch($page) {
         (new App\Controllers\CompteController())->compte();
         break;
 
+    // [Ajouter des routes ici]
+    case 'inscription':
+        (new App\Controllers\InscriptionController())->inscription();
+        break;
+
     case 'sessioncreate':
         (new App\Controllers\SessionCreateController())->sessionCreate();
         break;
