@@ -11,7 +11,7 @@ class SessionCreateController extends Controller
 
     public function sessionCreate()
     {
-        if ($this->checkPassword($_POST["mail"], $_POST["mdp"])) {
+        if ($this->checkPassword($_POST["mail"], $_POST["mdp"]) == 1) {
             $mail = $_SESSION["mail"];
             $helloWorld = "Bienvenue " . $mail . " !";
             return $this->render('accueil', compact('helloWorld'));

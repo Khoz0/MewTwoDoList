@@ -27,7 +27,8 @@
                             <label for="inputPassword">Password</label>
                         </div>
 
-                        <button class="btn btn-lg btn-primary2 btn-block text-uppercase" type="submit">Forgot
+                        <button class="btn btn-lg btn-primary2 btn-block text-uppercase" type="submit" formnovalidate>
+                            Forgot
                             password?
                         </button>
                         <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign in</button>
