@@ -14,6 +14,13 @@
                     <h5 class="card-title text-center">Compte</h5>
                     <form class="form-sign_in">
 
+                      <label for="inputNom">Votre pseudo</label>
+                      <div class="form-label-group">
+                          <input type="text" id="inputNom" class="form-control" placeholder="Nom"
+                                 required autofocus>
+                      </div>
+
+
                         <label for="inputNom">Votre nom</label>
                         <div class="form-label-group">
                             <input type="text" id="inputNom" class="form-control" placeholder="Nom"
