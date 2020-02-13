@@ -1,4 +1,6 @@
-
+<?php if(isset($_GET["valider"])){
+    header("Location: ?page=compte");
+} ?>
 <script type="text/javascript" src="cdn/jquery.js"> </script>
 <script type="text/javascript" src="javascript/modification_compte.js"></script>
 
@@ -9,15 +11,12 @@
             <div class="card card-sign_in my-5">
                 <div class="card-body">
                     <h5 class="card-title text-center">Compte</h5>
-                    <form class="form-sign_in">
-
-                      <label for="inputNom">Votre pseudo</label>
-                      <div class="form-label-group">
-                          <input type="text" id="inputNom" class="form-control" placeholder="Nom"
-                                 required autofocus>
-                      </div>
-
-
+                    <form class="form-sign_in" method="get" action="index.php?page=compte">
+                        <label for="inputPseudo">Votre pseudo</label>
+                        <div class="form-label-group">
+                            <input type="text" id="inputPseudo" class="form-control" placeholder="Nom"
+                                   required autofocus>
+                        </div>
                         <label for="inputNom">Votre nom</label>
                         <div class="form-label-group">
                             <input type="text" id="inputNom" class="form-control" placeholder="Nom"
@@ -27,13 +26,13 @@
                         <label for="inputPrenom">Votre prénom</label>
                         <div class="form-label-group">
                             <input type="text" id="inputPrenom" class="form-control" placeholder="Prénom"
-                                   required autofocus>
+                                   required>
                         </div>
 
                         <label for="inputEmail">Votre adresse mail</label>
                         <div class="form-label-group">
                             <input type="email" id="inputEmail" class="form-control" placeholder="Email"
-                                   required autofocus>
+                                   required>
                         </div>
 
                         <div id=mdp>
@@ -52,8 +51,7 @@
                         </div>
                         <hr class="my-4">
                     </form>
-
-                      <button class="btn btn-lg btn-primary btn-block text-uppercase" href="?page=accueil">Retour</button>
+                      <button class="btn btn-lg btn-primary btn-block text-uppercase" onclick="window.location.href='?page=accueil'">Retour</button>
                 </div>
             </div>
         </div>
