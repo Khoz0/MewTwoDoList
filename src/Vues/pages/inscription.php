@@ -13,11 +13,11 @@ InscriptionController::class
             <div class="card card-sign_in my-5">
                 <div class="card-body">
                     <h5 class="card-title text-center">Inscription</h5>
-                    <form class="form-sign_in" method="get" action="#">
+                    <form class="form-sign_in" method="post" action="index.php?page=inscription">
 
                         <label for="nomUser">Votre nom</label>
                         <div class="form-label-group">
-                            <input type="text" id="nomUser" onkeyup="verifLogin(this)" class="form-control" placeholder="Nom"
+                            <input type="text" id="nomUser" name="nomUser" onkeyup="verifLogin(this)" class="form-control" placeholder="Nom"
                                    required autofocus >
                         </div>
                         <?php
@@ -32,7 +32,7 @@ InscriptionController::class
 
                         <label for="prenomUser">Votre prénom</label>
                         <div class="form-label-group">
-                            <input type="text" id="prenomUser" onkeyup="verifLogin(this)" class="form-control" placeholder="Prénom"
+                            <input type="text"  name="prenomUser" id="prenomUser" onkeyup="verifLogin(this)" class="form-control" placeholder="Prénom"
                                    required autofocus>
                         </div>
                         <?php
@@ -47,7 +47,7 @@ InscriptionController::class
 
                         <label for="inputPseudo">Votre pseudo</label>
                         <div class="form-label-group">
-                            <input type="text" id="inputPseudo" class="form-control" placeholder="Pseudo"
+                            <input type="text" name="pseudoUser" id="pseudoUser" class="form-control" placeholder="Pseudo"
                                    required autofocus>
                         </div>
                         <?php
@@ -62,7 +62,7 @@ InscriptionController::class
 
                         <label for="mail">Votre adresse mail</label>
                         <div class="form-label-group">
-                            <input type="email" id="mail" onkeyup="verifMail(this)" class="form-control" placeholder="Email"
+                            <input type="email" name="mail" id="mail" onkeyup="verifMail(this)" class="form-control" placeholder="Email"
                                    required autofocus>
                         </div>
                         <?php
@@ -77,7 +77,7 @@ InscriptionController::class
 
                         <label for="mdp">Votre mot de passe</label>
                         <div class="form-label-group">
-                            <input type="password" id="mdp" onkeyup="verifMDP(this)" class="form-control" placeholder="Mot de passe"
+                            <input type="password" name="mdp" id="mdp" onkeyup="verifMDP(this)" class="form-control" placeholder="Mot de passe"
                                    required>
                         </div>
                         <?php
@@ -92,7 +92,7 @@ InscriptionController::class
 
                         <label for="mdpConf">Confirmer votre mot de passe</label>
                         <div class="form-label-group">
-                            <input type="password" id="mdpConf" class="form-control" placeholder="Confirmer votre mot de passe"
+                            <input type="password" name="mdpConf" id="mdpConf" class="form-control" placeholder="Confirmer votre mot de passe"
                                    required onkeyup="confMDP(this,document.getElementById('inputPassword').value)">
                         </div>
                         <?php
@@ -106,10 +106,11 @@ InscriptionController::class
                         ?>
                         <br>
 
-                        <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">S'inscrire</button>
+                        <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit" >S'inscrire</button>
                         <?php
                         if(isset($_GET["submit"])) {
-                            header('Location: index.php?page=login');
+                            echo "Bonjour";
+                            header('Location: index.php?page=inscription');
                         }
                         ?>
                         <hr class="my-4">

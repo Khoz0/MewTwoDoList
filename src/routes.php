@@ -1,6 +1,6 @@
 <?php
 
-$page = $_GET['page'] ?? header('Location: index.php?page=accueil');
+$page = $_GET['page'];
 
 // Le router de l'application est ici
 

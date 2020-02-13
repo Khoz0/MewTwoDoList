@@ -10,15 +10,15 @@ class InscriptionController extends Controller
         return $this->render('inscription');
     }
 
-   /* public function ajouterUtilisateur(){
+    public function ajouterUtilisateur(){
         unset($_SESSION);
-        $mail = $_GET['mail'] ?? null;
-        $nomUser = $_GET['nomUser'] ?? null;
-        $prenomUser  = $_GET['prenomUser'] ?? null;
-        $pseudoUser  = $_GET['pseudoUser'] ?? null;
-        $mdp  = $_GET['mdp'] ?? null;
-        $mdpConf = $_GET['mdpConf'] ?? null;
-        $photo = $_GET['photo'] ?? null;
+        $mail = $_POST['mail'] ?? null;
+        $nomUser = $_POST['nomUser'] ?? null;
+        $prenomUser  = $_POST['prenomUser'] ?? null;
+        $pseudoUser  = $_POST['pseudoUser'] ?? null;
+        $mdp  = $_POST['mdp'] ?? null;
+        $mdpConf = $_POST['mdpConf'] ?? null;
+        $photo = $_POST['photo'] ?? null;
 
         // On vérifie que les champs sont correctements entrés
         if (!preg_match('/^[a-zA-Z0-9]{1,50}$/', $pseudoUser)) {
@@ -75,7 +75,6 @@ class InscriptionController extends Controller
             return false;
         }
 
-        header("");
-    }*/
+    }
 
 }
