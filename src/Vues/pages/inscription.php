@@ -21,6 +21,12 @@
                                    required autofocus>
                         </div>
 
+                        <label for="inputPseudo">Votre pseudo</label>
+                        <div class="form-label-group">
+                            <input type="text" id="inputPseudo" class="form-control" placeholder="Pseudo"
+                                   required autofocus>
+                        </div>
+
                         <label for="inputEmail">Votre adresse mail</label>
                         <div class="form-label-group">
                             <input type="email" id="inputEmail" onkeyup="verifMail(this)" class="form-control" placeholder="Email"
