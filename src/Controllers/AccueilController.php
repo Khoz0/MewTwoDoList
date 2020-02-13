@@ -13,7 +13,8 @@ class AccueilController extends Controller {
             $helloWorld = "Bienvenue " . $_SESSION["mail"];
             return $this->render('accueil', compact('helloWorld'));
         } else {
-            return $this->render('login');
+            header('Location: ./?page=login');
+            exit();
         }
 	}
 	
