@@ -2,7 +2,6 @@
 
 namespace App\Controllers;
 
-use App\Controllers\Controller;
 use App\Modeles\DB;
 
 class AccueilController extends Controller {
@@ -20,11 +19,6 @@ class AccueilController extends Controller {
 		$pseudoUser  = $_POST['pseudoUser'] ?? null;
 		$mdp  = $_POST['mdp'] ?? null;
 		$photo = $_POST['photo'] ?? null;
-		
-		// On verifie les champs postés
-		if (is_null($pseudo)) {
-			return false;
-		}
 
 		if (is_null($mdp)) {
 			return false;
@@ -67,7 +61,7 @@ class AccueilController extends Controller {
 		$bdd = DB::getInstance();
 
 		$req = $bdd->prepare('SELECT pseudo_user FROM utilisateur WHERE pseudo_user=? LIMIT 1');
-		$req->execute([$pseudo_user]);
+		$req->execute([$pseudoUser]);
 		$donnee = $req->fetch();
 		if(!empty($donnee)) {
 			return false;
