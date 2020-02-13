@@ -1,3 +1,9 @@
+<link type="text/css" rel="stylesheet" href="css/sign_in.css">
+<link type="text/css" rel="stylesheet" href="css/all.css">
+<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css">
+<script type="text/javascript" src="js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript" src="js/jquery.slim.min.js"></script>
+<script src="particles.js"></script>
 
 <body>
 <div class="container">
@@ -21,7 +27,8 @@
                             <label for="inputPassword">Password</label>
                         </div>
 
-                        <button class="btn btn-lg btn-primary2 btn-block text-uppercase" type="submit">Forgot
+                        <button class="btn btn-lg btn-primary2 btn-block text-uppercase" type="submit" formnovalidate>
+                            Forgot
                             password?
                         </button>
                         <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign in</button>

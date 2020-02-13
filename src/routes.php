@@ -28,6 +28,10 @@ switch($page) {
         (new App\Controllers\SessionCreateController())->sessionCreate();
         break;
 
+    case 'disconnect':
+        (new App\Controllers\SessionDestroyController())->sessionDestroy();
+        break;
+
 	default: // Si, rien, alors erreur 404
 		(new App\Controllers\ErreurController)->_404();
 		break;

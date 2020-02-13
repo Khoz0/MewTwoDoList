@@ -10,7 +10,7 @@
 
     <?php $page = $_GET['page'] ?? '' ?>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-		<a class="navbar-brand" href="/">MewTwoToList</a>
+		<a class="navbar-brand" href="/">MewTwoDoList</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
@@ -24,7 +24,7 @@
                 <?php } ?>
 					<a class="nav-link" href="?page=accueil">Accueil <span class="sr-only">(current)</span></a>
 				</li>
-				<?php if(false) { 
+                <?php if (false) {
 				if ($page == 'compte') { ?>
 					<li class="nav-item active">
                 <?php }else{ ?>
@@ -33,21 +33,22 @@
 						<a class="nav-link" href="?page=compte">Mon compte</a>
 					</li>
 				<?php } else {
-					if ($page == 'login') { ?>
+                    if ($page == 'disconnect') { ?>
                         <li class="nav-item active">
                     <?php }else{ ?>
                         <li class="nav-item">
                     <?php } ?>
-						<a class="nav-link" href="?page=login">Connexion</a>
+                    <a class="nav-link" href="?page=disconnect">Deconnexion</a>
 					</li>
-					<?php if ($page == 'inscription') { ?>
+                    <?php if ($page == 'inscription') { ?>
                         <li class="nav-item active">
-                    <?php }else{ ?>
+                    <?php } else { ?>
                         <li class="nav-item">
                     <?php } ?>
-						<a class="nav-link" href="?page=inscription">Inscription</a>
-					</li>
-				<?php } ?>
+                    <a class="nav-link" href="?page=inscription">Inscription</a>
+                    </li>
+
+                <?php } ?>
 			</ul>
 
 		</div>
