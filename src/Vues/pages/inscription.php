@@ -93,7 +93,7 @@ InscriptionController::class
                         <label for="mdpConf">Confirmer votre mot de passe</label>
                         <div class="form-label-group">
                             <input type="password" id="mdpConf" class="form-control" placeholder="Confirmer votre mot de passe"
-                                   required onkeyup="confMDP(this,document.getElementById('inputPassword').value)">
+                                   required onkeyup="confMDP(this,document.getElementById('mdp').value)">
                         </div>
                         <?php
                         if(isset($_SESSION['error_syntx'])) {
@@ -111,6 +111,7 @@ InscriptionController::class
                         if(isset($_GET["submit"])) {
                             header('Location: index.php?page=login');
                         }
+
                         ?>
                         <hr class="my-4">
                     </form>
