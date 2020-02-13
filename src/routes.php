@@ -1,6 +1,6 @@
 <?php
 
-$page = $_GET['page'];
+$page = $_GET['page'] ?? header('Location: index.php?page=accueil');
 
 //var_dump($page);die;
 

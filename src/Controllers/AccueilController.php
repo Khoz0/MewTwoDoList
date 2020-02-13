@@ -13,7 +13,7 @@ class AccueilController extends Controller {
             $helloWorld = "Bienvenue " . $_SESSION["mail"];
             return $this->render('accueil', compact('helloWorld'));
         } else {
-            $helloWorld = "Bienvenue " . $_SESSION["mail"];
+            $helloWorld = "Bienvenue anonyme";
 
             return $this->render('accueil', compact('helloWorld'));
         }
