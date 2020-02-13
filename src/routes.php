@@ -2,6 +2,8 @@
 
 $page = $_GET['page'];
 
+//var_dump($page);die;
+
 // Le router de l'application est ici
 
 switch($page) {
@@ -14,14 +16,12 @@ switch($page) {
         (new App\Controllers\LoginController())->login();
         break;
 
-	// [Ajouter des routes ici]
-    case 'compte':
-        (new App\Controllers\CompteController())->compte();
-        break;
-
-    // [Ajouter des routes ici]
     case 'inscription':
         (new App\Controllers\InscriptionController())->inscription();
+        break;
+
+    case 'compte':
+        (new App\Controllers\CompteController())->compte();
         break;
 
     case 'sessioncreate':

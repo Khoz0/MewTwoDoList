@@ -11,6 +11,8 @@ class CompteController extends Controller {
         return $this->render('compte');
     }
 
-
-
+    public function getPseudo(){
+        $pseudo = $_GET["inputPseudo"];
+        echo $pseudo;
+    }
 }
