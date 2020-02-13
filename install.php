@@ -11,8 +11,8 @@ $query = file_get_contents("sql.sql");
 
 
 
-require 'src/Classes/DB.php';
-$bdd = App\Classes\DB::getInstance();
+require 'src/Modeles/DB.php';
+$bdd = App\Modeles\DB::getInstance();
 
 $stmt = $bdd->prepare($query);
 
