@@ -11,4 +11,6 @@ class CompteController extends Controller {
         return $this->render('compte');
     }
 
+
+
 }
