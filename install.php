@@ -3,7 +3,7 @@
 try {
 $config = parse_ini_file("src/Config/config.ini");
 } catch(Exception $e) {
-	echo "Merci de creer un fichier de configuration dans 'src/Config/config.ini'";
+	echo "Merci de créer un fichier de configuration dans 'src/Config/config.ini'";
 	die;
 }
 
@@ -12,7 +12,7 @@ $query = file_get_contents("sql.sql");
 
 
 require 'src/Modeles/DB.php';
-$bdd = App\Modeles\DB::getInstance();
+$bdd = App\Modeles\DB::getFirstInstance();
 
 $stmt = $bdd->prepare($query);
 
