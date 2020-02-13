@@ -14,6 +14,10 @@ switch($page) {
         (new App\Controllers\LoginController())->login();
         break;
 
+    case 'inscription':
+        (new App\Controllers\InscriptionController())->inscription();
+        break;
+
 	// [Ajouter des routes ici]
 
 	default: // Si, rien, alors erreur 404
