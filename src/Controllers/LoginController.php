@@ -10,4 +10,9 @@ class LoginController extends Controller
     {
         return $this->render('login');
     }
+
+    public function onLogin()
+    {
+        echo "test";
+    }
 }
