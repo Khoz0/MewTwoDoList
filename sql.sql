@@ -1,68 +1,68 @@
 -- SQL ICI
-CREATE TABLE Utilisateur(
-mail VARCHAR(30) NOT NULL PRIMARY KEY, 
+CREATE TABLE IF NOT EXISTS Utilisateur(
+mail VARCHAR(30) NOT NULL PRIMARY KEY,
 nomUser VARCHAR(50),
 prenomUser VARCHAR(50),
 pseudoUser VARCHAR(50) UNIQUE,
-mdp VARCHAR(16), 
+mdp VARCHAR(16),
 photo BLOB
-)
+);
 
-CREATE TABLE Liste(
-idListe NUMBER(10) NOT NULL PRIMARY KEY, 
+CREATE TABLE IF NOT EXISTS Liste(
+idListe INTEGER(10) NOT NULL PRIMARY KEY,
 intituleListe VARCHAR(50),
 dateCreation VARCHAR(50),
 dateFin VARCHAR(50),
-mailProprietaire VARCHAR(16), 
-CONSTRAINT FK_User FOREIGN KEY(mailProprietaire) REFERENCES Utilisateur (mail)
-)
+mailProprietaire VARCHAR(16),
+CONSTRAINT FK_Liste FOREIGN KEY(mailProprietaire) REFERENCES Utilisateur (mail)
+);
 
-CREATE TABLE Tache(
-idTache NUMBER(10) NOT NULL PRIMARY KEY, 
+CREATE TABLE IF NOT EXISTS Tache(
+idTache INTEGER(10) NOT NULL PRIMARY KEY,
 intituleTache VARCHAR(50),
-valide BOOLEEN(50),
-idListe NUMBER(50),
-mailListe VARCHAR(16), 
-CONSTRAINT FK_User FOREIGN KEY(idListe) REFERENCES Liste(idListe),
-CONSTRAINT FK_User FOREIGN KEY(mailListe) REFERENCES Liste(mailProprietaire)
-)
+valide BOOLEAN,
+idListeT INTEGER(50),
+mailUtilisateur VARCHAR(16),
+CONSTRAINT FK_Tache1 FOREIGN KEY(idListeT) REFERENCES Liste(idListe),
+CONSTRAINT FK_Tache2 FOREIGN KEY(mailUtilisateur) REFERENCES Liste(mailProprietaire)
+);
 
-CREATE TABLE Notification(
-idNotification NUMBER(10) NOT NULL PRIMARY KEY, 
+CREATE TABLE IF NOT EXISTS Notification(
+idNotification INTEGER(10) NOT NULL PRIMARY KEY,
 dateEnvoi DATE,
-valide BOOLEEN,
+valide BOOLEAN,
 contenu VARCHAR(200),
-lu BOOLEEN, 
+lu BOOLEEN,
 mail VARCHAR(50),
-idListe NUMBER(10),
-CONSTRAINT FK_User FOREIGN KEY(mail) REFERENCES Utilisateur(mail),
-CONSTRAINT FK_User FOREIGN KEY(idListe) REFERENCES Liste(idListe)
-)
+idListe INTEGER(10),
+CONSTRAINT FK_Notification1 FOREIGN KEY(mail) REFERENCES Utilisateur(mail),
+CONSTRAINT FK_Notification2 FOREIGN KEY(idListe) REFERENCES Liste(idListe)
+);
 
 
-CREATE TABLE NotificationAvecChangement(
-idNotification NUMBER(10) NOT NULL PRIMARY KEY
-)
+CREATE TABLE IF NOT EXISTS NotificationAvecChangement(
+idNotification INTEGER(10) NOT NULL PRIMARY KEY
+);
 
-CREATE TABLE NotificationAvecChoix(
-idNotification NUMBER(10) NOT NULL PRIMARY KEY, 
-repondu BOOLEEN
-)
+CREATE TABLE IF NOT EXISTS NotificationAvecChoix(
+idNotification INTEGER(10) NOT NULL PRIMARY KEY,
+repondu BOOLEAN
+);
 
-CREATE TABLE NotificationChangementProprietaire(
-idNotification NUMBER(10) NOT NULL PRIMARY KEY
-)
+CREATE TABLE IF NOT EXISTS NotificationChangementProprietaire(
+idNotification INTEGER(10) NOT NULL PRIMARY KEY
+);
 
-CREATE TABLE NotificationAjoutMembre(
-idNotification NUMBER(10) NOT NULL PRIMARY KEY
-)
+CREATE TABLE IF NOT EXISTS NotificationAjoutMembre(
+idNotification INTEGER(10) NOT NULL PRIMARY KEY
+);
 
-CREATE TABLE Destinataire(
+CREATE TABLE IF NOT EXISTS Destinataire(
     mail VARCHAR(50) NOT NULL PRIMARY KEY,
-idNotification NUMBER(10) NOT NULL PRIMARY KEY
-)
+idNotification INTEGER(10) NOT NULL PRIMARY KEY
+);
 
-CREATE TABLE Membre(
-CONSTRAINT FK_User FOREIGN KEY(mail) REFERENCES Utilisateur(mail))  NOT NULL PRIMARY KEY,
-CONSTRAINT FK_User FOREIGN KEY(idListe) REFERENCES Utilisateur(idListe))  NOT NULL PRIMARY KEY
-)
+CREATE TABLE IF NOT EXISTS Membre(
+CONSTRAINT FK_Membre1 FOREIGN KEY(mail) REFERENCES Utilisateur(mail))  NOT NULL PRIMARY KEY,
+CONSTRAINT FK_Membre2 FOREIGN KEY(idListe) REFERENCES Utilisateur(idListe))  NOT NULL PRIMARY KEY
+);
