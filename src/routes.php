@@ -10,6 +10,10 @@ switch($page) {
 		(new App\Controllers\AccueilController)->index();
 		break;
 
+    case 'login':
+        (new App\Controllers\LoginController())->login();
+        break;
+
 	// [Ajouter des routes ici]
 
 	default: // Si, rien, alors erreur 404
