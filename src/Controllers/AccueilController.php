@@ -8,13 +8,15 @@ class AccueilController extends Controller {
 
     public function index()
     {
-        /*if (isset($_SESSION["mail"])) {
+        if (isset($_SESSION["mail"])) {
 
-            $helloWorld = "Bienvenue " . $_SESSION["mail"];*/
+            $helloWorld = "Bienvenue " . $_SESSION["mail"];
             return $this->render('accueil', compact('helloWorld'));
-        /*} else {
-            return $this->render('login');
-        }*/
+        } else {
+            $helloWorld = "Bienvenue " . $_SESSION["mail"];
+
+            return $this->render('accueil', compact('helloWorld'));
+        }
 	}
 	
 	public function ajouterUtilisateur(){

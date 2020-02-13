@@ -1,3 +1,9 @@
+<link type="text/css" rel="stylesheet" href="css/sign_in.css">
+<link type="text/css" rel="stylesheet" href="css/all.css">
+<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css">
+<script type="text/javascript" src="js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript" src="js/jquery.slim.min.js"></script>
+<script src="particles.js"></script>
 
 <body>
 <div class="container">
