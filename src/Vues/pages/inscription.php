@@ -1,9 +1,4 @@
-<link type="text/css" rel="stylesheet" href="css/sign_in.css">
-<link type="text/css" rel="stylesheet" href="css/all.css">
-<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css">
-<script type="text/javascript" src="js/bootstrap.bundle.min.js"></script>
-<script type="text/javascript" src="js/jquery.slim.min.js"></script>
-<script src="particles.js"></script>
+<script type="text/javascript" src="javascript/verification_inscription.js"></script>
 
 <body>
 <div class="container">
@@ -16,32 +11,32 @@
 
                         <label for="inputNom">Votre nom</label>
                         <div class="form-label-group">
-                            <input type="text" id="inputNom" class="form-control" placeholder="Nom"
-                                   required autofocus>
+                            <input type="text" id="inputNom" onkeyup="verifLogin(this)" class="form-control" placeholder="Nom"
+                                   required autofocus >
                         </div>
 
                         <label for="inputPrenom">Votre prénom</label>
                         <div class="form-label-group">
-                            <input type="text" id="inputPrenom" class="form-control" placeholder="Prénom"
+                            <input type="text" id="inputPrenom" onkeyup="verifLogin(this)" class="form-control" placeholder="Prénom"
                                    required autofocus>
                         </div>
 
                         <label for="inputEmail">Votre adresse mail</label>
                         <div class="form-label-group">
-                            <input type="email" id="inputEmail" class="form-control" placeholder="Email"
+                            <input type="email" id="inputEmail" onkeyup="verifMail(this)" class="form-control" placeholder="Email"
                                    required autofocus>
                         </div>
 
                         <label for="inputPassword">Votre mot de passe</label>
                         <div class="form-label-group">
-                            <input type="password" id="inputPassword" class="form-control" placeholder="Mot de passe"
+                            <input type="password" id="inputPassword" onkeyup="verifMDP(this)" class="form-control" placeholder="Mot de passe"
                                    required>
                         </div>
 
                         <label for="inputPasswordConf">Confirmer votre mot de passe</label>
                         <div class="form-label-group">
                             <input type="password" id="inputPasswordConf" class="form-control" placeholder="Confirmer votre mot de passe"
-                                   required>
+                                   required onkeyup="confMDP(this,document.getElementById('inputPassword').value)">
                         </div>
                         <br>
 
