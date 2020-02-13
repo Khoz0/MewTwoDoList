@@ -1,4 +1,10 @@
 <script type="text/javascript" src="javascript/verification_inscription.js"></script>
+<?php
+use App\Controllers\InscriptionController;
+
+InscriptionController::class
+
+?>
 
 <body>
 <div class="container">
@@ -7,17 +13,17 @@
             <div class="card card-sign_in my-5">
                 <div class="card-body">
                     <h5 class="card-title text-center">Inscription</h5>
-                    <form class="form-sign_in">
+                    <form class="form-sign_in" method="get" action="#">
 
-                        <label for="inputNom">Votre nom</label>
+                        <label for="nomUser">Votre nom</label>
                         <div class="form-label-group">
-                            <input type="text" id="inputNom" onkeyup="verifLogin(this)" class="form-control" placeholder="Nom"
+                            <input type="text" id="nomUser" onkeyup="verifLogin(this)" class="form-control" placeholder="Nom"
                                    required autofocus >
                         </div>
 
-                        <label for="inputPrenom">Votre prénom</label>
+                        <label for="prenomUser">Votre prénom</label>
                         <div class="form-label-group">
-                            <input type="text" id="inputPrenom" onkeyup="verifLogin(this)" class="form-control" placeholder="Prénom"
+                            <input type="text" id="prenomUser" onkeyup="verifLogin(this)" class="form-control" placeholder="Prénom"
                                    required autofocus>
                         </div>
 
@@ -27,26 +33,31 @@
                                    required autofocus>
                         </div>
 
-                        <label for="inputEmail">Votre adresse mail</label>
+                        <label for="mail">Votre adresse mail</label>
                         <div class="form-label-group">
-                            <input type="email" id="inputEmail" onkeyup="verifMail(this)" class="form-control" placeholder="Email"
+                            <input type="email" id="mail" onkeyup="verifMail(this)" class="form-control" placeholder="Email"
                                    required autofocus>
                         </div>
 
-                        <label for="inputPassword">Votre mot de passe</label>
+                        <label for="mdp">Votre mot de passe</label>
                         <div class="form-label-group">
-                            <input type="password" id="inputPassword" onkeyup="verifMDP(this)" class="form-control" placeholder="Mot de passe"
+                            <input type="password" id="mdp" onkeyup="verifMDP(this)" class="form-control" placeholder="Mot de passe"
                                    required>
                         </div>
 
-                        <label for="inputPasswordConf">Confirmer votre mot de passe</label>
+                        <label for="mdpConf">Confirmer votre mot de passe</label>
                         <div class="form-label-group">
-                            <input type="password" id="inputPasswordConf" class="form-control" placeholder="Confirmer votre mot de passe"
+                            <input type="password" id="mdpConf" class="form-control" placeholder="Confirmer votre mot de passe"
                                    required onkeyup="confMDP(this,document.getElementById('inputPassword').value)">
                         </div>
                         <br>
 
                         <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">S'inscrire</button>
+                        <?php
+                        if(isset($_GET["submit"])) {
+                            header('Location: index.php?page=login');
+                        }
+                        ?>
                         <hr class="my-4">
                     </form>
                 </div>
