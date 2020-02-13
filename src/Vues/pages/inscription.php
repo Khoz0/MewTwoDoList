@@ -14,34 +14,34 @@
                     <h5 class="card-title text-center">Inscription</h5>
                     <form class="form-sign_in">
 
+                        <label for="inputNom">Votre nom</label>
                         <div class="form-label-group">
                             <input type="text" id="inputNom" class="form-control" placeholder="Nom"
                                    required autofocus>
-                            <label for="inputNom">Votre nom</label>
                         </div>
 
+                        <label for="inputPrenom">Votre prénom</label>
                         <div class="form-label-group">
                             <input type="text" id="inputPrenom" class="form-control" placeholder="Prénom"
                                    required autofocus>
-                            <label for="inputPrenom">Votre prénom</label>
                         </div>
 
+                        <label for="inputEmail">Votre adresse mail</label>
                         <div class="form-label-group">
                             <input type="email" id="inputEmail" class="form-control" placeholder="Email"
                                    required autofocus>
-                            <label for="inputEmail">Votre adresse mail</label>
                         </div>
 
+                        <label for="inputPassword">Votre mot de passe</label>
                         <div class="form-label-group">
                             <input type="password" id="inputPassword" class="form-control" placeholder="Mot de passe"
                                    required>
-                            <label for="inputPassword">Votre mot de passe</label>
                         </div>
 
+                        <label for="inputPasswordConf">Confirmer votre mot de passe</label>
                         <div class="form-label-group">
                             <input type="password" id="inputPasswordConf" class="form-control" placeholder="Confirmer votre mot de passe"
                                    required>
-                            <label for="inputPasswordConf">Confirmer votre mot de passe</label>
                         </div>
                         <br>
 
