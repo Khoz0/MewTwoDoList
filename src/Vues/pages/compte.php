@@ -1,6 +1,9 @@
-<?php if(isset($_GET["valider"])){
-    header("Location: ?page=compte");
-} ?>
+<?php
+use \App\Controllers\CompteController;
+
+CompteController::class;
+
+?>
 <script type="text/javascript" src="cdn/jquery.js"> </script>
 <script type="text/javascript" src="javascript/modification_compte.js"></script>
 
@@ -11,27 +14,31 @@
             <div class="card card-sign_in my-5">
                 <div class="card-body">
                     <h5 class="card-title text-center">Compte</h5>
-                    <form class="form-sign_in" method="get" action="index.php?page=compte">
+                    <form class="form-sign_in" method="POST" action="?page=compte">
+                        <?php if (isset($_POST["valider"])){
+                            //echo CompteController::vérification();
+                            echo CompteController::getPseudo();
+                        }?>
                         <label for="inputPseudo">Votre pseudo</label>
                         <div class="form-label-group">
-                            <input type="text" id="inputPseudo" class="form-control" placeholder="Nom"
+                            <input type="text" name="inputPseudo" class="form-control" placeholder="Pseudo"
                                    required autofocus>
                         </div>
                         <label for="inputNom">Votre nom</label>
                         <div class="form-label-group">
-                            <input type="text" id="inputNom" class="form-control" placeholder="Nom"
+                            <input type="text" name="inputNom" class="form-control" placeholder="Nom"
                                    required autofocus>
                         </div>
 
                         <label for="inputPrenom">Votre prénom</label>
                         <div class="form-label-group">
-                            <input type="text" id="inputPrenom" class="form-control" placeholder="Prénom"
+                            <input type="text" name="inputPrenom" class="form-control" placeholder="Prénom"
                                    required>
                         </div>
 
                         <label for="inputEmail">Votre adresse mail</label>
                         <div class="form-label-group">
-                            <input type="email" id="inputEmail" class="form-control" placeholder="Email"
+                            <input type="email" name="inputEmail" class="form-control" placeholder="Email"
                                    required>
                         </div>
 
