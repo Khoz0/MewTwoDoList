@@ -1,9 +1,3 @@
-<link type="text/css" rel="stylesheet" href="css/sign_in.css">
-<link type="text/css" rel="stylesheet" href="css/all.css">
-<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css">
-<script type="text/javascript" src="js/bootstrap.bundle.min.js"></script>
-<script type="text/javascript" src="js/jquery.slim.min.js"></script>
-<script src="particles.js"></script>
 
 <body>
 <div class="container">
@@ -12,15 +6,17 @@
             <div class="card card-sign_in my-5">
                 <div class="card-body">
                     <h5 class="card-title text-center">Sign In</h5>
-                    <form class="form-sign_in">
+                    <form class="form-sign_in" method="post" action="?page=sessioncreate">
                         <div class="form-label-group">
-                            <input type="email" id="inputEmail" class="form-control" placeholder="Email address"
+                            <input type="email" id="inputEmail" name="mail" class="form-control"
+                                   placeholder="Email address"
                                    required autofocus>
                             <label for="inputEmail">Email address</label>
                         </div>
 
                         <div class="form-label-group">
-                            <input type="password" id="inputPassword" class="form-control" placeholder="Password"
+                            <input type="password" id="inputPassword" name="mdp" class="form-control"
+                                   placeholder="Password"
                                    required>
                             <label for="inputPassword">Password</label>
                         </div>
