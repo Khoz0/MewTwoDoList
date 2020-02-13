@@ -14,13 +14,13 @@ switch($page) {
         (new App\Controllers\LoginController())->login();
         break;
 
-    case 'inscription':
-        (new App\Controllers\InscriptionController())->inscription();
-        break;
-
 	// [Ajouter des routes ici]
     case 'compte':
         (new App\Controllers\CompteController())->compte();
+        break;
+
+    case 'sessioncreate':
+        (new App\Controllers\SessionCreateController())->sessionCreate();
         break;
 
 	default: // Si, rien, alors erreur 404

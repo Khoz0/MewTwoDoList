@@ -6,10 +6,15 @@ use App\Modeles\DB;
 
 class AccueilController extends Controller {
 
-	public function index() {
-		$helloWorld = "Hello world";
+    public function index()
+    {
+        if (isset($_SESSION["mail"])) {
 
-		return $this->render('accueil', compact('helloWorld'));
+            $helloWorld = "Bienvenue " . $_SESSION["mail"];
+            return $this->render('accueil', compact('helloWorld'));
+        } else {
+            return $this->render('login');
+        }
 	}
 	
 	public function ajouterUtilisateur(){
@@ -69,7 +74,7 @@ class AccueilController extends Controller {
 	}
 	
 	public function getUtilisateurConnecte(){
-		$connecte = $_SESSION['pseudo_user'] ?? null;
+        $connecte = $_SESSION['mail'] ?? null;
 
 		if(!$connecte) {
 			return false;
