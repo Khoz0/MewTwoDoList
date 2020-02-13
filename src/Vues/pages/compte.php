@@ -41,15 +41,18 @@
 
                         <div id=newmdp>
                         </div>
-                        
+
                         <div id=confmdp>
                         </div>
 
 
                         <br>
+                        <button class="btn btn-lg btn-primary btn-block text-uppercase" id="modifier">Modifier</button>
+                        <div id=buttonmodif>
+                        </div>
                         <hr class="my-4">
                     </form>
-                      <button class="btn btn-lg btn-primary btn-block text-uppercase" id="modifier">Modifier</button>
+
                       <button class="btn btn-lg btn-primary btn-block text-uppercase" href="?page=accueil">Retour</button>
                 </div>
             </div>
