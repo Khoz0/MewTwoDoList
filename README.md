@@ -13,3 +13,18 @@ Un exemple de configuration est fourni dans **src/Config/config-exemple.ini**.
 		- dossier "vues" qui contient le code HTML
 		- dossier "controlleurs" qui contient la logique de notre application
 	- dossier "public" avec l'"index.php", les fichiers css, javascript ainsi que toutes les images
+
+
+## Contenu du fichier src/Config/config.ini
+
+	; Nom d'utilisateur de la base de données
+	user=root
+
+	; Mot de passe de la base de données
+	pass=root
+
+	; Le nom de la base de donnee utilisee
+	db=ppil
+
+	; Le nom d'hôte de la base de donnees
+	host=localhost
