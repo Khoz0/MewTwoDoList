@@ -24,7 +24,7 @@ function surligneVert(champ,erreur)
 
 function verifLogin(champ)
 {
-    if(champ.value.length < 1 || champ.value.length > 50)
+    if(champ.value.length > 50)
     {
         surligne(champ, true);
         return false;
