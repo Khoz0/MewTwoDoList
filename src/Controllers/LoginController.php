@@ -8,7 +8,12 @@ class LoginController extends Controller
 {
     public function login()
     {
-        return $this->render('login');
+        if (!isset($_SESSION["mail"])) {
+            return $this->render('login');
+        } else {
+            header('Location: ./?page=accueil');
+            exit();
+        }
     }
 
     public function onLogin()

@@ -12,29 +12,39 @@
         <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
             <div class="card card-sign_in my-5">
                 <div class="card-body">
-                    <h5 class="card-title text-center">Sign In</h5>
+                    <h5 class="card-title text-center">Connexion / Déconnexion</h5>
                     <form class="form-sign_in" method="post" action="?page=sessioncreate">
                         <div class="form-label-group">
                             <input type="email" id="inputEmail" name="mail" class="form-control"
-                                   placeholder="Email address"
+                                   placeholder="Adresse mail"
                                    required autofocus>
-                            <label for="inputEmail">Email address</label>
                         </div>
-
+                        <br>
                         <div class="form-label-group">
                             <input type="password" id="inputPassword" name="mdp" class="form-control"
-                                   placeholder="Password"
+                                   placeholder="Mot de passe"
                                    required>
-                            <label for="inputPassword">Password</label>
                         </div>
 
-                        <button class="btn btn-lg btn-primary2 btn-block text-uppercase" type="submit" formnovalidate>
-                            Forgot
-                            password?
+                        <br>
+
                         </button>
-                        <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign in</button>
+
+                        <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Connexion</button>
+                        <br>
                         <hr class="my-4">
                     </form>
+                    <form action="./?page=inscription">
+                        <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Inscription
+                        </button>
+                    </form>
+                    <br>
+
+                    <form action="./?page=inscription">
+                        <button class="btn btn-lg btn-primary2 btn-block text-uppercase" type="submit" formnovalidate>
+                            Mot de passe oublié ?
+                    </form>
+
                 </div>
             </div>
         </div>
