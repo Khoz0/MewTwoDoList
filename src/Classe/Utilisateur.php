@@ -1,5 +1,5 @@
 <?php
-
+namespace App\Classe;
 
 class Utilisateur
 {
@@ -12,12 +12,12 @@ class Utilisateur
 
     function __construct($nomUtilisateur, $prenom, $pseudo, $mail, $motDePasse, $urlPhoto)
     {
-        this . $nomUtilisateur = $nomUtilisateur;
-        this . $prenom = $prenom;
-        this . $pseudo = $pseudo;
-        this . $mail = $mail;
-        this . $motDePasse = $motDePasse;
-        this . $urlPhoto = $urlPhoto;
+        $this->$nomUtilisateur = $nomUtilisateur;
+        $this->$prenom = $prenom;
+        $this->$pseudo = $pseudo;
+        $this->$mail = $mail;
+        $this->$motDePasse = $motDePasse;
+        $this->$urlPhoto = $urlPhoto;
     }
 
     /**
