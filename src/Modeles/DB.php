@@ -4,7 +4,7 @@ namespace App\Modeles;
 
 use Exception;
 use PDO;
-use Utilisateur;
+use App\Classe\Utilisateur;
 
 class DB {
 

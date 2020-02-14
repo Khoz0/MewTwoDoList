@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 
 use App\Modeles\DB;
-use Utilisateur;
+use App\Classe\Utilisateur;
 
 class InscriptionController extends Controller
 {
