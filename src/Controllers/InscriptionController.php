@@ -2,15 +2,18 @@
 
 namespace App\Controllers;
 
+use App\Modeles\DB;
 
 class InscriptionController extends Controller
 {
+
     public function inscription()
     {
         return $this->render('inscription');
     }
 
     public function ajouterUtilisateur(){
+        DB::class;
         unset($_SESSION);
         $mail = $_POST['mail'] ?? null;
         $nomUser = $_POST['nomUser'] ?? null;
@@ -26,7 +29,7 @@ class InscriptionController extends Controller
         }
 
         // On teste le mot de passe
-        if (!preg_match('/^[a-zA-Z0-9]{4,16}$/', $mdp)) {
+        if (!preg_match('/^[a-zA-Z0-9]{3,16}$/', $mdp)) {
             $_SESSION['error_syntx']['mdp'] = 1;
         }
 
@@ -45,6 +48,12 @@ class InscriptionController extends Controller
         if($mail) {
             if(!preg_match('/^[a-zA-Z0-9\-]+@[a-zA-Z0-9\-]+\.[a-zA-Z0-9\-]+$/', $mail) || strlen($mail) > 100) {
                 $_SESSION['error_syntx']['mail'] = 1;
+            }
+        }
+
+        if($mdp && $mdpConf) {
+            if($mdp != $mdpConf) {
+                $_SESSION['error_exist']['mdpConf'] = 1;
             }
         }
 
@@ -72,7 +81,7 @@ class InscriptionController extends Controller
 
         //Si jamais on a rencontré des erreurs on le signale
         if(isset($_SESSION['error_exist']) || isset($_SESSION['error_syntx'])){
-            return false;
+            return 0;
         }else{
             $results = $bdd->prepare('INSERT INTO Utilisateur(mail, nomUser, prenomUser,pseudoUser,mdp,photo) VALUES (?a,?b,?g,?d,?e,?f)');
             $results->bindParam('?a', $pseudo);
@@ -81,6 +90,7 @@ class InscriptionController extends Controller
             $results->bindParam('?d', $pseudo);
             $results->bindParam('?e', $pseudo);
             $results->bindParam('?f', $pseudo);
+            return 1;
         }
 
     }

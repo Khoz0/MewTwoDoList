@@ -32,6 +32,10 @@ switch($page) {
         (new App\Controllers\SessionDestroyController())->sessionDestroy();
         break;
 
+    case 'addUser':
+        (new App\Controllers\AddUserController())->addUser();
+        break;
+
 	default: // Si, rien, alors erreur 404
 		(new App\Controllers\ErreurController)->_404();
 		break;

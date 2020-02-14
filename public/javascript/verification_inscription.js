@@ -3,7 +3,7 @@ function surligne(champ, erreur)
     if(erreur)
         champ.style.backgroundColor = "#bd5463";
     else
-        champ.style.backgroundColor = "";
+        champ.style.backgroundColor = "#9dd677";
 }
 
 function surligneOrange(champ,erreur)
@@ -17,14 +17,14 @@ function surligneOrange(champ,erreur)
 function surligneVert(champ,erreur)
 {
     if(erreur)
-        champ.style.backgroundColor = "#49bd19";
+        champ.style.backgroundColor = "#9dd677";
     else
         champ.style.backgroundColor = "";
 }
 
 function verifLogin(champ)
 {
-    if(champ.value.length > 50)
+    if(champ.value.length == 0 || champ.value.length > 50)
     {
         surligne(champ, true);
         return false;
@@ -39,7 +39,7 @@ function verifLogin(champ)
 
 function verifMDP(champ)
 {
-    if(champ.value.length < 5 || champ.value.length > 16)
+    if(champ.value.length < 3 || champ.value.length > 16)
     {
         surligne(champ, true);
         return false;
@@ -77,15 +77,15 @@ function confMDP(mdp1, mdp2)
 function verifMail(champ)
 {
     var regex = /^[a-zA-Z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{1,3}$/;
-    if(!regex.test(champ.value) && champ.value.length < 80)
+    if(regex.test(champ.value) && champ.value.length < 80)
     {
-        surligne(champ.value,false);
-        return false;
+        surligne(champ,false);
+        return true;
     }
     else
     {
-        surligne(champ.value,true);
-        return true;
+        surligne(champ,true);
+        return false;
     }
 }
 

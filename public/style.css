@@ -4,3 +4,7 @@
 
 /* CSS de test (à supprimer après) */
 .test { color: red; font-weight: bold; text-decoration: underline; }
+
+em {
+    color: #cb0003;
+}
