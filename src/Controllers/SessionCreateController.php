@@ -16,7 +16,8 @@ class SessionCreateController extends Controller
             $helloWorld = "Bienvenue " . $mail . " !";
             return $this->render('accueil', compact('helloWorld'));
         } else {
-            return $this->render('login');
+            header('Location: ./?page=login');
+            exit();
         }
 
     }

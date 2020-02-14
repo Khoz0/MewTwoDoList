@@ -14,6 +14,14 @@ function surligneOrange(champ,erreur)
         champ.style.backgroundColor = "";
 }
 
+function surligneJaune(champ,erreur)
+{
+    if(erreur)
+        champ.style.backgroundColor = "#cfc91d";
+    else
+        champ.style.backgroundColor = "";
+}
+
 function surligneVert(champ,erreur)
 {
     if(erreur)
@@ -41,14 +49,14 @@ function verifMDP(champ)
 {
     if(champ.value.length < 3 || champ.value.length > 16)
     {
-        surligne(champ, true);
+        surligneOrange(champ, true);
         return false;
     }
     else
     {
         if(champ.value.length < 8 && champ.value.length > 4)
         {
-            surligneOrange(champ, true);
+            surligneJaune(champ, true);
             return false;
         }else{
             if(champ.value.length < 10 && champ.value.length > 7)
