@@ -6,6 +6,10 @@ CompteController::class;
 ?>
 <script type="text/javascript" src="cdn/jquery.js"> </script>
 <script type="text/javascript" src="javascript/modification_compte.js"></script>
+<?php
+  $compte = CompteController::recuperation_donnees();
+  print_r($compte)
+ ?>
 
 <body>
 <div class="container">
@@ -21,25 +25,25 @@ CompteController::class;
                         }?>
                         <label for="inputPseudo">Votre pseudo</label>
                         <div class="form-label-group">
-                            <input type="text" name="inputPseudo" class="form-control" placeholder="Pseudo"
-                                   required autofocus>
+                            <input type="text" name="inputPseudo" class="form-control" placeholder=<?php echo $compte['pseudoUser'] ?>
+                                   autofocus>
                         </div>
                         <label for="inputNom">Votre nom</label>
                         <div class="form-label-group">
-                            <input type="text" name="inputNom" class="form-control" placeholder="Nom"
-                                   required autofocus>
+                            <input type="text" name="inputNom" class="form-control" placeholder=<?php echo $compte['nomUser'] ?>
+                                    >
                         </div>
 
                         <label for="inputPrenom">Votre prénom</label>
                         <div class="form-label-group">
-                            <input type="text" name="inputPrenom" class="form-control" placeholder="Prénom"
-                                   required>
+                            <input type="text" name="inputPrenom" class="form-control" placeholder=<?php echo $compte['prenomUser'] ?>
+                                   >
                         </div>
 
                         <label for="inputEmail">Votre adresse mail</label>
                         <div class="form-label-group">
-                            <input type="email" name="inputEmail" class="form-control" placeholder="Email"
-                                   required>
+                            <input type="email" name="inputEmail" class="form-control" placeholder="<?php echo $compte['mail'] ?>"
+                                   disabled>
                         </div>
 
                         <div id=mdp>

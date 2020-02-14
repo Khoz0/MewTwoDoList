@@ -3,14 +3,30 @@
 
 namespace App\Controllers;
 
-
 use App\Modeles\DB;
+
 
 class CompteController extends Controller {
 
     public function compte() {
 
         return $this->render('compte');
+    }
+
+    public function recuperation_donnees(){
+      if (isset($_SESSION["mail"])){
+        $mail = $_SESSION["mail"];
+        $db = DB::getInstance();
+        $user = $db->prepare("SELECT * FROM Utilisateur WHERE mail = :mailVerification");
+        $user->bindParam(':mailVerification', $mail);
+        $user->execute();
+
+        if($donnees = $user->fetch()){
+          return $donnees;
+        }
+
+
+      }
     }
 
     public function verification(){
