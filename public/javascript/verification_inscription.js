@@ -17,7 +17,7 @@ function surligneOrange(champ,erreur)
 function surligneJaune(champ,erreur)
 {
     if(erreur)
-        champ.style.backgroundColor = "#cfc91d";
+        champ.style.backgroundColor = "#e2df45";
     else
         champ.style.backgroundColor = "";
 }

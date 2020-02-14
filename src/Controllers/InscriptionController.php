@@ -4,7 +4,6 @@ namespace App\Controllers;
 
 
 use App\Modeles\DB;
-use Utilisateur;
 
 class InscriptionController extends Controller
 {
@@ -41,7 +40,7 @@ class InscriptionController extends Controller
         }
 
         if($prenomUser) {
-            if(!preg_match('/^[a-zA-Z\-]{1,50}$/', $prenomUser)) {
+            if(!preg_match('/^[a-zA-Zàéèëîïûü\-]{1,50}$/', $prenomUser)) {
                 $_SESSION['error_syntx']['prenom'] = 1;
             }
         }
