@@ -8,7 +8,6 @@ CompteController::class;
 <script type="text/javascript" src="javascript/modification_compte.js"></script>
 <?php
   $compte = CompteController::recuperation_donnees();
-  print_r($compte)
  ?>
 
 <body>
@@ -20,7 +19,7 @@ CompteController::class;
                     <h5 class="card-title text-center">Compte</h5>
                     <form class="form-sign_in" method="POST" action="?page=compte">
                         <?php if (isset($_POST["valider"])){
-                            CompteController::modification();
+                            (new App\Controllers\CompteController)->modification();
 
                         }?>
                         <label for="inputPseudo">Votre pseudo</label>

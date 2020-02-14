@@ -31,27 +31,25 @@ class CompteController extends Controller {
 
     public function verification(){
         $bdd = DB::getInstance();
-        $requete = $bdd->prepare("SELECT * FROM Utilisateur WHERE login = :loginSession");
-        $loginSession = $_SESSION['login'];
-        $requete->bindParam('loginSession', $loginSession);
+        $requete = $bdd->prepare("SELECT * FROM Utilisateur WHERE mail = :mail");
+        $loginSession = $_SESSION['mail'];
+        $requete->bindParam('mail', $loginSession);
         $requete->execute();
         $donnees = $requete->fetch();
         if (isset($_POST['inputPassword']) && !empty($_POST["inputPassword"])){
             if (SHA1($_POST["inputPassword"]) == $donnees['mdp']){
                 if (isset($_POST['inputPasswordConf']) && !empty($_POST["inputPasswordConf"]) && $_POST["inputPasswordConf"] != $_POST['inputPassword']){
                     if (isset($_POST['inputNewPassword']) && !empty($_POST["inputNewPassword"]) && $_POST['inputPasswordConf'] == $_POST['inputNewPassword']){
-                        $requete = $bdd->prepare("UPDATE Utilisateur SET mdp = SHA1(:mdpChanger) WHERE login = :loginSession");
-                        $loginSession = $_SESSION['login'];
+                        $requete = $bdd->prepare("UPDATE Utilisateur SET mdp = SHA1(:mdpChanger) WHERE mail = :mail");
+                        $loginSession = $_SESSION['mail'];
                         $mdpChanger = $_POST['inputNewPassword'];
-                        $requete->bindParam('loginSession', $loginSession);
+                        $requete->bindParam('mail', $loginSession);
                         $requete->bindParam('mdpChanger', $mdpChanger);
                         $requete->execute();
-                        return "Nouveau mdp créé.";
+                        echo "Nouveau mdp créé.";
                     }else{
                         return "Mot de passe de confirmation manquant ou différents du nouveau mot de passe.";
                     }
-                }else{
-                    return "Nouveau mot de passe manquant ou identique à l'ancien.";
                 }
             }else{
                 return "Mot de passe différent du mot de passe de l'utilisateur.";
@@ -61,79 +59,65 @@ class CompteController extends Controller {
 
     public function modification(){
         $bdd = DB::getInstance();
-        $requete = $bdd->prepare("SELECT * FROM Utilisateur WHERE login = :loginSession");
-        $loginSession = $_SESSION['login'];
-        $requete->bindParam('loginSession', $loginSession);
+        $requete = $bdd->prepare("SELECT * FROM Utilisateur WHERE mail = :mail");
+        $loginSession = $_SESSION['mail'];
+        $requete->bindParam('mail', $loginSession);
         $requete->execute();
         $donnees = $requete->fetch();
-        if ($donnees['login'] != $_POST['inputEmail'] && !empty($_POST['inputEmail'])){
-            $this->modifierEmail();
-        }
-        if ($donnees['nom'] != $_POST['inputNom'] && !empty($_POST['inputNom'])) {
+        if ($donnees['nomUser'] != $_POST['inputNom'] && !empty($_POST['inputNom'])) {
             $this->modifierNom();
         }
-        if ($donnees['prenom'] != $_POST['inputPrenom'] && !empty($_POST['inputPrenom'])) {
+        if ($donnees['prenomUser'] != $_POST['inputPrenom'] && !empty($_POST['inputPrenom'])) {
             $this->modifierPrenom();
         }
-        if ($donnees['pseudo'] != $_POST['inputPseudo'] && !empty($_POST['inputPseudo'])) {
+        if ($donnees['pseudoUser'] != $_POST['inputPseudo'] && !empty($_POST['inputPseudo'])) {
             $this->modifierPseudo();
         }
         $this->verification();
+        header('Location: ./?page=compte');
     }
 
     public function modifierPseudo(){
         $bdd = DB::getInstance();
-        $requete = $bdd->prepare("SELECT * FROM Utilisateur WHERE login = :loginSession");
-        $loginSession = $_SESSION['login'];
-        $requete->bindParam('loginSession', $loginSession);
+        $requete = $bdd->prepare("SELECT * FROM Utilisateur WHERE mail = :mail");
+        $loginSession = $_SESSION['mail'];
+        $requete->bindParam('mail', $loginSession);
         $requete->execute();
 
-        $requete = $bdd->prepare("UPDATE Utilisateur SET login = :login WHERE login = :login");
-        $nouveauLogin = $_POST['email'];
-        $requete->bindParam('login', $nouveauLogin);
+        $requete = $bdd->prepare("UPDATE Utilisateur SET pseudoUser = :pseudoUser WHERE mail = :mail");
+        $nouveauLogin = $_POST['inputPseudo'];
+        $requete->bindParam('pseudoUser', $nouveauLogin);
+        $requete->bindParam('mail', $loginSession);
         $requete->execute();
     }
 
     public function modifierNom(){
         $bdd = DB::getInstance();
-        $requete = $bdd->prepare("SELECT * FROM Utilisateur WHERE login = :loginSession");
-        $loginSession = $_SESSION['login'];
-        $requete->bindParam('loginSession', $loginSession);
+        $requete = $bdd->prepare("SELECT * FROM Utilisateur WHERE mail = :mail");
+        $loginSession = $_SESSION['mail'];
+        $requete->bindParam('mail', $loginSession);
         $requete->execute();
 
-        $requete = $bdd->prepare("UPDATE Utilisateur SET nom = :nom WHERE login = :login");
-        $loginSession = $_SESSION['login'];
+        $requete = $bdd->prepare("UPDATE Utilisateur SET nomUser = :nomUser WHERE mail = :mail");
+        $loginSession = $_SESSION['mail'];
         $nom = $_POST['inputNom'];
-        $requete->bindParam('login', $loginSession);
-        $requete->bindParam('nom', $nom);
+        $requete->bindParam('mail', $loginSession);
+        $requete->bindParam('nomUser', $nom);
         $requete->execute();
     }
 
     public function modifierPrenom(){
         $bdd = DB::getInstance();
-        $requete = $bdd->prepare("SELECT * FROM Utilisateur WHERE login = :loginSession");
-        $loginSession = $_SESSION['login'];
-        $requete->bindParam('loginSession', $loginSession);
+        $requete = $bdd->prepare("SELECT * FROM Utilisateur WHERE mail = :mail");
+        $loginSession = $_SESSION['mail'];
+        $requete->bindParam('mail', $loginSession);
         $requete->execute();
 
-        $requete = $bdd->prepare("UPDATE Utilisateur SET prenom = :prenom WHERE login = :login");
-        $loginSession = $_SESSION['login'];
+        $requete = $bdd->prepare("UPDATE Utilisateur SET prenomUser = :prenomUser WHERE mail = :mail");
+        $loginSession = $_SESSION['mail'];
         $prenom = $_POST['inputPrenom'];
-        $requete->bindParam('login', $loginSession);
-        $requete->bindParam('prenom', $prenom);
-        $requete->execute();
-    }
-
-    public function modifierEmail(){
-        $bdd = DB::getInstance();
-        $requete = $bdd->prepare("SELECT * FROM Utilisateur WHERE login = :loginSession");
-        $loginSession = $_SESSION['login'];
-        $requete->bindParam('loginSession', $loginSession);
-        $requete->execute();
-
-        $requete = $bdd->prepare("UPDATE Utilisateur SET login = :login WHERE login = :login");
-        $nouveauLogin = $_POST['inputEmail'];
-        $requete->bindParam('login', $nouveauLogin);
+        $requete->bindParam('mail', $loginSession);
+        $requete->bindParam('prenomUser', $prenom);
         $requete->execute();
     }
 }
