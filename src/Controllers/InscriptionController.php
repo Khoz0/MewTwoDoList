@@ -76,11 +76,12 @@ class InscriptionController extends Controller
         }else{
             $results = $bdd->prepare('INSERT INTO Utilisateur(mail, nomUser, prenomUser,pseudoUser,mdp,photo) VALUES (?a,?b,?g,?d,?e,?f)');
             $results->bindParam('?a', $pseudo);
-            $results->bindParam('?b', $pseudo);
-            $results->bindParam('?g', $pseudo);
+            $results->bindParam('?b', $nomUser);
+            $results->bindParam('?g', $prenomUser);
             $results->bindParam('?d', $pseudo);
-            $results->bindParam('?e', $pseudo);
-            $results->bindParam('?f', $pseudo);
+            $results->bindParam('?e', $mdp);
+            $results->bindParam('?f', $photo);
+            $results->execute();
         }
 
     }
