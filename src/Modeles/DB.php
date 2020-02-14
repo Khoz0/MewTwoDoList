@@ -2,8 +2,9 @@
 
 namespace App\Modeles;
 
-use \PDO;
-use \Exception;
+use Exception;
+use PDO;
+use Utilisateur;
 
 class DB {
 
@@ -25,7 +26,7 @@ class DB {
 
    /**
     * Creer une instance de PDO
-    * @return \PDO Instance de PDO
+    * @return PDO Instance de PDO
     */
    public static function getInstance() {
 
@@ -38,7 +39,7 @@ class DB {
         } elseif(file_exists('src/Config/config.ini')) {
           $config = parse_ini_file('src/Config/config.ini');
         } else {
-          throw new \Exception('Pas de fichier de config');
+            throw new Exception('Pas de fichier de config');
         }
 
 
@@ -54,7 +55,7 @@ class DB {
 
     /**
      * Creer une instance de PDO
-     * @return \PDO Instance de PDO
+     * @return PDO Instance de PDO
      */
     public static function getFirstInstance() {
 
@@ -67,7 +68,7 @@ class DB {
                 } elseif(file_exists('src/Config/config.ini')) {
                     $config = parse_ini_file('src/Config/config.ini');
                 } else {
-                    throw new \Exception('Pas de fichier de config');
+                    throw new Exception('Pas de fichier de config');
                 }
 
 
@@ -79,6 +80,21 @@ class DB {
         }
 
         return self::$_instance;
+    }
+
+    public function loadUtilisateur($mail)
+    {
+
+        /*Préparation des requêtes*/
+        $verifMail = prepare("SELECT * FROM Utilisateur where mail = :mailVerification");
+
+        /*On test si le mail existe dans la base de données*/
+        $verifMail->bindParam(':mailVerification', $mail);
+        $verifMail->execute();
+
+        $utilisateur = new Utilisateur($verifMail[""]);
+
+        return $utilisateur;
     }
 
 }
