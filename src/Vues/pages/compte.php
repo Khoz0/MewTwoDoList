@@ -16,8 +16,8 @@ CompteController::class;
                     <h5 class="card-title text-center">Compte</h5>
                     <form class="form-sign_in" method="POST" action="?page=compte">
                         <?php if (isset($_POST["valider"])){
-                            //echo CompteController::vérification();
-                            echo CompteController::getPseudo();
+                            CompteController::modification();
+
                         }?>
                         <label for="inputPseudo">Votre pseudo</label>
                         <div class="form-label-group">
