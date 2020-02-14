@@ -34,16 +34,16 @@
                         <br>
                         <hr class="my-4">
                     </form>
-                    <form action="./?page=inscription">
-                        <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Inscription
+
+                        <button class="btn btn-lg btn-primary btn-block text-uppercase" onclick="window.location.href='?page=inscription'">Inscription
                         </button>
-                    </form>
+
                     <br>
 
-                    <form action="./?page=inscription">
-                        <button class="btn btn-lg btn-primary2 btn-block text-uppercase" type="submit" formnovalidate>
+
+                        <button class="btn btn-lg btn-primary2 btn-block text-uppercase" onclick="window.location.href='?page=inscription'">
                             Mot de passe oublié ?
-                    </form>
+                          </button>
 
                 </div>
             </div>
