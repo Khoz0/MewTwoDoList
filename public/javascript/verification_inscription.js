@@ -3,13 +3,24 @@ function surligne(champ, erreur)
     if(erreur)
         champ.style.backgroundColor = "#bd5463";
     else
-        champ.style.backgroundColor = "";
+        champ.style.backgroundColor = "#7fbd3f";
 }
+
+
+
 
 function surligneOrange(champ,erreur)
 {
     if(erreur)
         champ.style.backgroundColor = "#bd6a22";
+    else
+        champ.style.backgroundColor = "";
+}
+
+function surligneJaune(champ,erreur)
+{
+    if(erreur)
+        champ.style.backgroundColor = "#cfc91d";
     else
         champ.style.backgroundColor = "";
 }
@@ -41,14 +52,14 @@ function verifMDP(champ)
 {
     if(champ.value.length < 5 || champ.value.length > 16)
     {
-        surligne(champ, true);
+        surligneOrange(champ, true);
         return false;
     }
     else
     {
         if(champ.value.length < 8 && champ.value.length > 4)
         {
-            surligneOrange(champ, true);
+            surligneJaune(champ, true);
             return false;
         }else{
             if(champ.value.length < 10 && champ.value.length > 7)
@@ -77,15 +88,15 @@ function confMDP(mdp1, mdp2)
 function verifMail(champ)
 {
     var regex = /^[a-zA-Z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{1,3}$/;
-    if(!regex.test(champ.value) && champ.value.length < 80)
+    if(regex.test(champ.value) && champ.value.length < 80)
     {
-        surligne(champ.value,false);
-        return false;
+        surligne(champ,false);
+        return true;
     }
     else
     {
-        surligne(champ.value,true);
-        return true;
+        surligne(champ,true);
+        return false;
     }
 }
 
