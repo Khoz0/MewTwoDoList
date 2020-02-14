@@ -39,7 +39,7 @@ InscriptionController::class
                         if(isset($_SESSION['error_syntx'])) {
                             if(array_key_exists('prenom',$_SESSION['error_syntx'])){
                                 if($_SESSION['error_syntx']['prenom'] == 1){
-                                    echo "<label>Pr&eacutenom incorrect</label><br>";
+                                    echo "<label>Prénom incorrect</label><br>";
                                 }
                             }
                         }
@@ -106,11 +106,13 @@ InscriptionController::class
                         ?>
                         <br>
 
-                        <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit" >S'inscrire</button>
+                        <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit" value="submit" name="submit">S'inscrire</button>
                         <?php
-                        if(isset($_GET["submit"])) {
+                        if(isset($_POST["submit"])) {
                             echo "Bonjour";
-                            header('Location: index.php?page=inscription');
+                        }
+                        else{
+                            echo "Pas bonjour";
                         }
                         ?>
                         <hr class="my-4">
