@@ -2,11 +2,12 @@
 
 namespace App\Controllers;
 
+
 use App\Modeles\DB;
+use Utilisateur;
 
 class InscriptionController extends Controller
 {
-
     public function inscription()
     {
         return $this->render('inscription');
@@ -83,14 +84,9 @@ class InscriptionController extends Controller
         if(isset($_SESSION['error_exist']) || isset($_SESSION['error_syntx'])){
             return 0;
         }else{
-            $results = $bdd->prepare('INSERT INTO Utilisateur(mail, nomUser, prenomUser,pseudoUser,mdp,photo) VALUES (?a,?b,?g,?d,?e,?f)');
-            $results->bindParam('?a', $pseudo);
-            $results->bindParam('?b', $nomUser);
-            $results->bindParam('?g', $prenomUser);
-            $results->bindParam('?d', $pseudo);
-            $results->bindParam('?e', $mdp);
-            $results->bindParam('?f', $photo);
-            $results->execute();
+            $utilisateur = new Utilisateur($nomUser,$prenomUser,$pseudo,$mail,$mdp,$photo);
+            $bdd = DB::getInstance();
+            $bdd::addUtilisateur($bdd,$utilisateur);
             return 1;
         }
 

@@ -97,5 +97,18 @@ class DB {
         return $utilisateur;
     }
 
+    public function addUtilisateur($bdd, $utilisateur){
+
+        $results = $bdd->prepare('INSERT INTO Utilisateur(mail, nomUser, prenomUser,pseudoUser,mdp,photo) VALUES (?a,?b,?g,?d,?e,?f)');
+        $results->bindParam('?a', $utilisateur::getMail());
+        $results->bindParam('?b', $utilisateur::getNomUtilisateur());
+        $results->bindParam('?g', $utilisateur::getPrenom());
+        $results->bindParam('?d', $utilisateur::getPseudo());
+        $results->bindParam('?e', $utilisateur::getMotDePasse());
+        $results->bindParam('?f', $utilisateur::getUrlPhoto());
+        $results->execute();
+
+    }
+
 }
 
