@@ -3,7 +3,7 @@ function init() {
 }
 
 function affichage(event) {
-  $("#mdp").html("<label for='inputPassword'>Votre mot de passe</label><div class='form-label-group'><input type='password' name='inputPassword' class='form-control' placeholder='Mot de passe' required></div>");
+  $("#mdp").html("<label for='inputPassword'>Votre mot de passe</label><div class='form-label-group'><input type='password' name='inputPassword' class='form-control' placeholder='Mot de passe'></div>");
   $("#confmdp").html("<label for='inputPasswordConf'>Confirmer votre mot de passe</label><div class='form-label-group'><input type='password' name='inputPasswordConf' class='form-control' placeholder='Confirmer votre mot de passe'></div>");
   $("#newmdp").html("<label for='inputNewPassword'>Nouveau mot de passe</label><div class='form-label-group'><input type='password' name='inputNewPassword' class='form-control' placeholder='Nouveau mot de passe'></div>")
   $("#modifier").hide();
