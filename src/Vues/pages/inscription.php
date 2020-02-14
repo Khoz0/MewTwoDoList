@@ -13,7 +13,7 @@ InscriptionController::class
             <div class="card card-sign_in my-5">
                 <div class="card-body">
                     <h5 class="card-title text-center">Inscription</h5>
-                    <form class="form-sign_in" method="post" action="index.php?page=inscription">
+                    <form class="form-sign_in" method="POST" action="?page=inscription">
 
                         <label for="nomUser">Votre nom</label>
                         <div class="form-label-group">
@@ -39,7 +39,7 @@ InscriptionController::class
                         if(isset($_SESSION['error_syntx'])) {
                             if(array_key_exists('prenom',$_SESSION['error_syntx'])){
                                 if($_SESSION['error_syntx']['prenom'] == 1){
-                                    echo "<label>Pr&eacutenom incorrect</label><br>";
+                                    echo "<label>Prénom incorrect</label><br>";
                                 }
                             }
                         }
@@ -93,7 +93,7 @@ InscriptionController::class
                         <label for="mdpConf">Confirmer votre mot de passe</label>
                         <div class="form-label-group">
                             <input type="password" name="mdpConf" id="mdpConf" class="form-control" placeholder="Confirmer votre mot de passe"
-                                   required onkeyup="confMDP(this,document.getElementById('inputPassword').value)">
+                                   required onkeyup="confMDP(this,document.getElementById('mdp').value)">
                         </div>
                         <?php
                         if(isset($_SESSION['error_syntx'])) {
@@ -105,14 +105,14 @@ InscriptionController::class
                         }
                         ?>
                         <br>
-
-                        <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit" >S'inscrire</button>
                         <?php
-                        if(isset($_GET["submit"])) {
+                        if(isset($_POST["inscrire"])) {
                             echo "Bonjour";
                             header('Location: index.php?page=inscription');
-                        }
+                        }else{echo $_POST["inscrire"];}
                         ?>
+                        <button class="btn btn-lg btn-primary btn-block text-uppercase" name ="inscrire" type="submit" value="inscrire">s'inscire</button>
+
                         <hr class="my-4">
                     </form>
                 </div>

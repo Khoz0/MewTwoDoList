@@ -73,6 +73,14 @@ class InscriptionController extends Controller
         //Si jamais on a rencontré des erreurs on le signale
         if(isset($_SESSION['error_exist']) || isset($_SESSION['error_syntx'])){
             return false;
+        }else{
+            $results = $bdd->prepare('INSERT INTO Utilisateur(mail, nomUser, prenomUser,pseudoUser,mdp,photo) VALUES (?a,?b,?g,?d,?e,?f)');
+            $results->bindParam('?a', $pseudo);
+            $results->bindParam('?b', $pseudo);
+            $results->bindParam('?g', $pseudo);
+            $results->bindParam('?d', $pseudo);
+            $results->bindParam('?e', $pseudo);
+            $results->bindParam('?f', $pseudo);
         }
 
     }
