@@ -5,6 +5,10 @@
 /* CSS de test (à supprimer après) */
 .test { color: red; font-weight: bold; text-decoration: underline; }
 
+erreur {
+    font-weight: bold;
+}
+
 em {
     color: #cb0003;
 }

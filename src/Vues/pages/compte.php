@@ -62,6 +62,7 @@ CompteController::class;
                         <hr class="my-4">
                     </form>
                      <button class="btn btn-lg btn-primary btn-block text-uppercase" id="modifier">Modifier</button>
+                    <br>
                       <button class="btn btn-lg btn-primary btn-block text-uppercase" onclick="window.location.href='?page=accueil'">Retour</button>
                 </div>
             </div>

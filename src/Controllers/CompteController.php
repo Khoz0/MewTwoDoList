@@ -8,6 +8,8 @@ use App\Modeles\DB;
 
 class CompteController extends Controller {
 
+    private $modifier = false;
+
     public function compte() {
 
         return $this->render('compte');
@@ -47,12 +49,21 @@ class CompteController extends Controller {
                         $requete->bindParam('mdpChanger', $mdpChanger);
                         $requete->execute();
                         echo "Nouveau mdp créé.";
+                        $this->modifier = true;
                     }else{
-                        return "Mot de passe de confirmation manquant ou différents du nouveau mot de passe.";
+                        echo "<em> Mot de passe de confirmation manquant ou différents du nouveau mot de passe. </em>";
+                        echo "<br>";
+                        $this->modifier = false;
                     }
+                }else{
+                    echo "<em> Mot de passe de confirmation erroné </em>";
+                    echo "<br>";
+                    $this->modifier = false;
                 }
             }else{
-                return "Mot de passe différent du mot de passe de l'utilisateur.";
+                echo "<em> Mot de passe différent du mot de passe de l'utilisateur. </em>";
+                echo "<br>";
+                $this->modifier = false;
             }
         }
     }
@@ -74,7 +85,9 @@ class CompteController extends Controller {
             $this->modifierPseudo();
         }
         $this->verification();
-        header('Location: ./?page=compte');
+        if ($this->modifier) {
+            header('Location: ./?page=compte');
+        }
     }
 
     public function modifierPseudo(){
@@ -89,6 +102,7 @@ class CompteController extends Controller {
         $requete->bindParam('pseudoUser', $nouveauLogin);
         $requete->bindParam('mail', $loginSession);
         $requete->execute();
+        $this->modifier = true;
     }
 
     public function modifierNom(){
@@ -104,6 +118,7 @@ class CompteController extends Controller {
         $requete->bindParam('mail', $loginSession);
         $requete->bindParam('nomUser', $nom);
         $requete->execute();
+        $this->modifier = true;
     }
 
     public function modifierPrenom(){
@@ -119,5 +134,6 @@ class CompteController extends Controller {
         $requete->bindParam('mail', $loginSession);
         $requete->bindParam('prenomUser', $prenom);
         $requete->execute();
+        $this->modifier = true;
     }
 }
