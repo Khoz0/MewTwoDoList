@@ -8,7 +8,7 @@ class LoginController extends Controller
 {
     public function login()
     {
-        if (!isset($_SESSION["mail"])) {
+        if (!isset($_SESSION["user"])) {
             return $this->render('login');
         } else {
             header('Location: ./?page=accueil');
