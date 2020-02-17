@@ -26,7 +26,7 @@ class SessionCreateController extends Controller
     public function checkPassword($mail, $password)
     {
         $mailVerification = $mail;
-        $bdd = DB::getInstance();
+        $bdd = DB::getInstance()->getPDO();
 
         /*Préparation des requêtes*/
         $verifMail = $bdd->prepare("SELECT mdp FROM Utilisateur where mail = :mailVerification");
@@ -50,7 +50,7 @@ class SessionCreateController extends Controller
                 session_start();
 
 
-                $_SESSION['user'] = serialize(DB::loadUtilisateur($mailVerification));
+                $_SESSION['user'] = serialize(DB::getInstance()->loadUtilisateur($mailVerification));
                 return 1;
             } else {
                 /*Le mot de passe ne correspond pas au mail*/
