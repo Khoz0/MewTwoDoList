@@ -8,9 +8,9 @@ class AccueilController extends Controller {
 
     public function index()
     {
-        if (isset($_SESSION["mail"])) {
+        if (isset($_SESSION["user"])) {
 
-            $helloWorld = "Bienvenue " . $_SESSION["mail"];
+            $helloWorld = "Bienvenue " . $_SESSION["user"];
             return $this->render('accueil', compact('helloWorld'));
         } else {
             header('Location: ./?page=login');

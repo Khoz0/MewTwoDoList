@@ -12,7 +12,7 @@ class SessionCreateController extends Controller
     public function sessionCreate()
     {
         if ($this->checkPassword($_POST["mail"], $_POST["mdp"]) == 1) {
-            $mail = $_SESSION["mail"];
+            $mail = $_SESSION['user']->getPrenom();
             $helloWorld = "Bienvenue " . $mail . " !";
             return $this->render('accueil', compact('helloWorld'));
         } else {
@@ -47,7 +47,9 @@ class SessionCreateController extends Controller
                 /*Le mot de passe correspond*/
                 session_destroy();
                 session_start();
-                $_SESSION['mail'] = $mailVerification;
+
+
+                $_SESSION['user'] = DB::loadUtilisateur($mailVerification);
                 return 1;
             } else {
                 /*Le mot de passe ne correspond pas au mail*/
