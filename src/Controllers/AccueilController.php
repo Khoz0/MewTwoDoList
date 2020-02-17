@@ -10,7 +10,9 @@ class AccueilController extends Controller {
     {
         if (isset($_SESSION["user"])) {
 
-            $helloWorld = "Bienvenue " . $_SESSION["user"];
+            $helloWorld = "Bienvenue ";
+            $user = unserialize($_SESSION["user"]);
+            $helloWorld .= $user->getPrenom() . " !";
             return $this->render('accueil', compact('helloWorld'));
         } else {
             header('Location: ./?page=login');

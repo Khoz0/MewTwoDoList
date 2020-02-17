@@ -11,14 +11,14 @@ class Utilisateur
     private $motDePasse;
     private $urlPhoto;
 
-    function __construct($nomUtilisateur, $prenom, $pseudo, $mail, $motDePasse, $urlPhoto)
+    function __construct($nom, $prenom, $pseudo, $mail, $motDePasse, $urlPhoto)
     {
-        $this->$nomUtilisateur = $nomUtilisateur;
-        $this->$prenom = $prenom;
-        $this->$pseudo = $pseudo;
-        $this->$mail = $mail;
-        $this->$motDePasse = $motDePasse;
-        $this->$urlPhoto = $urlPhoto;
+        $this->nomUtilisateur = $nom;
+        $this->prenom = $prenom;
+        $this->pseudo = $pseudo;
+        $this->mail = $mail;
+        $this->motDePasse = $motDePasse;
+        $this->urlPhoto = $urlPhoto;
     }
 
     /**
@@ -26,7 +26,7 @@ class Utilisateur
      */
     public function getNomUtilisateur()
     {
-        return $this->nomUtilisateur;
+        return $this->nom;
     }
 
     /**

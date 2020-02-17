@@ -92,7 +92,6 @@ class DB {
 
         if ($donnees = $verifMail->fetch()) {
             $utilisateur = new Utilisateur($donnees["nomUser"], $donnees["prenomUser"], $donnees["pseudoUser"], $donnees["mail"], null, null);
-            $utilisateur = new Utilisateur("coucou", $donnees["prenomUser"], "coucou", $donnees["mail"], null, null);
 
             return $utilisateur;
         } else {
