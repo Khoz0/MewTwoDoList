@@ -1,11 +1,8 @@
 <script type="text/javascript" src="javascript/verification_inscription.js"></script>
 <?php
 use App\Controllers\InscriptionController;
-
-InscriptionController::class
 ?>
 
-<body>
 <div class="container">
     <div class="row">
         <div class="col-sm-9 col-md-7 col-lg-7 mx-auto">
@@ -114,4 +111,3 @@ InscriptionController::class
         </div>
     </div>
 </div>
-</body>

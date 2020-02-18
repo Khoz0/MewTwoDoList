@@ -1,13 +1,5 @@
-<link type="text/css" rel="stylesheet" href="css/sign_in.css">
-<link type="text/css" rel="stylesheet" href="css/all.css">
-<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css">
-<script type="text/javascript" src="js/bootstrap.bundle.min.js"></script>
-<script type="text/javascript" src="js/jquery.slim.min.js"></script>
-<script src="particles.js"></script>
-<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-
-<body id=particles-js>
-<div class="container">
+<body id="particles-js">
+<div class="container" id="particles-js">
     <div class="row">
         <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
             <div class="card card-sign_in my-5">
