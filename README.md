@@ -28,3 +28,7 @@ Un exemple de configuration est fourni dans **src/Config/config-exemple.ini**.
 
 	; Le nom d'hôte de la base de donnees
 	host=localhost
+
+## Lancement des tests
+
+	./vendor/bin/phpunit tests
