@@ -143,5 +143,16 @@ class DB {
         $results->execute();
     }
 
-}
+    public function addTache($idTache,$intituleTache,$etat, $idListeTache,$mailUtilisateur,$valide)
+    {
+        $results = DB::getInstance()->getPDO()->prepare('INSERT INTO Tache(idTache,intituleTache,valide,idListeT,mailUtilisateur,etat) VALUES (:id, :intitule, :val, :idListe, :mail, :etat)');
+        $results->bindParam(':id', $idTache);
+        $results->bindParam(':intitule', $intituleTache);
+        $results->bindParam(':val', $valide);
+        $results->bindParam(':idListe', $idListeTache);
+        $results->bindParam(':mail', $mailUtilisateur);
+        $results->bindParam(':etat', $etat);
+        $results->execute();
+    }
 
+}

@@ -6,7 +6,8 @@ namespace App\Vues;
 <script type="text/javascript" src="javascript/suppression_liste.js"></script>
 <script>
 function pop_up() {
-    window.open('?page=ajoutTache','Ajout tâche', 'height=500, width=800, top=100, left=200, resizable = yes');
+    var id = document.getElementById("tache").value;
+    window.open('?page=ajoutTache&id='+id,'Ajout tâche', 'height=500, width=800, top=100, left=200, resizable = yes');
 
 }
 </script>
@@ -25,7 +26,7 @@ $bdd = serialize(DB::getInstance()->loadListe($_GET["id"]));
 </div>
 
 <div>
-  <button type="button" class="btn btn-primary"
-  onclick="pop_up();">
+  <button type="button" class="btn btn-primary" id="tache"
+  onclick="pop_up();" value=<?php echo $_GET["id"]; ?>>
   Ajout tâche </button>
 </div>

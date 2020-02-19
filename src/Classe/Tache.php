@@ -3,6 +3,7 @@
 
 namespace App\Classe;
 
+use App\Modeles\DB;
 
 class Tache
 {
@@ -43,7 +44,8 @@ class Tache
 
     public function sauvegarderBDD()
     {
-
+      $bdd = DB::getInstance();
+      $bdd->addTache($this->idTache,$this->intituleTache,$this->etat,$this->idListeTache,$this->mailUtilisateur, $this->valide);
     }
 
     public function retirerBDD()

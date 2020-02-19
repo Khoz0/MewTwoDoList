@@ -1,7 +1,7 @@
 CREATE DATABASE IF NOT EXISTS ppil;
 ALTER DATABASE ppil DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 USE ppil;
-        
+
 CREATE TABLE IF NOT EXISTS Utilisateur(
 	mail VARCHAR(30) NOT NULL PRIMARY KEY,
 	nomUser VARCHAR(50),
@@ -26,6 +26,7 @@ CREATE TABLE IF NOT EXISTS Tache(
 	valide BOOLEAN,
 	idListeT INTEGER(50),
 	mailUtilisateur VARCHAR(16),
+  etat VARCHAR(16),
 	CONSTRAINT FK_Tache1 FOREIGN KEY(idListeT) REFERENCES Liste(idListe),
 	CONSTRAINT FK_Tache2 FOREIGN KEY(mailUtilisateur) REFERENCES Utilisateur(mail)
 );
