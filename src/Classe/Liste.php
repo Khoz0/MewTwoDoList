@@ -27,8 +27,7 @@ class Liste {
         $this->mailProprietaire = $mailProprietaire;
         array_push($this->tabUtilisateur, $mailProprietaire);
 
-        $bdd = DB::getInstance();
-        $bdd->addListe($idListe,$intituleListe,$dateCreation,$dateFin,$mailProprietaire);
+        $this->chargerBDD();
     }
 
     public function ajouterUtilisateur($mailUtilisateur){
@@ -64,11 +63,13 @@ class Liste {
     }
 
     public function chargerBDD(){
-
+        $bdd = DB::getInstance();
+        $bdd->addListe($this->idListe,$this->intituleListe,$this->dateCreation,$this->dateFin,$this->mailProprietaire);
     }
 
     public function supprimerBDD(){
-
+        $bdd = DB::getInstance();
+        $bdd->addListe($this->idListe,$this->intituleListe,$this->dateCreation,$this->dateFin,$this->mailProprietaire);
     }
 
     /**

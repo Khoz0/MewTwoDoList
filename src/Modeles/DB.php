@@ -133,5 +133,12 @@ class DB {
         $results->execute();
     }
 
+    public function deleteListe($idListe)
+    {
+        $results = DB::getInstance()->getPDO()->prepare('DELETE FROM Liste WHERE idListe = :id ');
+        $results->bindParam(':id', $idListe);
+        $results->execute();
+    }
+
 }
 
