@@ -40,17 +40,19 @@ switch($page) {
         (new App\Controllers\ListeController())->liste();
         break;
 
-    case 'creationListe':
-        (new App\Controllers\CreationListeController())->creationListe();
-        break;
-
-		case 'ajoutTache':
+        case 'ajoutTache':
 				(new App\Controllers\AjoutTacheController())->ajoutTache();
 				break;
 
     case 'deleteAccount':
         (new App\Controllers\DeleteAccountController())->deleteAccount();
         break;
+
+    case 'creationListe':
+        (new App\Controllers\CreationListeController())->creation();
+        break;
+
+
 
 
 	default: // Si, rien, alors erreur 404

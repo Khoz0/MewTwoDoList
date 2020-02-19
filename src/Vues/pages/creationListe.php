@@ -1,4 +1,11 @@
-<script type="text/javascript" src="javascript/verification_inscription.js"></script>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Création d'une liste</title>
+</head>
+
+<body>
 <?php
 use App\Controllers\CreationListeController;
 ?>
@@ -28,13 +35,13 @@ use App\Controllers\CreationListeController;
 
                         <label for="dateDebut">Date de début</label>
                         <div class="form-label-group">
-                            <input type="date"  name="dateDebut" id="dateDebut"  class="form-control" placeholder="Date début"
+                            <input type="date"  name="dateDebut" id="dateDebut"  class="form-control"
                                    required autofocus>
                         </div>
 
                         <label for="dateFin">Date de fin</label>
                         <div class="form-label-group">
-                            <input type="date" name="dateFin" id="dateFin" class="form-control" placeholder="Date de fin"
+                            <input type="date" name="dateFin" id="dateFin" class="form-control"
                                    required autofocus>
                         </div>
 
@@ -49,3 +56,7 @@ use App\Controllers\CreationListeController;
         </div>
     </div>
 </div>
+
+
+</body>
+</html>

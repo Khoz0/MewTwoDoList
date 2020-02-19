@@ -49,9 +49,9 @@ if ($page != "login" && $page != "disconnect"){
                         <li class="nav-item">
                     <?php } ?>
 
-
                     <a class="nav-link" href="?page=inscription">Inscription</a>
                     </li>
+
 
                 <?php
                 } ?>
