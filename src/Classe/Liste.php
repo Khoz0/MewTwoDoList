@@ -4,6 +4,8 @@
 namespace App\Classe;
 
 
+use App\Modeles\DB;
+
 class Liste {
 
     private $idListe;
@@ -58,8 +60,22 @@ class Liste {
 
     }
 
+    public function chargerBDD(){
+
+    }
+
     public function supprimerBDD(){
 
     }
+
+    /**
+     * @return mixed
+     */
+    public function getIdListe()
+    {
+        return $this->idListe;
+    }
+
+
 
 }

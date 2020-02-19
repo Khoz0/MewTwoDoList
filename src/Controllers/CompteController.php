@@ -33,7 +33,7 @@ class CompteController extends Controller {
                         $requete->bindParam('mail', $loginSession);
                         $requete->bindParam('mdpChanger', $mdpChanger);
                         $requete->execute();
-                        echo "Nouveau mdp créé.";
+
                         $this->modifier = true;
                     }else{
                         echo "<em> Mot de passe de confirmation manquant ou différents du nouveau mot de passe. </em>";

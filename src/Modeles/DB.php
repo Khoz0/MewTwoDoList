@@ -3,6 +3,7 @@
 namespace App\Modeles;
 
 use App\Classe\Utilisateur;
+use App\Classe\Liste;
 use Exception;
 use PDO;
 
@@ -73,6 +74,23 @@ class DB {
             $utilisateur = new Utilisateur($donnees["nomUser"], $donnees["prenomUser"], $donnees["pseudoUser"], $donnees["mail"], null, null);
 
             return $utilisateur;
+        } else {
+            return null;
+        }
+    }
+
+    public function loadListe($id){
+        /*Préparation des requêtes*/
+        $verifId = DB::getInstance()->getPDO()->prepare("SELECT * FROM Liste where idListe = :idVerification");
+
+        /*On test si le mail existe dans la base de données*/
+        $verifId->bindParam(':mailVerification', $id);
+        $verifId->execute();
+
+        if ($donnees = $verifId->fetch()) {
+            $liste = new Liste($donnees["idListe"], $donnees["intituleListe"], $donnees["dateCreation"], $donnees["dateFin"], $donnees["mailProprietaire"]);
+
+            return $liste;
         } else {
             return null;
         }
