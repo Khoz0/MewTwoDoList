@@ -42,15 +42,6 @@ if ($page != "login" && $page != "disconnect"){
                     <?php } ?>
                     <a class="nav-link" href="?page=disconnect">Deconnexion</a>
 					</li>
-                    <?php
-                    if ($page == 'inscription') { ?>
-                        <li class="nav-item active">
-                    <?php } else { ?>
-                        <li class="nav-item">
-                    <?php } ?>
-
-                    <a class="nav-link" href="?page=inscription">Inscription</a>
-                    </li>
 
 
                 <?php
