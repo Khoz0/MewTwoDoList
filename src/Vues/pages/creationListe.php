@@ -23,7 +23,7 @@ use App\Controllers\CreationListeController;
                                 if ((new App\Controllers\CreationListeController)->getModifier()) {
                                     header("Location: ?page=accueil");
                                 }else{?>
-                                    <em> La date de création doit être antérieure à celle de fin de liste </em><br>
+                                    <em> La date de création doit être antérieure à celle de fin de liste et la date de fin de liste doit être postérieure à la date actuelle. </em><br>
                                 <?php }
                             }
                         ?>

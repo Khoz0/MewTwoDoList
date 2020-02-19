@@ -25,7 +25,7 @@ class CreationListeController extends Controller {
         }
         $id += 1;
         $mail = unserialize($_SESSION['user'])->getMail();
-        if ($this->getDateCreation() < $this->getDateFin()) {
+        if ($this->getDateCreation() < $this->getDateFin() && $this->getDateFin() > date("d/m/Y")) {
             new Liste($id, $this->getNom(), $this->getDateCreation(), $this->getDateFin(), $mail);
             $this->modifier = true;
         }
