@@ -27,7 +27,6 @@ class Liste {
         $this->mailProprietaire = $mailProprietaire;
         array_push($this->tabUtilisateur, $mailProprietaire);
 
-        $this->chargerBDD();
     }
 
     public function ajouterUtilisateur($mailUtilisateur){
