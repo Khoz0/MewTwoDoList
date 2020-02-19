@@ -11,7 +11,8 @@ class DeleteAccountController extends Controller
             DB::getInstance()->deleteUser(unserialize($_SESSION['user'])->getMail());
             unset($_SESSION['user']);
         }
-        return $this->render('login');
-
+        session_destroy();
+        header('Location: ./?page=login');
+        exit();
     }
 }

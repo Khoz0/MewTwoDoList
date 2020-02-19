@@ -40,9 +40,9 @@ switch($page) {
         (new App\Controllers\ListeController())->liste();
         break;
 
-        case 'ajoutTache':
-				(new App\Controllers\AjoutTacheController())->ajoutTache();
-				break;
+    case 'ajoutTache':
+        (new App\Controllers\AjoutTacheController())->ajoutTache();
+        break;
 
     case 'deleteAccount':
         (new App\Controllers\DeleteAccountController())->deleteAccount();
