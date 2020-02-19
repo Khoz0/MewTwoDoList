@@ -42,7 +42,7 @@ use App\Controllers\CreationListeController;
                         <label for="dateFin">Date de fin</label>
                         <div class="form-label-group">
                             <input type="date" name="dateFin" id="dateFin" class="form-control"
-                                   required autofocus>
+                                    autofocus>
                         </div>
 
                         <br>
