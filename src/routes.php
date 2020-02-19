@@ -48,6 +48,10 @@ switch($page) {
         (new App\Controllers\DeleteAccountController())->deleteAccount();
         break;
 
+    case 'deleteListe':
+        (new App\Controllers\DeleteListeController())->deleteListe();
+        break;
+
     case 'creationListe':
         (new App\Controllers\CreationListeController())->creationListe();
         break;
