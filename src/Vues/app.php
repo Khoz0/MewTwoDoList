@@ -43,6 +43,7 @@ if ($page != "login" && $page != "disconnect"){
                     <a class="nav-link" href="?page=disconnect">Deconnexion</a>
 					</li>
 
+
                 <?php
                 } ?>
 			</ul>
