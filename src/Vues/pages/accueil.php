@@ -31,6 +31,9 @@ if(isset($_SESSION["user"])){?>
                 </div>
                 <div class="jumbotron-fluid col-1"></div>
             <?php } ?>
+            <div class="jumbotron-fluid col-auto">
+                <a onclick="window.location.href = '?page=compte'"><img src="assests/plus.png" alt="Ajouter une liste" width="140px" height="140px" /></a>
+            </div>
         </div>
     </div>
 <?php } ?>
