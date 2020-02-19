@@ -116,5 +116,16 @@ class DB {
 
     }
 
+    public function addListe($idListe,$intituleListe,$dateCreation, $dateFin,$mailProprietaire)
+    {
+        $results = DB::getInstance()->getPDO()->prepare('INSERT INTO Liste(idListe,intituleListe,dateCreation,dateFin,mailProprietaire) VALUES (:id, :intitule, :dateCrea, :dateFin, :mail)');
+        $results->bindParam(':id', $idListe);
+        $results->bindParam(':intitule', $intituleListe);
+        $results->bindParam(':dateCrea', $dateCreation);
+        $results->bindParam(':dateFin', $dateFin);
+        $results->bindParam(':mail', $mailProprietaire);
+        $results->execute();
+    }
+
 }
 
