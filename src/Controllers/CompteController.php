@@ -4,35 +4,37 @@
 namespace App\Controllers;
 
 use App\Modeles\DB;
+use App\Classe\Utilisateur;
+
 
 
 class CompteController extends Controller {
 
     private $modifier = false;
+    private $user;
 
     public function compte() {
-
+        //$user = DB::getInstance()->loadUtilisateur();
         return $this->render('compte');
     }
 
     public function recuperation_donnees(){
-      if (isset($_SESSION["mail"])){
-        $mail = $_SESSION["mail"];
-        $db = DB::getInstance();
-        $user = $db->prepare("SELECT * FROM Utilisateur WHERE mail = :mailVerification");
-        $user->bindParam(':mailVerification', $mail);
-        $user->execute();
+        print_r($_SESSION["mail"]->getMail());
+        if (isset($_SESSION["user"])){
+            $mail = $_SESSION["user"]->getMail();
+            $db = DB::getInstance()->getPDO();
+            $user = $db->prepare("SELECT * FROM Utilisateur WHERE mail = :mailVerification");
+            $user->bindParam(':mailVerification', $mail);
+            $user->execute();
 
-        if($donnees = $user->fetch()){
-          return $donnees;
-        }
-
-
+            if($donnees = $user->fetch()){
+              return $donnees;
+            }
       }
     }
 
     public function verification(){
-        $bdd = DB::getInstance();
+        $bdd = DB::getInstance()->getPDO();
         $requete = $bdd->prepare("SELECT * FROM Utilisateur WHERE mail = :mail");
         $loginSession = $_SESSION['mail'];
         $requete->bindParam('mail', $loginSession);
@@ -69,7 +71,7 @@ class CompteController extends Controller {
     }
 
     public function modification(){
-        $bdd = DB::getInstance();
+        $bdd = DB::getInstance()->getPDO();
         $requete = $bdd->prepare("SELECT * FROM Utilisateur WHERE mail = :mail");
         $loginSession = $_SESSION['mail'];
         $requete->bindParam('mail', $loginSession);
@@ -91,7 +93,7 @@ class CompteController extends Controller {
     }
 
     public function modifierPseudo(){
-        $bdd = DB::getInstance();
+        $bdd = DB::getInstance()->getPDO();
         $requete = $bdd->prepare("SELECT * FROM Utilisateur WHERE mail = :mail");
         $loginSession = $_SESSION['mail'];
         $requete->bindParam('mail', $loginSession);
@@ -106,7 +108,7 @@ class CompteController extends Controller {
     }
 
     public function modifierNom(){
-        $bdd = DB::getInstance();
+        $bdd = DB::getInstance()->getPDO();
         $requete = $bdd->prepare("SELECT * FROM Utilisateur WHERE mail = :mail");
         $loginSession = $_SESSION['mail'];
         $requete->bindParam('mail', $loginSession);
@@ -122,7 +124,7 @@ class CompteController extends Controller {
     }
 
     public function modifierPrenom(){
-        $bdd = DB::getInstance();
+        $bdd = DB::getInstance()->getPDO();
         $requete = $bdd->prepare("SELECT * FROM Utilisateur WHERE mail = :mail");
         $loginSession = $_SESSION['mail'];
         $requete->bindParam('mail', $loginSession);
@@ -135,5 +137,21 @@ class CompteController extends Controller {
         $requete->bindParam('prenomUser', $prenom);
         $requete->execute();
         $this->modifier = true;
+    }
+
+    public function getPseudo(){
+        return Utilisateur::getPeudo();
+    }
+
+    public function getNom(){
+        return Utilisateur::getNom();
+    }
+
+    public function getPrenom(){
+        return Utilisateur::getPrenom();
+    }
+
+    public function getMail(){
+        return Utilisateur::getMail();
     }
 }

@@ -56,43 +56,44 @@ class AccueilController extends Controller {
 
 		if($prenomUser) {
 			if(!preg_match('/^[a-zA-Z0-9\-]{1,30}$/', $prenomUser)) {
-				return false;
-			}
-		}
+                return false;
+            }
+        }
 
-		if($mail) {
-			if(!preg_match('/^[a-zA-Z0-9\-]+@[a-zA-Z0-9\-]+\.[a-zA-Z0-9\-]+$/', $mail) || strlen($mail) > 100) {
-				return false;
-			}
-		}
-		
-		$bdd = DB::getInstance();
+        if ($mail) {
+            if (!preg_match('/^[a-zA-Z0-9\-]+@[a-zA-Z0-9\-]+\.[a-zA-Z0-9\-]+$/', $mail) || strlen($mail) > 100) {
+                return false;
+            }
+        }
 
-		$req = $bdd->prepare('SELECT pseudo_user FROM utilisateur WHERE pseudo_user=? LIMIT 1');
-		$req->execute([$pseudoUser]);
-		$donnee = $req->fetch();
-		if(!empty($donnee)) {
-			return false;
-		}
-	}
+        $bdd = DB::getInstance()->getPDO();
+
+        $req = $bdd->prepare('SELECT pseudo_user FROM utilisateur WHERE pseudo_user=? LIMIT 1');
+        $req->execute([$pseudoUser]);
+        $donnee = $req->fetch();
+        if (!empty($donnee)) {
+            return false;
+        }
+    }
 	
-	public function getUtilisateurConnecte(){
+	public function getUtilisateurConnecte()
+    {
         $connecte = $_SESSION['mail'] ?? null;
 
-		if(!$connecte) {
-			return false;
-		}
+        if (!$connecte) {
+            return false;
+        }
 
-		$bdd = DB::getInstance();
-		$req = $bdd->prepare('select * from utilisateur where pseudo=? limit 1');
-		$req->execute([$connecte]);
+        $bdd = DB::getInstance()->getPDO();
+        $req = $bdd->prepare('select * from utilisateur where pseudo=? limit 1');
+        $req->execute([$connecte]);
 
 
-		$utilisateur = $req->fetchAll();
+        $utilisateur = $req->fetchAll();
 
-		if(empty($utilisateur)) {
-			return false;
-		}
+        if (empty($utilisateur)) {
+            return false;
+        }
 
 		$utilisateur = $utilisateur[0];
 

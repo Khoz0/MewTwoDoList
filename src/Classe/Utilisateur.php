@@ -2,42 +2,39 @@
 
 namespace App\Classe;
 
-use phpDocumentor\Reflection\Types\This;
-
 class Utilisateur
 {
-    private $nomUtilisateur;
+    private $nom;
     private $prenom;
     private $pseudo;
     private $mail;
     private $motDePasse;
     private $urlPhoto;
 
-    function __construct($nomUtilisateur, $prenom, $pseudo, $mail, $motDePasse, $urlPhoto)
+    function __construct($nom, $prenom, $pseudo, $mail, $motDePasse, $urlPhoto)
     {
-
-        $this->$nomUtilisateur = $nomUtilisateur;
-        $this->$prenom = $prenom;
-        $this->$pseudo = $pseudo;
-        $this->$mail = $mail;
-        $this->$motDePasse = $motDePasse;
-        $this->$urlPhoto = $urlPhoto;
+        $this->nom = $nom;
+        $this->prenom = $prenom;
+        $this->pseudo = $pseudo;
+        $this->mail = $mail;
+        $this->motDePasse = $motDePasse;
+        $this->urlPhoto = $urlPhoto;
     }
 
     /**
      * @return mixed
      */
-    public function getNomUtilisateur()
+    public function getNom()
     {
-        return $this->nomUtilisateur;
+        return $this->nom;
     }
 
     /**
-     * @param mixed $nomUtilisateur
+     * @param mixed $nom
      */
-    public function setNomUtilisateur($nomUtilisateur)
+    public function setNom($nom)
     {
-        $this->nomUtilisateur = $nomUtilisateur;
+        $this->nom = $nom;
     }
 
     /**

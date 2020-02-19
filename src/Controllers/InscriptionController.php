@@ -3,8 +3,8 @@
 namespace App\Controllers;
 
 
-use App\Modeles\DB;
 use App\Classe\Utilisateur;
+use App\Modeles\DB;
 
 class InscriptionController extends Controller
 {
@@ -58,7 +58,7 @@ class InscriptionController extends Controller
             }
         }
 
-        $bdd = DB::getInstance();
+        $bdd = DB::getInstance()->getPDO();
 
         //On vérifie que le mail n'est pas utilisé par un autre utilisateur
         $results = $bdd->prepare('SELECT * FROM Utilisateur where mail = :mailVerification');
@@ -84,9 +84,9 @@ class InscriptionController extends Controller
         if(isset($_SESSION['error_exist']) || isset($_SESSION['error_syntx'])){
             return 0;
         }else{
-            $utilisateur = new Utilisateur($nomUser,$prenomUser,$pseudo,$mail,$mdp,$photo);
-            $bdd = DB::getInstance();
-            $bdd::addUtilisateur($bdd,$utilisateur);
+            $utilisateur = new Utilisateur($nomUser, $prenomUser, $pseudo, $mail, $mdp, $photo);
+            $bdd = DB::getInstance()->getPDO();
+            $bdd::addUtilisateur($bdd, $utilisateur);
             return 1;
         }
 

@@ -12,7 +12,7 @@
 if ($page != "login" && $page != "disconnect"){
 ?>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-		<a class="navbar-brand" href="/">MewTwoDoList</a>
+		<a class="navbar-brand" href="?page=accueil">MewTwoDoList</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
@@ -26,7 +26,7 @@ if ($page != "login" && $page != "disconnect"){
                 <?php } ?>
 					<a class="nav-link" href="?page=accueil">Accueil <span class="sr-only">(current)</span></a>
 				</li>
-                <?php if (false) {
+                <?php if ($_SESSION['user']) {
 				if ($page == 'compte') { ?>
 					<li class="nav-item active">
                 <?php }else{ ?>
@@ -34,7 +34,7 @@ if ($page != "login" && $page != "disconnect"){
                 <?php } ?>
 						<a class="nav-link" href="?page=compte">Mon compte</a>
 					</li>
-				<?php } else {
+				<?php }
                     if ($page == 'disconnect') { ?>
                         <li class="nav-item active">
                     <?php }else{ ?>
@@ -42,7 +42,8 @@ if ($page != "login" && $page != "disconnect"){
                     <?php } ?>
                     <a class="nav-link" href="?page=disconnect">Deconnexion</a>
 					</li>
-                    <?php if ($page == 'inscription') { ?>
+                    <?php
+                    if ($page == 'inscription') { ?>
                         <li class="nav-item active">
                     <?php } else { ?>
                         <li class="nav-item">
@@ -50,7 +51,7 @@ if ($page != "login" && $page != "disconnect"){
                     <a class="nav-link" href="?page=inscription">Inscription</a>
                     </li>
 
-                <?php }
+                <?php
                 } ?>
 			</ul>
 
