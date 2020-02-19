@@ -49,7 +49,7 @@ switch($page) {
         break;
 
     case 'creationListe':
-        (new App\Controllers\CreationListeController())->creation();
+        (new App\Controllers\CreationListeController())->creationListe();
         break;
 
 
