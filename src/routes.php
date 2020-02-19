@@ -40,6 +40,10 @@ switch($page) {
         (new App\Controllers\ListeController())->liste();
         break;
 
+    case 'creationListe':
+        (new App\Controllers\CreationListeController())->creationListe();
+        break;
+
 		case 'ajoutTache':
 				(new App\Controllers\AjoutTacheController())->ajoutTache();
 				break;

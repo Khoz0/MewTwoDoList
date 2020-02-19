@@ -9,8 +9,17 @@ use App\Controllers\CreationListeController;
             <div class="card card-sign_in my-5">
                 <div class="card-body">
                     <h5 class="card-title text-center">Création de ma liste</h5>
-                    <form class="form-sign_in" method="post" action="?page=addUser">
-
+                    <form class="form-sign_in" method="POST" action="?page=creationListe">
+                        <?php
+                            if(isset($_POST['submit'])){
+                                (new App\Controllers\CreationListeController())->ajoutListe();
+                                if ((new App\Controllers\CreationListeController)->getModifier()) {
+                                    header("Location: ?page=accueil");
+                                }else{?>
+                                    <em> La date de création doit être antérieure à celle de fin de liste </em><br>
+                                <?php }
+                            }
+                        ?>
                         <label for="nomListe">Nom de la liste</label>
                         <div class="form-label-group">
                             <input type="text" id="nomListe" name="nomListe"  class="form-control" placeholder="Nom"
