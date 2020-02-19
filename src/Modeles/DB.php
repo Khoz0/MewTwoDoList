@@ -78,15 +78,22 @@ class DB {
         }
     }
 
-    public function addUtilisateur($bdd, $utilisateur){
+    public function addUtilisateur($utilisateur){
 
-        $results = $bdd->prepare('INSERT INTO Utilisateur(mail, nomUser, prenomUser,pseudoUser,mdp,photo) VALUES (?a,?b,?g,?d,?e,?f)');
-        $results->bindParam('?a', $utilisateur::getMail());
-        $results->bindParam('?b', $utilisateur::getNomUtilisateur());
-        $results->bindParam('?g', $utilisateur::getPrenom());
-        $results->bindParam('?d', $utilisateur::getPseudo());
-        $results->bindParam('?e', $utilisateur::getMotDePasse());
-        $results->bindParam('?f', $utilisateur::getUrlPhoto());
+        $mail = $utilisateur->getMail();
+        $nom = $utilisateur->getNom();
+        $prenom = $utilisateur->getPrenom();
+        $mdp = $utilisateur->getMotDePasse();
+        $pseudo = $utilisateur->getPseudo();
+        $photo = $utilisateur->getUrlPhoto();
+
+        $results = DB::getInstance()->getPDO()->prepare('INSERT INTO Utilisateur(mail, nomUser, prenomUser,pseudoUser,mdp,photo) VALUES (:mail,:nomUser, :prenomUser,:pseudoUser,:mdp,:photo)');
+        $results->bindParam(':mail', $mail);
+        $results->bindParam(':nomUser', $nom);
+        $results->bindParam(':prenomUser', $prenom);
+        $results->bindParam(':pseudoUser', $pseudo);
+        $results->bindParam(':mdp', $mdp);
+        $results->bindParam(':photo', $photo);
         $results->execute();
 
     }

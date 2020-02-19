@@ -35,7 +35,7 @@ class InscriptionController extends Controller
         }
 
         if($nomUser) {
-            if(!preg_match('/^[a-zA-Z\-]{1,50}$/', $nomUser)) {
+            if(!preg_match('/^[a-zA-Zàéèëîïûü\-]{1,50}$/', $nomUser)) {
                 $_SESSION['error_syntx']['nom'] = 1;
             }
         }
@@ -85,8 +85,8 @@ class InscriptionController extends Controller
             return 0;
         }else{
             $utilisateur = new Utilisateur($nomUser, $prenomUser, $pseudo, $mail, $mdp, $photo);
-            $bdd = DB::getInstance()->getPDO();
-            $bdd::addUtilisateur($bdd, $utilisateur);
+            $bdd = DB::getInstance();
+            $bdd->addUtilisateur($utilisateur);
             return 1;
         }
 

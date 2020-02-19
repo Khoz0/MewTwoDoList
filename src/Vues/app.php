@@ -26,7 +26,7 @@ if ($page != "login" && $page != "disconnect"){
                 <?php } ?>
 					<a class="nav-link" href="?page=accueil">Accueil <span class="sr-only">(current)</span></a>
 				</li>
-                <?php if ($_SESSION['user']) {
+                <?php if (isset($_SESSION['user'])) {
 				if ($page == 'compte') { ?>
 					<li class="nav-item active">
                 <?php }else{ ?>
