@@ -25,10 +25,9 @@ class CreationListeController extends Controller {
         }
         $id += 1;
         $mail = unserialize($_SESSION['user'])->getMail();
-        if ($this->getDateCreation() < $this->getDateFin() && $this->getDateFin() > date("Y-m-d")) {
+        if (($this->getDateCreation() < $this->getDateFin() && $this->getDateFin() > date("Y-m-d")) || ($this->getDateFin() == null)) {
             $liste = new Liste($id, $this->getNom(), $this->getDateCreation(), $this->getDateFin(), $mail);
             $liste->chargerBDD();
-            echo "modifier est à true";
             $this->modifier = true;
         }
     }
