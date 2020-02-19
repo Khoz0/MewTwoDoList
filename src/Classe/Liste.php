@@ -76,6 +76,38 @@ class Liste {
         return $this->idListe;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getIntituleListe()
+    {
+        return $this->intituleListe;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDateCreation()
+    {
+        return $this->dateCreation;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDateFin()
+    {
+        return $this->dateFin;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMailProprietaire()
+    {
+        return $this->mailProprietaire;
+    }
+
 
 
 }

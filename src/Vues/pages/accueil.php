@@ -26,8 +26,8 @@ if(isset($_SESSION["user"])){?>
             $requete->execute();
             while($donnees = $requete->fetch()){
             ?>
-                <div class="jumbotron col-auto" onclick="window.location.href='?page=liste'">
-                    <?php echo $donnees['intituleListe'] ?>
+                <div class="jumbotron col-auto" onclick="window.location.href = '?page=liste&id=<?php echo $donnees['idListe']?>'">
+                    <nom_listes><?php echo $donnees['intituleListe'] ?></nom_listes>
                 </div>
                 <div class="jumbotron-fluid col-1"></div>
             <?php } ?>

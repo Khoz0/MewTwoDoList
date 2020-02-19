@@ -84,7 +84,7 @@ class DB {
         $verifId = DB::getInstance()->getPDO()->prepare("SELECT * FROM Liste where idListe = :idVerification");
 
         /*On test si le mail existe dans la base de données*/
-        $verifId->bindParam(':mailVerification', $id);
+        $verifId->bindParam(':idVerification', $id);
         $verifId->execute();
 
         if ($donnees = $verifId->fetch()) {
