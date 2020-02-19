@@ -4,7 +4,7 @@ namespace App\Classe;
 
 class Utilisateur
 {
-    private $nomUtilisateur;
+    private $nom;
     private $prenom;
     private $pseudo;
     private $mail;
@@ -13,7 +13,7 @@ class Utilisateur
 
     function __construct($nom, $prenom, $pseudo, $mail, $motDePasse, $urlPhoto)
     {
-        $this->nomUtilisateur = $nom;
+        $this->nom = $nom;
         $this->prenom = $prenom;
         $this->pseudo = $pseudo;
         $this->mail = $mail;
@@ -24,17 +24,17 @@ class Utilisateur
     /**
      * @return mixed
      */
-    public function getNomUtilisateur()
+    public function getNom()
     {
         return $this->nom;
     }
 
     /**
-     * @param mixed $nomUtilisateur
+     * @param mixed $nom
      */
-    public function setNomUtilisateur($nomUtilisateur)
+    public function setNom($nom)
     {
-        $this->nomUtilisateur = $nomUtilisateur;
+        $this->nom = $nom;
     }
 
     /**

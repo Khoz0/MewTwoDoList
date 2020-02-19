@@ -12,9 +12,9 @@ $query = file_get_contents("sql.sql");
 
 
 require 'src/Modeles/DB.php';
-$bdd = App\Modeles\DB::getFirstInstance();
+$bdd = App\Modeles\DB::getInstance();
 
-$stmt = $bdd->prepare($query);
+$stmt = $bdd->getPDO()->prepare($query);
 
 if ($stmt->execute())
      echo "Succes";
