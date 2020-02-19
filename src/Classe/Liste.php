@@ -26,6 +26,9 @@ class Liste {
         $this->dateFin = $dateFin;
         $this->mailProprietaire = $mailProprietaire;
         array_push($this->tabUtilisateur, $mailProprietaire);
+
+        $bdd = DB::getInstance();
+        $bdd->addListe($idListe,$intituleListe,$dateCreation,$dateFin,$mailProprietaire);
     }
 
     public function ajouterUtilisateur($mailUtilisateur){

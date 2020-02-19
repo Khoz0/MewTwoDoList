@@ -64,3 +64,10 @@ CREATE TABLE IF NOT EXISTS Destinataire(
 	mail VARCHAR(50) NOT NULL PRIMARY KEY,
 	idNotification INTEGER(10) NOT NULL
 );
+
+CREATE TABLE IF NOT EXISTS Membre(
+    mail VARCHAR(50),
+    idListe INTEGER(10),
+    CONSTRAINT FK_Membre1 FOREIGN KEY(mail) REFERENCES Utilisateur(mail),
+	CONSTRAINT FK_Membre2 FOREIGN KEY(idListe) REFERENCES Liste(idListe)
+)
