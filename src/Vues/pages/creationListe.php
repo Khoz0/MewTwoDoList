@@ -8,6 +8,8 @@
 <body>
 <?php
 use App\Controllers\CreationListeController;
+
+$creationListe = (new App\Controllers\CreationListeController());
 ?>
 
 <div class="container">
@@ -19,8 +21,8 @@ use App\Controllers\CreationListeController;
                     <form class="form-sign_in" method="POST" action="?page=creationListe">
                         <?php
                             if(isset($_POST['submit'])){
-                                (new App\Controllers\CreationListeController())->ajoutListe();
-                                if ((new App\Controllers\CreationListeController)->getModifier()) {
+                                $creationListe->ajoutListe();
+                                if ($creationListe->getModifier()) {
                                     header("Location: ?page=accueil");
                                 }else{?>
                                     <em> La date de création doit être antérieure à celle de fin de liste et la date de fin de liste doit être postérieure à la date actuelle. </em><br>
