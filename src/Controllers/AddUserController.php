@@ -3,9 +3,6 @@
 
 namespace App\Controllers;
 
-
-use App\Modeles\DB;
-
 class AddUserController extends Controller
 {
 

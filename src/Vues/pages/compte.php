@@ -6,6 +6,7 @@ CompteController::class;
 ?>
 <script type="text/javascript" src="cdn/jquery.js"> </script>
 <script type="text/javascript" src="javascript/modification_compte.js"></script>
+<script type="text/javascript" src="javascript/suppression_compte.js"></script>
 
 <body>
 <div class="container">
@@ -61,6 +62,8 @@ CompteController::class;
                      <button class="btn btn-lg btn-primary btn-block text-uppercase" id="modifier">Modifier</button>
                     <br>
                       <button class="btn btn-lg btn-primary btn-block text-uppercase" onclick="window.location.href='?page=accueil'">Retour</button>
+                    <br>
+                        <a href="#" onclick="conf_suppression()">Supprimer le compte</a>
                 </div>
             </div>
         </div>

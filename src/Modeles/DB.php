@@ -59,6 +59,12 @@ class DB {
         return $this->pdo;
     }
 
+    public function deleteUser($mail){
+        $res = DB::getInstance()->getPDO()->prepare("DELETE FROM Utilisateur WHERE mail = :mail");
+        $res->bindParam(":mail", $mail);
+        $res->execute();
+    }
+
 
     public function loadUtilisateur($mail)
     {
