@@ -7,7 +7,7 @@ class DeleteListeController extends Controller
 {
     public function deleteListe()
     {
-        DB::getInstance()->deleteListe();
+        DB::getInstance()->deleteListe($_GET['id']);
         return $this->render('accueil');
 
     }
