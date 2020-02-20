@@ -1,17 +1,3 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>Création d'une liste</title>
-</head>
-
-<body>
-<?php
-use App\Controllers\CreationListeController;
-
-$creationListe = (new App\Controllers\CreationListeController());
-?>
-
 <div class="container">
     <div class="row">
         <div class="col-sm-9 col-md-7 col-lg-7 mx-auto">
@@ -58,7 +44,3 @@ $creationListe = (new App\Controllers\CreationListeController());
         </div>
     </div>
 </div>
-
-
-</body>
-</html>

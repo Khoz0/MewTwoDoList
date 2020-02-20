@@ -12,7 +12,8 @@ class CreationListeController extends Controller {
     private $modifier = false;
 
     public function creationListe(){
-        return $this->render('creationListe');
+        $creationListe = (new App\Controllers\CreationListeController());
+        return $this->render('creationListe', compact('creationListe'));
     }
 
     public function ajoutListe(){

@@ -1,18 +1,12 @@
 <?php
-
-
-
 use \App\Controllers\AjoutTacheController;
 
-AjoutTacheController::class;
 
-?>
-<?php
   if (isset($_POST['texte'])){
       (new App\Controllers\AjoutTacheController)->ajouterTache($_GET["id"]);
       echo "<script type='text/javascript'>",
             "window.close()",
-            "</script>"; 
+            "</script>";
   }
 
  ?>

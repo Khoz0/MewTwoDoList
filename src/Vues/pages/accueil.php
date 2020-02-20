@@ -1,8 +1,5 @@
-
 <?php
-
 use App\Modeles\DB;
-
 ?>
 <script type="text/javascript" src="cdn/jquery.js"></script>
 <script type="text/javascript" src="javascript/tri_liste.js"></script>
