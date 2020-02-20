@@ -13,7 +13,7 @@ class TacheController extends Controller {
     	$idTache = $_GET['idTache'];
     	$bdd = DB::getInstance()->loadListe($idTache);
 
-        return $this->render('Tache', compact('bdd', 'idTache'));
+        return $this->render('tache', compact('bdd', 'idTache'));
     }
 
 
