@@ -12,7 +12,7 @@ class CreationListeController extends Controller {
     private $modifier = false;
 
     public function creationListe(){
-        $creationListe = (new App\Controllers\CreationListeController());
+        $creationListe = (new CreationListeController());
         return $this->render('creationListe', compact('creationListe'));
     }
 
