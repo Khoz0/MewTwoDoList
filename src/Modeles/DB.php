@@ -105,6 +105,24 @@ class DB {
         }
     }
 
+    public function loadTache($idTache){
+        /*Préparation des requêtes*/
+        $verifId = DB::getInstance()->getPDO()->prepare("SELECT * FROM tache where idTache = :idVerification");
+
+        /*On test si le mail existe dans la base de données*/
+        $verifId->bindParam(':idVerification', $id);
+        $verifId->execute();
+
+        if ($donnees = $verifId->fetch()) {
+            $tache = new Tache($donnees["idTache"], $donnees["intituleTache"], $donnees["etat"], $donnees["idListeTache"], $donnees["mailUtilisateur"], $donnees["valide"]);
+
+            return $tache;
+        } else {
+            return null;
+        }
+    }
+
+
     public function addUtilisateur($utilisateur){
 
         $mail = $utilisateur->getMail();
@@ -152,6 +170,13 @@ class DB {
         $results->bindParam(':idListe', $idListeTache);
         $results->bindParam(':mail', $mailUtilisateur);
         $results->bindParam(':etat', $etat);
+        $results->execute();
+    }
+
+    public function deleteTache($idTache)
+    {
+        $results = DB::getInstance()->getPDO()->prepare('DELETE FROM tache WHERE idTiste = :id ');
+        $results->bindParam(':id', $idListe);
         $results->execute();
     }
 
