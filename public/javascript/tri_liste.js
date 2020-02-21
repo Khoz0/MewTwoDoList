@@ -1,7 +1,15 @@
-function sort_by_name() {
-    $('#liste').each(
+function sort_by_name(val) {
+
+    console.log(val);
+    
+    $.each($('#liste'),
         function () {
-            console.log($(this));
+            $(this).children().each(
+                function () {
+                    if ($(this).attr("id") != null)
+                        console.log($(this).attr("id"));
+                }
+            );
         }
     );
 }

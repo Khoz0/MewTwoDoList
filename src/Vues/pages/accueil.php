@@ -14,7 +14,7 @@ if(isset($_SESSION["user"])){?>
         <br>
         <br>
         <h4>Trier par:</h4>
-        <select>
+        <select onchange="sort_by_name(this.value)">
             <option value="alphab">Ordre alphabétique</option>
             <option value="alphabInverse">Ordre alphabétique inverse</option>
             <option value="debRecent">Date de début la plus récente</option>
@@ -63,5 +63,5 @@ if(isset($_SESSION["user"])){?>
         </div>
     </div>
 <?php } ?>
-    <script language="JavaScript">sort_by_name();</script>
+    <script language="JavaScript">sort_by_name("alphab");</script>
 </div>
