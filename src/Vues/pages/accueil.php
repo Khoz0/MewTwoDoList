@@ -1,5 +1,7 @@
 <?php
+
 use App\Modeles\DB;
+
 ?>
 <script type="text/javascript" src="cdn/jquery.js"></script>
 <script type="text/javascript" src="javascript/tri_liste.js"></script>
@@ -9,6 +11,19 @@ use App\Modeles\DB;
 if(isset($_SESSION["user"])){?>
     <div class="jumbotron-fluid justify-content-center">
         <h1>Mes listes :</h1>
+        <br>
+        <br>
+        <h4>Trier par:</h4>
+        <select>
+            <option value="alphab">Ordre alphabétique</option>
+            <option value="alphabInverse">Ordre alphabétique inverse</option>
+            <option value="debRecent">Date de début la plus récente</option>
+            <option value="debAncien">Date de début la plus ancienne</option>
+            <option value="finRecent">Date de fin la plus récente</option>
+            <option value="finAncien">Date de fin la plus ancienne</option>
+        </select>
+        <br>
+        <br>
         <br>
     </div>
     <div class="jumbotron-fluid">
