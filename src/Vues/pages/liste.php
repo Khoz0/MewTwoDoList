@@ -19,7 +19,7 @@ $bdd = serialize(DB::getInstance()->loadListe($_GET["id"]));
 
 <div>
 	<button type="button" class="btn btn-primary" id="tache"
-	onclick="pop_up();" value="<? htmlspecialchars($id) ?>">Ajout tâche </button>
+	onclick="pop_up();" value="<?php echo $_GET["id"]; ?>">Ajout tâche </button>
 </div>
 
 
