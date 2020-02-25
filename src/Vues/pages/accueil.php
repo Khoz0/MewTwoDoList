@@ -14,7 +14,7 @@ if(isset($_SESSION["user"])){?>
         <br>
         <br>
         <h4>Trier par:</h4>
-        <select onchange="sort_by_name(this.value)">
+        <select onchange="sort_by_name(this.value)" onload="sort_by_name(this.value)">
             <option value="alphab">Ordre alphabétique</option>
             <option value="alphabInverse">Ordre alphabétique inverse</option>
             <option value="debRecent">Date de début la plus récente</option>
@@ -39,7 +39,7 @@ if(isset($_SESSION["user"])){?>
                     ?>
                     <div class="jumbotron col-auto" style="border: solid; order=-1;padding: 30px;
     margin: 10px;"
-                         id="<?php echo $donnees['intituleListe'] ?>\<?php echo $donnees['dateCreation'] ?> "
+                         id="<?php echo $donnees['intituleListe'] ?>\<?php echo $donnees['dateCreation'] ?>\<?php echo $donnees['dateFin'] ?>"
                          onclick="window.location.href = '?page=liste&id=<?php echo $donnees['idListe'] ?>'">
                         <nom_listes><?php echo $donnees['intituleListe'] ?></nom_listes>
                     </div>
