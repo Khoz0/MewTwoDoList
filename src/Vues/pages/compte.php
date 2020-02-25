@@ -1,5 +1,8 @@
 <?php
 use \App\Controllers\CompteController;
+
+$compte = (new App\Controllers\CompteController);
+
 ?>
 <script type="text/javascript" src="cdn/jquery.js"> </script>
 <script type="text/javascript" src="javascript/modification_compte.js"></script>
@@ -14,29 +17,29 @@ use \App\Controllers\CompteController;
                     <h5 class="card-title text-center">Compte</h5>
                     <form class="form-sign_in" method="POST" action="?page=compte">
                         <?php if (isset($_POST["valider"])){
-                            (new App\Controllers\CompteController)->modification();
+                            $compte->modification();
 
                         }?>
                         <label for="inputPseudo">Votre pseudo</label>
                         <div class="form-label-group">
-                            <input type="text" name="inputPseudo" class="form-control" placeholder=<?php echo (new CompteController)->getPseudo() ?>
+                            <input type="text" name="inputPseudo" class="form-control" placeholder=<?php echo $compte->getPseudo() ?>
                                    autofocus>
                         </div>
                         <label for="inputNom">Votre nom</label>
                         <div class="form-label-group">
-                            <input type="text" name="inputNom" class="form-control" placeholder=<?php echo (new CompteController)->getNom() ?>
+                            <input type="text" name="inputNom" class="form-control" placeholder=<?php echo $compte->getNom() ?>
                                     >
                         </div>
 
                         <label for="inputPrenom">Votre prénom</label>
                         <div class="form-label-group">
-                            <input type="text" name="inputPrenom" class="form-control" placeholder=<?php echo (new CompteController)->getPrenom() ?>
+                            <input type="text" name="inputPrenom" class="form-control" placeholder=<?php echo $compte->getPrenom() ?>
                                    >
                         </div>
 
                         <label for="inputEmail">Votre adresse mail</label>
                         <div class="form-label-group">
-                            <input type="email" name="inputEmail" class="form-control" placeholder="<?php echo (new CompteController)->getMail() ?>"
+                            <input type="email" name="inputEmail" class="form-control" placeholder="<?php echo $compte->getMail() ?>"
                                    disabled>
                         </div>
 

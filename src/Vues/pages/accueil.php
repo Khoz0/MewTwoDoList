@@ -62,6 +62,9 @@ if(isset($_SESSION["user"])){?>
                                                                            height="140px"/></a>
         </div>
     </div>
+    <div class="jumbotron-fluid justify-content-center">
+        <p>Les listes où je suis innvité(e) :</p>
+    </div>
 <?php } ?>
     <script language="JavaScript">sort_by_name("alphab");</script>
 </div>
