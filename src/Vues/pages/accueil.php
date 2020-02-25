@@ -27,32 +27,23 @@ if(isset($_SESSION["user"])){?>
         <br>
     </div>
     <div class="jumbotron-fluid">
-        <div class="row justify-content-center">
+        <div class="row justify-content-center" id="liste" style="display: flex">
+
             <?php
             $bdd = DB::getInstance()->getPDO();
             $requete = $bdd->prepare("SELECT * FROM Liste WHERE mailProprietaire = :mail");
             $loginSession = unserialize($_SESSION['user'])->getMail();
                 $requete->bindParam('mail', $loginSession);
                 $requete->execute();
-                echo "<div class=\"jumbotron-fluid col-1\"></div>";
                 while ($donnees = $requete->fetch()) {
                     ?>
-                    <div class="jumbotron col-auto" style="border: solid"
+                    <div class="jumbotron col-auto" style="border: solid; order=-1;padding: 30px;
+    margin: 10px;"
+                         id="<?php echo $donnees['intituleListe'] ?>\<?php echo $donnees['dateCreation'] ?> "
                          onclick="window.location.href = '?page=liste&id=<?php echo $donnees['idListe'] ?>'">
                         <nom_listes><?php echo $donnees['intituleListe'] ?></nom_listes>
                     </div>
-                    <div class="jumbotron-fluid col-1"></div>
                 <?php } ?>
-                <div class="jumbotron col-auto" style="border: solid" id="patate"
-                     onclick="window.location.href = '?page=liste&id=<?php echo 1 ?>'">
-                    <nom_listes><?php echo "patate" ?></nom_listes>
-                </div>
-                <div class="jumbotron-fluid col-1"></div>
-                <div class="jumbotron col-auto" style="border: solid" id="chien"
-                     onclick="window.location.href = '?page=liste&id=<?php echo 1 ?>'">
-                    <nom_listes><?php echo "chien" ?></nom_listes>
-                </div>
-            <div class="jumbotron-fluid col-1"></div>
         </div>
         <div class="jumbotron-fluid col-auto">
             <a onclick="window.location.href = '?page=creationListe'"><img src="assests/plus.png"
