@@ -28,8 +28,7 @@ if(isset($_SESSION["user"])){?>
     </div>
     <div class="jumbotron-fluid">
         <div class="row justify-content-center">
-            <div class="jumbotron-fluid col-auto" id="liste" style="display: flex; justify-content: space-between">
-                <?php
+            <?php
             $bdd = DB::getInstance()->getPDO();
             $requete = $bdd->prepare("SELECT * FROM Liste WHERE mailProprietaire = :mail");
             $loginSession = unserialize($_SESSION['user'])->getMail();
@@ -53,8 +52,7 @@ if(isset($_SESSION["user"])){?>
                      onclick="window.location.href = '?page=liste&id=<?php echo 1 ?>'">
                     <nom_listes><?php echo "chien" ?></nom_listes>
                 </div>
-                <div class="jumbotron-fluid col-1"></div>
-            </div>
+            <div class="jumbotron-fluid col-1"></div>
         </div>
         <div class="jumbotron-fluid col-auto">
             <a onclick="window.location.href = '?page=creationListe'"><img src="assests/plus.png"
@@ -63,7 +61,7 @@ if(isset($_SESSION["user"])){?>
         </div>
     </div>
     <div class="jumbotron-fluid justify-content-center">
-        <p>Les listes où je suis innvité(e) :</p>
+        <p>Les listes où je suis invité(e) :</p>
     </div>
 <?php } ?>
     <script language="JavaScript">sort_by_name("alphab");</script>
