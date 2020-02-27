@@ -42,18 +42,18 @@ class AddUserControllerTest extends TestCase {
         //Compte le nombre de lignes après l'insertion
 		$nblignesdeux = $nblignes + 1;
 		$requete = $bdd->prepare("SELECT count(*) FROM Utilisateur");
-		$requete->execute()
+		$requete->execute();
 
 		while($donnees = $requete->fetch()){
-			$compteur2++
+			$compteur2++;
 		}
 	
 		if($compteur2 == $nblignesdeux){
-			$res = true	
+			$res = true;	
 		}
 
 		$requete = $bdd->prepare("delete from utilisateur where mail = 'abcd@abcd.com'");
-		$requete->execute()
+		$requete->execute();
 
 		$this->assert($res, true, 'insertion reussie');
 
