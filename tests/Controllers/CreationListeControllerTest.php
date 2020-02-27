@@ -51,7 +51,7 @@ class CreationListeControllerTest extends TestCase {
 		$requete->execute();
 
 		$nblignesdeux = $nblignes + 1;
-		$requete = $bdd->prepare("SELECT count(*) FROM Utilisateur");
+		$requete = $bdd->prepare("SELECT count(*) FROM Liste");
 		$requete->execute();
 
 		while($donnees = $requete->fetch()){
@@ -62,10 +62,10 @@ class CreationListeControllerTest extends TestCase {
 			$res = true;	
 		}
 
-		$requete = $bdd->prepare("delete from utilisateur where mail = 'abcd@abcd.com'");
+		$requete = $bdd->prepare("delete from liste where idListe = 5000");
 		$requete->execute();
 
-		$requete = $bdd->prepare("delete from liste where idListe = 5000");
+		$requete = $bdd->prepare("delete from utilisateur where mail = 'abcd@abcd.com'");
 		$requete->execute();
 
 		$this->assert($res, true, 'insertion reussie');
