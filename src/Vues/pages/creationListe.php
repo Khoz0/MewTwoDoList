@@ -1,3 +1,10 @@
+<?php
+if(isset($_POST['submit'])){
+    $_SESSION['creation_liste']["nom"] = $_POST["nomListe"];
+    $_SESSION['creation_liste']["dateDebut"] = $_POST["dateDebut"];
+    $_SESSION['creation_liste']["dateFin"] = $_POST["dateFin"];
+}
+?>
 <div class="container">
     <div class="row">
         <div class="col-sm-9 col-md-7 col-lg-7 mx-auto">
@@ -18,19 +25,19 @@
                         <label for="nomListe">Nom de la liste</label>
                         <div class="form-label-group">
                             <input type="text" id="nomListe" name="nomListe"  class="form-control" placeholder="Nom"
-                                   required autofocus >
+                                   required autofocus value = <?php if (isset($_SESSION['creation_liste']["nom"])){echo "\"".$_SESSION['creation_liste']["nom"]."\"";} ?>>
                         </div>
 
                         <label for="dateDebut">Date de début</label>
                         <div class="form-label-group">
                             <input type="date"  name="dateDebut" id="dateDebut"  class="form-control"
-                                   required>
+                                   required value = <?php if (isset($_SESSION['creation_liste']["dateDebut"])){echo "\"".$_SESSION['creation_liste']["dateDebut"]."\"";} ?>>
                         </div>
 
                         <label for="dateFin">Date de fin</label>
                         <div class="form-label-group">
                             <input type="date" name="dateFin" id="dateFin" class="form-control"
-                                   >
+                                   value = <?php if (isset($_SESSION['creation_liste']["dateFin"])){echo "\"".$_SESSION['creation_liste']["dateFin"]."\"";} ?> >
                         </div>
 
                         <br>
@@ -44,3 +51,6 @@
         </div>
     </div>
 </div>
+<?php
+
+unset($_SESSION['creation_liste']);
