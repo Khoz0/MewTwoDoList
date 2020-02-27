@@ -3,7 +3,7 @@ ALTER DATABASE ppil DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 USE ppil;
 
 CREATE TABLE IF NOT EXISTS Utilisateur(
-	mail VARCHAR(30) NOT NULL PRIMARY KEY,
+	mail VARCHAR(100) NOT NULL PRIMARY KEY,
 	nomUser VARCHAR(50),
 	prenomUser VARCHAR(50),
 	pseudoUser VARCHAR(50) UNIQUE,
@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS Liste(
 	intituleListe VARCHAR(50),
 	dateCreation VARCHAR(50),
 	dateFin VARCHAR(50),
-	mailProprietaire VARCHAR(16),
+	mailProprietaire VARCHAR(100),
 	CONSTRAINT FK_Liste FOREIGN KEY(mailProprietaire) REFERENCES Utilisateur (mail)
 );
 
@@ -25,8 +25,8 @@ CREATE TABLE IF NOT EXISTS Tache(
 	intituleTache VARCHAR(50),
 	valide BOOLEAN,
 	idListeT INTEGER(50),
-	mailUtilisateur VARCHAR(16),
-  etat VARCHAR(16),
+	mailUtilisateur VARCHAR(100),
+    etat VARCHAR(16),
 	CONSTRAINT FK_Tache1 FOREIGN KEY(idListeT) REFERENCES Liste(idListe),
 	CONSTRAINT FK_Tache2 FOREIGN KEY(mailUtilisateur) REFERENCES Utilisateur(mail)
 );
@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS Notification(
 	valide BOOLEAN,
 	contenu VARCHAR(200),
 	lu BOOLEAN,
-	mail VARCHAR(50),
+	mail VARCHAR(100),
 	idListe INTEGER(10),
 	CONSTRAINT FK_Notification1 FOREIGN KEY(mail) REFERENCES Utilisateur(mail),
 	CONSTRAINT FK_Notification2 FOREIGN KEY(idListe) REFERENCES Liste(idListe)
@@ -62,12 +62,12 @@ CREATE TABLE IF NOT EXISTS NotificationAjoutMembre(
 );
 
 CREATE TABLE IF NOT EXISTS Destinataire(
-	mail VARCHAR(50) NOT NULL PRIMARY KEY,
+	mail VARCHAR(100) NOT NULL PRIMARY KEY,
 	idNotification INTEGER(10) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS Membre(
-    mail VARCHAR(50),
+    mail VARCHAR(100),
     idListe INTEGER(10),
     CONSTRAINT FK_Membre1 FOREIGN KEY(mail) REFERENCES Utilisateur(mail),
 	CONSTRAINT FK_Membre2 FOREIGN KEY(idListe) REFERENCES Liste(idListe)
