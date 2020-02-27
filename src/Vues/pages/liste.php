@@ -48,10 +48,18 @@ $liste = DB::getInstance()->loadListe($_GET["id"]);
         $requete->bindParam('mail', $loginSession);
         $requete->execute();
         while ($donnees = $requete->fetch()) {
-        ?>
+            ?>
+
+
             <div class="jumbotron-fluid col-auto" style="border: solid; ;padding: 30px; margin: 10px;"
                  id="<?php echo $donnees['intituleTache'] ?>">
+                 <div class="form-check" style="right: -50%; top: -40%;">
+                       <input type="checkbox" aria-label="..." <?php if ($donnees['valide'] == 1) {echo 'checked';}?> >
+                   </div>
                 <nom_listes><?php echo $donnees['intituleTache'] ?></nom_listes>
+                <div>
+                <button type="button" class="btn btn-primary btn-sm">Ajouter un Utilisateur</button>
+              </div>
             </div>
         <?php
         }*/
