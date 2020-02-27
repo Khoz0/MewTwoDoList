@@ -155,7 +155,6 @@ var pJS = function(tag_id, params){
 
 
   pJS.fn.retinaInit = function(){
-
     if(pJS.retina_detect && window.devicePixelRatio > 1){
       pJS.canvas.pxratio = window.devicePixelRatio; 
       pJS.tmp.retina = true;

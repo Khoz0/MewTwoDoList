@@ -1,4 +1,4 @@
-<body id="particles-js">
+<body>
 <div class="container" id="particles-js">
     <div class="row">
         <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
@@ -22,7 +22,7 @@
 
                         </button>
 
-                        <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Connexion</button>
+                        <button class="btn btn-lg btn-info btn-block text-uppercase" type="submit">Connexion</button>
 
 
                         <br>
@@ -31,7 +31,7 @@
 
                     </form>
 
-                        <button class="btn btn-lg btn-primary btn-block text-uppercase" onclick="window.location.href='?page=inscription'">Inscription
+                        <button class="btn btn-lg btn-info btn-block text-uppercase" onclick="window.location.href='?page=inscription'">Inscription
                         </button>
 
                     <br>
