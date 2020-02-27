@@ -1,7 +1,7 @@
 <?php
 namespace Tests\Controllers;
 
-use App\Controllers\CreationListeController;
+use App\Controllers\ModificationListeController;
 use PHPUnit\Framework\TestCase;
 use App\Modeles\DB;
 
@@ -11,23 +11,11 @@ use App\Modeles\DB;
 class CreationListeControllerTest extends TestCase {
 
 	//Test si la liste a bien été créé
-    public function testcreationListe() {
+    public function testmodificationListe() {
 
     	$res = false;
 
 		$bdd = DB::getInstance()->getPDO();
-		$requete = $bdd->prepare("SELECT count(*) FROM Liste");
-		$requete->execute();
-		
-		$compteur = 0;
-		$compteur2 = 0;
-
-		while($donnees = $requete->fetch()){
-			$compteur++;
-		}
-
-		//Compte le nb de lignes avant l'insertion
-		$nblignes = $compteur;
 
 		//on ajoute un proprio
 		$mail = 'abcd@abcd.com';
@@ -50,15 +38,44 @@ class CreationListeControllerTest extends TestCase {
 		$requete = $bdd->prepare("INSERT INTO Liste(idListe,intituleListe,dateCreation,dateFin,mailProprietaire) values(" + $id + "," + $intitule + "," + $datecrea + "," + $datefin + "," + $proprio + "," + $etat + ")");
 		$requete->execute();
 
-		$nblignesdeux = $nblignes + 1;
-		$requete = $bdd->prepare("SELECT count(*) FROM Liste");
+		$requete = $bdd->prepare("UPDATE Liste set intitule = 'modif' where idListe = 5000");
 		$requete->execute();
 
+
+		$modif = '';
+		$compteur = 0;
+		$requete = $bdd->prepare("select intitule from liste where idListe = 5000");	
 		while($donnees = $requete->fetch()){
-			$compteur2++;
+			$modif = $donnees;
+			$compteur++;
 		}
-	
-		if($compteur2 == $nblignesdeux){
+
+		if($compteur == 1 && $modif == 'modif'){
+			$res = true;	
+		}
+
+
+		$requete = $bdd->prepare("UPDATE Liste set dateFin = '2030-05-05' where idListe = 5000");
+		$requete->execute();
+
+		$modif = '';
+		$compteur = 0;
+		$requete = $bdd->prepare("select dateFin from liste where idListe = 5000");	
+		while($donnees = $requete->fetch()){
+			$modif = $donnees;
+			$compteur++;
+		}
+
+		$datedeb = '';
+		$requete = $bdd->prepare("select dateDebut from liste where idListe = 5000");	
+		while($donnees = $requete->fetch()){
+			$datedeb = $donnees;
+		}
+
+		$debut = strtotime($datedeb);
+		$fin = strtotime($datefin);
+
+		if($compteur == 1 && $modif == '2030-05-05' && $debut < $fin){
 			$res = true;	
 		}
 
@@ -66,9 +83,9 @@ class CreationListeControllerTest extends TestCase {
 		$requete->execute();
 
 		$requete = $bdd->prepare("delete from utilisateur where mail = 'abcd@abcd.com'");
-		$requete->execute();
+		$requete->execute();		
 
-		$this->assert($res, true, 'insertion reussie');
+		$this->assert($res, true, 'modification reussie');
 
     }
 

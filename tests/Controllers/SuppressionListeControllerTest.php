@@ -1,34 +1,31 @@
 <?php
 namespace Tests\Controllers;
 
-use App\Controllers\AjoutTacheController;
+use App\Controllers\DeleteListeController;
 use PHPUnit\Framework\TestCase;
 use App\Modeles\DB;
 
 /**
- * Tests AjoutTacheControllerTest
+ * Tests CreationListeController
  */
-class AjoutTacheControllerTest extends TestCase {
+class CreationListeControllerTest extends TestCase {
 
-     //Test si la liste a bien été ajouté à la bdd
-    public function testajouterTache() {
+	//Test si la liste a bien été créé
+    public function testsuppressionListe() {
 
-		$res = false;
+    	$res = false;
 
 		$bdd = DB::getInstance()->getPDO();
-		$requete = $bdd->prepare("SELECT count(*) FROM Tache");
+		$requete = $bdd->prepare("SELECT count(*) FROM Liste");
 		$requete->execute();
 		
 		$compteur = 0;
 		$compteur2 = 0;
-		while($donnees = $requete->fetch()){
-			$compteur++;
-		}
 
+		//Compte le nb de lignes avant l'insertion
 		$nblignes = $compteur;
 
-		//creation proprio
-
+		//on ajoute un proprio
 		$mail = 'abcd@abcd.com';
 		$nom_user = 'bonjour';
 		$prenomUser  = 'aurevoir';
@@ -37,8 +34,6 @@ class AjoutTacheControllerTest extends TestCase {
 
 		$requete = $bdd->prepare("INSERT INTO UTILISATEUR(mail, nomUser, prenomUser, pseudoUser, mdp) values(" + $mail + "," + $nom_user + "," + $prenomUser + "," + $pseudoUser + "," + $mdp + ")");
 		$requete->execute();
-
-		//creation liste
 
 		$id = 5000;
 		$intitule = 'intitule';
@@ -50,40 +45,35 @@ class AjoutTacheControllerTest extends TestCase {
 		$requete = $bdd->prepare("INSERT INTO Liste(idListe,intituleListe,dateCreation,dateFin,mailProprietaire) values(" + $id + "," + $intitule + "," + $datecrea + "," + $datefin + "," + $proprio + "," + $etat + ")");
 		$requete->execute();
 
-
-		//creation tache
-
-		$idT = 6000;
-		$intitule = 'intituleT';
-
-
-		$requete = $bdd->prepare("INSERT INTO Tache(idTache,intituleTache,valide,idListeT,mailUtilisateur) values(" + $idT + "," + $intitule + ", TRUE ," + $id + "," + $proprio + ")");
+		$nblignesdeux = $nblignes + 1;
+		$requete = $bdd->prepare("SELECT count(*) FROM Liste");
 		$requete->execute();
 
+		//on compte apres l'insertion
+		while($donnees = $requete->fetch()){
+			$compteur++;
+		}
 
+		
+	
+		
 
-		$nblignesdeux = $nblignes + 1;
-		$requete = $bdd->prepare("SELECT count(*) FROM Tache");
+		$requete = $bdd->prepare("delete from liste where idListe = 5000");
 		$requete->execute();
 
 		while($donnees = $requete->fetch()){
 			$compteur2++;
 		}
-	
-		if($compteur2 == $nblignesdeux){
+
+		if($compteur2 == $nblignesdeux - 1){
 			$res = true;	
 		}
 
-		$requete = $bdd->prepare("delete from tache where idTache = 6000");
-		$requete->execute();
-
-		$requete = $bdd->prepare("delete from liste where idListe = 5000");
-		$requete->execute();
-
 		$requete = $bdd->prepare("delete from utilisateur where mail = 'abcd@abcd.com'");
-		$requete->execute();		
+		$requete->execute();
 
-		$this->assert($res, true, 'insertion reussie');
-		
+		$this->assert($res, true, 'suppression reussie');
+
     }
+
 }

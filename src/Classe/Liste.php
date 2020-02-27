@@ -57,13 +57,17 @@ class Liste {
         }
     }
 
-    public function sauvegarderBDD(){
+    public function getTabTache(){
+        return $this->tabTache;
+    }
 
+    public function sauvegarderBDD(){
+        $bdd = DB::getInstance();
+        $bdd->addListe($this->idListe,$this->intituleListe,$this->dateCreation,$this->dateFin,$this->mailProprietaire);
     }
 
     public function chargerBDD(){
-        $bdd = DB::getInstance();
-        $bdd->addListe($this->idListe,$this->intituleListe,$this->dateCreation,$this->dateFin,$this->mailProprietaire);
+
     }
 
     public function supprimerBDD(){
