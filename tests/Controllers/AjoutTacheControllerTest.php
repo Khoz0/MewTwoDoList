@@ -74,14 +74,14 @@ class AjoutTacheControllerTest extends TestCase {
 			$res = true;	
 		}
 
-		$requete = $bdd->prepare("delete from utilisateur where mail = 'abcd@abcd.com'");
+		$requete = $bdd->prepare("delete from tache where idTache = 6000");
 		$requete->execute();
 
 		$requete = $bdd->prepare("delete from liste where idListe = 5000");
 		$requete->execute();
 
-		$requete = $bdd->prepare("delete from tache where idTache = 6000");
-		$requete->execute();
+		$requete = $bdd->prepare("delete from utilisateur where mail = 'abcd@abcd.com'");
+		$requete->execute();		
 
 		$this->assert($res, true, 'insertion reussie');
 		
