@@ -14,7 +14,7 @@ $bdd = serialize(DB::getInstance()->loadListe($_GET["id"]));
 ?>
 <div class="jumbotron text-center">
     <h1>Liste <?php echo unserialize($bdd)->getIntituleListe()?></h1>
-    <a href="#" onclick="conf_suppression(<?php echo $_GET["id"]; ?>)"> Supprimer la liste </a>
+    <a href="#" onclick="conf_suppression(<?php echo $_GET["id"]; ?>, 'Liste <?php echo unserialize($bdd)->getIntituleListe();?>')"> Supprimer la liste </a>
     <br>
     <br>
     <a href="#" onclick="window.location.href = '?page=accueil'"> Retour </a>
