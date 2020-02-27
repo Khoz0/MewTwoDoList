@@ -10,6 +10,7 @@ class Utilisateur
     private $mail;
     private $motDePasse;
     private $urlPhoto;
+    private $listesProprietaire;
 
     function __construct($nom, $prenom, $pseudo, $mail, $motDePasse, $urlPhoto)
     {
@@ -19,6 +20,23 @@ class Utilisateur
         $this->mail = $mail;
         $this->motDePasse = $motDePasse;
         $this->urlPhoto = $urlPhoto;
+        $this->listesProprietaire = array();
+    }
+
+    /**
+     * @return array
+     */
+    public function getListesProprietaire(): array
+    {
+        return $this->listesProprietaire;
+    }
+
+    /**
+     * @param array $listesProprietaire
+     */
+    public function setListesProprietaire(array $listesProprietaire)
+    {
+        $this->listesProprietaire = $listesProprietaire;
     }
 
     /**
@@ -119,14 +137,19 @@ class Utilisateur
 
 
 
-    public function creerListe($nom, $prenom, $pseudo, $mail, $motDePasse)
+    public function ajouterListe($liste)
     {
-
+        $this->listesProprietaire[$liste->getIdListe()] = $liste;
     }
 
-    public function supprimerListe($nom, $dateDebut, $dateFin)
+    public function supprimerListe($id)
     {
+        unset($this->listesProprietaire[$id]);
+    }
 
+    public function recupererListe($id): Liste
+    {
+        return $this->listesProprietaire[$id];
     }
 
     public function quitterListe($liste)
