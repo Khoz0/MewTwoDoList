@@ -17,6 +17,7 @@ class AddUserControllerTest extends TestCase {
 		$res = false;
 
 		$bdd = DB::getInstance()->getPDO();
+
 		$requete = $bdd->prepare("SELECT count(*) FROM Utilisateur");
 		$requete->execute();
 		
