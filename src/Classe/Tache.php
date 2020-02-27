@@ -14,6 +14,7 @@ class Tache
     private $idListeTache;
     private $mailUtilisateur;
     private $valide;
+    private $utilisateurAssigne;
 
     /**
      * Liste constructor.
@@ -27,15 +28,22 @@ class Tache
         $this->valide = $valide;
     }
 
-    public function ajouterUtilisateur($utilisateur)
+    /**
+     * @return mixed
+     */
+    public function getUtilisateurAssigne()
     {
-        $this->mailUtilisateur = $utilisateur;
+        return $this->mailUtilisateur;
     }
 
-    public function retirerUtilisateur()
+    /**
+     * @param mixed $utilisateurAssigne
+     */
+    public function setUtilisateurAssigne($utilisateurAssigne)
     {
-        $this->mailUtilisateur = null;
+        $this->mailUtilisateur = $utilisateurAssigne;
     }
+
 
     public function changeEtat($etat)
     {

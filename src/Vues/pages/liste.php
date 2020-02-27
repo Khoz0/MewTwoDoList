@@ -7,7 +7,6 @@ namespace App\Vues;
 
 <?php
 
-use App\Classe\Tache;
 use App\Modeles\DB;
 
 $bdd = serialize(DB::getInstance()->loadListe($_GET["id"]));
@@ -36,17 +35,46 @@ $liste = DB::getInstance()->loadListe($_GET["id"]);
         foreach ($taches as $elem){
             $tache = DB::getInstance()->loadTache($elem['idTache']);
             $nom = $tache->getIntituleTache();
-            $valide =$tache->getValide();
+            $valide = $tache->getValide();
+            $user = unserialize($_SESSION['user']);
             ?>
             <div class="jumbotron-fluid col-auto" style="border: solid; ;padding: 30px; margin: 10px;"
                  id="<?php echo $nom ?>">
-                 <div class="form-check" style="right: -50%; top: -40%;">
-                       <input type="checkbox" aria-label="..." <?php if ($valide == 1) {echo 'checked';}?> >
-                   </div>
+                <div class="form-check align-top">
+                    <input type="checkbox" aria-label="..." <?php if ($valide == 1) {
+                        echo 'checked';
+                    } ?> >
+                </div>
                 <nom_listes><?php echo $nom ?></nom_listes>
-                <div>
-                <button type="button" class="btn btn-primary btn-sm">Ajouter un Utilisateur</button>
-              </div>
+                <?php
+
+                if ($tache->getUtilisateurAssigne() == null) {
+                    if (isset($_POST[$nom])) {
+                        $tache->setUtilisateurAssigne(unserialize($_SESSION['user']));
+                    }
+
+                    ?>
+                    <div>
+                        <form method="post" name="<?php echo $nom ?> " action="#">
+                            <button type="button" value="<?php echo $user->getMail() ?>" class="btn btn-primary btn-sm">
+                                Ajouter
+                                un Utilisateur
+                            </button>
+                        </form>
+                    </div>
+                    <?php
+                } else {
+                    ?><br><h5><?php echo $tache->getUtilisateurAssigne(); ?></h5><br>
+                    <div>
+                        <form method="post" name="-<?php echo $nom ?> " action="#">
+                            <button type="button" value="<?php echo $user->getMail() ?>" class="btn btn-primary btn-sm">
+                                Se retirer
+                            </button>
+                        </form>
+                    </div>
+                    <?php
+                }
+                ?>
             </div>
         <?php } ?>
     </div>
