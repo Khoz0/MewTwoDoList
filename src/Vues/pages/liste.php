@@ -14,6 +14,8 @@ $bdd = serialize(DB::getInstance()->loadListe($_GET["id"]));
 ?>
 <div class="jumbotron text-center">
     <h1>Liste <?php echo unserialize($bdd)->getIntituleListe()?></h1>
+    <a href="#" onclick="conf_modification(<?php echo $_GET["id"]; ?>)"> Modifier la liste </a>
+    <br>
     <a href="#" onclick="conf_suppression(<?php echo $_GET["id"]; ?>, 'Liste <?php echo unserialize($bdd)->getIntituleListe();?>')"> Supprimer la liste </a>
     <br>
     <br>
@@ -46,6 +48,7 @@ $bdd = serialize(DB::getInstance()->loadListe($_GET["id"]));
 </div>
 
 <script type="text/javascript" src="javascript/suppression_liste.js"></script>
+<script type="text/javascript" src="javascript/modification_liste.js"></script>
 <script>
 	function pop_up() {
 		var id = document.getElementById("tache").value;
