@@ -1,18 +1,23 @@
 <?php
 use \App\Controllers\AjoutTacheController;
-
-
-  if (isset($_POST['texte'])){
-      (new App\Controllers\AjoutTacheController)->ajouterTache($_GET["id"]);
-      echo "<script type='text/javascript'>",
-            "window.close()",
-            "</script>";
-  }
+$ajoutTache = new App\Controllers\AjoutTacheController;
 
  ?>
 <div class="jumbotron text-center">
 <h1 class="display-4"> Ajout  Tâche </h1>
 </div>
+<?php
+if (isset($_POST['texte'])){
+    if (!empty($_POST['texte'])) {
+        $ajoutTache->ajouterTache($_GET["id"]);
+        echo "<script type='text/javascript'>",
+        "window.close()",
+        "</script>";
+    }else{ ?>
+        <em> La date de création doit être antérieure à celle de fin de liste et la date de fin de liste doit être postérieure à la date actuelle. </em><br>
+    <?php }
+}
+?>
 <form class="form-sign_in" method="POST" action=<?php echo "?page=ajoutTache&id=".$_GET['id'] ;?> >
 <div class="input-group">
   <div class="input-group-pretend">

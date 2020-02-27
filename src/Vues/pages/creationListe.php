@@ -1,4 +1,11 @@
 <?php
+
+namespace App\Vues;
+
+use App\Controllers\CreationListeController;
+
+$creationListe = new CreationListeController();
+
 if(isset($_POST['submit'])){
     $_SESSION['creation_liste']["nom"] = $_POST["nomListe"];
     $_SESSION['creation_liste']["dateDebut"] = $_POST["dateDebut"];
