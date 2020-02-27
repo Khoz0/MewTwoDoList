@@ -40,10 +40,12 @@ if ($page != "login" && $page != "disconnect"){
                     <?php }else{ ?>
                         <li class="nav-item">
                     <?php } ?>
-                    <a class="nav-link" href="?page=disconnect">Deconnexion</a>
+                    <?php if (isset($_SESSION['user'])) {?>
+                        <a class="nav-link" href="?page=disconnect">Deconnexion</a>
+                        <?php }else{ ?>
+                        <a class="nav-link" href="?page=login">connexion</a>
+                    <?php } ?>
 					</li>
-
-
                 <?php
                 } ?>
 			</ul>
