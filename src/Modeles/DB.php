@@ -4,6 +4,7 @@ namespace App\Modeles;
 
 use App\Classe\Utilisateur;
 use App\Classe\Liste;
+use App\Classe\Tache;
 use Exception;
 use PDO;
 
@@ -104,6 +105,12 @@ class DB {
         if ($donnees = $verifId->fetch()) {
             $liste = new Liste($donnees["idListe"], $donnees["intituleListe"], $donnees["dateCreation"], $donnees["dateFin"], $donnees["mailProprietaire"]);
 
+            $recupererTaches = DB::getInstance()->getPDO()->prepare("SELECT * FROM Tache where idListeT = :idVerification2");
+            $recupererTaches->bindParam(':idVerification2', $donnees["idListe"]);
+            $recupererTaches->execute();
+            while ($donneesTaches = $recupererTaches->fetch()) {
+                $liste->ajouterTache($donneesTaches);
+            }
             return $liste;
         } else {
             return null;
@@ -115,11 +122,11 @@ class DB {
         $verifId = DB::getInstance()->getPDO()->prepare("SELECT * FROM tache where idTache = :idVerification");
 
         /*On test si le mail existe dans la base de données*/
-        $verifId->bindParam(':idVerification', $id);
+        $verifId->bindParam(':idVerification', $idTache);
         $verifId->execute();
 
         if ($donnees = $verifId->fetch()) {
-            $tache = new Tache($donnees["idTache"], $donnees["intituleTache"], $donnees["etat"], $donnees["idListeTache"], $donnees["mailUtilisateur"], $donnees["valide"]);
+            $tache = new Tache($donnees["idTache"], $donnees["intituleTache"], $donnees["etat"], $donnees["idListeT"], $donnees["mailUtilisateur"], $donnees["valide"]);
 
             return $tache;
         } else {
