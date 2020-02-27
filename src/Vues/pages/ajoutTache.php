@@ -11,7 +11,8 @@ if (isset($_POST['texte'])){
     if (!empty($_POST['texte'])) {
         $ajoutTache->ajouterTache($_GET["id"]);
         echo "<script type='text/javascript'>",
-        "window.close()",
+        "window.opener.location.reload(true);",
+        "window.close();",
         "</script>";
     }else{ ?>
         <em> La date de création doit être antérieure à celle de fin de liste et la date de fin de liste doit être postérieure à la date actuelle. </em><br>
