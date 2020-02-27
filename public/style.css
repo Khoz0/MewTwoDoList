@@ -1,29 +1,6 @@
-/* Style CSS ici */
-
-
-
-/* CSS de test (à supprimer après) */
-.test { color: red; font-weight: bold; text-decoration: underline; }
-
-erreur {
-    font-weight: bold;
-}
-
-em {
-    font-weight: bold;
-    color: #cb0003;
-}
-
-nom_listes {
-    font-size: 18pt;
-    font-weight: bold;
-    color : #005cbf;
-}
-
-
 body {
-    margin: 0;
-    font: normal 75% Arial, Helvetica, sans-serif;
+    margin:0;
+    font:normal 75% Arial, Helvetica, sans-serif;
 }
 
 canvas {
@@ -32,7 +9,7 @@ canvas {
 }
 
 #particles-js {
-    position: absolute;
+    position:absolute;
     width: 100%;
     height: 100%;
     background-color: #232741;
@@ -42,12 +19,10 @@ canvas {
     background-position: 50% -250%;
 }
 
-/* ---- stats.js ---- */
 .count-particles {
     background: #000022;
     position: absolute;
-    top: 48px;
-    left: 0;
+    top: 48px; left: 0;
     width: 80px;
     color: #13E8E9;
     font-size: .8em;
@@ -58,6 +33,8 @@ canvas {
     font-family: Helvetica, Arial, sans-serif;
     font-weight: bold;
 }
+
+
 
 .js-count-particles {
     font-size: 1.1em;
@@ -76,4 +53,8 @@ canvas {
 
 .count-particles {
     border-radius: 0 0 3px 3px;
+}
+
+.imgmenu {
+    background-image: url("assests/parametre.png");
 }
