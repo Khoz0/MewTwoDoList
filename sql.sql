@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS Liste(
 	intituleListe VARCHAR(50),
 	dateCreation VARCHAR(50),
 	dateFin VARCHAR(50),
-	mailProprietaire VARCHAR(16),
+	mailProprietaire VARCHAR(30),
 	CONSTRAINT FK_Liste FOREIGN KEY(mailProprietaire) REFERENCES Utilisateur (mail)
 );
 

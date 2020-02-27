@@ -36,7 +36,12 @@ class DB {
             }
             $this->pdo = new PDO("mysql:host=$config[host];dbname=$config[db];charset=utf8", $config['user'], $config['pass'], array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
         } catch (Exception $e) {
-            die($e->getMessage());
+            try {
+                $this->pdo = new PDO("mysql:host=$config[host];charset=utf8", $config['user'], $config['pass'], array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+            }
+            catch (Exception $e) {
+                die($e->getMessage());
+            }
         }
     }
 
