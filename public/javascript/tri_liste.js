@@ -80,7 +80,7 @@ function sort_finRecent(a, b) {
     if (b.attr("id").split("\\")[2] == "")
         return -10;
 
-    if (new Date(a.attr("id").split("\\")[2]).getTime() > new Date(b.attr("id").split("\\")[2]).getTime())
+    if (new Date(a.attr("id").split("\\")[2]).getTime() < new Date(b.attr("id").split("\\")[2]).getTime())
         return -1;
     return 1;
 }
@@ -92,7 +92,7 @@ function sort_finAncien(a, b) {
     if (b.attr("id").split("\\")[2] == "")
         return 10;
 
-    if (new Date(a.attr("id").split("\\")[2]).getTime() < new Date(b.attr("id").split("\\")[2]).getTime())
+    if (new Date(a.attr("id").split("\\")[2]).getTime() > new Date(b.attr("id").split("\\")[2]).getTime())
         return -1;
     return 1;
 }
