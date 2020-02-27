@@ -9,19 +9,18 @@ use App\Modeles\DB;
 class SessionCreateController extends Controller
 {
 
+
     public function sessionCreate()
     {
         if ($this->checkPassword($_POST["mail"], $_POST["mdp"]) == 1) {
-
-            $prenom = unserialize($_SESSION['user'])->getPrenom();
-            $helloWorld = "Bienvenue " . $prenom . " !";
-            return $this->render('accueil', compact('helloWorld'));
+            return $this->render('accueil');
         } else {
             header('Location: ./?page=login');
             exit();
         }
 
     }
+
 
     public function checkPassword($mail, $password)
     {
@@ -50,14 +49,22 @@ class SessionCreateController extends Controller
                 session_start();
 
 
+                $this->console_log(self::$error);
                 $_SESSION['user'] = serialize(DB::getInstance()->loadUtilisateur($mailVerification));
                 return 1;
             } else {
                 /*Le mot de passe ne correspond pas au mail*/
+                $error = "Le couple d'identifiant est incorrect !";
+                session_start();
+                $_SESSION['error'] = serialize($error);
                 return 2;
             }
         } else {
             /*Le mail n'est pas dans la base de données*/
+
+            $error = "Le mail n'existe pas !";
+            session_start();
+            $_SESSION['error'] = serialize($error);
             return 0;
         }
     }

@@ -23,8 +23,12 @@
                         </button>
 
                         <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Connexion</button>
+
+
                         <br>
+                        <h5 class="card-title text-center"><?= $err ?><?php echo '<br>' ?></h5>
                         <hr class="my-4">
+
                     </form>
 
                         <button class="btn btn-lg btn-primary btn-block text-uppercase" onclick="window.location.href='?page=inscription'">Inscription
