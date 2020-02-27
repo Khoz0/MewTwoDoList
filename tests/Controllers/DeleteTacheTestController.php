@@ -6,17 +6,17 @@ use PHPUnit\Framework\TestCase;
 use App\Modeles\DB;
 
 /**
- * Tests CreationListeController
+ * Tests DeleteTacheTestController
  */
-class CreationListeControllerTest extends TestCase {
+class DeleteTacheTestController extends TestCase {
 
 	//Test si la liste a bien été créé
-    public function testsuppressionListe() {
+    public function testdeleteTache() {
 
     	$res = false;
 
 		$bdd = DB::getInstance()->getPDO();
-		$requete = $bdd->prepare("SELECT count(*) FROM Liste");
+		$requete = $bdd->prepare("SELECT count(*) FROM Tache");
 		$requete->execute();
 		
 		$compteur = 0;
@@ -37,13 +37,24 @@ class CreationListeControllerTest extends TestCase {
 		$datecrea = '1999-06-04';
 		$datefin = '2030-12-25';
 		$proprio = 'abcd@abcd.com';
+		$etat = 'En cours';
 
         //On réalise l'insertion
-		$requete = $bdd->prepare("INSERT INTO Liste(idListe,intituleListe,dateCreation,dateFin,mailProprietaire) values(" + $id + "," + $intitule + "," + $datecrea + "," + $datefin + "," + $proprio + ")");
+		$requete = $bdd->prepare("INSERT INTO Liste(idListe,intituleListe,dateCreation,dateFin,mailProprietaire) values(" + $id + "," + $intitule + "," + $datecrea + "," + $datefin + "," + $proprio +")");
 		$requete->execute();
 
+		$idTache = 6666;
+		$intituleTache = 'intituleTache';
+		$valide = 0;
+		$idListeT = 5000;
+		$proprio = 'abcd@abcd.com';
+		$etat = 'En cours'
 
-		$requete = $bdd->prepare("SELECT count(*) FROM Liste");
+        //On réalise l'insertion
+		$requete = $bdd->prepare("INSERT INTO Tache(idTache,intituleTache,valide,idListeT,mailUtilisateur,etat) values(" + $idTache + "," + $intituleTache + "," + $valide + "," + $idListeT + "," + $mailUtilisateur + "," + $etat + ")");
+		$requete->execute();
+
+		$requete = $bdd->prepare("SELECT count(*) FROM Tache");
 		$requete->execute();
 
 		//on compte apres l'insertion
