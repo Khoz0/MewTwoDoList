@@ -15,7 +15,7 @@ if (isset($_POST['texte'])){
         "window.close();",
         "</script>";
     }else{ ?>
-        <em> La date de création doit être antérieure à celle de fin de liste et la date de fin de liste doit être postérieure à la date actuelle. </em><br>
+        <em> L'intitulé de la liste n'est pas rempli'. </em><br>
     <?php }
 }
 ?>
