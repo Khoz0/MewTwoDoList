@@ -1,5 +1,3 @@
--- Adminer 4.7.5 MySQL dump
-
 SET NAMES utf8;
 SET time_zone = '+00:00';
 SET foreign_key_checks = 0;
@@ -110,6 +108,3 @@ CREATE TABLE `Utilisateur` (
   PRIMARY KEY (`mail`),
   UNIQUE KEY `pseudoUser` (`pseudoUser`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
--- 2020-02-27 10:05:06
