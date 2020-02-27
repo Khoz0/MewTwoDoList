@@ -28,7 +28,7 @@ if ($page != "login" && $page != "disconnect"){
                 <?php }else{ ?>
                     <li class="nav-item">
                 <?php } ?>
-					<a class="nav-link" href="?page=accueil">Accueil <span class="sr-only">(current)</span></a>
+					<!--<a class="nav-link" href="?page=accueil">Accueil <span class="sr-only">(current)</span></a>-->
 				</li>
                 <?php if (isset($_SESSION['user'])) {
 				if ($page == 'compte') { ?>
@@ -36,7 +36,7 @@ if ($page != "login" && $page != "disconnect"){
                 <?php }else{ ?>
                     <li class="nav-item">
                 <?php } ?>
-						<a class="nav-link" href="?page=compte">Mon compte</a>
+						<!--<a class="nav-link" href="?page=compte">Mon compte</a>-->
 					</li>
 				<?php }
                     if ($page == 'disconnect') { ?>
@@ -45,9 +45,9 @@ if ($page != "login" && $page != "disconnect"){
                         <li class="nav-item">
                     <?php } ?>
                     <?php if (isset($_SESSION['user'])) {?>
-                        <a class="nav-link" href="?page=disconnect">Deconnexion</a>
+                        <!--<a class="nav-link" href="?page=disconnect">Deconnexion</a>-->
                         <?php }else{ ?>
-                        <a class="nav-link" href="?page=login">connexion</a>
+                        <!--<a class="nav-link" href="?page=login">connexion</a>-->
                     <?php } ?>
 					</li>
                 <?php
@@ -63,7 +63,11 @@ if ($page != "login" && $page != "disconnect"){
 
         <div class="dropdown-menu dropdown-menu-right">
         <a class="dropdown-item" href="?page=compte">Mon Compte</a>
-        <a class="dropdown-item" href="?page=disconnect">Se déconnecter</a>
+        <?php if (isset($_SESSION['user'])) {?>
+            <a class="dropdown-item" href="?page=disconnect">Se déconnecter</a>
+            <?php }else{ ?>
+            <a class="dropdown-item" href="?page=disconnect">Se connecter</a>
+        <?php } ?>
         </div>
 
 	</nav>
