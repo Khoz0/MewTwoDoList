@@ -22,9 +22,6 @@ class CreationListeControllerTest extends TestCase {
 		$compteur = 0;
 		$compteur2 = 0;
 
-		//Compte le nb de lignes avant l'insertion
-		$nblignes = $compteur;
-
 		//on ajoute un proprio
 		$mail = 'abcd@abcd.com';
 		$nom_user = 'bonjour';
@@ -45,7 +42,7 @@ class CreationListeControllerTest extends TestCase {
 		$requete = $bdd->prepare("INSERT INTO Liste(idListe,intituleListe,dateCreation,dateFin,mailProprietaire) values(" + $id + "," + $intitule + "," + $datecrea + "," + $datefin + "," + $proprio + "," + $etat + ")");
 		$requete->execute();
 
-		$nblignesdeux = $nblignes + 1;
+
 		$requete = $bdd->prepare("SELECT count(*) FROM Liste");
 		$requete->execute();
 
@@ -54,9 +51,8 @@ class CreationListeControllerTest extends TestCase {
 			$compteur++;
 		}
 
-		
-	
-		
+		//Compte le nb de lignes apres l'insertion
+		$nblignes = $compteur;		
 
 		$requete = $bdd->prepare("delete from liste where idListe = 5000");
 		$requete->execute();
@@ -65,7 +61,7 @@ class CreationListeControllerTest extends TestCase {
 			$compteur2++;
 		}
 
-		if($compteur2 == $nblignesdeux - 1){
+		if($compteur2 == $nblignes - 1){
 			$res = true;	
 		}
 
