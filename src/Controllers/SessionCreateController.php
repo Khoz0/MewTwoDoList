@@ -49,7 +49,6 @@ class SessionCreateController extends Controller
                 session_start();
 
 
-                $this->console_log(self::$error);
                 $_SESSION['user'] = serialize(DB::getInstance()->loadUtilisateur($mailVerification));
                 return 1;
             } else {
