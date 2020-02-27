@@ -14,7 +14,8 @@ class AddUserController extends Controller
             return $this->render('inscription');
         } else {
 
-            return $this->render('login');
+            header('Location: ./?page=login');
+            exit();
         }
 
     }
