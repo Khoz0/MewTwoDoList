@@ -5,11 +5,11 @@ use App\Modeles\DB;
 ?>
 <script type="text/javascript" src="cdn/jquery.js"></script>
 <script type="text/javascript" src="javascript/tri_liste.js"></script>
-<div class="jumbotron text-center">
+<div class="jumbotron-fluid text-center">
 
     <?php
 if(isset($_SESSION["user"])){?>
-    <div class="jumbotron-fluid justify-content-center">
+    <div class="jumbotron justify-content-center">
         <h1>Mes listes :</h1>
         <br>
         <br>

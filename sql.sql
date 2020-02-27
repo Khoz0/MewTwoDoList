@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS Tache(
 	valide BOOLEAN,
 	idListeT INTEGER(50),
 	mailUtilisateur VARCHAR(16),
-  etat VARCHAR(16),
+    etat VARCHAR(16),
 	CONSTRAINT FK_Tache1 FOREIGN KEY(idListeT) REFERENCES Liste(idListe),
 	CONSTRAINT FK_Tache2 FOREIGN KEY(mailUtilisateur) REFERENCES Utilisateur(mail)
 );
