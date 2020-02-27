@@ -30,6 +30,10 @@ class CreationListeController extends Controller {
             $liste = new Liste($id, $this->getNom(), $this->getDateCreation(), $this->getDateFin(), $mail);
             $liste->sauvegarderBDD();
             $this->modifier = true;
+
+            $user = unserialize($_SESSION['user']);
+            $user->ajouterListe($liste);
+            $_SESSION['user'] = serialize($user);
         }
     }
 

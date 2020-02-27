@@ -2,9 +2,9 @@
 
 namespace App\Modeles;
 
-use App\Classe\Utilisateur;
 use App\Classe\Liste;
 use App\Classe\Tache;
+use App\Classe\Utilisateur;
 use Exception;
 use PDO;
 
@@ -80,6 +80,7 @@ class DB {
 
         /*Préparation des requêtes*/
         $verifMail = DB::getInstance()->getPDO()->prepare("SELECT * FROM Utilisateur where mail = :mailVerification");
+        $getListeProp = DB::getInstance()->getPDO()->prepare("SELECT * FROM Liste where mailProprietaire = :mailVerification");
 
         /*On test si le mail existe dans la base de données*/
         $verifMail->bindParam(':mailVerification', $mail);
@@ -88,6 +89,16 @@ class DB {
         if ($donnees = $verifMail->fetch()) {
             $utilisateur = new Utilisateur($donnees["nomUser"], $donnees["prenomUser"], $donnees["pseudoUser"], $donnees["mail"], null, null);
 
+
+            /*On récupère les liste dont l'utilisateur est le propriétaire dans la base de données*/
+            $getListeProp->bindParam(':mailVerification', $mail);
+            $getListeProp->execute();
+
+            while ($donnesListe = $getListeProp->fetch()) {
+                $liste = $this->loadListe($donnesListe['idListe']);
+                $utilisateur->ajouterListe($liste);
+
+            }
             return $utilisateur;
         } else {
             return null;
