@@ -26,9 +26,10 @@ $liste = DB::getInstance()->loadListe($_GET["id"]);
                     $membres = $liste->recupererMembres($_GET["id"]);
                     foreach ($membres as $membre){
                 ?>
-                        <a class="dropdown-item"><?php echo $membre[0]?></a>
+                        <p class="dropdown-item"><?php echo $membre[0]?></p>
                 <?php }
                     ?>
+                <button class="dropdown-item" onclick="window.location.href='?page=accueil'">Quitter la liste</button>
             </div>
         </div>
     <?php }
