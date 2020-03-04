@@ -59,21 +59,31 @@ if ($page != "login" && $page != "disconnect"){
         <?php
         if (stristr($_SERVER['REQUEST_URI'], "id=") != ""){
             ?>
-            <button class="btn float-right" type="button"><img src="assests/membre_listes.png" width="20" height="20"></button>
+            <div class="btn-group">
+                <button class="btn float-right" type="button" data-toggle="dropdown" data-target="membres"
+                              aria-haspopup="listbox" aria-expanded="false"><img src="assests/membre_listes.png" width="20" height="20"></button>
+
+                <div class="dropdown-menu dropdown-menu-right" id = "membres">
+                    <a class="dropdown-item">Oui</a>
+                </div>
+            </div>
         <?php }
         ?>
-		<button class="btn float-right" type="button"><img src="assests/notif.png" width="20" height="20"></button>
+        <div class="btn-group">
+            <button class="btn float-right" type="button"><img src="assests/notif.png" width="20" height="20"></button>
+        </div>
+        <div class="btn-group">
+            <button class="btn btn-default dropdown-toggle mr-4 float-right" type="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false"><img src="assests/parametre.png" class="img-rounded" width="20" height="20"></button>
 
-        <button class="btn btn-default dropdown-toggle mr-4 float-right" type="button" data-toggle="dropdown"
-        aria-haspopup="true" aria-expanded="false"><img src="assests/parametre.png" class="img-rounded" width="20" height="20"></button>
-
-        <div class="dropdown-menu dropdown-menu-right">
-        <a class="dropdown-item" href="?page=compte">Mon Compte</a>
-        <?php if (isset($_SESSION['user'])) {?>
-            <a class="dropdown-item" href="?page=disconnect">Se déconnecter</a>
-            <?php }else{ ?>
-            <a class="dropdown-item" href="?page=disconnect">Se connecter</a>
-        <?php } ?>
+            <div class="dropdown-menu dropdown-menu-right">
+            <a class="dropdown-item" href="?page=compte">Mon Compte</a>
+            <?php if (isset($_SESSION['user'])) {?>
+                <a class="dropdown-item" href="?page=disconnect">Se déconnecter</a>
+                <?php }else{ ?>
+                <a class="dropdown-item" href="?page=disconnect">Se connecter</a>
+            <?php } ?>
+            </div>
         </div>
 
 	</nav>
