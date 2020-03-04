@@ -1,8 +1,6 @@
 <?php
 
-$page = $_GET['page'] ?? header('Location: index.php?page=accueil');
-
-//var_dump($page);die;
+$page = $_GET['page'] ?? $_SERVER['argv'][1] ?? header('Location: index.php?page=accueil');
 
 // Le router de l'application est ici
 
