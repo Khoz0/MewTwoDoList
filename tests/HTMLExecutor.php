@@ -1,5 +1,7 @@
 <?php
 
+namespace Tests;
+
 class HTMLExecutor {
 
 	public function getHTML(string $page): string {
@@ -15,9 +17,3 @@ class HTMLExecutor {
 	}
 
 }
-
-$html = new HTMLExecutor;
-
-$output = $html->getHTML('404');
-
-var_dump($output);
