@@ -6,8 +6,6 @@ namespace App\Controllers;
 use App\Modeles\DB;
 use App\Classe\Utilisateur;
 
-
-
 class CompteController extends Controller {
 
     private $modifier = false;
@@ -35,6 +33,9 @@ class CompteController extends Controller {
                         $requete->execute();
 
                         $this->modifier = true;
+                        $user = unserialize($_SESSION['user']);
+                        $user->setMotDePasse($mdpChanger);
+                        $_SESSION['user'] = serialize($user);
                     }else{
                         echo "<em> Mot de passe de confirmation manquant ou différents du nouveau mot de passe. </em>";
                         echo "<br>";
@@ -83,11 +84,14 @@ class CompteController extends Controller {
         $requete->execute();
 
         $requete = $bdd->prepare("UPDATE Utilisateur SET pseudoUser = :pseudoUser WHERE mail = :mail");
-        $nouveauLogin = $_POST['inputPseudo'];
-        $requete->bindParam('pseudoUser', $nouveauLogin);
+        $pseudo = $_POST['inputPseudo'];
+        $requete->bindParam('pseudoUser', $pseudo);
         $requete->bindParam('mail', $loginSession);
         $requete->execute();
         $this->modifier = true;
+        $user = unserialize($_SESSION['user']);
+        $user->setPseudo($pseudo);
+        $_SESSION['user'] = serialize($user);
     }
 
     public function modifierNom(){
@@ -103,6 +107,9 @@ class CompteController extends Controller {
         $requete->bindParam('nomUser', $nom);
         $requete->execute();
         $this->modifier = true;
+        $user = unserialize($_SESSION['user']);
+        $user->setPseudo($nom);
+        $_SESSION['user'] = serialize($user);
     }
 
     public function modifierPrenom(){
@@ -118,6 +125,9 @@ class CompteController extends Controller {
         $requete->bindParam('prenomUser', $prenom);
         $requete->execute();
         $this->modifier = true;
+        $user = unserialize($_SESSION['user']);
+        $user->setPseudo($prenom);
+        $_SESSION['user'] = serialize($user);
     }
 
     public function getPseudo(){

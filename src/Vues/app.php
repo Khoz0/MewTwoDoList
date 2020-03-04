@@ -10,7 +10,7 @@
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="cdn/bootstrap-4.3.1-dist/js/bootstrap.js"></script>
 </head>
-<body id="particles-js">>
+<body id="particles-js">
 
 <?php $page = $_GET['page'] ?? '';
 if ($page != "login" && $page != "disconnect"){
@@ -55,11 +55,17 @@ if ($page != "login" && $page != "disconnect"){
 			</ul>
 
 		</div>
-
-		<button class="btn float-right" type="button"><img src="notif.png" width="20" height="20"></button>
+        <!-- affichage des icônes de menu -->
+        <?php
+        if (stristr($_SERVER['REQUEST_URI'], "id=") != ""){
+            ?>
+            <button class="btn float-right" type="button"><img src="assests/membre_listes.png" width="20" height="20"></button>
+        <?php }
+        ?>
+		<button class="btn float-right" type="button"><img src="assests/notif.png" width="20" height="20"></button>
 
         <button class="btn btn-default dropdown-toggle mr-4 float-right" type="button" data-toggle="dropdown"
-        aria-haspopup="true" aria-expanded="false"><img src="parametre.png" class="img-rounded" width="20" height="20"></button>
+        aria-haspopup="true" aria-expanded="false"><img src="assests/parametre.png" class="img-rounded" width="20" height="20"></button>
 
         <div class="dropdown-menu dropdown-menu-right">
         <a class="dropdown-item" href="?page=compte">Mon Compte</a>
