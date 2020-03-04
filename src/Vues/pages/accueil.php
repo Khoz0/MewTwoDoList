@@ -1,14 +1,12 @@
 <?php
 
-use App\Modeles\DB;
 ?>
 <script type="text/javascript" src="cdn/jquery.js"></script>
 <script type="text/javascript" src="javascript/tri_liste.js"></script>
 <div class="jumbotron-fluid text-center">
 
     <?php
-if(isset($_SESSION["user"])){
-    $user = unserialize($_SESSION['user']); ?>
+if(isset($_SESSION["user"])){?>
     <div class="jumbotron justify-content-center">
         <h1>Mes listes :</h1>
         <br>
@@ -30,18 +28,15 @@ if(isset($_SESSION["user"])){
         <div class="row justify-content-center" id="liste" style="display: flex">
 
             <?php
-            $bdd = DB::getInstance()->getPDO();
-            $requete = $bdd->prepare("SELECT * FROM Liste WHERE mailProprietaire = :mail");
-            $loginSession = $user->getMail();
-                $requete->bindParam('mail', $loginSession);
-                $requete->execute();
-                while ($donnees = $requete->fetch()) {
+            $user = unserialize($_SESSION["user"]);
+            $listes = $user->getListesProprietaire();
+
+            foreach ($listes as $liste) {
                     ?>
-                    <div class="jumbotron col-auto" style="border: solid; order=-1;padding: 30px; margin: 10px; cursor: pointer"
-                         id="<?php echo $donnees['intituleListe'] ?>\<?php echo $donnees['dateCreation'] ?>\<?php echo $donnees['dateFin'] ?>"
-                         onclick="window.location.href = '?page=liste&id=<?php echo $donnees['idListe'] ?>'">
-                        <nom_listes><?php echo $donnees['intituleListe'] ?></nom_listes><br>
-                        <dates><?="<br>Début : ".$donnees['dateCreation']."<br>"."Fin : ".$donnees['dateFin']?></dates>
+                    <div class="jumbotron col-auto" style="border: solid; order=-1;padding: 30px; margin: 10px;"
+                         id="<?php echo $liste->getIntituleListe() ?>\<?php echo $liste->getDateCreation() ?>\<?php echo $liste->getDateFin() ?>"
+                         onclick="window.location.href = '?page=liste&id=<?php echo $liste->getIdListe() ?>'">
+                        <nom_listes><?php echo $liste->getIntituleListe() ?></nom_listes>
                     </div>
                 <?php } ?>
         </div>
