@@ -1,14 +1,14 @@
 <?php
 
 use App\Modeles\DB;
-
 ?>
 <script type="text/javascript" src="cdn/jquery.js"></script>
 <script type="text/javascript" src="javascript/tri_liste.js"></script>
 <div class="jumbotron-fluid text-center">
 
     <?php
-if(isset($_SESSION["user"])){?>
+if(isset($_SESSION["user"])){
+    $user = unserialize($_SESSION['user']); ?>
     <div class="jumbotron justify-content-center">
         <h1>Mes listes :</h1>
         <br>
@@ -32,16 +32,16 @@ if(isset($_SESSION["user"])){?>
             <?php
             $bdd = DB::getInstance()->getPDO();
             $requete = $bdd->prepare("SELECT * FROM Liste WHERE mailProprietaire = :mail");
-            $loginSession = unserialize($_SESSION['user'])->getMail();
+            $loginSession = $user->getMail();
                 $requete->bindParam('mail', $loginSession);
                 $requete->execute();
                 while ($donnees = $requete->fetch()) {
                     ?>
-                    <div class="jumbotron col-auto" style="border: solid; order=-1;padding: 30px;
-    margin: 10px;"
+                    <div class="jumbotron col-auto" style="border: solid; order=-1;padding: 30px; margin: 10px; cursor: pointer"
                          id="<?php echo $donnees['intituleListe'] ?>\<?php echo $donnees['dateCreation'] ?>\<?php echo $donnees['dateFin'] ?>"
                          onclick="window.location.href = '?page=liste&id=<?php echo $donnees['idListe'] ?>'">
-                        <nom_listes><?php echo $donnees['intituleListe'] ?></nom_listes>
+                        <nom_listes><?php echo $donnees['intituleListe'] ?></nom_listes><br>
+                        <dates><?="<br>Début : ".$donnees['dateCreation']."<br>"."Fin : ".$donnees['dateFin']?></dates>
                     </div>
                 <?php } ?>
         </div>

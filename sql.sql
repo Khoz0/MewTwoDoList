@@ -2,13 +2,23 @@ CREATE DATABASE IF NOT EXISTS ppil;
 ALTER DATABASE ppil DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 USE ppil;
 
+CREATE TABLE IF NOT EXISTS Images (
+  idImage INT NOT NULL AUTO_INCREMENT ,
+  nomImage VARCHAR( 50 ) NOT NULL ,
+  tailleImage VARCHAR( 25 ) NOT NULL ,
+  typeImage VARCHAR( 25 ) NOT NULL ,
+  blobImage BLOB NOT NULL ,
+  PRIMARY KEY ( idImage )
+);
+
 CREATE TABLE IF NOT EXISTS Utilisateur(
 	mail VARCHAR(100) NOT NULL PRIMARY KEY,
 	nomUser VARCHAR(50),
 	prenomUser VARCHAR(50),
 	pseudoUser VARCHAR(50) UNIQUE,
 	mdp VARCHAR(16),
-	photo BLOB
+	photo INT,
+  CONSTRAINT FK_Photo FOREIGN KEY(photo) REFERENCES Images (idImage)
 );
 
 CREATE TABLE IF NOT EXISTS Liste(
@@ -26,7 +36,7 @@ CREATE TABLE IF NOT EXISTS Tache(
 	valide BOOLEAN,
 	idListeT INTEGER(50),
 	mailUtilisateur VARCHAR(100),
-    etat VARCHAR(16),
+  etat VARCHAR(16),
 	CONSTRAINT FK_Tache1 FOREIGN KEY(idListeT) REFERENCES Liste(idListe),
 	CONSTRAINT FK_Tache2 FOREIGN KEY(mailUtilisateur) REFERENCES Utilisateur(mail)
 );

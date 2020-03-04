@@ -127,6 +127,23 @@ class DB {
         }
     }
 
+    public function ajouterPhoto($img_nom, $img_taille, $img_type, $img_blob){
+        $results = DB::getInstance()->getPDO()->prepare('INSERT INTO Images (nomImage, tailleImage, typeImage, blobImage) VALUES (:nom, :taille, :typeImg, :blob)');
+        $results->bindParam(':nom', $img_nom);
+        $results->bindParam(':taille', $img_taille);
+        $results->bindParam(':typeImg', $img_type);
+        $results->bindParam(':blob', $img_blob);
+        $results->execute();
+    }
+
+    public function lastImagesId(){
+        $results = DB::getInstance()->getPDO()->prepare("SELECT idImage FROM Images ORDER BY idImage DESC");
+        $results->execute();
+        if($donnees = $results->fetch()){
+            return $donnees['idImage'];
+        }
+        return null;
+    }
 
     public function addUtilisateur($utilisateur){
 
@@ -135,7 +152,7 @@ class DB {
         $prenom = $utilisateur->getPrenom();
         $mdp = $utilisateur->getMotDePasse();
         $pseudo = $utilisateur->getPseudo();
-        $photo = $utilisateur->getUrlPhoto();
+        $photo = $utilisateur->getPhoto();
 
         $results = DB::getInstance()->getPDO()->prepare('INSERT INTO Utilisateur(mail, nomUser, prenomUser,pseudoUser,mdp,photo) VALUES (:mail,:nomUser, :prenomUser,:pseudoUser,:mdp,:photo)');
         $results->bindParam(':mail', $mail);

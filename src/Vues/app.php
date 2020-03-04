@@ -5,6 +5,8 @@
 	<title><?= $titre ?></title>
 	<link rel="stylesheet" href="cdn/bootstrap-4.3.1-dist/css/bootstrap.css">
 	<link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
 <body>
 

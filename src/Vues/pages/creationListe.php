@@ -37,7 +37,7 @@ if(isset($_POST['submit'])){
 
                         <label for="dateDebut">Date de début</label>
                         <div class="form-label-group">
-                            <input type="date"  name="dateDebut" id="dateDebut"  class="form-control"
+                            <input type="date" name="dateDebut" id="dateDebut"  class="form-control"
                                    required value = <?php if (isset($_SESSION['creation_liste']["dateDebut"])){echo "\"".$_SESSION['creation_liste']["dateDebut"]."\"";} ?>>
                         </div>
 
