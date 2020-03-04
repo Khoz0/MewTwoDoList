@@ -13,6 +13,27 @@ $bdd = serialize(DB::getInstance()->loadListe($_GET["id"]));
 $liste = DB::getInstance()->loadListe($_GET["id"]);
 
 ?>
+<div class="float-right"
+    <?php
+    if (stristr($_SERVER['REQUEST_URI'], "id=") != ""){
+        ?>
+        <div class="btn-group">
+            <button class="btn float-right" type="button" data-toggle="dropdown" data-target="membres"
+                    aria-haspopup="listbox" aria-expanded="false"><img src="assests/membre_listes.png" width="20" height="20"></button>
+
+            <div class="dropdown-menu dropdown-menu-right" id = "membres">
+                <?php
+                    $membres = $liste->recupererMembres($_GET["id"]);
+                    foreach ($membres as $membre){
+                ?>
+                        <a class="dropdown-item"><?php echo $membre[0]?></a>
+                <?php }
+                    ?>
+            </div>
+        </div>
+    <?php }
+    ?>
+</div>
 <div class="jumbotron text-center">
     <h1>Liste <?php echo unserialize($bdd)->getIntituleListe()?></h1>
     <a href="#" onclick="conf_modification(<?php echo $_GET["id"]; ?>)"> Modifier la liste </a>

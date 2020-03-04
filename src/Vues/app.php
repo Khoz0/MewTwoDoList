@@ -56,19 +56,6 @@ if ($page != "login" && $page != "disconnect"){
 
 		</div>
         <!-- affichage des icônes de menu -->
-        <?php
-        if (stristr($_SERVER['REQUEST_URI'], "id=") != ""){
-            ?>
-            <div class="btn-group">
-                <button class="btn float-right" type="button" data-toggle="dropdown" data-target="membres"
-                              aria-haspopup="listbox" aria-expanded="false"><img src="assests/membre_listes.png" width="20" height="20"></button>
-
-                <div class="dropdown-menu dropdown-menu-right" id = "membres">
-                    <a class="dropdown-item">Oui</a>
-                </div>
-            </div>
-        <?php }
-        ?>
         <div class="btn-group">
             <button class="btn float-right" type="button"><img src="assests/notif.png" width="20" height="20"></button>
         </div>
