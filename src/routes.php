@@ -64,6 +64,9 @@ switch($page) {
     case 'memberSelect':
         (new App\Controllers\RechercheMembreController())->memberSelect();
         break;
+	case 'supprimerUserList':
+        (new App\Controllers\ListeController())->deleteListMember();
+        break;
 
 
 	default: // Si, rien, alors erreur 404

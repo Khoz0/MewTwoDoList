@@ -47,6 +47,11 @@ class Liste {
         return $membres;
     }
 
+	/*public function supprimerMembre($mail){
+        $bdd = DB::getInstance();
+        $bdd->deleteListMember($mail);
+    }*/
+
     public function changerProprietaire($mailUtilisateur){
         $this->mailProprietaire = $mailUtilisateur;
     }

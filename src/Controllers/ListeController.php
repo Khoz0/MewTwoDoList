@@ -22,5 +22,11 @@ class ListeController extends Controller {
         return $this->render('liste', compact('bdd', 'id'));
     }
 
+	public function deleteListMember(){
+		$mail = $_GET['mail'];
+		$idListe = $_GET['idListe'];
+    	$bdd = DB::getInstance()->deleteListMember($mail, $idListe);
+	}
+
 
 }
