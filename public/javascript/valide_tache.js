@@ -13,7 +13,6 @@ function valide() {
   url = window.location.origin + "/mew_two_do_list/ajax/valide_tache.php";
   console.log(url);
 
-  if (confirm('Êtes vous sûr de vouloir supprimer votre tâche ?\nCette action est définitive !')) {
 
     $.ajax({
       type: 'POST',
@@ -24,14 +23,14 @@ function valide() {
       },
       timeout: 5000,
       success: function() {
-        
+
       },
       error: (xhr) => {
         console.log("status =" + xhr.status);
         console.log(xhr);
       }
     });
-  }
+  
 
 }
 
