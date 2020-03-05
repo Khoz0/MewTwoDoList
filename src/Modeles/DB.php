@@ -74,9 +74,15 @@ class DB {
         $resList->execute();
     }
 
-	public function deleteListMember($mail, $idListe){
+	public function deleteListMember($idListe){
         $res = DB::getInstance()->getPDO()->prepare("DELETE FROM Membre WHERE mail = :mail and idListe = :idListe");
         $res->bindParam(":mail", $mail);
+        $res->bindParam(":idListe", $idListe);
+        $res->execute();
+    }
+
+    public function deleteAllListMembers($idListe){
+        $res = DB::getInstance()->getPDO()->prepare("DELETE FROM Membre WHERE idListe = :idListe");
         $res->bindParam(":idListe", $idListe);
         $res->execute();
     }
@@ -263,9 +269,21 @@ class DB {
 
     public function deleteListe($idListe)
     {
+        $results = DB::getInstance()->getPDO()->prepare("SELECT idTache FROM Tache WHERE idListeT=:id");
+        $results->bindParam(':id', $idListe);
+        $results->execute();
+        while($donnees = $results->fetch()){
+            $this->deleteTache($donnees['idTache']);
+        }
+
+        $this->deleteAllListMembers($idListe);
+
         $results = DB::getInstance()->getPDO()->prepare('DELETE FROM Liste WHERE idListe = :id ');
         $results->bindParam(':id', $idListe);
         $results->execute();
+        $user = unserialize($_SESSION['user']);
+        $user->supprimerListe($idListe);
+        $_SESSION['user'] = serialize($user);
     }
 
     public function addTache($idTache,$intituleTache,$etat, $idListeTache,$mailUtilisateur,$valide)
