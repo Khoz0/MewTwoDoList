@@ -1,10 +1,9 @@
 <?php
 
-import_once("src/Modeles/DB.php")
+namespace App\Modeles;
 
-use DB;
+require('../src/Modeles/DB.php');
 
-Db::getInstance;
 
 if (isset($_POST['id'])) {
   echo $_POST['id'];
