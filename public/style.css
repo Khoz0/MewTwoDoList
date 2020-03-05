@@ -3,7 +3,6 @@
 
 
 /* CSS de test (à supprimer après) */
-.test { color: red; font-weight: bold; text-decoration: underline; }
 
 erreur {
     font-weight: bold;
@@ -41,7 +40,7 @@ canvas {
     width: 100%;
     height: 100%;
     background-color: #232741;
-    background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/200px-International_Pok%C3%A9mon_logo.svg.png");
+    //background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/200px-International_Pok%C3%A9mon_logo.svg.png");
     background-repeat: no-repeat;
     background-size: 20%;
     background-position: 50% -250%;

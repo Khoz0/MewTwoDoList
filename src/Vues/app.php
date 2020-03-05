@@ -8,7 +8,7 @@
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
-<body id="particles-js">
+<body >
 
 <?php $page = $_GET['page'] ?? '';
 if ($page != "login" && $page != "disconnect" && $page != "inscription"){
@@ -26,7 +26,7 @@ if ($page != "login" && $page != "disconnect" && $page != "inscription"){
                 <?php }else{ ?>
                     <li class="nav-item">
                 <?php } ?>
-					<!--<a class="nav-link" href="?page=accueil">Accueil <span class="sr-only">(current)</span></a>-->
+					<a class="nav-link" href="?page=accueil">Accueil <span class="sr-only">(current)</span></a>
 				</li>
                 <?php if (isset($_SESSION['user'])) {
 				if ($page == 'compte') { ?>
@@ -34,7 +34,7 @@ if ($page != "login" && $page != "disconnect" && $page != "inscription"){
                 <?php }else{ ?>
                     <li class="nav-item">
                 <?php } ?>
-						<!--<a class="nav-link" href="?page=compte">Mon compte</a>-->
+						<a class="nav-link" href="?page=compte">Mon compte</a>
 					</li>
 				<?php }
                     if ($page == 'disconnect') { ?>
@@ -43,9 +43,9 @@ if ($page != "login" && $page != "disconnect" && $page != "inscription"){
                         <li class="nav-item">
                     <?php } ?>
                     <?php if (isset($_SESSION['user'])) {?>
-                        <!--<a class="nav-link" href="?page=disconnect">Deconnexion</a>-->
+                        <a class="nav-link" href="?page=disconnect">Deconnexion</a>
                         <?php }else{ ?>
-                        <!--<a class="nav-link" href="?page=login">connexion</a>-->
+                        <a class="nav-link" href="?page=login">Connexion</a>
                     <?php } ?>
 					</li>
 
