@@ -263,4 +263,16 @@ class DB {
         return $membres;
     }
 
+    public function recupererListesMembres($mail){
+        $listes = array();
+        $results = DB::getInstance()->getPDO()->prepare('SELECT * FROM Membre WHERE mail = :mail');
+        $results->bindParam(':mail', $mail);
+        $results->execute();
+        while ($donnees = $results->fetch()){
+            $liste = $this->loadListe($donnees['idListe']);
+            array_push($listes, $liste);
+        }
+        return $listes;
+    }
+
 }

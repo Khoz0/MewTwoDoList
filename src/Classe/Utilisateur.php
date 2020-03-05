@@ -28,7 +28,7 @@ class Utilisateur
     /**
      * @return array
      */
-    public function getListesProprietaire(): array
+    public function getListesProprietaire()
     {
         return $this->listesProprietaire;
     }
@@ -147,7 +147,7 @@ class Utilisateur
         unset($this->listesProprietaire[$id]);
     }
 
-    public function recupererListe($id): Liste
+    public function recupererListe($id)
     {
         return $this->listesProprietaire[$id];
     }
