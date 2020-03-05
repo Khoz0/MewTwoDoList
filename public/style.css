@@ -86,3 +86,13 @@ canvas {
 .imgmenu {
     background-image: url("assests/parametre.png");
 }
+
+.scroller {
+    width: 300px;
+    height: 100px;
+    overflow-y: scroll;
+}
+
+barre-recherche{
+
+}
