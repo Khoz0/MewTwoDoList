@@ -92,6 +92,7 @@ $liste = DB::getInstance()->loadListe($_GET["id"]);
             ?>
             <div class="jumbotron-fluid col-auto" style="border: solid; ;padding: 30px; margin: 10px;"
                  id="<?php echo $nom ?>">
+                <nom_listes><?php echo $nom ?></nom_listes>
                  <div class="form-check align-top">
                    <button class="btn float-right" id="modifTache" type="button" onclick="pop_up_modif(this)" value="<?php echo $id; ?>"><img src="assests/membre_listes.png" width="20" height="20"></button>
                 </div>
@@ -100,7 +101,6 @@ $liste = DB::getInstance()->loadListe($_GET["id"]);
                         echo 'checked';
                     } ?> >
                 </div>
-                <nom_listes><?php echo $nom ?></nom_listes>
                 <?php
 
                 if ($tache->getUtilisateurAssigne() == null) {
