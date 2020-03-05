@@ -1,7 +1,7 @@
 <?php
 namespace App\Vues;
-
 use App\Controllers\RechercheMembreController;
+use App\Modeles\DB;
 
 $membreSelection = new RechercheMembreController();
 ?>
@@ -23,9 +23,44 @@ $membreSelection = new RechercheMembreController();
 
 
 <div class="scroller">
+    <div class="jumbotron-fluid">
+        <div class="row justify-content-center" id="utilisateurs" style="display: flex">
 
+            <?php
+            $cpt = 0;
+            foreach (DB::getInstance()->getUtilisateurs() as $user) {
+                if ($user->getMail() != unserialize($_SESSION['user'])->getMail() && $cpt < 10) {
+                    $cpt++;
+                    ?>
+                    <div class="jumbotron col-auto" style="border: solid; order=-1;padding: 10px; margin: 20px;"
+                         id="<?php echo $user->getMail() ?>">
+
+                        <table>
+                            <tr>
+                                <td><img
+                                            style="border-style: solid;" src="assests/notif.png" width="60px"
+                                            height="60px" alt= <?php echo $user->getMail() ?>></td>
+                                <td width="60px"></td>
+                                <td>
+                                    <form><input type="checkbox"></form>
+                                </td>
+                            </tr>
+                            <br>
+                        </table>
+
+                        <br>
+                        <div style="alignment: center"><?php echo $user->getMail() ?></div>
+                        <div style="alignment: center"><?php echo $user->getPrenom() . " " . $user->getNom() ?></div>
+
+                    </div>
+                <?php }
+            } ?>
+
+        </div>
+    </div>
 
 </div>
-
+<div class="row justify-content-center">
 <button>Annuler</button>
 <button>Valider</button>
+</div>
