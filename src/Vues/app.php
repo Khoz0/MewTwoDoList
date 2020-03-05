@@ -13,7 +13,7 @@
 <body>
 
 <?php $page = $_GET['page'] ?? '';
-if ($page != "login" && $page != "disconnect" && $page != "inscription"){
+if ($page != "login" && $page != "disconnect" && $page != "inscription" && $page != "modifTache"){
 ?>
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <a class="navbar-brand" href="?page=accueil">MewTwoDoList</a>
@@ -40,7 +40,7 @@ if ($page != "login" && $page != "disconnect" && $page != "inscription"){
 
 
     <!-- affichage des icônes de menu -->
-    <?php if (isset($_SESSION['user'])) {?>
+    <?php if (isset($_SESSION['user']) && $page != "modifTache") {?>
         <div class="btn-group">
             <button class="btn float-right" type="button"><img src="assests/notif.png" width="20" height="20"></button>
         </div>

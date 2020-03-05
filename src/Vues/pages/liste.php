@@ -89,6 +89,9 @@ $liste = DB::getInstance()->loadListe($_GET["id"]);
             ?>
             <div class="jumbotron-fluid col-auto" style="border: solid; ;padding: 30px; margin: 10px;"
                  id="<?php echo $nom ?>">
+                 <div class="form-check align-top">
+                   <button class="btn float-right" id="modifTache" type="button" onclick="pop_up_modif(this)" value="<?php echo $id; ?>"><img src="assests/membre_listes.png" width="20" height="20"></button>
+                </div>
                 <div class="form-check align-top">
                     <input type="checkbox" aria-label="..." class="valide" value="<?php echo $id; ?>" <?php if ($valide == 1) {
                         echo 'checked';
@@ -139,4 +142,9 @@ $liste = DB::getInstance()->loadListe($_GET["id"]);
 		var id = document.getElementById("tache").value;
 		window.open('?page=ajoutTache&id='+id,'Ajout tâche', 'height=500, width=800, top=100, left=200, resizable = yes');
 	}
+  function pop_up_modif(elem) {
+    var id = elem.value;
+    window.open('?page=modifTache&id='+id,'Modification de la tâche', 'height=500, width=800, top=100, left=200, resizable = yes');
+  }
+
 </script>

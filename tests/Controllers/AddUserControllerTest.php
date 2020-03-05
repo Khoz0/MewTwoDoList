@@ -14,6 +14,9 @@ class AddUserControllerTest extends TestCase {
 
 	//Test si l'utilisateur a bien été ajouté
     public function testaddUser() {
+
+    	$fonction = new FonctionTest();
+    	
 		$res = false;
 
 		$bdd = DB::getInstance()->getPDO();
@@ -30,15 +33,7 @@ class AddUserControllerTest extends TestCase {
         //Compte le nb de lignes avant l'insertion
 		$nblignes = $compteur;
 
-		$mail = 'abcd@abcd.com';
-		$nom_user = 'bonjour';
-		$prenomUser  = 'aurevoir';
-		$pseudoUser  = 'pseudo';
-		$mdp  = 'mdp123';
-
-        //On réalise l'insertion
-		$requete = $bdd->prepare("INSERT INTO UTILISATEUR(mail, nomUser, prenomUser, pseudoUser, mdp) values(" + $mail + "," + $nom_user + "," + $prenomUser + "," + $pseudoUser + "," + $mdp + ")");
-		$requete->execute();
+		$fonction->ajouterUtilisateurTest();
 
         //Compte le nombre de lignes après l'insertion
 		$nblignesdeux = $nblignes + 1;
@@ -53,8 +48,7 @@ class AddUserControllerTest extends TestCase {
 			$res = true;	
 		}
 
-		$requete = $bdd->prepare("delete from utilisateur where mail = 'abcd@abcd.com'");
-		$requete->execute();
+		$fonction->supprimerUtilisateurTest();
 
 		$this->assert($res, true, 'insertion reussie');
 

@@ -83,6 +83,12 @@ class Tache
         return $this->intituleTache;
     }
 
+
+    public function setIntituleTache($intitule)
+    {
+        $this->intituleTache = $intitule;
+    }
+
     /**
      * @return mixed
      */
