@@ -25,12 +25,10 @@ class CompteController extends Controller {
             if (($_POST["inputPassword"]) == $donnees['mdp']){
                 if (isset($_POST['inputPasswordConf']) && !empty($_POST["inputPasswordConf"]) && $_POST["inputPasswordConf"] != $_POST['inputPassword']){
                     if (isset($_POST['inputNewPassword']) && !empty($_POST["inputNewPassword"]) && $_POST['inputPasswordConf'] == $_POST['inputNewPassword']){
-                        $requete = $bdd->prepare("UPDATE Utilisateur SET mdp = (:mdpChanger) WHERE mail = :mail");
                         $loginSession = unserialize($_SESSION['user'])->getMail();
                         $mdpChanger = $_POST['inputNewPassword'];
-                        $requete->bindParam('mail', $loginSession);
-                        $requete->bindParam('mdpChanger', $mdpChanger);
-                        $requete->execute();
+
+                        $bdd->updateUtilisateur($loginSession, null, null, $mdpChanger, null, null);
 
                         $this->modifier = true;
                         $user = unserialize($_SESSION['user']);
@@ -81,18 +79,18 @@ class CompteController extends Controller {
     }
 
     public function modifierPseudo(){
-        $bdd = DB::getInstance()->getPDO();
-        $requete = $bdd->prepare("SELECT * FROM Utilisateur WHERE mail = :mail");
+        $bddRequete = DB::getInstance()->getPDO();
+        $requete = $bddRequete->prepare("SELECT * FROM Utilisateur WHERE mail = :mail");
         $loginSession = unserialize($_SESSION['user'])->getMail();
         $requete->bindParam('mail', $loginSession);
         $requete->execute();
 
-        $requete = $bdd->prepare("UPDATE Utilisateur SET pseudoUser = :pseudoUser WHERE mail = :mail");
         $pseudo = $_POST['inputPseudo'];
-        $requete->bindParam('pseudoUser', $pseudo);
-        $requete->bindParam('mail', $loginSession);
-        $requete->execute();
+
+        $bdd = DB::getInstance();
+        $bdd->updateUtilisateur($loginSession, null, null, null, $pseudo, null);
         $this->modifier = true;
+
         $user = unserialize($_SESSION['user']);
         $user->setPseudo($pseudo);
         $_SESSION['user'] = serialize($user);
@@ -105,12 +103,12 @@ class CompteController extends Controller {
         $requete->bindParam('mail', $loginSession);
         $requete->execute();
 
-        $requete = $bdd->prepare("UPDATE Utilisateur SET nomUser = :nomUser WHERE mail = :mail");
         $nom = $_POST['inputNom'];
-        $requete->bindParam('mail', $loginSession);
-        $requete->bindParam('nomUser', $nom);
-        $requete->execute();
+
+        $bdd = DB::getInstance();
+        $bdd->updateUtilisateur($loginSession, $nom, null, null, null, null);
         $this->modifier = true;
+
         $user = unserialize($_SESSION['user']);
         $user->setPseudo($nom);
         $_SESSION['user'] = serialize($user);
@@ -160,12 +158,11 @@ class CompteController extends Controller {
         $requete->bindParam('mail', $loginSession);
         $requete->execute();
 
-        $requete = $bdd->prepare("UPDATE Utilisateur SET prenomUser = :prenomUser WHERE mail = :mail");
         $prenom = $_POST['inputPrenom'];
-        $requete->bindParam('mail', $loginSession);
-        $requete->bindParam('prenomUser', $prenom);
-        $requete->execute();
+
+        $bdd->updateUtilisateur($loginSession, null, $prenom, null, null, null);
         $this->modifier = true;
+
         $user = unserialize($_SESSION['user']);
         $user->setPseudo($prenom);
         $_SESSION['user'] = serialize($user);

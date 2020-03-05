@@ -13,10 +13,4 @@ class ModificationTacheController extends Controller
         return $this->render('modifTache');
     }
 
-    public function modificationTache($id){
-
-        $tache = DB::getInstance()->loadTache($id);
-
-
-    }
 }

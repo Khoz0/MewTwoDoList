@@ -31,6 +31,7 @@ $liste = DB::getInstance()->loadListe($_GET["id"]);
                                     <p><?php echo $membre[0]?>
                                     <button class="btn"><img src="assests/changement.png" width="15" height="15"></button>
                                     <button class="btn"><img src="assests/croix.png" width="15" height="15"></button>
+									<a href="?page=supprimerUserList&mail=<?= $membre['mail'] ?>&idListe=<?= $_GET['id'] ?>">supprimer</a>
                                     </p>
                                 </div>
                             </div>
@@ -48,7 +49,7 @@ $liste = DB::getInstance()->loadListe($_GET["id"]);
                     }
                     ?>
                 <div class="col-lg-auto text-center">
-                    <button class="btn dropdown-item" onclick="window.location.href='?page=accueil'"><img src="assests/add_user.png" width="40" height="40"></button>
+                    <button class="btn dropdown-item" onclick="window.location.href='?page=memberSelect&id=<?php echo $_GET["id"]; ?>'"><img src="assests/add_user.png" width="40" height="40"></button>
                 </div>
             </div>
         </div>
@@ -59,9 +60,6 @@ $liste = DB::getInstance()->loadListe($_GET["id"]);
 <div class="jumbotron text-center">
     <h1>Liste <?php echo htmlspecialchars(unserialize($bdd)->getIntituleListe()) ?></h1>
     <a href="#" onclick="conf_modification(<?php echo $_GET["id"]; ?>)"> Modifier la liste </a>
-    <br>
-
-    <a href="?page=memberSelect" >Ajouter un membre </a>
     <br>
 
     <a href="#" onclick="conf_suppression(<?php echo $_GET["id"]; ?>, 'Liste <?php echo unserialize($bdd)->getIntituleListe();?>')"> Supprimer la liste </a>

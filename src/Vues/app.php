@@ -46,7 +46,15 @@ if ($page != "login" && $page != "disconnect" && $page != "inscription" && $page
         </div>
         <div class="btn-group">
             <button class="btn btn-default dropdown-toggle mr-4 float-right" type="button" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false"><img src="assests/parametre.png" class="img-rounded" width="20" height="20"></button>
+                    aria-haspopup="true" aria-expanded="false">
+                <?php
+                $user = unserialize($_SESSION['user']);
+                if ($user->getPhoto() == null) {
+                    echo "<img src='assests/profil.png'  class=\"img-rounded\" width=\"20\" height=\"20\">";
+                } else {
+                    echo "<img src=\"" . $user->getPhoto() . "\" class=\"img-rounded\" width=\"20\" height=\"20\" >";
+                } ?>
+            </button>
 
             <div class="dropdown-menu dropdown-menu-right">
                 <a class="dropdown-item" href="?page=compte">Mon Compte</a>

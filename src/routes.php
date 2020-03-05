@@ -46,6 +46,10 @@ switch($page) {
 			(new App\Controllers\ModificationTacheController)->modifTache();
 			break;
 
+		case 'deleteTache':
+		(new App\Controllers\DeleteTacheController)->deleteTache();
+		break;
+
     case 'deleteAccount':
         (new App\Controllers\DeleteAccountController())->deleteAccount();
         break;
@@ -63,6 +67,9 @@ switch($page) {
         break;
     case 'memberSelect':
         (new App\Controllers\RechercheMembreController())->memberSelect();
+        break;
+	case 'supprimerUserList':
+        (new App\Controllers\ListeController())->deleteListMember();
         break;
 
 

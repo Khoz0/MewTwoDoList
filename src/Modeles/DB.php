@@ -74,10 +74,11 @@ class DB {
         $resList->execute();
     }
 
-	public function deleteListMember($mail){
-        $resUser = DB::getInstance()->getPDO()->prepare("DELETE FROM Membre WHERE mail = :mail");
-        $resUser->bindParam(":mail", $mail);
-        $resList->execute();
+	public function deleteListMember($mail, $idListe){
+        $res = DB::getInstance()->getPDO()->prepare("DELETE FROM Membre WHERE mail = :mail and idListe = :idListe");
+        $res->bindParam(":mail", $mail);
+        $res->bindParam(":idListe", $idListe);
+        $res->execute();
     }
 
     public function getUtilisateurs()
@@ -90,7 +91,7 @@ class DB {
         $utilisateurs = array();
 
         while ($donnees = $getUser->fetch()) {
-            $utilisateur = new Utilisateur($donnees["nomUser"], $donnees["prenomUser"], $donnees["pseudoUser"], $donnees["mail"], null, null);
+            $utilisateur = new Utilisateur($donnees["nomUser"], $donnees["prenomUser"], $donnees["pseudoUser"], $donnees["mail"], null, $donnees['photo']);
 
             $utilisateurs[$utilisateur->getMail()] = $utilisateur;
 
@@ -200,6 +201,44 @@ class DB {
 
     }
 
+    public function updateUtilisateur($mail, $nom, $prenom, $mdp, $pseudo, $photo){
+        $utilisateur = $this->loadUtilisateur($mail);
+
+        $results = DB::getInstance()->getPDO()->prepare("UPDATE Utilisateur SET nomUser = :nomUser, prenomUser = :prenomUser, pseudoUser = :pseudoUser, mdp = :mdp, photo = :photo WHERE mail = :mail");
+        $results->bindParam('mail', $mail);
+        if ($nom != null) {
+            $results->bindParam('nomUser', $nom);
+        }else {
+            $nom = $utilisateur->getNom();
+            $results->bindParam('nomUser', $nom);
+        }
+        if ($prenom != null) {
+            $results->bindParam('prenomUser', $prenom);
+        }else {
+            $prenom = $utilisateur->getPrenom();
+            $results->bindParam('prenomUser', $prenom);
+        }
+        if ($mdp != null) {
+            $results->bindParam('mdp', $mdp);
+        }else {
+            $mdp = $utilisateur->getMotDePasse();
+            $results->bindParam('mdp', $mdp);
+        }
+        if ($pseudo != null) {
+            $results->bindParam('pseudoUser', $pseudo);
+        }else {
+            $pseudo = $utilisateur->getPseudo();
+            $results->bindParam('pseudoUser', $pseudo);
+        }
+        if ($photo != null) {
+            $results->bindParam('photo', $photo);
+        }else {
+            $photo = $utilisateur->getPhoto();
+            $results->bindParam('photo', $photo);
+        }
+        $results->execute();
+    }
+
     public function addListe($idListe,$intituleListe,$dateCreation, $dateFin,$mailProprietaire)
     {
         $results = DB::getInstance()->getPDO()->prepare('INSERT INTO Liste(idListe,intituleListe,dateCreation,dateFin,mailProprietaire) VALUES (:id, :intitule, :dateCrea, :dateFin, :mail)');
@@ -257,8 +296,8 @@ class DB {
 
     public function deleteTache($idTache)
     {
-        $results = DB::getInstance()->getPDO()->prepare('DELETE FROM tache WHERE idTiste = :id ');
-        $results->bindParam(':id', $idListe);
+        $results = DB::getInstance()->getPDO()->prepare('DELETE FROM Tache WHERE idTache = :id ');
+        $results->bindParam(':id', $idTache);
         $results->execute();
     }
 

@@ -7,7 +7,7 @@ class DeleteTacheController extends Controller
 {
     public function deleteTache()
     {
-        DB::getInstance()->deleteTache($_GET['idTache']);
+        DB::getInstance()->deleteTache($_GET['id']);
         return $this->render('accueil');
 
     }
