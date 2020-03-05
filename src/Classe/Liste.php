@@ -41,6 +41,12 @@ class Liste {
         }
     }
 
+    public function recupererMembres($idListe){
+        $bdd = DB::getInstance();
+        $membres = $bdd->recupererMembres($idListe);
+        return $membres;
+    }
+
     public function changerProprietaire($mailUtilisateur){
         $this->mailProprietaire = $mailUtilisateur;
     }
@@ -64,6 +70,7 @@ class Liste {
     public function sauvegarderBDD(){
         $bdd = DB::getInstance();
         $bdd->addListe($this->idListe,$this->intituleListe,$this->dateCreation,$this->dateFin,$this->mailProprietaire);
+        $bdd->addMembre($this->mailProprietaire, $this->idListe);
     }
 
     public function chargerBDD(){

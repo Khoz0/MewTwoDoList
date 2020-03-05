@@ -220,4 +220,22 @@ class DB {
         $results->execute();
     }
 
+    public function addMembre($mail, $idListe){
+        $results = DB::getInstance()->getPDO()->prepare('INSERT INTO Membre(mail, idListe) VALUES (:mail, :id) ');
+        $results->bindParam(':mail', $mail);
+        $results->bindParam(':id', $idListe);
+        $results->execute();
+    }
+
+    public function recupererMembres($idListe){
+        $membres = array();
+        $results = DB::getInstance()->getPDO()->prepare('SELECT * FROM Membre WHERE idListe = :id');
+        $results->bindParam(':id', $idListe);
+        $results->execute();
+        while ($donnees = $results->fetch()){
+            array_push($membres, $donnees);
+        }
+        return $membres;
+    }
+
 }

@@ -8,7 +8,7 @@
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
-<body id="particles-js">>
+<body id="particles-js">
 
 <?php $page = $_GET['page'] ?? '';
 if ($page != "login" && $page != "disconnect"){
@@ -55,19 +55,22 @@ if ($page != "login" && $page != "disconnect"){
 			</ul>
 
 		</div>
+        <!-- affichage des icônes de menu -->
+        <div class="btn-group">
+            <button class="btn float-right" type="button"><img src="assests/notif.png" width="20" height="20"></button>
+        </div>
+        <div class="btn-group">
+            <button class="btn btn-default dropdown-toggle mr-4 float-right" type="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false"><img src="assests/parametre.png" class="img-rounded" width="20" height="20"></button>
 
-		<button class="btn float-right" type="button"><img src="notif.png" width="20" height="20"></button>
-
-        <button class="btn btn-default dropdown-toggle mr-4 float-right" type="button" data-toggle="dropdown"
-        aria-haspopup="true" aria-expanded="false"><img src="parametre.png" class="img-rounded" width="20" height="20"></button>
-
-        <div class="dropdown-menu dropdown-menu-right">
-        <a class="dropdown-item" href="?page=compte">Mon Compte</a>
-        <?php if (isset($_SESSION['user'])) {?>
-            <a class="dropdown-item" href="?page=disconnect">Se déconnecter</a>
-            <?php }else{ ?>
-            <a class="dropdown-item" href="?page=disconnect">Se connecter</a>
-        <?php } ?>
+            <div class="dropdown-menu dropdown-menu-right">
+            <a class="dropdown-item" href="?page=compte">Mon Compte</a>
+            <?php if (isset($_SESSION['user'])) {?>
+                <a class="dropdown-item" href="?page=disconnect">Se déconnecter</a>
+                <?php }else{ ?>
+                <a class="dropdown-item" href="?page=disconnect">Se connecter</a>
+            <?php } ?>
+            </div>
         </div>
 
 	</nav>
