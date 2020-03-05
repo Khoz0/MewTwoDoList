@@ -130,7 +130,7 @@ class DB {
 
     public function loadTache($idTache){
         /*Préparation des requêtes*/
-        $verifId = DB::getInstance()->getPDO()->prepare("SELECT * FROM tache where idTache = :idVerification");
+        $verifId = DB::getInstance()->getPDO()->prepare("SELECT * FROM Tache where idTache = :idVerification");
 
         /*On test si le mail existe dans la base de données*/
         $verifId->bindParam(':idVerification', $idTache);
