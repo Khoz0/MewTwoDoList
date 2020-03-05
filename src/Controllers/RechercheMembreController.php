@@ -13,5 +13,4 @@ class RechercheMembreController extends Controller
         return $this->render('membreSelection', compact('membreSelection'));
     }
 
-
 }
