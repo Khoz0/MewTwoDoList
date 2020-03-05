@@ -5,7 +5,6 @@ namespace App\Vues;
 use App\Controllers\ModificationListeController;
 
 $modificationListe = new ModificationListeController();
-
 ?>
 
 <div class="container">
@@ -16,6 +15,9 @@ $modificationListe = new ModificationListeController();
                     <h5 class="card-title text-center">Modification de ma liste</h5>
                     <?php
                     $id = $_GET['id'];
+                    $user = unserialize($_SESSION['user']);
+                    $liste = $user->recupererListe($id);
+                    $_SESSION['user'] = serialize($user);
                     ?>
                     <form class="form-sign_in" method="POST" action="?page=modificationListe&id=<?php echo $id; ?>">
                         <?php
@@ -30,8 +32,9 @@ $modificationListe = new ModificationListeController();
                         ?>
                         <label for="nomListe">Nom de la liste</label>
                         <div class="form-label-group">
-                            <input type="text" id="nomListe" name="nomListe"  class="form-control" placeholder="Nom"
-                                   required autofocus >
+                            <?php echo $modificationListe->getAncienNom()?>
+                            <input type="text" id="nomListe" name="nomListe"  class="form-control" placeholder="<?php echo $liste->getIntituleListe();?>"
+                                   required >
                         </div>
 
                         <label for="dateFin">Date de fin</label>
@@ -43,7 +46,7 @@ $modificationListe = new ModificationListeController();
                         <br>
 
                         <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit" value="submit" name="submit">Valider</button>
-
+                        <br><a href='?page=liste&id=<?=$id?>'>Retour</a>
                         <hr class="my-4">
                     </form>
                 </div>

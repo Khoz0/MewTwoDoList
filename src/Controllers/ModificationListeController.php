@@ -11,6 +11,7 @@ class ModificationListeController extends Controller
 {
 
     private $modifier = false;
+    private $ancienNom;
 
     public function modificationListe()
     {
@@ -49,5 +50,10 @@ class ModificationListeController extends Controller
 
     public function getModifier(){
         return $this->modifier;
+    }
+
+    public function getAncienNom()
+    {
+        return $this->ancienNom;
     }
 }
