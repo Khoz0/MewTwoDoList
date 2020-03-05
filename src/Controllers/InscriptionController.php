@@ -63,9 +63,9 @@ class InscriptionController extends Controller
         }
 
         if($photo != null) {
-            move_uploaded_file($photo['tmp_name'], 'assests/uploads/' . basename($photo['name'].$mail));
-            $photo = "assests/uploads/".$photo['name'].$mail;
-            $_SESSION['photo'] = "assests/uploads/".$photo['name'].$mail;
+            move_uploaded_file($photo['tmp_name'], 'assests/uploads/' . basename($mail.$photo['name']));
+            $photo = $mail."assests/uploads/".$photo['name'];
+            $_SESSION['photo'] = $mail."assests/uploads/".$photo['name'];
         }
 
 
