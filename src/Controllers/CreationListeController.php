@@ -18,6 +18,7 @@ class CreationListeController extends Controller {
 
     public function ajoutListe(){
         $id = 0;
+        $user = $_SESSION['user'];
         $bdd = DB::getInstance()->getPDO();
         $requete = $bdd->prepare("SELECT * FROM Liste");
         $requete->execute();

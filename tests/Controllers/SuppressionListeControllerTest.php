@@ -8,7 +8,7 @@ use App\Modeles\DB;
 /**
  * Tests CreationListeController
  */
-class CreationListeControllerTest extends TestCase {
+class SuppressionListeControllerTest extends TestCase {
 
 	//Test si la liste a bien été créé
     public function testsuppressionListe() {

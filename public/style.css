@@ -1,3 +1,30 @@
+/* Style CSS ici */
+
+
+
+/* CSS de test (à supprimer après) */
+
+erreur {
+    font-weight: bold;
+}
+
+em {
+    font-weight: bold;
+    color: #cb0003;
+}
+
+nom_listes {
+    font-size: 18pt;
+    font-weight: bold;
+    color : #005cbf;
+}
+
+dates {
+    font-size: 10pt;
+    color : #4b9fff;
+}
+
+
 body {
     margin:0;
     font:normal 75% Arial, Helvetica, sans-serif;
@@ -13,11 +40,13 @@ canvas {
     width: 100%;
     height: 100%;
     background-color: #232741;
+    //background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/200px-International_Pok%C3%A9mon_logo.svg.png");
     background-repeat: no-repeat;
     background-size: 20%;
     background-position: 50% -250%;
 }
 
+/* ---- stats.js ---- */
 .count-particles {
     background: #000022;
     position: absolute;
