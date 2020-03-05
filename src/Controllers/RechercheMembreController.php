@@ -4,7 +4,7 @@
 namespace App\Controllers;
 
 
-class RechercheMembreController
+class RechercheMembreController extends Controller
 {
 
     public function memberSelect()
