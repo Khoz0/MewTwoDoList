@@ -1,5 +1,5 @@
 <?php
-
+use App\Modeles\DB;
 ?>
 <script type="text/javascript" src="cdn/jquery.js"></script>
 <script type="text/javascript" src="javascript/tri_liste.js"></script>
@@ -26,27 +26,62 @@ if(isset($_SESSION["user"])){?>
     </div>
     <div class="jumbotron-fluid">
         <div class="row justify-content-center" id="liste" style="display: flex">
-
             <?php
             $user = unserialize($_SESSION["user"]);
             $listes = $user->getListesProprietaire();
-
             foreach ($listes as $liste) {
                     ?>
                     <div class="jumbotron col-auto" style="border: solid; order=-1;padding: 30px; margin: 10px;"
-                         id="<?php echo $liste->getIntituleListe().$liste->getIdListe() ?>"
+                         id="<?php echo htmlspecialchars($liste->getIntituleListe().$liste->getIdListe()) ?>"
                          onclick="window.location.href = '?page=liste&id=<?php echo $liste->getIdListe() ?>'">
-                        <nom_listes><?php echo $liste->getIntituleListe() ?></nom_listes>
-                        <dates><br><br>Du <?php echo $liste->getDateCreation()?><br>au <?php echo $liste->getDateFin()?></dates>
+                        <nom_listes><?php echo htmlspecialchars($liste->getIntituleListe()) ?></nom_listes>
+                        <?php if ($liste->getDateFin() == null) { ?>
+                            <dates><br><br>A partir du <?php echo htmlspecialchars($liste->getDateCreation()) ?><br></dates>
+                        <?php } else { ?>
+                            <dates><br><br>Du <?php echo htmlspecialchars($liste->getDateCreation()) ?>
+                                <br>au <?php echo htmlspecialchars($liste->getDateFin()) ?></dates>
+                        <?php } ?>
                     </div>
-                <?php } ?>
+                <?php }
+            $_SESSION['user'] = serialize($user); ?>
+
         </div>
         <div class="jumbotron-fluid col-auto">
             <a onclick="window.location.href = '?page=creationListe'"><img src="assests/plus.png" alt="Ajouter une liste" width="140px" height="140px"/></a>
         </div>
     </div>
-    <div class="jumbotron-fluid justify-content-center">
+    <div class="jumbotron-fluid">
         <p>Les listes où je suis invité(e) :</p>
+    </div>
+    <div class="row justify-content-center" id="liste" style="display: flex">
+        <?php
+            $user = unserialize($_SESSION["user"]);
+            $mail = $user->getMail();
+            $bdd = DB::getInstance();
+            $listesTotal = $bdd->recupererListesMembres($mail);
+            $listesInvite = array();
+            foreach ($listesTotal as $li){
+                foreach ($listes as $li2){
+                    if ($li->getIdListe() != $li2->getIdListe()){
+                        array_push($listesInvite, $li);
+                    }
+                }
+            }
+            foreach ($listesInvite as $listeInvite){
+            ?>
+                <div class="jumbotron col-auto" style="border: solid; order=-1;padding: 30px; margin: 10px;"
+                     id="<?php echo $listeInvite->getIntituleListe().$listeInvite->getIdListe() ?>"
+                     onclick="window.location.href = '?page=liste&id=<?php echo $listeInvite->getIdListe() ?>'">
+                    <nom_listes><?php echo $listeInvite->getIntituleListe(); ?></nom_listes>
+                    <?php if ($listeInvite->getDateFin() == null) { ?>
+                        <dates><br><br>A partir du <?php echo $listeInvite->getDateCreation() ?><br></dates>
+                    <?php } else { ?>
+                        <dates><br><br>Du <?php echo $listeInvite->getDateCreation() ?>
+                            <br>au <?php echo $listeInvite->getDateFin() ?></dates>
+                    <?php } ?>
+                </div>
+            <?php }
+        ?>
     </div>
 <?php } ?>
     <script language="JavaScript">sort_by_name("alphab");</script>

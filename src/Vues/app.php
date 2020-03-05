@@ -1,91 +1,72 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-	<meta charset="UTF-8">
-	<title><?= $titre ?></title>
-	<link rel="stylesheet" href="cdn/bootstrap-4.3.1-dist/css/bootstrap.css">
-	<link rel="stylesheet" href="style.css">
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <meta charset="UTF-8">
+    <title><?= $titre ?></title>
+    <script src="cdn/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+    <link rel="stylesheet" href="style2.css">
+    <link rel="stylesheet" href="cdn/bootstrap-4.3.1-dist/css/bootstrap.css">
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="cdn/bootstrap-4.3.1-dist/js/bootstrap.js"></script>
 </head>
-<body >
+<body>
 
 <?php $page = $_GET['page'] ?? '';
 if ($page != "login" && $page != "disconnect" && $page != "inscription"){
 ?>
-	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <a class="navbar-brand" href="?page=accueil">MewTwoDoList</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <a class="navbar-brand" href="?page=accueil">MewTwoDoList</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
-        </button>
+    </button>
 
-		<div class="collapse navbar-collapse" id="navbarSupportedContent">
-			<ul class="navbar-nav mr-auto">
-				<?php if ($page == 'accueil') { ?>
-					<li class="nav-item active">
-                <?php }else{ ?>
-                    <li class="nav-item">
-                <?php } ?>
-					<a class="nav-link" href="?page=accueil">Accueil <span class="sr-only">(current)</span></a>
-				</li>
-                <?php if (isset($_SESSION['user'])) {
-				if ($page == 'compte') { ?>
-					<li class="nav-item active">
-                <?php }else{ ?>
-                    <li class="nav-item">
-                <?php } ?>
-						<a class="nav-link" href="?page=compte">Mon compte</a>
-					</li>
-				<?php }
-                    if ($page == 'disconnect') { ?>
-                        <li class="nav-item active">
-                    <?php }else{ ?>
-                        <li class="nav-item">
-                    <?php } ?>
-                    <?php if (isset($_SESSION['user'])) {?>
-                        <a class="nav-link" href="?page=disconnect">Deconnexion</a>
-                        <?php }else{ ?>
-                        <a class="nav-link" href="?page=login">Connexion</a>
-                    <?php } ?>
-					</li>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <li class="nav-item">
+                </li>
+            <li class="nav-item active">
+                <li class="nav-item">
+            </li>
+            <li class="nav-item active">
+                <li class="nav-item">
+            </li>
+        </ul>
+    </div>
+    <?php
+    } ?>
 
 
-                <?php
-                } ?>
-			</ul>
 
-		</div>
-        <!-- affichage des icônes de menu -->
-        <?php if (isset($_SESSION['user'])) {?>
+    <!-- affichage des icônes de menu -->
+    <?php if (isset($_SESSION['user'])) {?>
         <div class="btn-group">
             <button class="btn float-right" type="button"><img src="assests/notif.png" width="20" height="20"></button>
         </div>
         <div class="btn-group">
             <button class="btn btn-default dropdown-toggle mr-4 float-right" type="button" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false"><img src="assests/parametre.png" class="img-rounded" width="20" height="20"></button>
+                    aria-haspopup="true" aria-expanded="false"><img src="assests/parametre.png" class="img-rounded" width="20" height="20"></button>
 
             <div class="dropdown-menu dropdown-menu-right">
-            <a class="dropdown-item" href="?page=compte">Mon Compte</a>
-            <?php if (isset($_SESSION['user'])) {?>
-                <a class="dropdown-item" href="?page=disconnect">Se déconnecter</a>
+                <a class="dropdown-item" href="?page=compte">Mon Compte</a>
+                <?php if (isset($_SESSION['user'])) {?>
+                    <a class="dropdown-item" href="?page=disconnect">Se déconnecter</a>
                 <?php }else{ ?>
-                <a class="dropdown-item" href="?page=disconnect">Se connecter</a>
-            <?php } ?>
+                    <a class="dropdown-item" href="?page=disconnect">Se connecter</a>
+                <?php } ?>
             </div>
-        <?php } ?>
         </div>
+    <?php } ?>
+</nav>
 
-	</nav>
 
-	<main role="main">
-		<section class="container">
-			<?= $contenu ?>
-		</section>
-	</main>
-</body>
-
+<main role="main">
+    <section class="container">
+        <?= $contenu ?>
+    </section>
+</main>
 <script type="text/javascript">
-
     particlesJS({
         "particles": {
             "number": {
@@ -200,4 +181,9 @@ if ($page != "login" && $page != "disconnect" && $page != "inscription"){
 
 
 </script>
+</body>
+
+
+
+
 </html>

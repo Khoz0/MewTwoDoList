@@ -6,4 +6,5 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'HtmlValidator' => array($vendorDir . '/rexxars/html-validator/library'),
 );

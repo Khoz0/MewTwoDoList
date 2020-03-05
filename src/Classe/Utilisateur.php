@@ -1,6 +1,9 @@
 <?php
 
 namespace App\Classe;
+
+use App\Classe\Liste;
+
 use App\Modeles\DB;
 class Utilisateur
 {
@@ -10,7 +13,7 @@ class Utilisateur
     private $mail;
     private $motDePasse;
     private $photo;
-    private $listesProprietaire;
+    private $listesProprietaire = array();
 
     function __construct($nom, $prenom, $pseudo, $mail, $motDePasse, $urlPhoto)
     {
@@ -26,7 +29,7 @@ class Utilisateur
     /**
      * @return array
      */
-    public function getListesProprietaire(): array
+    public function getListesProprietaire()
     {
         return $this->listesProprietaire;
     }
@@ -135,6 +138,8 @@ class Utilisateur
         $this->photo = $photo;
     }
 
+
+
     public function ajouterListe($liste)
     {
         $this->listesProprietaire[$liste->getIdListe()] = $liste;
@@ -145,7 +150,7 @@ class Utilisateur
         unset($this->listesProprietaire[$id]);
     }
 
-    public function recupererListe($id): Liste
+    public function recupererListe($id)
     {
         return $this->listesProprietaire[$id];
     }

@@ -1,14 +1,14 @@
 <?php
 
-import_once("src/Modeles/DB.php")
+namespace App\Modeles;
 
-use DB;
+require_once('../src/Modeles/DB.php');
+require_once('../src/Classe/Tache.php');
 
-Db::getInstance;
 
 if (isset($_POST['id'])) {
-  echo $_POST['id'];
   $tache = DB::getInstance()->loadTache($_POST['id']);
-  echo $_POST['id'];
+  $tache->setValide($_POST['valide']);
+  $tache->modifBDD();
 }
  ?>

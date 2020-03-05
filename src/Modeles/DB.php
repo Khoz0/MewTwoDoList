@@ -74,6 +74,12 @@ class DB {
         $resList->execute();
     }
 
+	public function deleteListMember($mail){
+        $resUser = DB::getInstance()->getPDO()->prepare("DELETE FROM Membre WHERE mail = :mail");
+        $resUser->bindParam(":mail", $mail);
+        $resList->execute();
+    }
+
 
     public function loadUtilisateur($mail)
     {
@@ -130,7 +136,7 @@ class DB {
 
     public function loadTache($idTache){
         /*Préparation des requêtes*/
-        $verifId = DB::getInstance()->getPDO()->prepare("SELECT * FROM tache where idTache = :idVerification");
+        $verifId = DB::getInstance()->getPDO()->prepare("SELECT * FROM Tache where idTache = :idVerification");
 
         /*On test si le mail existe dans la base de données*/
         $verifId->bindParam(':idVerification', $idTache);
@@ -185,6 +191,17 @@ class DB {
         $results->execute();
     }
 
+    public function alterListe($idListe,$intituleListe,$dateCreation, $dateFin,$mailProprietaire)
+    {
+        $results = DB::getInstance()->getPDO()->prepare('UPDATE Liste SET idListe=:id, intituleListe=:intitule, dateCreation=:dateCrea, dateFin=:dateFin WHERE idListe = :id');
+        $results->bindParam(':id', $idListe);
+        $results->bindParam(':intitule', $intituleListe);
+        $results->bindParam(':dateCrea', $dateCreation);
+        $results->bindParam(':dateFin', $dateFin);
+        $results->bindParam(':mail', $mailProprietaire);
+        $results->execute();
+    }
+
     public function deleteListe($idListe)
     {
         $results = DB::getInstance()->getPDO()->prepare('DELETE FROM Liste WHERE idListe = :id ');
@@ -203,6 +220,20 @@ class DB {
         $results->bindParam(':etat', $etat);
         $results->execute();
     }
+
+    public function modifTache($idTache,$intituleTache,$etat, $idListeTache,$mailUtilisateur,$valide)
+    {
+        $results = DB::getInstance()->getPDO()->prepare('UPDATE Tache SET idTache=:id, intituleTache=:intitule, valide=:val, idListeT=:idListe, mailUtilisateur=:mail, etat=:etatT WHERE idTache = :id');
+        $results->bindParam(':id', $idTache);
+        $results->bindParam(':intitule', $intituleTache);
+        $results->bindParam(':val', $valide);
+        $results->bindParam(':idListe', $idListeTache);
+        $results->bindParam(':mail', $mailUtilisateur);
+        $results->bindParam(':etatT', $etat);
+        $results->execute();
+    }
+
+
 
     public function deleteTache($idTache)
     {
@@ -227,6 +258,18 @@ class DB {
             array_push($membres, $donnees);
         }
         return $membres;
+    }
+
+    public function recupererListesMembres($mail){
+        $listes = array();
+        $results = DB::getInstance()->getPDO()->prepare('SELECT * FROM Membre WHERE mail = :mail');
+        $results->bindParam(':mail', $mail);
+        $results->execute();
+        while ($donnees = $results->fetch()){
+            $liste = $this->loadListe($donnees['idListe']);
+            array_push($listes, $liste);
+        }
+        return $listes;
     }
 
 }

@@ -29,7 +29,8 @@ class CreationListeController extends Controller {
         $mail = unserialize($_SESSION['user'])->getMail();
         if (($this->getDateCreation() < $this->getDateFin() && $this->getDateFin() > date("Y-m-d")) || ($this->getDateFin() == null)) {
             $liste = new Liste($id, $this->getNom(), $this->getDateCreation(), $this->getDateFin(), $mail);
-            $liste->sauvegarderBDD();
+            unserialize($_SESSION['user'])->ajouterListe($liste);
+            $liste->sauvegarderBDD(false);
             $this->modifier = true;
 
             $user = unserialize($_SESSION['user']);
