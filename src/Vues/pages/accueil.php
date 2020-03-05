@@ -36,7 +36,12 @@ if(isset($_SESSION["user"])){?>
                          id="<?php echo $liste->getIntituleListe().$liste->getIdListe() ?>"
                          onclick="window.location.href = '?page=liste&id=<?php echo $liste->getIdListe() ?>'">
                         <nom_listes><?php echo $liste->getIntituleListe(); ?></nom_listes>
-                        <dates><br><br>Du <?php echo $liste->getDateCreation()?><br>au <?php echo $liste->getDateFin()?></dates>
+                        <?php if ($liste->getDateFin() == null) { ?>
+                            <dates><br><br>A partir du <?php echo $liste->getDateCreation() ?><br></dates>
+                        <?php } else { ?>
+                            <dates><br><br>Du <?php echo $liste->getDateCreation() ?>
+                                <br>au <?php echo $liste->getDateFin() ?></dates>
+                        <?php } ?>
                     </div>
                 <?php }
             $_SESSION['user'] = serialize($user); ?>
