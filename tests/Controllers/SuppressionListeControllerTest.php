@@ -38,7 +38,7 @@ class SuppressionListeControllerTest extends TestCase {
 		//Compte le nb de lignes apres l'insertion
 		$nblignes = $compteur;		
 
-		$fonction->supprimerListeTest();
+		$fonction->supprimerTacheTest();
 
 		while($donnees = $requete->fetch()){
 			$compteur2++;
@@ -48,6 +48,7 @@ class SuppressionListeControllerTest extends TestCase {
 			$res = true;	
 		}
 
+		$fonction->supprimerListeTest();
 		$fonction->supprimerUtilisateurTest();
 
 		$this->assert($res, true, 'suppression reussie');
