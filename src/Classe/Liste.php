@@ -34,10 +34,8 @@ class Liste {
     }
 
     public function retirerUtilisateur($mailUtilisateur){
-        foreach ($this->tabUtilisateur as $element){
-            if ($element == $mailUtilisateur){
-                unset($this->tabUtilisateur[array_search($element, $this->tabUtilisateur)]);
-            }
+        if(in_array($mailUtilisateur, $this->tabUtilisateur)){
+            unset($this->tabUtilisateur[array_search($mailUtilisateur, $this->tabUtilisateur)]);
         }
     }
 

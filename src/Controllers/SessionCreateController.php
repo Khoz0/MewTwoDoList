@@ -29,7 +29,7 @@ class SessionCreateController extends Controller
 
         /*Préparation des requêtes*/
         $verifMail = $bdd->prepare("SELECT mdp FROM Utilisateur where mail = :mailVerification");
-        $verifMdp = $bdd->prepare("SELECT mail FROM Utilisateur where mail = :mailVerification AND mdp = (:mdpVerification)");
+        $verifMdp = $bdd->prepare("SELECT mail FROM Utilisateur where mail = :mailVerification AND mdp = MD5(:mdpVerification)");
 
         /*On test si le mail existe dans la base de données*/
         $verifMail->bindParam(':mailVerification', $mailVerification);
