@@ -57,7 +57,9 @@ switch($page) {
     case 'modificationListe':
         (new App\Controllers\ModificationListeController())->modificationListe();
         break;
-
+    case 'memberSelect':
+        (new App\Controllers\ModificationListeController())->memberSelect();
+        break;
 
 
 	default: // Si, rien, alors erreur 404

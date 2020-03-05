@@ -30,7 +30,6 @@ if(isset($_SESSION["user"])){?>
             <?php
             $user = unserialize($_SESSION["user"]);
             $listes = $user->getListesProprietaire();
-
             foreach ($listes as $liste) {
                     ?>
                     <div class="jumbotron col-auto" style="border: solid; order=-1;padding: 30px; margin: 10px;"
