@@ -71,6 +71,9 @@ switch($page) {
 	case 'supprimerUserList':
         (new App\Controllers\ListeController())->deleteListMember();
         break;
+    case 'addUserList':
+        (new App\Controllers\ListeController())->addListMember();
+        break;
 
 
 	default: // Si, rien, alors erreur 404
