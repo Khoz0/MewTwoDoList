@@ -94,10 +94,10 @@ $liste = DB::getInstance()->loadListe($_GET["id"]);
                  id="<?php echo $nom ?>">
                 <nom_listes><?php echo $nom ?></nom_listes>
                  <div class="form-check align-top">
-                   <button class="btn float-right" id="modifTache" type="button" onclick="pop_up_modif(this)" value="<?php echo $id; ?>"><img src="assests/membre_listes.png" width="20" height="20"></button>
+                   <button class="btn"  id="modifTache" type="button" onclick="pop_up_modif(this)" value="<?php echo $id; ?>"><img src="assests/edit.png" width="20" height="20"></button>
                 </div>
                 <div class="form-check align-top">
-                    <input type="checkbox" aria-label="..." class="valide" value="<?php echo $id; ?>" <?php if ($valide == 1) {
+                    <input type="checkbox" aria-label="..." class="valide" id="valide" value="<?php echo $id; ?>" <?php if ($valide == 1) {
                         echo 'checked';
                     } ?> >
                 </div>
@@ -142,6 +142,7 @@ $liste = DB::getInstance()->loadListe($_GET["id"]);
 
 <script>
 	function pop_up() {
+    console.log("test");
 		var id = document.getElementById("tache").value;
 		window.open('?page=ajoutTache&id='+id,'Ajout tâche', 'height=500, width=800, top=100, left=200, resizable = yes');
 	}
