@@ -11,7 +11,7 @@
 <body id="particles-js">
 
 <?php $page = $_GET['page'] ?? '';
-if ($page != "login" && $page != "disconnect"){
+if ($page != "login" && $page != "disconnect" && $page != "inscription"){
 ?>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <a class="navbar-brand" href="?page=accueil">MewTwoDoList</a>
@@ -56,6 +56,7 @@ if ($page != "login" && $page != "disconnect"){
 
 		</div>
         <!-- affichage des icônes de menu -->
+        <?php if (isset($_SESSION['user'])) {?>
         <div class="btn-group">
             <button class="btn float-right" type="button"><img src="assests/notif.png" width="20" height="20"></button>
         </div>
@@ -71,6 +72,7 @@ if ($page != "login" && $page != "disconnect"){
                 <a class="dropdown-item" href="?page=disconnect">Se connecter</a>
             <?php } ?>
             </div>
+        <?php } ?>
         </div>
 
 	</nav>
