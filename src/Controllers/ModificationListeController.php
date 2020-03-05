@@ -19,13 +19,22 @@ class ModificationListeController extends Controller
     }
 
     public function modifierListe($id){
-        $bdd = DB::getInstance()->getPDO();
+        $user = unserialize($_SESSION['user']);
+        $liste = $user->recupererListe($id);
+        $_SESSION['user'] = serialize($user);
 
-
-        if (($this->getDateCreation() < $this->getDateFin() && $this->getDateFin() > date("Y-m-d")) || ($this->getDateFin() == null)) {
-            $mail = unserialize($_SESSION['user'])->getMail();
-            $liste = new Liste($id, $this->getNom(), $this->getDateCreation(), $this->getDateFin(), $mail);
-            $liste->chargerBDD();
+        if (($liste->getDateCreation() < $this->getDateFin() && $this->getDateFin() > date("Y-m-d")) || ($this->getDateFin() == null)) {
+            if(isset($_POST['dateFin'])){
+                $liste->setDateFin($this->getDateFin());
+            }
+            if(isset($_POST['nomListe'])){
+                $liste->setIntituleListe($this->getNom());
+            }
+            $liste->sauvegarderBDD(true);
+            $user->supprimerListe($id);
+            $liste = DB::getInstance()->loadListe($id);
+            $user->ajouterListe($liste);
+            $_SESSION['user'] = serialize($user);
             $this->modifier = true;
         }
     }

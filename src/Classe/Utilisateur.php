@@ -2,6 +2,8 @@
 
 namespace App\Classe;
 
+use App\Classe\Liste;
+
 class Utilisateur
 {
     private $nom;
@@ -10,7 +12,7 @@ class Utilisateur
     private $mail;
     private $motDePasse;
     private $photo;
-    private $listesProprietaire;
+    private $listesProprietaire = array();
 
     function __construct($nom, $prenom, $pseudo, $mail, $motDePasse, $urlPhoto)
     {
@@ -134,8 +136,6 @@ class Utilisateur
     {
         $this->photo = $photo;
     }
-
-
 
     public function ajouterListe($liste)
     {
