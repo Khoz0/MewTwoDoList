@@ -23,30 +23,35 @@ $liste = DB::getInstance()->loadListe($_GET["id"]);
             <div class="dropdown-menu dropdown-menu-right col-lg-2" id = "membres">
                 <?php
                     $membres = $liste->recupererMembres($_GET["id"]);
-                    foreach ($membres as $membre){
-                        if ($liste->getMailProprietaire() == unserialize($_SESSION['user'])->getMail()){
-                ?>
+                    if ($liste->getMailProprietaire() == unserialize($_SESSION['user'])->getMail()){
+                        foreach ($membres as $membre) {
+                            ?>
                             <div class="dropdown-item">
                                 <div class="col-lg-auto">
-                                    <p><?php echo $membre[0]?>
-                                    <button class="btn"><img src="assests/changement.png" width="15" height="15"></button>
-									<a href="?page=supprimerUserList&mail=<?= $membre['mail'] ?>&idListe=<?= $_GET['id'] ?>"><img src="assests/croix.png" width="15" height="15"></a>
+                                    <p><?php echo $membre[0] ?>
+                                        <button class="btn"><img src="assests/changement.png" width="15"
+                                                                 height="15"></button>
+                                        <a href="?page=supprimerUserList&mail=<?= $membre['mail'] ?>&idListe=<?= $_GET['id'] ?>"><img
+                                                    src="assests/croix.png" width="15" height="15"></a>
                                     </p>
                                 </div>
                             </div>
-                        <?php
-                        }else{
-                        ?>
+                            <?php
+                        }
+                    }else{
+                        foreach ($membres as $membre) {
+                            ?>
                             <div class="dropdown-item">
                                 <div class="col-lg-auto">
-                                    <p><?php echo $membre[0]?>
-                                    <button class="btn">Quitter la liste</button>
+                                    <p><?php echo $membre[0] ?>
                                     </p>
                                 </div>
                             </div>
-                        <?php }
+                            <?php
+                        }
+                        echo "<button class=\"btn col-lg-auto\" onclick=\"window.location.href='?page=supprimerUserList&mail=".$membre[0]."&idListe=".$_GET["id"]."'\">Quitter la liste</button>";
                     }
-                    ?>
+                ?>
                 <div class="col-lg-auto text-center">
                     <button class="btn dropdown-item" onclick="window.location.href='?page=memberSelect&id=<?php echo $_GET["id"]; ?>'"><img src="assests/add_user.png" width="40" height="40"></button>
                 </div>

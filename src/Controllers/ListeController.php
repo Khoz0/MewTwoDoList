@@ -25,9 +25,14 @@ class ListeController extends Controller {
 	public function deleteListMember(){
 		$mail = $_GET['mail'];
 		$idListe = $_GET['idListe'];
-    	$bdd = DB::getInstance()->deleteListMember($mail, $idListe);
-
-		$this->redirect("liste&id=$idListe");
+		$bdd = DB::getInstance();
+    	$bdd->deleteListMember($mail, $idListe);
+    	if($bdd->isMemberIn($mail, $idListe)) {
+            $this->redirect("liste&id=$idListe");
+        }
+    	else{
+            $this->redirect("accueil");
+        }
 	}
 
 

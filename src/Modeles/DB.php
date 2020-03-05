@@ -345,6 +345,17 @@ class DB {
         return $membres;
     }
 
+    public function isMemberIn($mail, $idListe){
+        $results = DB::getInstance()->getPDO()->prepare('SELECT * FROM Membre WHERE mail = :mail and idListe = :id');
+        $results->bindParam(':id', $idListe);
+        $results->bindParam(':mail', $mail);
+        $results->execute();
+        if($donnes = $results->fetch()){
+            return 1;
+        }
+        return null;
+    }
+
     public function recupererListesMembres($mail){
         $listes = array();
         $results = DB::getInstance()->getPDO()->prepare('SELECT * FROM Membre WHERE mail = :mail');
