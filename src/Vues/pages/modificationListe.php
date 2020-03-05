@@ -1,16 +1,28 @@
+<?php
+
+namespace App\Vues;
+
+use App\Controllers\ModificationListeController;
+
+$modificationListe = new ModificationListeController();
+
+?>
+
 <div class="container">
     <div class="row">
         <div class="col-sm-9 col-md-7 col-lg-7 mx-auto">
             <div class="card card-sign_in my-5">
                 <div class="card-body">
                     <h5 class="card-title text-center">Modification de ma liste</h5>
-                    <form class="form-sign_in" method="POST" action="?page=modificationListe">
+                    <?php
+                    $id = $_GET['id'];
+                    ?>
+                    <form class="form-sign_in" method="POST" action="?page=modificationListe&id=<?php echo $id; ?>">
                         <?php
                         if(isset($_POST['submit'])){
-                            $id = $_GET['id'];
                             $modificationListe->modifierListe($id);
                             if ($modificationListe->getModifier()) {
-                                header("Location: '?page=liste&id=$id'");
+                                header("Location: ?page=liste&id=$id");
                             }else{?>
                                 <em> La date de fin de liste doit être postérieure à la date actuelle. </em><br>
                             <?php }

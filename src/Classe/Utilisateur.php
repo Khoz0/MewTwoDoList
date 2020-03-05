@@ -2,6 +2,8 @@
 
 namespace App\Classe;
 
+use App\Classe\Liste;
+
 class Utilisateur
 {
     private $nom;
@@ -10,7 +12,7 @@ class Utilisateur
     private $mail;
     private $motDePasse;
     private $urlPhoto;
-    private $listesProprietaire;
+    private $listesProprietaire = array();
 
     function __construct($nom, $prenom, $pseudo, $mail, $motDePasse, $urlPhoto)
     {
@@ -20,7 +22,6 @@ class Utilisateur
         $this->mail = $mail;
         $this->motDePasse = $motDePasse;
         $this->urlPhoto = $urlPhoto;
-        $this->listesProprietaire = array();
     }
 
     /**
@@ -141,6 +142,7 @@ class Utilisateur
     {
         $this->listesProprietaire[$liste->getIdListe()] = $liste;
     }
+
 
     public function supprimerListe($id)
     {

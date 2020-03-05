@@ -36,9 +36,11 @@ if(isset($_SESSION["user"])){?>
                     <div class="jumbotron col-auto" style="border: solid; order=-1;padding: 30px; margin: 10px;"
                          id="<?php echo $liste->getIntituleListe() ?>\<?php echo $liste->getDateCreation() ?>\<?php echo $liste->getDateFin() ?>"
                          onclick="window.location.href = '?page=liste&id=<?php echo $liste->getIdListe() ?>'">
-                        <nom_listes><?php echo $liste->getIntituleListe() ?></nom_listes>
+                        <nom_listes><?php echo $liste->getIntituleListe(); ?></nom_listes>
                     </div>
-                <?php } ?>
+                <?php }
+            $_SESSION['user'] = serialize($user); ?>
+
         </div>
         <div class="jumbotron-fluid col-auto">
             <a onclick="window.location.href = '?page=creationListe'"><img src="assests/plus.png" alt="Ajouter une liste" width="140px" height="140px"/></a>

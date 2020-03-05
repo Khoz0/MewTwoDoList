@@ -57,13 +57,18 @@ class Liste {
         }
     }
 
+
     public function getTabTache(){
         return $this->tabTache;
     }
 
-    public function sauvegarderBDD(){
+    public function sauvegarderBDD($inBDD){
         $bdd = DB::getInstance();
-        $bdd->addListe($this->idListe,$this->intituleListe,$this->dateCreation,$this->dateFin,$this->mailProprietaire);
+        if (!$inBDD) {
+            $bdd->addListe($this->idListe, $this->intituleListe, $this->dateCreation, $this->dateFin, $this->mailProprietaire);
+        }else {
+            $bdd->alterListe($this->idListe, $this->intituleListe, $this->dateCreation, $this->dateFin, $this->mailProprietaire);
+        }
     }
 
     public function chargerBDD(){
@@ -114,6 +119,64 @@ class Liste {
     {
         return $this->mailProprietaire;
     }
+
+    /**
+     * @param mixed $idListe
+     */
+    public function setIdListe($idListe)
+    {
+        $this->idListe = $idListe;
+    }
+
+    /**
+     * @param mixed $intituleListe
+     */
+    public function setIntituleListe($intituleListe)
+    {
+        $this->intituleListe = $intituleListe;
+    }
+
+    /**
+     * @param mixed $dateCreation
+     */
+    public function setDateCreation($dateCreation)
+    {
+        $this->dateCreation = $dateCreation;
+    }
+
+    /**
+     * @param mixed $dateFin
+     */
+    public function setDateFin($dateFin)
+    {
+        $this->dateFin = $dateFin;
+    }
+
+    /**
+     * @param mixed $mailProprietaire
+     */
+    public function setMailProprietaire($mailProprietaire)
+    {
+        $this->mailProprietaire = $mailProprietaire;
+    }
+
+    /**
+     * @param array $tabUtilisateur
+     */
+    public function setTabUtilisateur(array $tabUtilisateur)
+    {
+        $this->tabUtilisateur = $tabUtilisateur;
+    }
+
+    /**
+     * @param array $tabTache
+     */
+    public function setTabTache(array $tabTache)
+    {
+        $this->tabTache = $tabTache;
+    }
+
+
 
 
 
