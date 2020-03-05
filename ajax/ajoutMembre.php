@@ -1,4 +1,5 @@
 <?php
+namespace App\Modeles;
 
 use App\Modeles\DB;
 

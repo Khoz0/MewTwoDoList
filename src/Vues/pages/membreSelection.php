@@ -50,7 +50,7 @@ $membreSelection = new RechercheMembreController();
                                     } ?> </td>
                                 <td width="30px"></td>
                                 <td>
-                                    <button onclick="addMembre(<?php echo $user->getMail();?>,<?php echo $_GET["id"]; ?>)">Ajouter</button>
+                                    <button onclick="addMembre('<?php echo $user->getMail();?>','<?php echo $_GET["id"]; ?>')">Ajouter</button>
                                 </td>
                             </tr>
                             <br>

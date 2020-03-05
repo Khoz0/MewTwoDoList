@@ -1,13 +1,16 @@
-function addMembre(user,id) {
+function addMembre(mail,id) {
+    var url = window.location.origin + "/mew_two_do_list/ajax/ajoutMembre.php";
+    console.log(url);
     $.ajax({
-        url: 'ajoutMembre.php',
+        url: url,
         type: 'GET',
-        data: 'user=' + user + '&id='+ id,
+        data: {user: mail, id: id},
 
         success: function (code_html, statut) { // code_html contient le HTML renvoyé
         },
-        error: function (resultat, statut, erreur) {
-            console.log("Erreur requête ajax")
+        error: (xhr) => {
+            console.log("status =" + xhr.status);
+            console.log(xhr);
         }
     });
 }
