@@ -56,6 +56,12 @@ class Tache
       $bdd->addTache($this->idTache,$this->intituleTache,$this->etat,$this->idListeTache,$this->mailUtilisateur, $this->valide);
     }
 
+    public function modifBDD()
+    {
+      $bdd = DB::getInstance();
+      $bdd->modifTache($this->idTache,$this->intituleTache,$this->etat,$this->idListeTache,$this->mailUtilisateur, $this->valide);
+    }
+
     public function retirerBDD()
     {
 
@@ -108,6 +114,16 @@ class Tache
     {
         return $this->valide;
     }
+
+    /**
+     * @return mixed
+     */
+    public function setValide($valide)
+    {
+        $this->valide = $valide;
+    }
+
+
 
 
 
