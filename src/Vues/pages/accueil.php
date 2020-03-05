@@ -53,17 +53,17 @@ if(isset($_SESSION["user"])){?>
     <div class="jumbotron-fluid">
         <p>Les listes où je suis invité(e) :</p>
     </div>
-    <div class="row justify-content-center" id="liste" style="display: flex">
+    <div class="row justify-content-center" id="liste2" style="display: flex">
         <?php
             $user = unserialize($_SESSION["user"]);
             $mail = $user->getMail();
             $bdd = DB::getInstance();
             $listesTotal = $bdd->recupererListesMembres($mail);
             $listesInvite = array();
-            foreach ($listesTotal as $li){
-                foreach ($listes as $li2){
-                    if ($li->getIdListe() != $li2->getIdListe()){
-                        array_push($listesInvite, $li);
+            foreach ($listesTotal as $listesMembre){
+                foreach ($listes as $listeProprio){
+                    if (!in_array($listesMembre, $listes) && !in_array($listesMembre, $listesInvite)){
+                        array_push($listesInvite, $listesMembre);
                     }
                 }
             }
