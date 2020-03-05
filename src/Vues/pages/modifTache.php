@@ -14,7 +14,6 @@ $modifTache = new App\Controllers\ModificationTacheController;
 
    if (isset($_POST['texte'])){
        if (!empty($_POST['texte'])) {
-
            $tache->setIntituleTache($_POST['texte']);
            $tache->modifBDD();
            echo "<script type='text/javascript'>",
@@ -35,7 +34,7 @@ $modifTache = new App\Controllers\ModificationTacheController;
 <h1 class="display-4"> Modification de la tâche </h1>
 </div>
 <button class="btn float-right " type="button" data-toggle="dropdown" data-target="membres"
-        aria-haspopup="listbox" aria-expanded="false" onclick="supprTache(this)" value="<?php echo $id; ?>"><img src="assests/membre_listes.png" width="20" height="20"></button>
+        aria-haspopup="listbox" aria-expanded="false" id="delete" value="<?php echo $id; ?>"><img src="assests/delete.png" width="20" height="20"></button>
 
 
 <form class="form-sign_in" method="POST" action=<?php echo "?page=modifTache&id=".$_GET['id'] ;?> >
@@ -53,13 +52,5 @@ $modifTache = new App\Controllers\ModificationTacheController;
 </div>
 </form>
 
-<script type="text/javascript">
-  function supprTache(elem) {
-    id = elem.value
-
-    if (confirm('Êtes vous sûr de vouloir supprimer votre tâche ?\nCette action est définitive !')) {
-      window.opener.location.href='?page=deleteTache&id='+id;
-      window.close();
-    }
-  }
-</script>
+<script type="text/javascript" src="cdn/jquery.js"> </script>
+<script type="text/javascript" src="javascript/delete_tache.js"></script>
