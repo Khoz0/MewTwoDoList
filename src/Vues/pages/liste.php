@@ -18,18 +18,39 @@ $liste = DB::getInstance()->loadListe($_GET["id"]);
     if (stristr($_SERVER['REQUEST_URI'], "id=") != ""){
         ?>
         <div class="btn-group">
-            <button class="btn float-right" type="button" data-toggle="dropdown" data-target="membres"
+            <button class="btn float-right " type="button" data-toggle="dropdown" data-target="membres"
                     aria-haspopup="listbox" aria-expanded="false"><img src="assests/membre_listes.png" width="20" height="20"></button>
 
-            <div class="dropdown-menu dropdown-menu-right" id = "membres">
+            <div class="dropdown-menu dropdown-menu-right col-lg-2" id = "membres">
                 <?php
                     $membres = $liste->recupererMembres($_GET["id"]);
                     foreach ($membres as $membre){
+                        if ($liste->getMailProprietaire() == unserialize($_SESSION['user'])->getMail()){
                 ?>
-                        <p class="dropdown-item"><?php echo $membre[0]?></p>
-                <?php }
+                            <div class="dropdown-item">
+                                <div class="col-lg-auto">
+                                    <p><?php echo $membre[0]?>
+                                    <button class="btn"><img src="assests/changement.png" width="15" height="15"></button>
+                                    <button class="btn"><img src="assests/croix.png" width="15" height="15"></button>
+                                    </p>
+                                </div>
+                            </div>
+                        <?php
+                        }else{
+                        ?>
+                            <div class="dropdown-item">
+                                <div class="col-lg-auto">
+                                    <p><?php echo $membre[0]?>
+                                    <button class="btn">Quitter la liste</button>
+                                    </p>
+                                </div>
+                            </div>
+                        <?php }
+                    }
                     ?>
-                <button class="dropdown-item" onclick="window.location.href='?page=accueil'">Quitter la liste</button>
+                <div class="col-lg-auto text-center">
+                    <button class="btn dropdown-item" onclick="window.location.href='?page=accueil'"><img src="assests/add_user.png" width="40" height="40"></button>
+                </div>
             </div>
         </div>
     <?php }
