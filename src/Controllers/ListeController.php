@@ -35,5 +35,13 @@ class ListeController extends Controller {
         }
 	}
 
+    public function addListMember(){
+        $mail = $_GET['mail'];
+        $idListe = $_GET['idListe'];
+        $bdd = DB::getInstance()->addMembre($mail, $idListe);
+
+        $this->redirect("liste&id=$idListe");
+    }
+
 
 }
