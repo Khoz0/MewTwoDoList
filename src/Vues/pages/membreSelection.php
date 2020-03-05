@@ -7,6 +7,7 @@ $membreSelection = new RechercheMembreController();
 ?>
 
 <script type="text/javascript" src="javascript/tri_membre.js"></script>
+<script type="text/javascript" src="javascript/ajouter_membre.js"></script>
 
 <h4>Rechercher par:</h4>
 <select onchange="sort_by_name(this.value)" onload="sort_by_name(this.value)">
@@ -15,14 +16,15 @@ $membreSelection = new RechercheMembreController();
     <option value="mail">Mail</option>
 </select>
 
-
+<div class="row justify-content-center">
 <input class="barre-recherche" type="search" id="site-search" name="q"
-       aria-label="Rechercher un membre...">
+       placeholder="Rechercher un membre">
 
 <button>Rechercher</button>
+</div>
 
 
-<div class="scroller">
+
     <div class="jumbotron-fluid">
         <div class="row justify-content-center" id="utilisateurs" style="display: flex">
 
@@ -48,7 +50,7 @@ $membreSelection = new RechercheMembreController();
                                     } ?> </td>
                                 <td width="30px"></td>
                                 <td>
-                                    <button>Ajouter</button>
+                                    <button onclick="addMembre(<?php echo $user->getMail();?>,<?php echo $_GET["id"]; ?>)">Ajouter</button>
                                 </td>
                             </tr>
                             <br>
@@ -65,7 +67,7 @@ $membreSelection = new RechercheMembreController();
         </div>
     </div>
 
-</div>
+
 <div class="row justify-content-center">
 <button>Annuler</button>
 </div>
