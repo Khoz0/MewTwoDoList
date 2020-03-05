@@ -27,6 +27,8 @@ class ListeController extends Controller {
 		$idListe = $_GET['idListe'];
 		$bdd = DB::getInstance();
     	$bdd->deleteListMember($mail, $idListe);
+        $liste = $bdd->loadListe($idListe);
+        $liste->retirerUtilisateur($mail);
     	if($bdd->isMemberIn($mail, $idListe)) {
             $this->redirect("liste&id=$idListe");
         }
@@ -38,7 +40,10 @@ class ListeController extends Controller {
     public function addListMember(){
         $mail = $_GET['mail'];
         $idListe = $_GET['idListe'];
-        $bdd = DB::getInstance()->addMembre($mail, $idListe);
+        $bdd = DB::getInstance();
+        $bdd->addMembre($mail, $idListe);
+        $liste = $bdd->loadListe($idListe);
+        $liste->ajouterUtilisateur($mail);
 
         $this->redirect("liste&id=$idListe");
     }

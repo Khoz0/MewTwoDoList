@@ -187,8 +187,13 @@ class Liste {
         $this->tabTache = $tabTache;
     }
 
-
-
+    /**
+     * @return array
+     */
+    public function getTabUtilisateur()
+    {
+        return $this->tabUtilisateur;
+    }
 
 
 }
