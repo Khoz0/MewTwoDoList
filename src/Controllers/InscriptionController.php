@@ -63,12 +63,12 @@ class InscriptionController extends Controller
         }
 
         if($photo != null) {
-            if(!is_dir("assest/uploads/")){
-                mkdir("assest/uploads/");
+            if(!is_dir("assests/uploads/")){
+                mkdir("assests/uploads/", 0777, true);
             }
-            move_uploaded_file($photo['tmp_name'], 'assests/uploads/' . basename($mail.$photo['name']));
-            $photo = $mail."assests/uploads/".$photo['name'];
-            $_SESSION['photo'] = $mail."assests/uploads/".$photo['name'];
+            move_uploaded_file($photo['tmp_name'], 'assests/uploads/' . basename($photo['name']).$mail);
+            $photo = "assests/uploads/".$photo['name'].$mail;
+            $_SESSION['photo'] = "assests/uploads/".$photo['name'].$mail;
         }
 
 
