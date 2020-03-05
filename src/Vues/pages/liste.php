@@ -58,12 +58,13 @@ $liste = DB::getInstance()->loadListe($_GET["id"]);
             $tache = DB::getInstance()->loadTache($elem['idTache']);
             $nom = $tache->getIntituleTache();
             $valide = $tache->getValide();
+            $id = $tache->getIdTache();
             $user = unserialize($_SESSION['user']);
             ?>
             <div class="jumbotron-fluid col-auto" style="border: solid; ;padding: 30px; margin: 10px;"
                  id="<?php echo $nom ?>">
                 <div class="form-check align-top">
-                    <input type="checkbox" aria-label="..." <?php if ($valide == 1) {
+                    <input type="checkbox" aria-label="..." class="valide" value="<?php echo $id; ?>" <?php if ($valide == 1) {
                         echo 'checked';
                     } ?> >
                 </div>
@@ -104,6 +105,9 @@ $liste = DB::getInstance()->loadListe($_GET["id"]);
 
 <script type="text/javascript" src="javascript/suppression_liste.js"></script>
 <script type="text/javascript" src="javascript/modification_liste.js"></script>
+<script type="text/javascript" src="cdn/jquery.js"> </script>
+<script type="text/javascript" src="javascript/valide_tache.js"></script>
+
 <script>
 	function pop_up() {
 		var id = document.getElementById("tache").value;
