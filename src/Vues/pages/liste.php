@@ -30,8 +30,7 @@ $liste = DB::getInstance()->loadListe($_GET["id"]);
                                 <div class="col-lg-auto">
                                     <p><?php echo $membre[0]?>
                                     <button class="btn"><img src="assests/changement.png" width="15" height="15"></button>
-                                    <button class="btn"><img src="assests/croix.png" width="15" height="15"></button>
-									<a href="?page=supprimerUserList&mail=<?= $membre['mail'] ?>&idListe=<?= $_GET['id'] ?>">supprimer</a>
+									<a href="?page=supprimerUserList&mail=<?= $membre['mail'] ?>&idListe=<?= $_GET['id'] ?>"><img src="assests/croix.png"></a>
                                     </p>
                                 </div>
                             </div>
