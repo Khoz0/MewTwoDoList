@@ -58,7 +58,7 @@ switch($page) {
         (new App\Controllers\ModificationListeController())->modificationListe();
         break;
     case 'memberSelect':
-        (new App\Controllers\ModificationListeController())->memberSelect();
+        (new App\Controllers\RechercheMembreController())->memberSelect();
         break;
 
 
