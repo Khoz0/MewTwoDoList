@@ -31,6 +31,10 @@ class ModificationListeController extends Controller
                 $liste->setIntituleListe($this->getNom());
             }
             $liste->sauvegarderBDD(true);
+            $user->supprimerListe($id);
+            $liste = DB::getInstance()->loadListe($id);
+            $user->ajouterListe($liste);
+            $_SESSION['user'] = serialize($user);
             $this->modifier = true;
         }
     }

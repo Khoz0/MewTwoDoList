@@ -137,8 +137,6 @@ class Utilisateur
         $this->photo = $photo;
     }
 
-
-
     public function ajouterListe($liste)
     {
         $this->listesProprietaire[$liste->getIdListe()] = $liste;
