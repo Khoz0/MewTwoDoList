@@ -296,8 +296,8 @@ class DB {
 
     public function deleteTache($idTache)
     {
-        $results = DB::getInstance()->getPDO()->prepare('DELETE FROM tache WHERE idTiste = :id ');
-        $results->bindParam(':id', $idListe);
+        $results = DB::getInstance()->getPDO()->prepare('DELETE FROM Tache WHERE idTache = :id ');
+        $results->bindParam(':id', $idTache);
         $results->execute();
     }
 
