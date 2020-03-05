@@ -90,7 +90,7 @@ class DB {
         $utilisateurs = array();
 
         while ($donnees = $getUser->fetch()) {
-            $utilisateur = new Utilisateur($donnees["nomUser"], $donnees["prenomUser"], $donnees["pseudoUser"], $donnees["mail"], null, null);
+            $utilisateur = new Utilisateur($donnees["nomUser"], $donnees["prenomUser"], $donnees["pseudoUser"], $donnees["mail"], null, $donnees['photo']);
 
             $utilisateurs[$utilisateur->getMail()] = $utilisateur;
 

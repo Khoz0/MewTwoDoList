@@ -37,9 +37,15 @@ $membreSelection = new RechercheMembreController();
 
                         <table>
                             <tr>
-                                <td><img
-                                            style="border-style: solid;" src="assests/notif.png" width="60px"
-                                            height="60px" alt= <?php echo $user->getMail() ?>></td>
+                                <td>
+                                    <?php
+                                    if ($user->getPhoto() == null) {
+                                        echo "<img src='assests/profil.png'  width=\"60px\"
+                                            height=\"60px\" alt= " . $user->getMail() . ">";
+                                    } else {
+                                        echo "<img src=\"" . $user->getPhoto() . "\" width=\"60px\"
+                                            height=\"60px\" alt= " . $user->getMail() . " >";
+                                    } ?> </td>
                                 <td width="30px"></td>
                                 <td>
                                     <button>Ajouter</button>
