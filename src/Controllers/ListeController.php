@@ -25,7 +25,7 @@ class ListeController extends Controller {
 	public function deleteListMember(){
 		$mail = $_GET['mail'];
 		$idListe = $_GET['idListe'];
-    	$bdd = DB::getInstance()->deleteListMember($mail);
+    	$bdd = DB::getInstance()->deleteListMember($mail, $idListe);
 	}
 
 
