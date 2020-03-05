@@ -74,10 +74,18 @@ class DB {
         $resList->execute();
     }
 
-	public function deleteListMember($idListe){
-        $res = DB::getInstance()->getPDO()->prepare("DELETE FROM Membre WHERE mail = :mail and idListe = :idListe");
+	public function deleteListMember($mail, $idListe){
+        $res = DB::getInstance()->getPDO()->prepare("SELECT mailProprietaire FROM Liste WHERE idListe = :idListe");
+        $res->bindParam(":idListe", $idListe);
+        $res->execute();
+        if($donnees = $res->fetch()){
+            $mailProprio = $donnees["mailProprietaire"];
+        }
+
+        $res = DB::getInstance()->getPDO()->prepare("DELETE FROM Membre WHERE mail = :mail and idListe = :idListe and mail != :mailProprio");
         $res->bindParam(":mail", $mail);
         $res->bindParam(":idListe", $idListe);
+        $res->bindParam(":mailProprio", $mailProprio);
         $res->execute();
     }
 
