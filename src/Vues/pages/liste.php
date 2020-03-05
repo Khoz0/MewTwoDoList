@@ -39,6 +39,10 @@ $liste = DB::getInstance()->loadListe($_GET["id"]);
     <h1>Liste <?php echo htmlspecialchars(unserialize($bdd)->getIntituleListe()) ?></h1>
     <a href="#" onclick="conf_modification(<?php echo $_GET["id"]; ?>)"> Modifier la liste </a>
     <br>
+
+    <a href="?page=memberSelect" >Ajouter un membre </a>
+    <br>
+
     <a href="#" onclick="conf_suppression(<?php echo $_GET["id"]; ?>, 'Liste <?php echo unserialize($bdd)->getIntituleListe();?>')"> Supprimer la liste </a>
     <br>
     <br>

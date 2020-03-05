@@ -224,6 +224,20 @@ class DB {
         $results->execute();
     }
 
+    public function modifTache($idTache,$intituleTache,$etat, $idListeTache,$mailUtilisateur,$valide)
+    {
+        $results = DB::getInstance()->getPDO()->prepare('UPDATE Tache SET idTache=:id, intituleTache=:intitule, valide=:val, idListeT=:idListe, mailUtilisateur=:mail, etat=:etatT WHERE idTache = :id');
+        $results->bindParam(':id', $idTache);
+        $results->bindParam(':intitule', $intituleTache);
+        $results->bindParam(':val', $valide);
+        $results->bindParam(':idListe', $idListeTache);
+        $results->bindParam(':mail', $mailUtilisateur);
+        $results->bindParam(':etatT', $etat);
+        $results->execute();
+    }
+
+
+
     public function deleteTache($idTache)
     {
         $results = DB::getInstance()->getPDO()->prepare('DELETE FROM tache WHERE idTiste = :id ');
