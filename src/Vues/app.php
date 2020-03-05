@@ -8,7 +8,7 @@
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
-<body >
+<body>
 
 <?php $page = $_GET['page'] ?? '';
 if ($page != "login" && $page != "disconnect" && $page != "inscription"){
@@ -49,12 +49,13 @@ if ($page != "login" && $page != "disconnect" && $page != "inscription"){
                     <?php } ?>
 					</li>
 
-
+</ul>
+</div>
                 <?php
                 } ?>
-			</ul>
+			
 
-		</div>
+		
         <!-- affichage des icônes de menu -->
         <?php if (isset($_SESSION['user'])) {?>
         <div class="btn-group">
@@ -72,21 +73,19 @@ if ($page != "login" && $page != "disconnect" && $page != "inscription"){
                 <a class="dropdown-item" href="?page=disconnect">Se connecter</a>
             <?php } ?>
             </div>
-        <?php } ?>
-        </div>
+</div>
 
 	</nav>
+        <?php } ?>
+        
 
 	<main role="main">
 		<section class="container">
 			<?= $contenu ?>
 		</section>
 	</main>
-</body>
-
 <script type="text/javascript">
-
-    particlesJS({
+particlesJS({
         "particles": {
             "number": {
                 "value": 160,
@@ -200,4 +199,9 @@ if ($page != "login" && $page != "disconnect" && $page != "inscription"){
 
 
 </script>
+</body>
+
+
+
+    
 </html>

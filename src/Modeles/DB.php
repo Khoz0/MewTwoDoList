@@ -194,6 +194,17 @@ class DB {
         $results->execute();
     }
 
+    public function alterListe($idListe,$intituleListe,$dateCreation, $dateFin,$mailProprietaire)
+    {
+        $results = DB::getInstance()->getPDO()->prepare('UPDATE liste SET idListe=:id, intituleListe=:intitule, dateCreation=:dateCrea, dateFin=:dateFin WHERE idListe = :id');
+        $results->bindParam(':id', $idListe);
+        $results->bindParam(':intitule', $intituleListe);
+        $results->bindParam(':dateCrea', $dateCreation);
+        $results->bindParam(':dateFin', $dateFin);
+        $results->bindParam(':mail', $mailProprietaire);
+        $results->execute();
+    }
+
     public function deleteListe($idListe)
     {
         $results = DB::getInstance()->getPDO()->prepare('DELETE FROM Liste WHERE idListe = :id ');
