@@ -70,6 +70,10 @@ class CompteController extends Controller {
         if ($donnees['pseudoUser'] != $_POST['inputPseudo'] && !empty($_POST['inputPseudo'])) {
             $this->modifierPseudo();
         }
+        if ($donnees['photo'] != "assests/uploads/".$_FILES['inputPhoto']['name'].$loginSession && !empty($_FILES['inputPhoto']['name'])) {
+            $this->modifierPhoto();
+        }
+
         $this->verification();
         if ($this->modifier) {
             header('Location: ./?page=compte');
@@ -109,6 +113,43 @@ class CompteController extends Controller {
         $this->modifier = true;
         $user = unserialize($_SESSION['user']);
         $user->setPseudo($nom);
+        $_SESSION['user'] = serialize($user);
+    }
+
+    /**
+     *
+     */
+    public function modifierPhoto()
+    {
+        $bdd = DB::getInstance()->getPDO();
+        $requete = $bdd->prepare("SELECT * FROM Utilisateur WHERE mail = :mail");
+        $loginSession = unserialize($_SESSION['user'])->getMail();
+
+        //On supprime l'ancienne photo de profil
+        $oldPhoto = unserialize($_SESSION['user'])->getPhoto();
+        unlink($oldPhoto);
+
+        $requete->bindParam('mail', $loginSession);
+        $requete->execute();
+        $file_photo = $_FILES["inputPhoto"];
+
+        if(!is_dir("assests/uploads/")){
+            mkdir("assests/uploads/", 0777, true);
+        }
+        if(!is_file("assests/uploads/".$file_photo['name'].$loginSession)){
+            move_uploaded_file($file_photo['tmp_name'], 'assests/uploads/' . basename($file_photo['name']).$loginSession);
+        }
+        $photo = "assests/uploads/".$file_photo['name'].$loginSession;
+
+
+        $requete = $bdd->prepare("UPDATE Utilisateur SET photo = :photo WHERE mail = :mail");
+        $requete->bindParam('mail', $loginSession);
+        $requete->bindParam('photo', $photo);
+        $requete->execute();
+
+        $this->modifier = true;
+        $user = unserialize($_SESSION['user']);
+        $user->setPhoto($photo);
         $_SESSION['user'] = serialize($user);
     }
 

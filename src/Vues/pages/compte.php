@@ -23,7 +23,7 @@ $user = unserialize($_SESSION['user']);
                     else{
                         echo "<img src=\"".$user->getPhoto()."\" width='100px' style='border-radius: 50%'/>";
                     }?>
-                    <form class="form-sign_in" method="POST" action="?page=compte">
+                    <form class="form-sign_in" method="POST" action="?page=compte" enctype="multipart/form-data">
                         <?php if (isset($_POST["valider"])){
                             $compte->modification();
 
@@ -50,6 +50,11 @@ $user = unserialize($_SESSION['user']);
                                    disabled>
                         </div>
 
+                        <label for='inputPassword'>Votre photo de profil</label>
+                        <div class='form-label-group'>
+                            <input type='file' name='inputPhoto' class='form-control'>
+                        </div>
+
                         <div id=mdp>
                         </div>
 
@@ -58,7 +63,6 @@ $user = unserialize($_SESSION['user']);
 
                         <div id=confmdp>
                         </div>
-
 
                         <br>
 
