@@ -80,6 +80,26 @@ class DB {
         $resList->execute();
     }
 
+    public function getUtilisateurs()
+    {
+        /*Préparation des requêtes*/
+        $getUser = DB::getInstance()->getPDO()->prepare("SELECT * FROM Utilisateur");
+
+        $getUser->execute();
+
+        $utilisateurs = array();
+
+        while ($donnees = $getUser->fetch()) {
+            $utilisateur = new Utilisateur($donnees["nomUser"], $donnees["prenomUser"], $donnees["pseudoUser"], $donnees["mail"], null, null);
+
+            $utilisateurs[$utilisateur->getMail()] = $utilisateur;
+
+
+        }
+
+        return $utilisateurs;
+    }
+
 
     public function loadUtilisateur($mail)
     {
