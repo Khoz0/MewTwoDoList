@@ -113,7 +113,7 @@ class DB {
         $verifMail->execute();
 
         if ($donnees = $verifMail->fetch()) {
-            $utilisateur = new Utilisateur($donnees["nomUser"], $donnees["prenomUser"], $donnees["pseudoUser"], $donnees["mail"], null, null);
+            $utilisateur = new Utilisateur($donnees["nomUser"], $donnees["prenomUser"], $donnees["pseudoUser"], $donnees["mail"], null, $donnees["photo"]);
 
 
             /*On récupère les liste dont l'utilisateur est le propriétaire dans la base de données*/
@@ -169,15 +169,6 @@ class DB {
         } else {
             return null;
         }
-    }
-
-    public function ajouterPhoto($img_nom, $img_taille, $img_type, $img_blob){
-        $results = DB::getInstance()->getPDO()->prepare('INSERT INTO Images (nomImage, tailleImage, typeImage, blobImage) VALUES (:nom, :taille, :typeImg, :blob)');
-        $results->bindParam(':nom', $img_nom);
-        $results->bindParam(':taille', $img_taille);
-        $results->bindParam(':typeImg', $img_type);
-        $results->bindParam(':blob', $img_blob);
-        $results->execute();
     }
 
     public function lastImagesId(){
@@ -287,6 +278,18 @@ class DB {
             array_push($membres, $donnees);
         }
         return $membres;
+    }
+
+    public function recupererListesMembres($mail){
+        $listes = array();
+        $results = DB::getInstance()->getPDO()->prepare('SELECT * FROM Membre WHERE mail = :mail');
+        $results->bindParam(':mail', $mail);
+        $results->execute();
+        while ($donnees = $results->fetch()){
+            $liste = $this->loadListe($donnees['idListe']);
+            array_push($listes, $liste);
+        }
+        return $listes;
     }
 
 }

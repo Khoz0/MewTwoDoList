@@ -14,12 +14,21 @@ $user = unserialize($_SESSION['user']);
         <div class="col-sm-9 col-md-7 col-lg-7 mx-auto">
             <div class="card card-sign_in my-5">
                 <div class="card-body">
+
                     <h5 class="card-title text-center">Mon compte</h5>
+                    <?php
+                    if($user->getPhoto() == null){
+                        echo "<img src='assests/profil.png' width='100px' style='border-radius: 50%'/>";
+                    }
+                    else{
+                        echo "<img src=\"".$user->getPhoto()."\" width='100px' style='border-radius: 50%'/>";
+                    }?>
                     <form class="form-sign_in" method="POST" action="?page=compte">
                         <?php if (isset($_POST["valider"])){
                             $compte->modification();
 
                         }?>
+                        <br>
                         <label for="inputPseudo">Votre pseudo</label>
                         <div class="form-label-group">
                             <input type="text" name="inputPseudo" class="form-control" placeholder=<?php echo $compte->getPseudo() ?>

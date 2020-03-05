@@ -54,6 +54,13 @@ use App\Controllers\InscriptionController;
                                 }
                             }
                         }
+                        if(isset($_SESSION['error_exist'])) {
+                            if(array_key_exists('pseudo',$_SESSION['error_exist'])){
+                                if($_SESSION['error_exist']['pseudo'] == 1){
+                                    echo "<em>Ce pseudo est déjà utilisé</em><br>";
+                                }
+                            }
+                        }
                         ?>
 
                         <label for="mail">Votre adresse mail</label>
@@ -113,13 +120,6 @@ use App\Controllers\InscriptionController;
                             <input type="hidden" name="MAX_FILE_SIZE" value="250000" />
                             <input type="file" name="photo" id="photo" size="50">
                         </div>
-                        <?php 
-                        if(isset($_FILES["photo"])){
-                            $imagetmp=addslashes (file_get_contents($_FILES['photo']['tmp_name']));?>
-                            <img src="<?=$_FILES["photo"]["tmp_name"]?>">
-                        <?php
-                        }
-                        ?>
                         <br>
 
                         <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit" value="submit" name="submit">S'inscrire</button>

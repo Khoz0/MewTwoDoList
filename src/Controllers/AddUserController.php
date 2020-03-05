@@ -10,7 +10,6 @@ class AddUserController extends Controller
     {
         (new InscriptionController)->ajouterUtilisateur();
         if (isset($_SESSION["error_syntx"]) || isset($_SESSION["error_exist"])) {
-
             return $this->render('inscription');
         } else {
 
