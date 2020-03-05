@@ -40,17 +40,17 @@ $membreSelection = new RechercheMembreController();
                                 <td><img
                                             style="border-style: solid;" src="assests/notif.png" width="60px"
                                             height="60px" alt= <?php echo $user->getMail() ?>></td>
-                                <td width="60px"></td>
+                                <td width="30px"></td>
                                 <td>
-                                    <form><input type="checkbox"></form>
+                                    <button>Ajouter</button>
                                 </td>
                             </tr>
                             <br>
                         </table>
 
                         <br>
-                        <div style="alignment: center"><?php echo $user->getMail() ?></div>
-                        <div style="alignment: center"><?php echo $user->getPrenom() . " " . $user->getNom() ?></div>
+                        <div class="row justify-content-center"><?php echo $user->getMail() ?></div>
+                        <div class="row justify-content-center"><?php echo $user->getPrenom() . " " . $user->getNom() ?></div>
 
                     </div>
                 <?php }
@@ -62,5 +62,4 @@ $membreSelection = new RechercheMembreController();
 </div>
 <div class="row justify-content-center">
 <button>Annuler</button>
-<button>Valider</button>
 </div>
