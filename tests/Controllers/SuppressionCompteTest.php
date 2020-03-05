@@ -8,10 +8,13 @@ use App\Modeles\DB;
 /**
  * Tests AjoutTacheControllerTest
  */
-class SupprimerCompteTest extends TestCase {
+class SuppressionCompteTest extends TestCase {
 
      //Test si la liste a bien été ajouté à la bdd
     public function testasupprimerCompte() {
+
+    	$fonction = new FonctionTest();
+    	
 		$res = false;
 
 		$bdd = DB::getInstance()->getPDO();
@@ -21,16 +24,7 @@ class SupprimerCompteTest extends TestCase {
 		$compteur = 0;
 		$compteur2 = 0;
 		
-        //Compte le nb de lignes avant l'insertion
-		$mail = 'abcd@abcd.com';
-		$nom_user = 'bonjour';
-		$prenomUser  = 'aurevoir';
-		$pseudoUser  = 'pseudo';
-		$mdp  = 'mdp123';
-
-        //On réalise l'insertion
-		$requete = $bdd->prepare("INSERT INTO UTILISATEUR(mail, nomUser, prenomUser, pseudoUser, mdp) values(" + $mail + "," + $nom_user + "," + $prenomUser + "," + $pseudoUser + "," + $mdp + ")");
-		$requete->execute();	
+        $fonction->ajouterUtilisateurTest();	
 
         //Compte le nombre de lignes après l'insertion
 		$requete = $bdd->prepare("SELECT count(*) FROM Utilisateur");
@@ -40,8 +34,7 @@ class SupprimerCompteTest extends TestCase {
 			$compteur++;
 		}		
 
-		$requete = $bdd->prepare("delete from utilisateur where mail = 'abcd@abcd.com'");
-		$requete->execute();
+		$fonction->supprimerUtilisateurTest();
 
 		while($donnees = $requete->fetch()){
 			$compteur2 --;
