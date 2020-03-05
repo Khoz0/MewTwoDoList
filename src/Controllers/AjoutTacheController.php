@@ -2,8 +2,8 @@
 
 
 namespace App\Controllers;
-use App\Modeles\DB;
 use App\Classe\Tache;
+use App\Modeles\DB;
 
 class AjoutTacheController extends Controller
 {
@@ -24,8 +24,7 @@ class AjoutTacheController extends Controller
             $id = $donnees['idTache'];
         }
         $id += 1;
-        $mail = unserialize($_SESSION['user'])->getMail();
-        $tache = new Tache($id, $_POST['texte'], "stand by", $idListe, $mail, 0);
+        $tache = new Tache($id, $_POST['texte'], "stand by", $idListe, null, 0);
         $liste->ajouterTache($tache);
         $tache->sauvegarderBDD();
 

@@ -9,7 +9,7 @@ use App\Controllers\InscriptionController;
             <div class="card card-sign_in my-5">
                 <div class="card-body">
                     <h5 class="card-title text-center">Inscription</h5>
-                    <form class="form-sign_in" method="post" action="?page=addUser">
+                    <form class="form-sign_in" method="post" action="?page=addUser" enctype="multipart/form-data">
 
                         <label for="nomUser">Votre nom</label>
                         <div class="form-label-group">
@@ -69,6 +69,13 @@ use App\Controllers\InscriptionController;
                                 }
                             }
                         }
+                        if(isset($_SESSION['error_exist'])) {
+                            if(array_key_exists('mail',$_SESSION['error_exist'])){
+                                if($_SESSION['error_exist']['mail'] == 1){
+                                    echo "<em>Ce mail est déjà utilisé</em><br>";
+                                }
+                            }
+                        }
                         ?>
 
                         <label for="mdp">Votre mot de passe</label>
@@ -98,6 +105,19 @@ use App\Controllers\InscriptionController;
                                     echo "<em>Les mots de passe ne correspondent pas</em><br>";
                                 }
                             }
+                        }
+                        ?>
+
+                        <label for="photo">Choisissez une photo de profil</label>
+                        <div class="form-label-group">
+                            <input type="hidden" name="MAX_FILE_SIZE" value="250000" />
+                            <input type="file" name="photo" id="photo" size="50">
+                        </div>
+                        <?php 
+                        if(isset($_FILES["photo"])){
+                            $imagetmp=addslashes (file_get_contents($_FILES['photo']['tmp_name']));?>
+                            <img src="<?=$_FILES["photo"]["tmp_name"]?>">
+                        <?php
                         }
                         ?>
                         <br>

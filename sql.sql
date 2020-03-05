@@ -3,6 +3,10 @@ SET time_zone = '+00:00';
 SET foreign_key_checks = 0;
 SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
 
+CREATE DATABASE IF NOT EXISTS ppil;
+ALTER DATABASE ppil DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE ppil;
+
 DROP TABLE IF EXISTS `Destinataire`;
 CREATE TABLE `Destinataire` (
   `mail` varchar(100) NOT NULL,
@@ -10,6 +14,16 @@ CREATE TABLE `Destinataire` (
   PRIMARY KEY (`mail`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
+DROP TABLE IF EXISTS `Images`;
+CREATE TABLE `Images` (
+  `idImage` INT NOT NULL AUTO_INCREMENT ,
+  `nomImage` VARCHAR( 50 ) NOT NULL ,
+  `tailleImage` VARCHAR( 25 ) NOT NULL ,
+  `typeImage` VARCHAR( 25 ) NOT NULL ,
+  `blobImage` LONGBLOB NOT NULL ,
+  PRIMARY KEY ( `idImage` )
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `Liste`;
 CREATE TABLE `Liste` (
@@ -104,7 +118,8 @@ CREATE TABLE `Utilisateur` (
   `prenomUser` varchar(50) DEFAULT NULL,
   `pseudoUser` varchar(50) DEFAULT NULL,
   `mdp` varchar(16) DEFAULT NULL,
-  `photo` blob DEFAULT NULL,
+  `photo` INT DEFAULT NULL,
+  CONSTRAINT FK_Photo FOREIGN KEY(`photo`) REFERENCES `Images` (`idImage`),
   PRIMARY KEY (`mail`),
   UNIQUE KEY `pseudoUser` (`pseudoUser`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

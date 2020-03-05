@@ -15,6 +15,7 @@ class InscriptionController extends Controller
 
     public function ajouterUtilisateur(){
         DB::class;
+        $bdd = DB::getInstance();
         unset($_SESSION);
         $mail = $_POST['mail'] ?? null;
         $nomUser = $_POST['nomUser'] ?? null;
@@ -22,7 +23,7 @@ class InscriptionController extends Controller
         $pseudoUser  = $_POST['pseudoUser'] ?? null;
         $mdp  = $_POST['mdp'] ?? null;
         $mdpConf = $_POST['mdpConf'] ?? null;
-        $photo = $_POST['photo'] ?? null;
+        $photo = $_FILES["photo"] ?? null;
 
         // On vérifie que les champs sont correctements entrés
         if (!preg_match('/^[a-zA-Z0-9]{1,50}$/', $pseudoUser)) {
@@ -58,10 +59,38 @@ class InscriptionController extends Controller
             }
         }
 
-        $bdd = DB::getInstance()->getPDO();
+        $ret        = false;
+        $img_blob   = '';
+        $img_taille = 0;
+        $img_type   = '';
+        $img_nom    = '';
+        $taille_max = 250000;
+        $ret        = is_uploaded_file($_FILES['photo']['tmp_name']);
+
+        if (!$ret) {
+            echo "Problème de transfert";
+            return false;
+        } else {
+            // Le fichier a bien été reçu
+            $img_taille = $_FILES['photo']['size'];
+
+            if ($img_taille > $taille_max) {
+                echo "Trop gros !";
+                return false;
+            }
+
+            $img_type = $_FILES['photo']['type'];
+            $img_nom  = $_FILES['photo']['name'];
+            $img_blob = file_get_contents ($_FILES['photo']['tmp_name']);
+            $bdd->ajouterPhoto($img_nom, $img_taille, $img_type, $img_blob);
+            $photo = $bdd->lastImagesId();
+        }
+
+
+        $db = DB::getInstance()->getPDO();
 
         //On vérifie que le mail n'est pas utilisé par un autre utilisateur
-        $results = $bdd->prepare('SELECT * FROM Utilisateur where mail = :mailVerification');
+        $results = $db->prepare('SELECT * FROM Utilisateur where mail = :mailVerification');
         $mailVerification = $mail;
         $results->bindParam(':mailVerification', $mailVerification);
         $results->execute();
@@ -71,7 +100,7 @@ class InscriptionController extends Controller
         }
 
         //On vérifie que le pseudo n'est pas utilisé par un autre utilisateur
-        $results = $bdd->prepare('SELECT * FROM Utilisateur where pseudoUser = :pseudo');
+        $results = $db->prepare('SELECT * FROM Utilisateur where pseudoUser = :pseudo');
         $pseudo = $pseudoUser;
         $results->bindParam(':pseudo', $pseudo);
         $results->execute();
@@ -85,9 +114,8 @@ class InscriptionController extends Controller
             return 0;
         }else{
             $utilisateur = new Utilisateur($nomUser, $prenomUser, $pseudo, $mail, $mdp, $photo);
-            $bdd = DB::getInstance();
             $bdd->addUtilisateur($utilisateur);
-            return 1;
+            return 0;
         }
 
     }

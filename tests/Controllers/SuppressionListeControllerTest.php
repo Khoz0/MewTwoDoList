@@ -8,7 +8,7 @@ use App\Modeles\DB;
 /**
  * Tests CreationListeController
  */
-class CreationListeControllerTest extends TestCase {
+class SuppressionListeControllerTest extends TestCase {
 
 	//Test si la liste a bien été créé
     public function testsuppressionListe() {
@@ -36,10 +36,10 @@ class CreationListeControllerTest extends TestCase {
 		$intitule = 'intitule';
 		$datecrea = '1999-06-04';
 		$datefin = '2030-12-25';
-		$proprio = 'mdp123';
+		$proprio = 'abcd@abcd.com';
 
         //On réalise l'insertion
-		$requete = $bdd->prepare("INSERT INTO Liste(idListe,intituleListe,dateCreation,dateFin,mailProprietaire) values(" + $id + "," + $intitule + "," + $datecrea + "," + $datefin + "," + $proprio + "," + $etat + ")");
+		$requete = $bdd->prepare("INSERT INTO Liste(idListe,intituleListe,dateCreation,dateFin,mailProprietaire) values(" + $id + "," + $intitule + "," + $datecrea + "," + $datefin + "," + $proprio + ")");
 		$requete->execute();
 
 

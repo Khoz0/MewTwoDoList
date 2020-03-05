@@ -11,7 +11,7 @@ class Utilisateur
     private $pseudo;
     private $mail;
     private $motDePasse;
-    private $urlPhoto;
+    private $photo;
     private $listesProprietaire = array();
 
     function __construct($nom, $prenom, $pseudo, $mail, $motDePasse, $urlPhoto)
@@ -21,7 +21,8 @@ class Utilisateur
         $this->pseudo = $pseudo;
         $this->mail = $mail;
         $this->motDePasse = $motDePasse;
-        $this->urlPhoto = $urlPhoto;
+        $this->photo = $urlPhoto;
+        $this->listesProprietaire = array();
     }
 
     /**
@@ -123,17 +124,17 @@ class Utilisateur
     /**
      * @return mixed
      */
-    public function getUrlPhoto()
+    public function getPhoto()
     {
-        return $this->urlPhoto;
+        return $this->photo;
     }
 
     /**
-     * @param mixed $urlPhoto
+     * @param mixed $photo
      */
-    public function setUrlPhoto($urlPhoto)
+    public function setPhoto($photo)
     {
-        $this->urlPhoto = $urlPhoto;
+        $this->photo = $photo;
     }
 
 
@@ -142,7 +143,6 @@ class Utilisateur
     {
         $this->listesProprietaire[$liste->getIdListe()] = $liste;
     }
-
 
     public function supprimerListe($id)
     {

@@ -2,7 +2,7 @@
 use \App\Controllers\CompteController;
 
 $compte = (new App\Controllers\CompteController);
-
+$user = unserialize($_SESSION['user']);
 ?>
 <script type="text/javascript" src="cdn/jquery.js"> </script>
 <script type="text/javascript" src="javascript/modification_compte.js"></script>
@@ -14,7 +14,7 @@ $compte = (new App\Controllers\CompteController);
         <div class="col-sm-9 col-md-7 col-lg-7 mx-auto">
             <div class="card card-sign_in my-5">
                 <div class="card-body">
-                    <h5 class="card-title text-center">Compte</h5>
+                    <h5 class="card-title text-center">Mon compte</h5>
                     <form class="form-sign_in" method="POST" action="?page=compte">
                         <?php if (isset($_POST["valider"])){
                             $compte->modification();
@@ -27,14 +27,12 @@ $compte = (new App\Controllers\CompteController);
                         </div>
                         <label for="inputNom">Votre nom</label>
                         <div class="form-label-group">
-                            <input type="text" name="inputNom" class="form-control" placeholder=<?php echo $compte->getNom() ?>
-                                    >
+                            <input type="text" name="inputNom" class="form-control" placeholder=<?php echo $compte->getNom() ?>>
                         </div>
 
                         <label for="inputPrenom">Votre prénom</label>
                         <div class="form-label-group">
-                            <input type="text" name="inputPrenom" class="form-control" placeholder=<?php echo $compte->getPrenom() ?>
-                                   >
+                            <input type="text" name="inputPrenom" class="form-control" placeholder=<?php echo $compte->getPrenom() ?>>
                         </div>
 
                         <label for="inputEmail">Votre adresse mail</label>
