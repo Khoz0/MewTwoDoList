@@ -74,6 +74,12 @@ class DB {
         $resList->execute();
     }
 
+	public function deleteListMember($mail){
+        $resUser = DB::getInstance()->getPDO()->prepare("DELETE FROM Membre WHERE mail = :mail");
+        $resUser->bindParam(":mail", $mail);
+        $resList->execute();
+    }
+
 
     public function loadUtilisateur($mail)
     {
@@ -196,7 +202,7 @@ class DB {
 
     public function alterListe($idListe,$intituleListe,$dateCreation, $dateFin,$mailProprietaire)
     {
-        $results = DB::getInstance()->getPDO()->prepare('UPDATE liste SET idListe=:id, intituleListe=:intitule, dateCreation=:dateCrea, dateFin=:dateFin WHERE idListe = :id');
+        $results = DB::getInstance()->getPDO()->prepare('UPDATE Liste SET idListe=:id, intituleListe=:intitule, dateCreation=:dateCrea, dateFin=:dateFin WHERE idListe = :id');
         $results->bindParam(':id', $idListe);
         $results->bindParam(':intitule', $intituleListe);
         $results->bindParam(':dateCrea', $dateCreation);

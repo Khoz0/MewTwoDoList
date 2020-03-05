@@ -32,14 +32,14 @@ if(isset($_SESSION["user"])){?>
             foreach ($listes as $liste) {
                     ?>
                     <div class="jumbotron col-auto" style="border: solid; order=-1;padding: 30px; margin: 10px;"
-                         id="<?php echo $liste->getIntituleListe().$liste->getIdListe() ?>"
+                         id="<?php echo htmlspecialchars($liste->getIntituleListe().$liste->getIdListe()) ?>"
                          onclick="window.location.href = '?page=liste&id=<?php echo $liste->getIdListe() ?>'">
-                        <nom_listes><?php echo $liste->getIntituleListe(); ?></nom_listes>
+                        <nom_listes><?php echo htmlspecialchars($liste->getIntituleListe()) ?></nom_listes>
                         <?php if ($liste->getDateFin() == null) { ?>
-                            <dates><br><br>A partir du <?php echo $liste->getDateCreation() ?><br></dates>
+                            <dates><br><br>A partir du <?php echo htmlspecialchars($liste->getDateCreation()) ?><br></dates>
                         <?php } else { ?>
-                            <dates><br><br>Du <?php echo $liste->getDateCreation() ?>
-                                <br>au <?php echo $liste->getDateFin() ?></dates>
+                            <dates><br><br>Du <?php echo htmlspecialchars($liste->getDateCreation()) ?>
+                                <br>au <?php echo htmlspecialchars($liste->getDateFin()) ?></dates>
                         <?php } ?>
                     </div>
                 <?php }
