@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Classe;
-
+use App\Modeles\DB;
 class Utilisateur
 {
     private $nom;
@@ -134,8 +134,6 @@ class Utilisateur
     {
         $this->photo = $photo;
     }
-
-
 
     public function ajouterListe($liste)
     {
