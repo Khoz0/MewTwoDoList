@@ -86,12 +86,18 @@ class CompteController extends Controller {
         $pseudo = $_POST['inputPseudo'];
 
         $bdd = DB::getInstance();
-        $bdd->updateUtilisateur($loginSession, null, null, null, $pseudo, null);
-        $this->modifier = true;
+        if(!$bdd->isPseudo($pseudo)) {
+            $bdd->updateUtilisateur($loginSession, null, null, null, $pseudo, null);
+            $this->modifier = true;
 
-        $user = unserialize($_SESSION['user']);
-        $user->setPseudo($pseudo);
-        $_SESSION['user'] = serialize($user);
+            $user = unserialize($_SESSION['user']);
+            $user->setPseudo($pseudo);
+            $_SESSION['user'] = serialize($user);
+        }
+        else{
+            echo "<em> Ce pseudo est déjà utilisé. </em>";
+            echo "<br>";
+        }
     }
 
     public function modifierNom(){

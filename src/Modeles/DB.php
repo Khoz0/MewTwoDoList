@@ -236,22 +236,7 @@ class DB {
             $results->bindParam('mdp', $mdp);
         }
         if ($pseudo != null) {
-            $requete = DB::getInstance()->getPDO()->prepare('SELECT pseudoUser FROM Utilisateur');
-            $requete->execute();
-            while ($donnees = $requete->fetch()){
-                if($donnees['pseudoUser'] == $pseudo){
-                    $existe = 1;
-                }
-            }
-            if ($existe == 0) {
-                $results->bindParam('pseudoUser', $pseudo);
-            }else{
-                ?>
-                <em> Le pseudo existe déjà </em>
-                <?php
-                $pseudo = $utilisateur->getPseudo();
-                $results->bindParam('pseudoUser', $pseudo);
-            }
+            $results->bindParam('pseudoUser', $pseudo);
         }else {
             $pseudo = $utilisateur->getPseudo();
             $results->bindParam('pseudoUser', $pseudo);
@@ -263,6 +248,17 @@ class DB {
             $results->bindParam('photo', $photo);
         }
         $results->execute();
+    }
+
+    public function isPseudo($pseudo){
+        $requete = DB::getInstance()->getPDO()->prepare('SELECT pseudoUser FROM Utilisateur');
+        $requete->execute();
+        while ($donnees = $requete->fetch()){
+            if($donnees['pseudoUser'] == $pseudo){
+                return 1;
+            }
+        }
+        return 0;
     }
 
     public function addListe($idListe,$intituleListe,$dateCreation, $dateFin,$mailProprietaire)

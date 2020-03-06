@@ -33,6 +33,16 @@ $user = unserialize($_SESSION['user']);
                         <div class="form-label-group">
                             <input type="text" name="inputPseudo" class="form-control" placeholder=<?php echo $user->getPseudo() ?>
                                    autofocus>
+                            <?php
+                            if(isset($_SESSION['error_exist'])){
+                                if(isset($_SESSION['error_exist']['pseudo'])){
+                                    if($_SESSION['error_exist']['pseudo'] == 1){
+                                        echo "<em>Ce pseudo est déjà utilisé</em>";
+                                        $_SESSION['error_exist']['pseudo'] = 0;
+                                    }
+                                }
+                            }
+                            ?>
                         </div>
                         <label for="inputNom">Votre nom</label>
                         <div class="form-label-group">
