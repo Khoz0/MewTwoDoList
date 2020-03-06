@@ -42,7 +42,7 @@ if ($page != "login" && $page != "disconnect" && $page != "inscription" && $page
     <!-- affichage des icônes de menu -->
     <?php if (isset($_SESSION['user']) && $page != "modifTache") {?>
         <div class="btn-group">
-            <button class="btn float-right" type="button"><img src="assests/notif.png" width="20" height="20"></button>
+            <button class="btn float-right" type="button"><img src="assests/notif.png" alt="notification" width="20" height="20"></button>
         </div>
         <div class="btn-group">
             <button class="btn btn-default dropdown-toggle mr-4 float-right" type="button" data-toggle="dropdown"
@@ -50,9 +50,9 @@ if ($page != "login" && $page != "disconnect" && $page != "inscription" && $page
                 <?php
                 $user = unserialize($_SESSION['user']);
                 if ($user->getPhoto() == null) {
-                    echo "<img src='assests/profil.png'  class=\"img-rounded\" width=\"20\" height=\"20\">";
+                    echo "<img src='assests/profil.png' alt='profil' class=\"img-rounded\" width=\"20\" height=\"20\">";
                 } else {
-                    echo "<img src=\"" . $user->getPhoto() . "\" class=\"img-rounded\" width=\"20\" height=\"20\" >";
+                    echo "<img src=\"" . $user->getPhoto() . "\" class=\"img-rounded\" width=\"20\" height=\"20\" alt='profil'>";
                 } ?>
             </button>
 
