@@ -34,8 +34,9 @@ $liste = DB::getInstance()->loadListe($_GET["id"]);
                                             <img src="assests/changement.png" width="15"
                                                                  height="15" alt="changement">
                                         </button>
-                                        <a href="?page=supprimerUserList&mail=<?= $membre ?>&idListe=<?= $_GET['id'] ?>"><img
-                                                    src="assests/croix.png" width="15" height="15"></a>
+                                        <a href="?page=supprimerUserList&mail=<?= $membre ?>&idListe=<?= $_GET['id'] ?>">
+                                            <img
+                                                    src="assests/croix.png" width="15" height="15" alt="croix"></a>
                                     </p>
                                 </div>
                             </div>
@@ -43,7 +44,7 @@ $liste = DB::getInstance()->loadListe($_GET["id"]);
                         }
                         ?>
                         <div class="col-lg-auto text-center">
-                            <button class="btn dropdown-item" onclick="window.location.href='?page=memberSelect&id=<?php echo $_GET["id"] ?>'"><img src="assests/add_user.png" width="40" height="40"></button>
+                            <button class="btn dropdown-item" onclick="window.location.href='?page=memberSelect&id=<?php echo $_GET["id"] ?>'"><img src="assests/add_user.png" width="40" height="40" alt="add_user"></button>
                         </div>
                         <?php
                     }else{
