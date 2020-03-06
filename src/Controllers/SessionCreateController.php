@@ -28,22 +28,16 @@ class SessionCreateController extends Controller
         $bdd = DB::getInstance()->getPDO();
 
         /*Préparation des requêtes*/
-        $verifMail = $bdd->prepare("SELECT mdp FROM Utilisateur where mail = :mailVerification");
-        $verifMdp = $bdd->prepare("SELECT mail FROM Utilisateur where mail = :mailVerification AND mdp = MD5(:mdpVerification)");
+        $utilisateur = $bdd->prepare("SELECT mdp FROM Utilisateur where mail = :mailVerification");
 
         /*On test si le mail existe dans la base de données*/
-        $verifMail->bindParam(':mailVerification', $mailVerification);
-        $verifMail->execute();
+        $utilisateur->bindParam(':mailVerification', $mailVerification);
+        $utilisateur->execute();
 
-        if ($donnees = $verifMail->fetch()) {
-            /*Le mail est dans la base de données*/
+        if ($donnees = $utilisateur->fetch()) {
 
-            /*On teste si le mot de passe associé  ce mail est celui qui est entré*/
-            $verifMdp->bindParam(':mailVerification', $mailVerification);
-            $verifMdp->bindParam(':mdpVerification', $password);
-            $verifMdp->execute();
 
-            if ($donnees2 = $verifMdp->fetch()) {
+            if (password_verify($password, $donnees['mdp'])) {
                 /*Le mot de passe correspond*/
                 session_destroy();
                 session_start();
@@ -58,6 +52,7 @@ class SessionCreateController extends Controller
                 $_SESSION['error'] = serialize($error);
                 return 2;
             }
+
         } else {
             /*Le mail n'est pas dans la base de données*/
 
