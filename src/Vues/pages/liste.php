@@ -111,10 +111,12 @@ $liste = DB::getInstance()->loadListe($_GET["id"]);
                     ?>
                     <div>
                         <form method="post" name="<?php echo $nom ?> " action="#">
+                            <a href="?page=addUserTache&mail=<?php echo $membre['mail'] ?>&idTache=<?php echo $id;?>&idListe=<?php echo $_GET['id'];?>">
                             <button type="button" value="<?php echo $user->getMail() ?>" class="btn btn-primary btn-sm">
                                 Ajouter
                                 un Utilisateur
                             </button>
+                            </a>
                         </form>
                     </div>
                     <?php
@@ -122,9 +124,11 @@ $liste = DB::getInstance()->loadListe($_GET["id"]);
                     ?><br><h5><?php echo $tache->getUtilisateurAssigne(); ?></h5><br>
                     <div>
                         <form method="post" name="-<?php echo $nom ?> " action="#">
+                            <a href="?page=deleteUserTache&mail=<?php echo $membre['mail'] ?>&idTache=<?php echo $id;?>&idListe=<?php echo $_GET['id'];?>">
                             <button type="button" value="<?php echo $user->getMail() ?>" class="btn btn-primary btn-sm">
                                 Se retirer
                             </button>
+                            </a>
                         </form>
                     </div>
                     <?php

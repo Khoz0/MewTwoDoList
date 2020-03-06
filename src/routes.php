@@ -74,6 +74,12 @@ switch($page) {
     case 'addUserList':
         (new App\Controllers\ListeController())->addListMember();
         break;
+    case 'addUserTache':
+        (new App\Controllers\TacheController())->addUser();
+        break;
+    case 'deleteUserTache':
+        (new App\Controllers\TacheController())->deleteUser();
+        break;
 
 
 	default: // Si, rien, alors erreur 404
