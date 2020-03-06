@@ -200,12 +200,12 @@ class DB {
         $pseudo = $utilisateur->getPseudo();
         $photo = $utilisateur->getPhoto();
 
-        $results = DB::getInstance()->getPDO()->prepare('INSERT INTO Utilisateur(mail, nomUser, prenomUser,pseudoUser,mdp,photo) VALUES (:mail,:nomUser, :prenomUser,:pseudoUser, MD5(:mdp),:photo)');
+        $results = DB::getInstance()->getPDO()->prepare('INSERT INTO Utilisateur(mail, nomUser, prenomUser,pseudoUser,mdp,photo) VALUES (:mail,:nomUser, :prenomUser,:pseudoUser, :mdp,:photo)');
         $results->bindParam(':mail', $mail);
         $results->bindParam(':nomUser', $nom);
         $results->bindParam(':prenomUser', $prenom);
         $results->bindParam(':pseudoUser', $pseudo);
-        $results->bindParam(':mdp', $mdp);
+        $results->bindParam(':mdp', password_hash($mdp, PASSWORD_DEFAULT));
         $results->bindParam(':photo', $photo);
         $results->execute();
 

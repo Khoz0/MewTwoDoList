@@ -94,9 +94,9 @@ class InscriptionController extends Controller
         }
 
         //Si jamais on a rencontré des erreurs on le signale
-        if(isset($_SESSION['error_exist']) || isset($_SESSION['error_syntx'])){
+        if (isset($_SESSION['error_exist']) || isset($_SESSION['error_syntx'])) {
             return 0;
-        }else{
+        } else {
             $utilisateur = new Utilisateur($nomUser, $prenomUser, $pseudo, $mail, $mdp, $photo);
             $bdd->addUtilisateur($utilisateur);
             return 0;
