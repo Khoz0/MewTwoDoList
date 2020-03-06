@@ -4,10 +4,7 @@ use \App\Controllers\CompteController;
 $compte = (new App\Controllers\CompteController);
 $user = unserialize($_SESSION['user']);
 ?>
-<script src="javascript/modification_compte.js"></script>
-<script src="javascript/suppression_compte.js"></script>
 
-<body>
 <div class="container">
     <div class="row">
         <div class="col-sm-9 col-md-7 col-lg-7 mx-auto">
@@ -17,10 +14,10 @@ $user = unserialize($_SESSION['user']);
                     <h5 class="card-title text-center">Mon compte</h5>
                     <?php
                     if($user->getPhoto() == null){
-                        echo "<img src='assests/profil.png' width='100px' height='100px' style='border-radius: 50%'/>";
+                        echo "<img src='assests/profil.png' style='border-radius: 50%'/>";
                     }
                     else{
-                        echo "<img src=\"".$user->getPhoto()."\" width='100px' height='100px' style='border-radius: 50%'/>";
+                        echo "<img src=\"".$user->getPhoto()."\" style='border-radius: 50%'/>";
                     }?>
                     <form class="form-sign_in" method="POST" action="?page=compte" enctype="multipart/form-data">
                         <?php if (isset($_POST["valider"])){
@@ -89,4 +86,6 @@ $user = unserialize($_SESSION['user']);
         </div>
     </div>
 </div>
-</body>
+
+<script src="javascript/modification_compte.js"></script>
+<script src="javascript/suppression_compte.js"></script>
