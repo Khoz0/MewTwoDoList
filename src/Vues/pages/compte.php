@@ -18,10 +18,10 @@ $user = unserialize($_SESSION['user']);
                     <h5 class="card-title text-center">Mon compte</h5>
                     <?php
                     if($user->getPhoto() == null){
-                        echo "<img src='assests/profil.png' width='100px' style='border-radius: 50%'/>";
+                        echo "<img src='assests/profil.png' width='100px' height='100px' style='border-radius: 50%'/>";
                     }
                     else{
-                        echo "<img src=\"".$user->getPhoto()."\" width='100px' style='border-radius: 50%'/>";
+                        echo "<img src=\"".$user->getPhoto()."\" width='100px' height='100px' style='border-radius: 50%'/>";
                     }?>
                     <form class="form-sign_in" method="POST" action="?page=compte" enctype="multipart/form-data">
                         <?php if (isset($_POST["valider"])){
@@ -31,8 +31,18 @@ $user = unserialize($_SESSION['user']);
                         <br>
                         <label for="inputPseudo">Votre pseudo</label>
                         <div class="form-label-group">
-                            <input type="text" name="inputPseudo" class="form-control" placeholder=<?php echo $compte->getPseudo() ?>
+                            <input type="text" name="inputPseudo" class="form-control" placeholder=<?php echo $user->getPseudo() ?>
                                    autofocus>
+                            <?php
+                            if(isset($_SESSION['error_exist'])){
+                                if(isset($_SESSION['error_exist']['pseudo'])){
+                                    if($_SESSION['error_exist']['pseudo'] == 1){
+                                        echo "<em>Ce pseudo est déjà utilisé</em>";
+                                        $_SESSION['error_exist']['pseudo'] = 0;
+                                    }
+                                }
+                            }
+                            ?>
                         </div>
                         <label for="inputNom">Votre nom</label>
                         <div class="form-label-group">

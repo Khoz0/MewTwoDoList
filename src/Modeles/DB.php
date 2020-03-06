@@ -213,6 +213,7 @@ class DB {
 
     public function updateUtilisateur($mail, $nom, $prenom, $mdp, $pseudo, $photo){
         $utilisateur = $this->loadUtilisateur($mail);
+        $existe = 0;
 
         $results = DB::getInstance()->getPDO()->prepare("UPDATE Utilisateur SET nomUser = :nomUser, prenomUser = :prenomUser, pseudoUser = :pseudoUser, mdp = :mdp, photo = :photo WHERE mail = :mail");
         $results->bindParam('mail', $mail);
@@ -247,6 +248,17 @@ class DB {
             $results->bindParam('photo', $photo);
         }
         $results->execute();
+    }
+
+    public function isPseudo($pseudo){
+        $requete = DB::getInstance()->getPDO()->prepare('SELECT pseudoUser FROM Utilisateur');
+        $requete->execute();
+        while ($donnees = $requete->fetch()){
+            if($donnees['pseudoUser'] == $pseudo){
+                return 1;
+            }
+        }
+        return 0;
     }
 
     public function addListe($idListe,$intituleListe,$dateCreation, $dateFin,$mailProprietaire)
@@ -327,6 +339,19 @@ class DB {
         $results = DB::getInstance()->getPDO()->prepare('INSERT INTO Membre(mail, idListe) VALUES (:mail, :id) ');
         $results->bindParam(':mail', $mail);
         $results->bindParam(':id', $idListe);
+        $results->execute();
+    }
+
+    public function addUserTache($mail, $idTache){
+        $results = DB::getInstance()->getPDO()->prepare('UPDATE tache SET mailUtilisateur = :mail WHERE idTache = :id');
+        $results->bindParam(':mail', $mail);
+        $results->bindParam(':id', $idTache);
+        $results->execute();
+    }
+
+    public function deleteUserTache($idTache){
+        $results = DB::getInstance()->getPDO()->prepare('UPDATE tache SET mailUtilisateur = NULL WHERE idTache = :id');
+        $results->bindParam(':id', $idTache);
         $results->execute();
     }
 
