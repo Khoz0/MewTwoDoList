@@ -25,12 +25,13 @@ class Liste {
         $this->dateCreation = $dateCreation;
         $this->dateFin = $dateFin;
         $this->mailProprietaire = $mailProprietaire;
+        //$user = DB::getInstance()->loadUtilisateur($mailProprietaire);
         array_push($this->tabUtilisateur, $mailProprietaire);
-
     }
 
     public function ajouterUtilisateur($mailUtilisateur){
-        array_push($this->tabUtilisateur, $mailUtilisateur);
+        $user = DB::getInstance()->loadUtilisateur($mailUtilisateur);
+        array_push($this->tabUtilisateur, $user);
     }
 
     public function retirerUtilisateur($mailUtilisateur){
@@ -39,10 +40,8 @@ class Liste {
         }
     }
 
-    public function recupererMembres($idListe){
-        $bdd = DB::getInstance();
-        $membres = $bdd->recupererMembres($idListe);
-        return $membres;
+    public function recupererMembres(){
+        return $this->tabUtilisateur;
     }
 
 	/*public function supprimerMembre($mail){
@@ -75,6 +74,7 @@ class Liste {
         if (!$inBDD) {
             $bdd->addListe($this->idListe, $this->intituleListe, $this->dateCreation, $this->dateFin, $this->mailProprietaire);
             $bdd->addMembre($this->mailProprietaire, $this->idListe);
+            $this->ajouterUtilisateur($this->mailProprietaire);
         }else {
             $bdd->alterListe($this->idListe, $this->intituleListe, $this->dateCreation, $this->dateFin, $this->mailProprietaire);
         }

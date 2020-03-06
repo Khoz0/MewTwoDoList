@@ -217,6 +217,7 @@ class DB {
 
     public function updateUtilisateur($mail, $nom, $prenom, $mdp, $pseudo, $photo){
         $utilisateur = $this->loadUtilisateur($mail);
+        $existe = 0;
 
         $results = DB::getInstance()->getPDO()->prepare("UPDATE Utilisateur SET nomUser = :nomUser, prenomUser = :prenomUser, pseudoUser = :pseudoUser, mdp = :mdp, photo = :photo WHERE mail = :mail");
         $results->bindParam('mail', $mail);
@@ -239,7 +240,22 @@ class DB {
             $results->bindParam('mdp', $mdp);
         }
         if ($pseudo != null) {
-            $results->bindParam('pseudoUser', $pseudo);
+            $requete = DB::getInstance()->getPDO()->prepare('SELECT pseudoUser FROM Utilisateur');
+            $requete->execute();
+            while ($donnees = $requete->fetch()){
+                if($donnees['pseudoUser'] == $pseudo){
+                    $existe = 1;
+                }
+            }
+            if ($existe == 0) {
+                $results->bindParam('pseudoUser', $pseudo);
+            }else{
+                ?>
+                <em> Le pseudo existe déjà </em>
+                <?php
+                $pseudo = $utilisateur->getPseudo();
+                $results->bindParam('pseudoUser', $pseudo);
+            }
         }else {
             $pseudo = $utilisateur->getPseudo();
             $results->bindParam('pseudoUser', $pseudo);
