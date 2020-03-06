@@ -4,9 +4,8 @@ use \App\Controllers\CompteController;
 $compte = (new App\Controllers\CompteController);
 $user = unserialize($_SESSION['user']);
 ?>
-<script type="text/javascript" src="cdn/jquery.js"> </script>
-<script type="text/javascript" src="javascript/modification_compte.js"></script>
-<script type="text/javascript" src="javascript/suppression_compte.js"></script>
+<script src="javascript/modification_compte.js"></script>
+<script src="javascript/suppression_compte.js"></script>
 
 <body>
 <div class="container">
