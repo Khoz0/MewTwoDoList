@@ -35,14 +35,10 @@ class DB {
             } else {
                 throw new Exception('Pas de fichier de config');
             }
+
             $this->pdo = new PDO("mysql:host=$config[host];dbname=$config[db];charset=utf8", $config['user'], $config['pass'], array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+
         } catch (Exception $e) {
-            try {
-                $this->pdo = new PDO("mysql:host=$config[host];charset=utf8", $config['user'], $config['pass'], array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
-            }
-            catch (Exception $e) {
-                die($e->getMessage());
-            }
         }
     }
 
