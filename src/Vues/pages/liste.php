@@ -12,13 +12,13 @@ $bdd = serialize(DB::getInstance()->loadListe($_GET["id"]));
 $liste = DB::getInstance()->loadListe($_GET["id"]);
 
 ?>
-<div class="float-right"
+<div class="float-right">
     <?php
     if (stristr($_SERVER['REQUEST_URI'], "id=") != ""){
         ?>
         <div class="btn-group">
             <button class="btn float-right " type="button" data-toggle="dropdown" data-target="membres"
-                    aria-haspopup="listbox" aria-expanded="false"><img src="assests/membre_listes.png" width="20" height="20"></button>
+                    aria-haspopup="listbox" aria-expanded="false"><img src="assests/membre_listes.png" width="20" height="20" alt="membre_liste"></button>
 
             <div class="dropdown-menu dropdown-menu-right col-lg-2" id = "membres">
                 <?php
@@ -30,8 +30,10 @@ $liste = DB::getInstance()->loadListe($_GET["id"]);
                             <div class="dropdown-item">
                                 <div class="col-lg-auto">
                                     <p><?php echo $membre ?>
-                                        <button class="btn"><img src="assests/changement.png" width="15"
-                                                                 height="15"></button>
+                                        <button class="btn">
+                                            <img src="assests/changement.png" width="15"
+                                                                 height="15" alt="changement">
+                                        </button>
                                         <a href="?page=supprimerUserList&mail=<?= $membre ?>&idListe=<?= $_GET['id'] ?>"><img
                                                     src="assests/croix.png" width="15" height="15"></a>
                                     </p>
