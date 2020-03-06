@@ -35,14 +35,10 @@ class DB {
             } else {
                 throw new Exception('Pas de fichier de config');
             }
+
             $this->pdo = new PDO("mysql:host=$config[host];dbname=$config[db];charset=utf8", $config['user'], $config['pass'], array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+
         } catch (Exception $e) {
-            try {
-                $this->pdo = new PDO("mysql:host=$config[host];charset=utf8", $config['user'], $config['pass'], array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
-            }
-            catch (Exception $e) {
-                die($e->getMessage());
-            }
         }
     }
 
@@ -217,6 +213,7 @@ class DB {
 
     public function updateUtilisateur($mail, $nom, $prenom, $mdp, $pseudo, $photo){
         $utilisateur = $this->loadUtilisateur($mail);
+        $existe = 0;
 
         $results = DB::getInstance()->getPDO()->prepare("UPDATE Utilisateur SET nomUser = :nomUser, prenomUser = :prenomUser, pseudoUser = :pseudoUser, mdp = :mdp, photo = :photo WHERE mail = :mail");
         $results->bindParam('mail', $mail);
@@ -239,7 +236,22 @@ class DB {
             $results->bindParam('mdp', $mdp);
         }
         if ($pseudo != null) {
-            $results->bindParam('pseudoUser', $pseudo);
+            $requete = DB::getInstance()->getPDO()->prepare('SELECT pseudoUser FROM Utilisateur');
+            $requete->execute();
+            while ($donnees = $requete->fetch()){
+                if($donnees['pseudoUser'] == $pseudo){
+                    $existe = 1;
+                }
+            }
+            if ($existe == 0) {
+                $results->bindParam('pseudoUser', $pseudo);
+            }else{
+                ?>
+                <em> Le pseudo existe déjà </em>
+                <?php
+                $pseudo = $utilisateur->getPseudo();
+                $results->bindParam('pseudoUser', $pseudo);
+            }
         }else {
             $pseudo = $utilisateur->getPseudo();
             $results->bindParam('pseudoUser', $pseudo);
@@ -331,6 +343,19 @@ class DB {
         $results = DB::getInstance()->getPDO()->prepare('INSERT INTO Membre(mail, idListe) VALUES (:mail, :id) ');
         $results->bindParam(':mail', $mail);
         $results->bindParam(':id', $idListe);
+        $results->execute();
+    }
+
+    public function addUserTache($mail, $idTache){
+        $results = DB::getInstance()->getPDO()->prepare('UPDATE tache SET mailUtilisateur = :mail WHERE idTache = :id');
+        $results->bindParam(':mail', $mail);
+        $results->bindParam(':id', $idTache);
+        $results->execute();
+    }
+
+    public function deleteUserTache($idTache){
+        $results = DB::getInstance()->getPDO()->prepare('UPDATE tache SET mailUtilisateur = NULL WHERE idTache = :id');
+        $results->bindParam(':id', $idTache);
         $results->execute();
     }
 

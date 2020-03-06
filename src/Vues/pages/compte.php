@@ -18,10 +18,10 @@ $user = unserialize($_SESSION['user']);
                     <h5 class="card-title text-center">Mon compte</h5>
                     <?php
                     if($user->getPhoto() == null){
-                        echo "<img src='assests/profil.png' width='100px' style='border-radius: 50%'/>";
+                        echo "<img src='assests/profil.png' width='100px' height='100px' style='border-radius: 50%'/>";
                     }
                     else{
-                        echo "<img src=\"".$user->getPhoto()."\" width='100px' style='border-radius: 50%'/>";
+                        echo "<img src=\"".$user->getPhoto()."\" width='100px' height='100px' style='border-radius: 50%'/>";
                     }?>
                     <form class="form-sign_in" method="POST" action="?page=compte" enctype="multipart/form-data">
                         <?php if (isset($_POST["valider"])){

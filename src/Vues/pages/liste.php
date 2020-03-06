@@ -23,15 +23,16 @@ $liste = DB::getInstance()->loadListe($_GET["id"]);
             <div class="dropdown-menu dropdown-menu-right col-lg-2" id = "membres">
                 <?php
                     $membres = $liste->recupererMembres($_GET["id"]);
+                    print_r($membres);
                     if ($liste->getMailProprietaire() == unserialize($_SESSION['user'])->getMail()){
                         foreach ($membres as $membre) {
                             ?>
                             <div class="dropdown-item">
                                 <div class="col-lg-auto">
-                                    <p><?php echo $membre[0] ?>
+                                    <p><?php echo $membre ?>
                                         <button class="btn"><img src="assests/changement.png" width="15"
                                                                  height="15"></button>
-                                        <a href="?page=supprimerUserList&mail=<?= $membre['mail'] ?>&idListe=<?= $_GET['id'] ?>"><img
+                                        <a href="?page=supprimerUserList&mail=<?= $membre ?>&idListe=<?= $_GET['id'] ?>"><img
                                                     src="assests/croix.png" width="15" height="15"></a>
                                     </p>
                                 </div>
@@ -48,7 +49,7 @@ $liste = DB::getInstance()->loadListe($_GET["id"]);
                             ?>
                             <div class="dropdown-item">
                                 <div class="col-lg-auto">
-                                    <p><?php echo $membre[0] ?>
+                                    <p><?php echo $membre ?>
                                     </p>
                                 </div>
                             </div>
@@ -111,10 +112,12 @@ $liste = DB::getInstance()->loadListe($_GET["id"]);
                     ?>
                     <div>
                         <form method="post" name="<?php echo $nom ?> " action="#">
+                            <a href="?page=addUserTache&mail=<?php echo $membre['mail'] ?>&idTache=<?php echo $id;?>&idListe=<?php echo $_GET['id'];?>">
                             <button type="button" value="<?php echo $user->getMail() ?>" class="btn btn-primary btn-sm">
                                 Ajouter
                                 un Utilisateur
                             </button>
+                            </a>
                         </form>
                     </div>
                     <?php
@@ -122,9 +125,11 @@ $liste = DB::getInstance()->loadListe($_GET["id"]);
                     ?><br><h5><?php echo $tache->getUtilisateurAssigne(); ?></h5><br>
                     <div>
                         <form method="post" name="-<?php echo $nom ?> " action="#">
+                            <a href="?page=deleteUserTache&mail=<?php echo $membre['mail'] ?>&idTache=<?php echo $id;?>&idListe=<?php echo $_GET['id'];?>">
                             <button type="button" value="<?php echo $user->getMail() ?>" class="btn btn-primary btn-sm">
                                 Se retirer
                             </button>
+                            </a>
                         </form>
                     </div>
                     <?php

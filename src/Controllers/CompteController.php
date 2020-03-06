@@ -15,8 +15,8 @@ class CompteController extends Controller {
     }
 
     public function verification(){
-        $bdd = DB::getInstance()->getPDO();
-        $requete = $bdd->prepare("SELECT * FROM Utilisateur WHERE mail = :mail");
+        $bddRequete = DB::getInstance()->getPDO();
+        $requete = $bddRequete->prepare("SELECT * FROM Utilisateur WHERE mail = :mail");
         $loginSession = unserialize($_SESSION['user'])->getMail();
         $requete->bindParam('mail', $loginSession);
         $requete->execute();
@@ -28,6 +28,7 @@ class CompteController extends Controller {
                         $loginSession = unserialize($_SESSION['user'])->getMail();
                         $mdpChanger = $_POST['inputNewPassword'];
 
+                        $bdd = DB::getInstance();
                         $bdd->updateUtilisateur($loginSession, null, null, $mdpChanger, null, null);
 
                         $this->modifier = true;
@@ -53,8 +54,8 @@ class CompteController extends Controller {
     }
 
     public function modification(){
-        $bdd = DB::getInstance()->getPDO();
-        $requete = $bdd->prepare("SELECT * FROM Utilisateur WHERE mail = :mail");
+        $bddRequete = DB::getInstance()->getPDO();
+        $requete = $bddRequete->prepare("SELECT * FROM Utilisateur WHERE mail = :mail");
         $loginSession = unserialize($_SESSION['user'])->getMail();
         $requete->bindParam('mail', $loginSession);
         $requete->execute();
@@ -138,11 +139,8 @@ class CompteController extends Controller {
     }
 
     public function modifierPrenom(){
-        $bdd = DB::getInstance()->getPDO();
-        $requete = $bdd->prepare("SELECT * FROM Utilisateur WHERE mail = :mail");
         $loginSession = unserialize($_SESSION['user'])->getMail();
-        $requete->bindParam('mail', $loginSession);
-        $requete->execute();
+
 
         $bdd = DB::getInstance();
         $prenom = $_POST['inputPrenom'];
