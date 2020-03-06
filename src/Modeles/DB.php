@@ -35,14 +35,10 @@ class DB {
             } else {
                 throw new Exception('Pas de fichier de config');
             }
+
             $this->pdo = new PDO("mysql:host=$config[host];dbname=$config[db];charset=utf8", $config['user'], $config['pass'], array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+
         } catch (Exception $e) {
-            try {
-                $this->pdo = new PDO("mysql:host=$config[host];charset=utf8", $config['user'], $config['pass'], array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
-            }
-            catch (Exception $e) {
-                die($e->getMessage());
-            }
         }
     }
 
@@ -347,6 +343,19 @@ class DB {
         $results = DB::getInstance()->getPDO()->prepare('INSERT INTO Membre(mail, idListe) VALUES (:mail, :id) ');
         $results->bindParam(':mail', $mail);
         $results->bindParam(':id', $idListe);
+        $results->execute();
+    }
+
+    public function addUserTache($mail, $idTache){
+        $results = DB::getInstance()->getPDO()->prepare('UPDATE tache SET mailUtilisateur = :mail WHERE idTache = :id');
+        $results->bindParam(':mail', $mail);
+        $results->bindParam(':id', $idTache);
+        $results->execute();
+    }
+
+    public function deleteUserTache($idTache){
+        $results = DB::getInstance()->getPDO()->prepare('UPDATE tache SET mailUtilisateur = NULL WHERE idTache = :id');
+        $results->bindParam(':id', $idTache);
         $results->execute();
     }
 
