@@ -5,7 +5,7 @@
     <title><?= $titre ?></title>
     <script src="cdn/jquery.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
-    <link rel="stylesheet" href="style2.css">
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="cdn/bootstrap-4.3.1-dist/css/bootstrap.css">
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="cdn/bootstrap-4.3.1-dist/js/bootstrap.js"></script>

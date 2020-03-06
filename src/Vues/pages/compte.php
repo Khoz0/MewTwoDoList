@@ -31,7 +31,7 @@ $user = unserialize($_SESSION['user']);
                         <br>
                         <label for="inputPseudo">Votre pseudo</label>
                         <div class="form-label-group">
-                            <input type="text" name="inputPseudo" class="form-control" placeholder=<?php echo $compte->getPseudo() ?>
+                            <input type="text" name="inputPseudo" class="form-control" placeholder=<?php echo $user->getPseudo() ?>
                                    autofocus>
                         </div>
                         <label for="inputNom">Votre nom</label>
