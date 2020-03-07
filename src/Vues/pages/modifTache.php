@@ -11,6 +11,7 @@ $modifTache = new App\Controllers\ModificationTacheController;
    $tache = DB::getInstance()->loadTache($_GET['id']);
    $intitule = $tache->getIntituleTache();
    $id = $tache->getIdTache();
+   $idListe = $tache->getIdListeTache();
 
    if (isset($_POST['texte'])){
        if (!empty($_POST['texte'])) {
@@ -34,7 +35,7 @@ $modifTache = new App\Controllers\ModificationTacheController;
 <h1 class="display-4"> Modification de la tâche </h1>
 </div>
 <button class="btn float-right " type="button" data-toggle="dropdown" data-target="membres"
-        aria-haspopup="listbox" aria-expanded="false" id="delete" value="<?php echo $id; ?>"><img src="assests/delete.png" width="20" height="20"></button>
+        aria-haspopup="listbox" aria-expanded="false" id="delete" value="<?php echo $id.' '.$idListe; ?>"><img src="assests/delete.png" width="20" height="20"></button>
 
 
 <form class="form-sign_in" method="POST" action=<?php echo "?page=modifTache&id=".$_GET['id'] ;?> >

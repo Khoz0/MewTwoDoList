@@ -4,8 +4,9 @@ function init() {
 
 function deleteTache() {
   var id = $(this).val();
+  var res = id.split(" ");
   url = window.location.origin + "/mew_two_do_list/ajax/delete_tache.php";
-  console.log(url);
+  console.log(res[1]);
 
   if (confirm('Êtes vous sûr de vouloir supprimer votre tâche ?\nCette action est définitive !')) {
 
@@ -13,12 +14,14 @@ function deleteTache() {
       type: 'POST',
       url: url,
       data: {
-        id: id
+        id: res[0],
+        idListe: res[1]
       },
       timeout: 5000,
       success: function() {
         window.opener.location.reload(true);
         window.close();
+      
       },
       error: (xhr) => {
         console.log("status =" + xhr.status);
