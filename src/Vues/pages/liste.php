@@ -14,7 +14,7 @@ $liste = DB::getInstance()->loadListe($_GET["id"]);
 ?>
 <div class="float-right">
     <?php
-    if (stristr($_SERVER['REQUEST_URI'], "id=") != ""){
+    if (stristr($_SERVER['REQUEST_URI'], "id=") != "") {
         ?>
         <div class="btn-group">
             <button class="btn float-right " type="button" data-toggle="dropdown" data-target="membres"
@@ -87,7 +87,8 @@ $liste = DB::getInstance()->loadListe($_GET["id"]);
     <div class="row justify-content-center" id="liste" style="display: flex">
         <?php
         $taches = $liste->getTabTache();
-        foreach ($taches as $elem){
+        $idListe = $liste->getIdListe();
+        foreach ($taches as $elem) {
             $tache = DB::getInstance()->loadTache($elem['idTache']);
             $nom = $tache->getIntituleTache();
             $valide = $tache->getValide();
@@ -97,14 +98,17 @@ $liste = DB::getInstance()->loadListe($_GET["id"]);
             <div class="jumbotron-fluid col-auto" style="border: solid; ;padding: 30px; margin: 10px;"
                  id="<?php echo $nom ?>">
                 <nom_listes><?php echo $nom ?></nom_listes>
-                 <div class="form-check align-top">
+                <div class="container">
+                 <div class="row">
+                   <div class="col">
                    <button class="btn"  id="modifTache" type="button" onclick="pop_up_modif(this)" value="<?php echo $id; ?>"><img src="assests/edit.png" width="20" height="20"></button>
-                </div>
-                <div class="form-check align-top">
+                 </div>
+                  <div class="col">
                     <input type="checkbox" aria-label="..." class="valide" id="valide" value="<?php echo $id; ?>" <?php if ($valide == 1) {
-                        echo 'checked';
-                    } ?> >
+                echo 'checked';
+            } ?> >
                 </div>
+              </div>
                 <?php
 
                 if ($tache->getUtilisateurAssigne() == null) {
@@ -139,6 +143,7 @@ $liste = DB::getInstance()->loadListe($_GET["id"]);
                 }
                 ?>
             </div>
+          </div>
         <?php } ?>
     </div>
 </div>

@@ -64,7 +64,8 @@ class Tache
 
     public function retirerBDD()
     {
-
+      $bdd = DB::getInstance();
+      $bdd->deleteTache($this->idTache);
     }
 
     /**
