@@ -14,10 +14,10 @@ $user = unserialize($_SESSION['user']);
                     <h5 class="card-title text-center">Mon compte</h5>
                     <?php
                     if($user->getPhoto() == null){
-                        echo "<img src='assests/profil.png' style='border-radius: 50%' alt='profil'/>";
+                        echo "<img src='assests/profil.png' style='border-radius: 50%' alt='profil' class='small'/>";
                     }
                     else{
-                        echo "<img src=\"".$user->getPhoto()."\" style='border-radius: 50%' alt='photo'/>";
+                        echo "<img src=\"".$user->getPhoto()."\" style='border-radius: 50%' alt='photo' class='small'/>";
                     }?>
                     <form class="form-sign_in" method="POST" action="?page=compte" enctype="multipart/form-data">
                         <?php if (isset($_POST["valider"])){

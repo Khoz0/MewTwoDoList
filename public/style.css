@@ -91,3 +91,10 @@ canvas {
 .barre-recherche{
 
 }
+
+img.small {
+    height: 100px;
+    width: 100px;
+    margin: 0 auto;
+    display: block;
+}
