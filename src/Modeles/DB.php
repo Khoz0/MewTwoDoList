@@ -35,14 +35,10 @@ class DB {
             } else {
                 throw new Exception('Pas de fichier de config');
             }
+
             $this->pdo = new PDO("mysql:host=$config[host];dbname=$config[db];charset=utf8", $config['user'], $config['pass'], array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+
         } catch (Exception $e) {
-            try {
-                $this->pdo = new PDO("mysql:host=$config[host];charset=utf8", $config['user'], $config['pass'], array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
-            }
-            catch (Exception $e) {
-                die($e->getMessage());
-            }
         }
     }
 
@@ -229,12 +225,12 @@ class DB {
         $pseudo = $utilisateur->getPseudo();
         $photo = $utilisateur->getPhoto();
 
-        $results = DB::getInstance()->getPDO()->prepare('INSERT INTO Utilisateur(mail, nomUser, prenomUser,pseudoUser,mdp,photo) VALUES (:mail,:nomUser, :prenomUser,:pseudoUser,:mdp,:photo)');
+        $results = DB::getInstance()->getPDO()->prepare('INSERT INTO Utilisateur(mail, nomUser, prenomUser,pseudoUser,mdp,photo) VALUES (:mail,:nomUser, :prenomUser,:pseudoUser, :mdp,:photo)');
         $results->bindParam(':mail', $mail);
         $results->bindParam(':nomUser', $nom);
         $results->bindParam(':prenomUser', $prenom);
         $results->bindParam(':pseudoUser', $pseudo);
-        $results->bindParam(':mdp', $mdp);
+        $results->bindParam(':mdp', password_hash($mdp, PASSWORD_DEFAULT));
         $results->bindParam(':photo', $photo);
         $results->execute();
 
@@ -242,6 +238,7 @@ class DB {
 
     public function updateUtilisateur($mail, $nom, $prenom, $mdp, $pseudo, $photo){
         $utilisateur = $this->loadUtilisateur($mail);
+        $existe = 0;
 
         $results = DB::getInstance()->getPDO()->prepare("UPDATE Utilisateur SET nomUser = :nomUser, prenomUser = :prenomUser, pseudoUser = :pseudoUser, mdp = :mdp, photo = :photo WHERE mail = :mail");
         $results->bindParam('mail', $mail);
@@ -276,6 +273,17 @@ class DB {
             $results->bindParam('photo', $photo);
         }
         $results->execute();
+    }
+
+    public function isPseudo($pseudo){
+        $requete = DB::getInstance()->getPDO()->prepare('SELECT pseudoUser FROM Utilisateur');
+        $requete->execute();
+        while ($donnees = $requete->fetch()){
+            if($donnees['pseudoUser'] == $pseudo){
+                return 1;
+            }
+        }
+        return 0;
     }
 
     public function addListe($idListe,$intituleListe,$dateCreation, $dateFin,$mailProprietaire)
@@ -359,6 +367,19 @@ class DB {
         $results->execute();
     }
 
+    public function addUserTache($mail, $idTache){
+        $results = DB::getInstance()->getPDO()->prepare('UPDATE tache SET mailUtilisateur = :mail WHERE idTache = :id');
+        $results->bindParam(':mail', $mail);
+        $results->bindParam(':id', $idTache);
+        $results->execute();
+    }
+
+    public function deleteUserTache($idTache){
+        $results = DB::getInstance()->getPDO()->prepare('UPDATE tache SET mailUtilisateur = NULL WHERE idTache = :id');
+        $results->bindParam(':id', $idTache);
+        $results->execute();
+    }
+
     public function recupererMembres($idListe){
         $membres = array();
         $results = DB::getInstance()->getPDO()->prepare('SELECT * FROM Membre WHERE idListe = :id');
@@ -368,6 +389,17 @@ class DB {
             array_push($membres, $donnees);
         }
         return $membres;
+    }
+
+    public function isMemberIn($mail, $idListe){
+        $results = DB::getInstance()->getPDO()->prepare('SELECT * FROM Membre WHERE mail = :mail and idListe = :id');
+        $results->bindParam(':id', $idListe);
+        $results->bindParam(':mail', $mail);
+        $results->execute();
+        if($donnes = $results->fetch()){
+            return 1;
+        }
+        return null;
     }
 
     public function recupererListesMembres($mail){

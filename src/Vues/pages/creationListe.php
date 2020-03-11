@@ -32,19 +32,19 @@ if(isset($_POST['submit'])){
                         <label for="nomListe">Nom de la liste</label>
                         <div class="form-label-group">
                             <input type="text" id="nomListe" name="nomListe"  class="form-control" placeholder="Nom"
-                                   required autofocus value = <?php if (isset($_SESSION['creation_liste']["nom"])){echo "\"".$_SESSION['creation_liste']["nom"]."\"";} ?>>
+                                   required autofocus value="<?php if (isset($_SESSION['creation_liste']["nom"])){echo "\"".$_SESSION['creation_liste']["nom"]."\"";} ?>">
                         </div>
 
                         <label for="dateDebut">Date de début</label>
                         <div class="form-label-group">
                             <input type="date" name="dateDebut" id="dateDebut"  class="form-control"
-                                   required value = <?php if (isset($_SESSION['creation_liste']["dateDebut"])){echo "\"".$_SESSION['creation_liste']["dateDebut"]."\"";} ?>>
+                                   required value="<?php if (isset($_SESSION['creation_liste']["dateDebut"])){echo "\"".$_SESSION['creation_liste']["dateDebut"]."\"";} ?>">
                         </div>
 
                         <label for="dateFin">Date de fin</label>
                         <div class="form-label-group">
                             <input type="date" name="dateFin" id="dateFin" class="form-control"
-                                   value = <?php if (isset($_SESSION['creation_liste']["dateFin"])){echo "\"".$_SESSION['creation_liste']["dateFin"]."\"";} ?> >
+                                   value="<?php if (isset($_SESSION['creation_liste']["dateFin"])){echo "\"".$_SESSION['creation_liste']["dateFin"]."\"";} ?>">
                         </div>
 
                         <br>

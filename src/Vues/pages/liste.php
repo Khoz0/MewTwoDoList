@@ -12,44 +12,55 @@ $bdd = serialize(DB::getInstance()->loadListe($_GET["id"]));
 $liste = DB::getInstance()->loadListe($_GET["id"]);
 
 ?>
-<div class="float-right"
+<div class="float-right">
     <?php
-    if (stristr($_SERVER['REQUEST_URI'], "id=") != ""){
+    if (stristr($_SERVER['REQUEST_URI'], "id=") != "") {
         ?>
         <div class="btn-group">
             <button class="btn float-right " type="button" data-toggle="dropdown" data-target="membres"
-                    aria-haspopup="listbox" aria-expanded="false"><img src="assests/membre_listes.png" width="20" height="20"></button>
+                    aria-haspopup="listbox" aria-expanded="false"><img src="assests/membre_listes.png" width="20" height="20" alt="membre_liste"></button>
 
             <div class="dropdown-menu dropdown-menu-right col-lg-2" id = "membres">
                 <?php
                     $membres = $liste->recupererMembres($_GET["id"]);
-                    foreach ($membres as $membre){
-                        if ($liste->getMailProprietaire() == unserialize($_SESSION['user'])->getMail()){
-                ?>
+                    print_r($membres);
+                    if ($liste->getMailProprietaire() == unserialize($_SESSION['user'])->getMail()){
+                        foreach ($membres as $membre) {
+                            ?>
                             <div class="dropdown-item">
                                 <div class="col-lg-auto">
-                                    <p><?php echo $membre[0]?>
-                                    <button class="btn"><img src="assests/changement.png" width="15" height="15"></button>
-									<a href="?page=supprimerUserList&mail=<?= $membre['mail'] ?>&idListe=<?= $_GET['id'] ?>"><img src="assests/croix.png" width="15" height="15"></a>
+                                    <p><?php echo $membre ?>
+                                        <button class="btn">
+                                            <img src="assests/changement.png" width="15"
+                                                                 height="15" alt="changement">
+                                        </button>
+                                        <a href="?page=supprimerUserList&mail=<?= $membre ?>&idListe=<?= $_GET['id'] ?>">
+                                            <img
+                                                    src="assests/croix.png" width="15" height="15" alt="croix"></a>
                                     </p>
                                 </div>
                             </div>
-                        <?php
-                        }else{
+                            <?php
+                        }
                         ?>
+                        <div class="col-lg-auto text-center">
+                            <button class="btn dropdown-item" onclick="window.location.href='?page=memberSelect&id=<?php echo $_GET["id"] ?>'"><img src="assests/add_user.png" width="40" height="40" alt="add_user"></button>
+                        </div>
+                        <?php
+                    }else{
+                        foreach ($membres as $membre) {
+                            ?>
                             <div class="dropdown-item">
                                 <div class="col-lg-auto">
-                                    <p><?php echo $membre[0]?>
-                                    <button class="btn">Quitter la liste</button>
+                                    <p><?php echo $membre ?>
                                     </p>
                                 </div>
                             </div>
-                        <?php }
+                            <?php
+                        }
+                        echo "<button class=\"btn col-lg-auto\" onclick=\"window.location.href='?page=supprimerUserList&mail=".$membre[0]."&idListe=".$_GET["id"]."'\">Quitter la liste</button>";
                     }
-                    ?>
-                <div class="col-lg-auto text-center">
-                    <button class="btn dropdown-item" onclick="window.location.href='?page=memberSelect&id=<?php echo $_GET["id"] ?>'"><img src="assests/add_user.png" width="40" height="40"></button>
-                </div>
+                ?>
             </div>
         </div>
     <?php }
@@ -76,7 +87,8 @@ $liste = DB::getInstance()->loadListe($_GET["id"]);
     <div class="row justify-content-center" id="liste" style="display: flex">
         <?php
         $taches = $liste->getTabTache();
-        foreach ($taches as $elem){
+        $idListe = $liste->getIdListe();
+        foreach ($taches as $elem) {
             $tache = DB::getInstance()->loadTache($elem['idTache']);
             $nom = $tache->getIntituleTache();
             $valide = $tache->getValide();
@@ -85,15 +97,18 @@ $liste = DB::getInstance()->loadListe($_GET["id"]);
             ?>
             <div class="jumbotron-fluid col-auto" style="border: solid; ;padding: 30px; margin: 10px;"
                  id="<?php echo $nom ?>">
-                 <div class="form-check align-top">
-                   <button class="btn float-right" id="modifTache" type="button" onclick="pop_up_modif(this)" value="<?php echo $id; ?>"><img src="assests/membre_listes.png" width="20" height="20"></button>
-                </div>
-                <div class="form-check align-top">
-                    <input type="checkbox" aria-label="..." class="valide" value="<?php echo $id; ?>" <?php if ($valide == 1) {
-                        echo 'checked';
-                    } ?> >
-                </div>
                 <nom_listes><?php echo $nom ?></nom_listes>
+                <div class="container">
+                 <div class="row">
+                   <div class="col">
+                   <button class="btn"  id="modifTache" type="button" onclick="pop_up_modif(this)" value="<?php echo $id; ?>"><img src="assests/edit.png" width="20" height="20"></button>
+                 </div>
+                  <div class="col">
+                    <input type="checkbox" aria-label="..." class="valide" id="valide" value="<?php echo $id; ?>" <?php if ($valide == 1) {
+                echo 'checked';
+            } ?> >
+                </div>
+              </div>
                 <?php
 
                 if ($tache->getUtilisateurAssigne() == null) {
@@ -104,10 +119,12 @@ $liste = DB::getInstance()->loadListe($_GET["id"]);
                     ?>
                     <div>
                         <form method="post" name="<?php echo $nom ?> " action="#">
+                            <a href="?page=addUserTache&mail=<?php echo $membre['mail'] ?>&idTache=<?php echo $id;?>&idListe=<?php echo $_GET['id'];?>">
                             <button type="button" value="<?php echo $user->getMail() ?>" class="btn btn-primary btn-sm">
                                 Ajouter
                                 un Utilisateur
                             </button>
+                            </a>
                         </form>
                     </div>
                     <?php
@@ -115,15 +132,18 @@ $liste = DB::getInstance()->loadListe($_GET["id"]);
                     ?><br><h5><?php echo $tache->getUtilisateurAssigne(); ?></h5><br>
                     <div>
                         <form method="post" name="-<?php echo $nom ?> " action="#">
+                            <a href="?page=deleteUserTache&mail=<?php echo $membre['mail'] ?>&idTache=<?php echo $id;?>&idListe=<?php echo $_GET['id'];?>">
                             <button type="button" value="<?php echo $user->getMail() ?>" class="btn btn-primary btn-sm">
                                 Se retirer
                             </button>
+                            </a>
                         </form>
                     </div>
                     <?php
                 }
                 ?>
             </div>
+          </div>
         <?php } ?>
     </div>
 </div>
@@ -135,6 +155,7 @@ $liste = DB::getInstance()->loadListe($_GET["id"]);
 
 <script>
 	function pop_up() {
+    console.log("test");
 		var id = document.getElementById("tache").value;
 		window.open('?page=ajoutTache&id='+id,'Ajout tâche', 'height=500, width=800, top=100, left=200, resizable = yes');
 	}

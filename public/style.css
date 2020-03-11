@@ -39,7 +39,7 @@ canvas {
     position: absolute;
     width: 100%;
     height: 100%;
-    background-color: #232741;
+    //background-color: #232741;
     //background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/200px-International_Pok%C3%A9mon_logo.svg.png");
     background-repeat: no-repeat;
     background-size: 20%;
@@ -90,4 +90,11 @@ canvas {
 
 .barre-recherche{
 
+}
+
+img.small {
+    height: 100px;
+    width: 100px;
+    margin: 0 auto;
+    display: block;
 }

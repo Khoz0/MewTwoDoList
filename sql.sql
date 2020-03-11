@@ -107,7 +107,7 @@ CREATE TABLE `Utilisateur` (
   `nomUser` varchar(50) DEFAULT NULL,
   `prenomUser` varchar(50) DEFAULT NULL,
   `pseudoUser` varchar(50) DEFAULT NULL,
-  `mdp` varchar(16) DEFAULT NULL,
+  `mdp` varchar(500) DEFAULT NULL,
   `photo` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`mail`),
   UNIQUE KEY `pseudoUser` (`pseudoUser`)
