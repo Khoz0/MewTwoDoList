@@ -6,19 +6,23 @@ use App\Modeles\DB;
 $membreSelection = new RechercheMembreController();
 ?>
 
+<script type="text/javascript" src="cdn/jquery.js"></script>
 <script type="text/javascript" src="javascript/tri_membre.js"></script>
 <script type="text/javascript" src="javascript/ajouter_membre.js"></script>
+<script type="text/javascript" src="javascript/request_member.js"></script>
 
 <h4>Rechercher par:</h4>
-<select onchange="sort_by_name(this.value)" onload="sort_by_name(this.value)">
-    <option value="nom">Nom & prénom</option>
+<select id="criteria"
+        onchange="setCriteria(document.getElementById('criteria').value,document.getElementById('site-search').value)">
+    <option value="name" selected="selected">Nom & prénom</option>
     <option value="pseudo">Pseudo</option>
     <option value="mail">Mail</option>
 </select>
 
 <div class="row justify-content-center">
 <input class="barre-recherche" type="search" id="site-search" name="q"
-       placeholder="Rechercher un membre">
+       placeholder="Rechercher un membre"
+       onkeyup="setCriteria(document.getElementById('criteria').value,document.getElementById('site-search').value)">
 
 <button>Rechercher</button>
 </div>
@@ -30,8 +34,11 @@ $membreSelection = new RechercheMembreController();
 
             <?php
             $cpt = 0;
-            foreach (DB::getInstance()->getUtilisateurs() as $user) {
-                if ($user->getMail() != unserialize($_SESSION['user'])->getMail() && $cpt < 10) {
+
+            $liste = DB::getInstance()->loadListe($_GET['id']);
+
+            foreach (DB::getInstance()->getUtilisateurs("", null) as $user) {
+                if ($user->getMail() != unserialize($_SESSION['user'])->getMail() && $cpt < 10 && !$liste->contientUtilisateur($user->getMail())) {
                     $cpt++;
                     ?>
                     <div class="jumbotron col-auto" style="border: solid; order=-1;padding: 10px; margin: 20px;"

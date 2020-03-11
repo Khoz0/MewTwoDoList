@@ -95,10 +95,35 @@ class DB {
         $res->execute();
     }
 
-    public function getUtilisateurs()
+    public function getUtilisateurs($criteria, $args)
     {
-        /*Préparation des requêtes*/
-        $getUser = DB::getInstance()->getPDO()->prepare("SELECT * FROM Utilisateur");
+        switch ($criteria) {
+            case "name":
+                $getUser = DB::getInstance()->getPDO()->prepare("SELECT * FROM Utilisateur where nomUser like :nomUser or prenomUser like :prenomUser or nomUser like :prenomUser or prenomUser like :nomUser ");
+
+                $name = $args[0] . "%";
+                $prenom = $args[1] . "%";
+
+
+                $getUser->bindParam(':nomUser', $name);
+                $getUser->bindParam(':prenomUser', $prenom);
+                break;
+            case "mail":
+                $getUser = DB::getInstance()->getPDO()->prepare("SELECT * FROM Utilisateur where mail = :mail");
+
+                $mail = "%" . $args[0] . "%";
+                $getUser->bindParam(':mail', $mail);
+
+                break;
+            case "pseudo":
+                $getUser = DB::getInstance()->getPDO()->prepare("SELECT * FROM Utilisateur where pseudoUser = :pseudoUser");
+                $user = $args[0] . "%";
+                $getUser->bindParam(':pseudoUser', $user);
+                break;
+            default:
+                $getUser = DB::getInstance()->getPDO()->prepare("SELECT * FROM Utilisateur");
+                break;
+        }
 
         $getUser->execute();
 

@@ -47,6 +47,13 @@ class Liste {
         return $membres;
     }
 
+
+    public function contientUtilisateur($mail)
+    {
+        return in_array($mail, $this->tabUtilisateur);
+    }
+
+
 	/*public function supprimerMembre($mail){
         $bdd = DB::getInstance();
         $bdd->deleteListMember($mail);
