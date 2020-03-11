@@ -13,7 +13,7 @@ $membreSelection = new RechercheMembreController();
 
 <h4>Rechercher par:</h4>
 <select id="criteria"
-        onchange="setCriteria(document.getElementById('criteria').value,document.getElementById('site-search').value)">
+        onchange="setCriteria(document.getElementById('criteria').value,document.getElementById('site-search').value,'<?php echo unserialize($_SESSION['user'])->getMail(); ?>','<?php echo $_GET['id']; ?>');">
     <option value="name" selected="selected">Nom & prénom</option>
     <option value="pseudo">Pseudo</option>
     <option value="mail">Mail</option>
@@ -22,9 +22,8 @@ $membreSelection = new RechercheMembreController();
 <div class="row justify-content-center">
 <input class="barre-recherche" type="search" id="site-search" name="q"
        placeholder="Rechercher un membre"
-       onkeyup="setCriteria(document.getElementById('criteria').value,document.getElementById('site-search').value)">
+       onkeyup="setCriteria(document.getElementById('criteria').value,document.getElementById('site-search').value,'<?php echo unserialize($_SESSION['user'])->getMail(); ?>','<?php echo $_GET['id']; ?>');">
 
-<button>Rechercher</button>
 </div>
 
 

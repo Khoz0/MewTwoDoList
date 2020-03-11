@@ -1,6 +1,6 @@
-function setCriteria(criteria, liste) {
+function setCriteria(criteria, liste, nom, id) {
 
-    console.log(criteria + " " + liste);
+    console.log(criteria + " " + liste + " " + nom + " " + id);
     url = window.location.origin + "/mew_two_do_list/ajax/request_member.php";
     if (liste == undefined) {
 
@@ -40,27 +40,29 @@ function setCriteria(criteria, liste) {
 
             res = code_html.split("\\/");
 
-            for (i = 0; i < res.length; i += 6) {
-                document.getElementById("utilisateurs").innerHTML += '<div class="jumbotron col-auto" style="border: solid; order=-1;padding: 10px; margin: 20px;" id="lia@li.com">\n' +
-                    '\n' +
-                    '                        <br><table>\n' +
-                    '                            <tbody><tr>\n' +
-                    '                                <td>\n' +
-                    '                                    <img src="' + res[i + 1] + '" width="60px" height="60px" alt="lia@li.com"> </td>\n' +
-                    '                                <td width="30px"></td>\n' +
-                    '                                <td>\n' +
-                    '                                    <button onclick="addMembre(\'' + res[i] + '\',\'1\')">Ajouter</button>\n' + //TODO Soucis, quel numéro de liste ?
-                    '                                </td>\n' +
-                    '                            </tr>\n' +
-                    '                            \n' +
-                    '                        </tbody></table>\n' +
-                    '\n' +
-                    '                        <br>\n' +
-                    '                        <div class="row justify-content-center">' + res[i] + '</div>\n' +
-                    '                        <div class="row justify-content-center">' + res[i] + ' ' + res[i] + '</div>\n' + //Prenom + nom
-                    '\n' +
-                    '                    </div>';
-                console.log(res[i]);
+            for (i = 0; i < res.length - 1; i += 4) {
+                if (res[i] != nom) {
+                    document.getElementById("utilisateurs").innerHTML += '<div class="jumbotron col-auto" style="border: solid; order=-1;padding: 10px; margin: 20px;" id="lia@li.com">\n' +
+                        '\n' +
+                        '                        <br><table>\n' +
+                        '                            <tbody><tr>\n' +
+                        '                                <td>\n' +
+                        '                                    <img src="' + res[i + 1] + '" width="60px" height="60px" alt="' + res[i] + '"> </td>\n' +
+                        '                                <td width="30px"></td>\n' +
+                        '                                <td>\n' +
+                        '                                    <button onclick="addMembre(\'' + res[i] + '\',\'' + id + '\')">Ajouter</button>\n' + //TODO Soucis, quel numéro de liste ?
+                        '                                </td>\n' +
+                        '                            </tr>\n' +
+                        '                            \n' +
+                        '                        </tbody></table>\n' +
+                        '\n' +
+                        '                        <br>\n' +
+                        '                        <div class="row justify-content-center">' + res[i] + '</div>\n' +
+                        '                        <div class="row justify-content-center">' + res[i + 2] + ' ' + res[i + 3] + '</div>\n' + //Prenom + nom
+                        '\n' +
+                        '                    </div>';
+                    console.log(res[i]);
+                }
             }
 
         },

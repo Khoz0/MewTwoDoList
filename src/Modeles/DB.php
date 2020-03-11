@@ -95,10 +95,13 @@ class DB {
     {
         switch ($criteria) {
             case "name":
-                $getUser = DB::getInstance()->getPDO()->prepare("SELECT * FROM Utilisateur where nomUser like :nomUser or prenomUser like :prenomUser or nomUser like :prenomUser or prenomUser like :nomUser ");
+                $getUser = DB::getInstance()->getPDO()->prepare("SELECT * FROM Utilisateur 
+                        where nomUser like UPPER(CONCAT(:nomUser,'%')) or 
+                         prenomUser like UPPER(CONCAT(:prenomUser,'%')) or nomUser like UPPER(CONCAT(:prenomUser,'%')) 
+                         or prenomUser like UPPER(CONCAT(:nomUser,'%')) ");
 
-                $name = $args[0] . "%";
-                $prenom = $args[1] . "%";
+                $name = $args[0];
+                $prenom = $args[1];
 
 
                 $getUser->bindParam(':nomUser', $name);
