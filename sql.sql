@@ -15,6 +15,19 @@ CREATE TABLE `Destinataire` (
   PRIMARY KEY (`mail`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+DROP TABLE IF EXISTS `Utilisateur`;
+CREATE TABLE `Utilisateur` (
+  `mail` varchar(100) NOT NULL,
+  `nomUser` varchar(50) DEFAULT NULL,
+  `prenomUser` varchar(50) DEFAULT NULL,
+  `pseudoUser` varchar(50) DEFAULT NULL,
+  `mdp` varchar(500) DEFAULT NULL,
+  `photo` varchar(500) DEFAULT NULL,
+  PRIMARY KEY (`mail`),
+  UNIQUE KEY `pseudoUser` (`pseudoUser`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
 DROP TABLE IF EXISTS `Liste`;
 CREATE TABLE `Liste` (
   `idListe` int(10) NOT NULL,
@@ -98,17 +111,4 @@ CREATE TABLE `Tache` (
   KEY `FK_Tache2` (`mailUtilisateur`),
   CONSTRAINT `FK_Tache1` FOREIGN KEY (`idListeT`) REFERENCES `Liste` (`idListe`),
   CONSTRAINT `FK_Tache2` FOREIGN KEY (`mailUtilisateur`) REFERENCES `Utilisateur` (`mail`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-DROP TABLE IF EXISTS `Utilisateur`;
-CREATE TABLE `Utilisateur` (
-  `mail` varchar(100) NOT NULL,
-  `nomUser` varchar(50) DEFAULT NULL,
-  `prenomUser` varchar(50) DEFAULT NULL,
-  `pseudoUser` varchar(50) DEFAULT NULL,
-  `mdp` varchar(500) DEFAULT NULL,
-  `photo` varchar(500) DEFAULT NULL,
-  PRIMARY KEY (`mail`),
-  UNIQUE KEY `pseudoUser` (`pseudoUser`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
