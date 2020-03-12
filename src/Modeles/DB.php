@@ -143,7 +143,7 @@ class DB {
 
     public function loadUtilisateur($mail)
     {
-
+        $tabListes = array();
         /*Préparation des requêtes*/
         $verifMail = DB::getInstance()->getPDO()->prepare("SELECT * FROM Utilisateur where mail = :mailVerification");
         $getListeProp = DB::getInstance()->getPDO()->prepare("SELECT * FROM Liste where mailProprietaire = :mailVerification");
@@ -162,9 +162,9 @@ class DB {
 
             while ($donnesListe = $getListeProp->fetch()) {
                 $liste = $this->loadListe($donnesListe['idListe']);
-                $utilisateur->ajouterListe($liste);
+                array_push($tabListes, $liste);
 
-            }
+            }$utilisateur->setListesProprietaire($tabListes);
             return $utilisateur;
         } else {
             return null;
@@ -188,6 +188,16 @@ class DB {
             while ($donneesTaches = $recupererTaches->fetch()) {
                 $liste->ajouterTache($donneesTaches);
             }
+
+            $recupererMembre = DB::getInstance()->getPDO()->prepare("SELECT * FROM Membre WHERE idListe = :id");
+            $recupererMembre->bindParam(":id", $id);
+            $recupererMembre->execute();
+            while ($donneesMembre = $recupererMembre->fetch()) {
+                if($donneesMembre != $donnees["mailProprietaire"]) {
+                    $liste->ajouterUtilisateur($donneesMembre["mail"]);
+                }
+            }
+
             return $liste;
         } else {
             return null;

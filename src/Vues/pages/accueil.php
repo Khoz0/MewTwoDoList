@@ -60,11 +60,13 @@ if(isset($_SESSION["user"])){?>
             $bdd = DB::getInstance();
             $listesTotal = $bdd->recupererListesMembres($mail);
             $listesInvite = array();
-            foreach ($listesTotal as $listesMembre){
-                foreach ($listes as $listeProprio){
-                    if (!in_array($listesMembre, $listes) && !in_array($listesMembre, $listesInvite)){
-                        array_push($listesInvite, $listesMembre);
+            foreach ($listesTotal as $listeMembre){
+                if (!empty($listes)) {
+                    if ($listeMembre->getMailProprietaire() != unserialize($_SESSION["user"])->getMail() && !in_array($listeMembre, $listesInvite)) {
+                        array_push($listesInvite, $listeMembre);
                     }
+                }else{
+                    array_push($listesInvite, $listeMembre);
                 }
             }
             foreach ($listesInvite as $listeInvite){

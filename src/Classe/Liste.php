@@ -25,13 +25,10 @@ class Liste {
         $this->dateCreation = $dateCreation;
         $this->dateFin = $dateFin;
         $this->mailProprietaire = $mailProprietaire;
-        //$user = DB::getInstance()->loadUtilisateur($mailProprietaire);
-        array_push($this->tabUtilisateur, $mailProprietaire);
     }
 
     public function ajouterUtilisateur($mailUtilisateur){
-        $user = DB::getInstance()->loadUtilisateur($mailUtilisateur);
-        array_push($this->tabUtilisateur, $user);
+        array_push($this->tabUtilisateur, $mailUtilisateur);
     }
 
     public function retirerUtilisateur($mailUtilisateur){

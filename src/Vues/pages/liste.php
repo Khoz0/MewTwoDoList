@@ -22,7 +22,7 @@ $liste = DB::getInstance()->loadListe($_GET["id"]);
 
             <div class="dropdown-menu dropdown-menu-right col-lg-2" id = "membres">
                 <?php
-                $membres = $liste->recupererMembres($_GET["id"]);
+                    $membres = $liste->recupererMembres($_GET["id"]);
                     if ($liste->getMailProprietaire() == unserialize($_SESSION['user'])->getMail()){
                         foreach ($membres as $membre) {
                             ?>
