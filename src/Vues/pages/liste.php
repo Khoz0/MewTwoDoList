@@ -22,7 +22,7 @@ $liste = DB::getInstance()->loadListe($_GET["id"]);
 
             <div class="dropdown-menu dropdown-menu-right col-lg-2" id = "membres">
                 <?php
-                    $membres = $liste->recupererMembres($_GET["id"]);
+                $membres = $liste->recupererMembres($_GET["id"]);
                     if ($liste->getMailProprietaire() == unserialize($_SESSION['user'])->getMail()){
                         foreach ($membres as $membre) {
                             ?>
@@ -82,6 +82,8 @@ $liste = DB::getInstance()->loadListe($_GET["id"]);
 	onclick="pop_up();" value="<?php echo $_GET["id"]; ?>">Ajout tâche </button>
 </div>
 
+
+<!--Affichage des tâches-->
 <div class = "jumbotron-fluid text-center">
     <div class="row justify-content-center" id="liste" style="display: flex">
         <?php
@@ -99,26 +101,31 @@ $liste = DB::getInstance()->loadListe($_GET["id"]);
                 <nom_listes><?php echo $nom ?></nom_listes>
                 <div class="container">
                  <div class="row">
-                   <div class="col">
-                   <button class="btn"  id="modifTache" type="button" onclick="pop_up_modif(this)" value="<?php echo $id; ?>"><img src="assests/edit.png" width="20" height="20"></button>
-                 </div>
-                  <div class="col">
-                    <input type="checkbox" aria-label="..." class="valide" id="valide" value="<?php echo $id; ?>" <?php if ($valide == 1) {
+
+                     <!--Bouton modifier tâche-->
+                     <div class="col">
+                         <button class="btn"  id="modifTache" type="button" onclick="pop_up_modif(this)" value="<?php echo $id; ?>"><img src="assests/edit.png" width="20" height="20"></button>
+                     </div>
+
+                     <!--Check box de tâche finie-->
+                     <div class="col">
+                         <input type="checkbox" aria-label="..." class="valide" id="valide" value="<?php echo $id; ?>" <?php if ($valide == 1) {
                 echo 'checked';
             } ?> >
-                </div>
-              </div>
+                     </div>
+
+                 </div>
                 <?php
 
                 if ($tache->getUtilisateurAssigne() == null) {
                     if (isset($_POST[$nom])) {
-                        $tache->setUtilisateurAssigne($_POST[$nom]);
+                        $tache->setUtilisateurAssigne(unserialize($_SESSION['user']));
                     }
 
                     ?>
                     <div>
                         <form method="post" name="<?php echo $nom ?> " action="#">
-                            <a href="?page=addUserTache&mail=<?php echo $membre['mail'] ?>&idTache=<?php echo $id;?>&idListe=<?php echo $_GET['id'];?>">
+                            <a href="?page=addUserTache&mail=<?php echo $user->getMail() ?>&idTache=<?php echo $id;?>&idListe=<?php echo $_GET['id'];?>">
                             <button type="button" value="<?php echo $user->getMail() ?>" class="btn btn-primary btn-sm">
                                 Ajouter
                                 un Utilisateur
@@ -132,7 +139,7 @@ $liste = DB::getInstance()->loadListe($_GET["id"]);
                     ?><br><h5><?php echo $tache->getUtilisateurAssigne(); ?></h5><br>
                     <div>
                         <form method="post" name="-<?php echo $nom ?> " action="#">
-                            <a href="?page=deleteUserTache&mail=<?php echo $membre['mail'] ?>&idTache=<?php echo $id;?>&idListe=<?php echo $_GET['id'];?>">
+                            <a href="?page=deleteUserTache&mail=<?php echo $user->getMail() ?>&idTache=<?php echo $id;?>&idListe=<?php echo $_GET['id'];?>">
                             <button type="button" value="<?php echo $user->getMail() ?>" class="btn btn-primary btn-sm">
                                 Se retirer
                             </button>
@@ -147,6 +154,7 @@ $liste = DB::getInstance()->loadListe($_GET["id"]);
         <?php } ?>
     </div>
 </div>
+<!--Fin affichage des tâches-->
 
 <script type="text/javascript" src="javascript/suppression_liste.js"></script>
 <script type="text/javascript" src="javascript/modification_liste.js"></script>

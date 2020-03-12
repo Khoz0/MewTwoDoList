@@ -5,8 +5,9 @@ function init() {
 function deleteTache() {
   var id = $(this).val();
   var res = id.split(" ");
-  url = window.location.origin + "/mew_two_do_list/ajax/delete_tache.php";
-  console.log(res[1]);
+  var path = window.location.pathname;
+  var base = path.split("/");
+  url = window.location.origin + "/" +base[1] +"/ajax/delete_tache.php";
 
   if (confirm('Êtes vous sûr de vouloir supprimer votre tâche ?\nCette action est définitive !')) {
 
@@ -21,7 +22,7 @@ function deleteTache() {
       success: function() {
         window.opener.location.reload(true);
         window.close();
-      
+
       },
       error: (xhr) => {
         console.log("status =" + xhr.status);

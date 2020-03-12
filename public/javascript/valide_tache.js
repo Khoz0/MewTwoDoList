@@ -10,7 +10,9 @@ function valide() {
     valide = 0;
   }
   var id = $(this).val();
-  url = window.location.origin + "/mew_two_do_list/ajax/valide_tache.php";
+  var path = window.location.pathname;
+  var base = path.split("/");
+  url = window.location.origin + "/" + base[1] +"/ajax/valide_tache.php";
   console.log(url);
 
 
@@ -30,7 +32,7 @@ function valide() {
         console.log(xhr);
       }
     });
-  
+
 
 }
 
