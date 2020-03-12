@@ -446,4 +446,73 @@ class DB {
         return $listes;
     }
 
+	public function createNotif($date, $valide, $contenu, $lu, $mail, $idLis){
+		$results = DB::getInstance()->getPDO()->prepare('insert into Notification (dateEnvoi,valide,contenu,lu,mail,idListe) values (:date, :valide, :contenu, :lu, :mail, :idLis)');
+        $results->bindParam(':date', $date);
+        $results->bindParam(':valide', $valide);
+		$results->bindParam(':contenu', $contenu);
+        $results->bindParam(':lu', $lu);
+		$results->bindParam(':mail', $mail);
+        $results->bindParam(':idLis', $idLis);
+        $results->execute();
+	}
+
+	public function createNotifAjoutMembre($idNotif){
+        $results = DB::getInstance()->getPDO()->prepare('insert into NotificationAjoutMembre values (:idNotif)');
+        $results->bindParam(':idNotif', $idNotif);
+        $results->execute();
+    }
+
+	public function createNotifAvecChangement($idNotif){
+        $results = DB::getInstance()->getPDO()->prepare('insert into NotificationAvecChangement values (:idNotif)');
+        $results->bindParam(':idNotif', $idNotif);
+        $results->execute();
+    }
+
+	public function createNotifAvecChoix($idNotif, $repondu){
+        $results = DB::getInstance()->getPDO()->prepare('insert into NotificationAvecChoix values (:idNotif, :repondu)');
+        $results->bindParam(':idNotif', $idNotif);
+		$results->bindParam(':repondu', $repondu);
+        $results->execute();
+    }
+
+	public function createNotifChangementProprietaire($idNotif){
+        $results = DB::getInstance()->getPDO()->prepare('insert into NotificationChangementProprietaire values (:idNotif)');
+        $results->bindParam(':idNotif', $idNotif);
+        $results->execute();
+    }
+
+
+	public function deleteNotifAjoutMembre($idNotif){
+        $res = DB::getInstance()->getPDO()->prepare("delete from NotificationAjoutMembre where idNotification = :idNotif");
+        $res->execute();
+
+		$res = DB::getInstance()->getPDO()->prepare("delete from Notification where idNotification = :idNotif");
+		$res->execute();
+	}
+
+	public function deleteNotifAvecChangement($idNotif){
+        $res = DB::getInstance()->getPDO()->prepare("delete from NotificationAvecChangement where idNotification = :idNotif");
+        $res->execute();
+
+		$res = DB::getInstance()->getPDO()->prepare("delete from Notification where idNotification = :idNotif");
+		$res->execute();
+	}
+
+	public function deleteNotifAvecChoix($idNotif){
+        $res = DB::getInstance()->getPDO()->prepare("delete from NotificationAvecChoix where idNotification = :idNotif");
+        $res->execute();
+
+		$res = DB::getInstance()->getPDO()->prepare("delete from Notification where idNotification = :idNotif");
+		$res->execute();
+	}
+
+	public function deleteNotifChangementProprietaire($idNotif){
+        $res = DB::getInstance()->getPDO()->prepare("delete from NotificationChangementProprietaire where idNotification = :idNotif");
+        $res->execute();
+
+		$res = DB::getInstance()->getPDO()->prepare("delete from Notification where idNotification = :idNotif");
+		$res->execute();
+	}
+
 }
