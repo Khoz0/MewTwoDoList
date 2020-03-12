@@ -51,7 +51,9 @@ function setCriteria(criteria, liste, nom, id) {
                         '                                    <img src="' + res[i + 1] + '" width="60px" height="60px" alt="' + res[i] + '"> </td>\n' +
                         '                                <td width="30px"></td>\n' +
                         '                                <td>\n' +
-                        '                                    <button onclick="addMembre(\'' + res[i] + '\',\'' + id + '\')">Ajouter</button>\n' + //TODO Soucis, quel numéro de liste ?
+                        '<a href="?page=addUserList&amp;mail=' + res[i] + '&amp;idListe=' + id + '">\n' +
+                        '                                    <button>Ajouter</button>\n' +
+                        '                                    </a>' +
                         '                                </td>\n' +
                         '                            </tr>\n' +
                         '                            \n' +
@@ -62,7 +64,6 @@ function setCriteria(criteria, liste, nom, id) {
                         '                        <div class="row justify-content-center">' + res[i + 2] + ' ' + res[i + 3] + '</div>\n' + //Prenom + nom
                         '\n' +
                         '                    </div>';
-                    console.log(res[i]);
                 }
             }
 
