@@ -23,7 +23,6 @@ $liste = DB::getInstance()->loadListe($_GET["id"]);
             <div class="dropdown-menu dropdown-menu-right col-lg-2" id = "membres">
                 <?php
                     $membres = $liste->recupererMembres($_GET["id"]);
-                    print_r($membres);
                     if ($liste->getMailProprietaire() == unserialize($_SESSION['user'])->getMail()){
                         foreach ($membres as $membre) {
                             ?>
@@ -113,7 +112,7 @@ $liste = DB::getInstance()->loadListe($_GET["id"]);
 
                 if ($tache->getUtilisateurAssigne() == null) {
                     if (isset($_POST[$nom])) {
-                        $tache->setUtilisateurAssigne(unserialize($_SESSION['user']));
+                        //$tache->setUtilisateurAssigne($_POST[$nom]);
                     }
 
                     ?>
@@ -129,6 +128,7 @@ $liste = DB::getInstance()->loadListe($_GET["id"]);
                     </div>
                     <?php
                 } else {
+                    var_dump($tache->getUtilisateurAssigne());
                     ?><br><h5><?php echo $tache->getUtilisateurAssigne(); ?></h5><br>
                     <div>
                         <form method="post" name="-<?php echo $nom ?> " action="#">
