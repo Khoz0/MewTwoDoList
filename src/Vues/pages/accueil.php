@@ -1,8 +1,7 @@
 <?php
 use App\Modeles\DB;
 ?>
-<script type="text/javascript" src="cdn/jquery.js"></script>
-<script type="text/javascript" src="javascript/tri_liste.js"></script>
+<script src="javascript/tri_liste.js"></script>
 <div class="jumbotron-fluid text-center">
 
     <?php
@@ -31,15 +30,15 @@ if(isset($_SESSION["user"])){?>
             $listes = $user->getListesProprietaire();
             foreach ($listes as $liste) {
                     ?>
-                    <div class="jumbotron col-auto" style="border: solid; order=-1;padding: 30px; margin: 10px;"
-                         id="<?php echo htmlspecialchars($liste->getIntituleListe().$liste->getIdListe()) ?>"
-                         onclick="window.location.href = '?page=liste&id=<?php echo $liste->getIdListe() ?>'">
-                        <nom_listes><?php echo htmlspecialchars($liste->getIntituleListe()) ?></nom_listes>
+                    <div class="jumbotron col-auto" style="border: solid; padding: 30px; margin: 10px;"
+                         id="<?= htmlspecialchars($liste->getIntituleListe().$liste->getIdListe()) ?>"
+                         onclick="window.location.href = '?page=liste&id=<?= $liste->getIdListe() ?>'">
+                        <div><?= htmlspecialchars($liste->getIntituleListe()) ?></div>
                         <?php if ($liste->getDateFin() == null) { ?>
-                            <dates><br><br>A partir du <?php echo htmlspecialchars($liste->getDateCreation()) ?><br></dates>
+                            <div><br><br>A partir du <?= htmlspecialchars($liste->getDateCreation()) ?><br></div>
                         <?php } else { ?>
-                            <dates><br><br>Du <?php echo htmlspecialchars($liste->getDateCreation()) ?>
-                                <br>au <?php echo htmlspecialchars($liste->getDateFin()) ?></dates>
+                            <div><br><br>Du <?= htmlspecialchars($liste->getDateCreation()) ?>
+                                <br>au <?= htmlspecialchars($liste->getDateFin()) ?></div>
                         <?php } ?>
                     </div>
                 <?php }
@@ -71,20 +70,21 @@ if(isset($_SESSION["user"])){?>
             }
             foreach ($listesInvite as $listeInvite){
             ?>
-                <div class="jumbotron col-auto" style="border: solid; order=-1;padding: 30px; margin: 10px;"
-                     id="<?php echo $listeInvite->getIntituleListe().$listeInvite->getIdListe() ?>"
-                     onclick="window.location.href = '?page=liste&id=<?php echo $listeInvite->getIdListe() ?>'">
-                    <nom_listes><?php echo $listeInvite->getIntituleListe(); ?></nom_listes>
+
+                <div class="jumbotron col-auto" style="border: solid; padding: 30px; margin: 10px;"
+                     onclick="window.location.href = '?page=liste&id=<?= $listeInvite->getIdListe() ?>'">
+                    <h3><?= $listeInvite->getIntituleListe(); ?></h3>
                     <?php if ($listeInvite->getDateFin() == null) { ?>
-                        <dates><br><br>A partir du <?php echo $listeInvite->getDateCreation() ?><br></dates>
+                        <div><br><br>A partir du <?= $listeInvite->getDateCreation() ?><br></div>
                     <?php } else { ?>
-                        <dates><br><br>Du <?php echo $listeInvite->getDateCreation() ?>
-                            <br>au <?php echo $listeInvite->getDateFin() ?></dates>
+                        <div><br><br>Du <?= $listeInvite->getDateCreation() ?>
+                            <br>au <?= $listeInvite->getDateFin() ?></div>
                     <?php } ?>
                 </div>
+
             <?php }
         ?>
     </div>
 <?php } ?>
-    <script language="JavaScript">sort_by_name("alphab");</script>
+    <script>sort_by_name("alphab");</script>
 </div>

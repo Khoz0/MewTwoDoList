@@ -17,7 +17,7 @@ if (isset($_POST['criteria'])) {
     else
         array_push($args, "");
 
-    $res = DB::getInstance()->getUtilisateurs($_POST['criteria'], $args);
+    $res = DB::getInstance()->getUtilisateurs($_POST['criteria'], $args, $_POST['id']);
 
     $html = "";
 

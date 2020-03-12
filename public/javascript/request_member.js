@@ -25,7 +25,7 @@ function setCriteria(criteria, liste, nom, id) {
     $.ajax({
         type: 'POST',
         url: url,
-        data: {criteria: criteria, arg0: arg0, arg1: arg1},
+        data: {criteria: criteria, arg0: arg0, arg1: arg1, id: id},
         timeout: 5000,
         success: function (code_html) {
 
