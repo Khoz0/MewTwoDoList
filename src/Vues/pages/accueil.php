@@ -31,7 +31,6 @@ if(isset($_SESSION["user"])){?>
             foreach ($listes as $liste) {
                     ?>
                     <div class="jumbotron col-auto" style="border: solid; padding: 30px; margin: 10px;"
-                         id="<?= htmlspecialchars($liste->getIntituleListe().$liste->getIdListe()) ?>"
                          onclick="window.location.href = '?page=liste&id=<?= $liste->getIdListe() ?>'">
                         <div><?= htmlspecialchars($liste->getIntituleListe()) ?></div>
                         <?php if ($liste->getDateFin() == null) { ?>
@@ -46,7 +45,7 @@ if(isset($_SESSION["user"])){?>
 
         </div>
         <div class="jumbotron-fluid col-auto">
-            <a onclick="window.location.href = '?page=creationListe'"><img src="assests/plus.png" alt="Ajouter une liste" width="140px" height="140px"/></a>
+            <a onclick="window.location.href = '?page=creationListe'"><img src="assests/plus.png" alt="Ajouter une liste"/></a>
         </div>
     </div>
     <div class="jumbotron-fluid">
