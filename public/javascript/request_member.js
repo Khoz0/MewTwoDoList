@@ -1,8 +1,9 @@
 function setCriteria(criteria, liste, nom, id) {
 
     args = liste.split(" ");
-
-    url = window.location.origin + "/mew_two_do_list/ajax/request_member.php";
+    var path = window.location.pathname;
+    var base = path.split("/");
+    url = window.location.origin + "/" + base[1] + "/ajax/request_member.php";
     if (liste == undefined) {
 
         arg0 = "";
