@@ -43,8 +43,8 @@ CREATE TABLE `Liste` (
 
 DROP TABLE IF EXISTS `Membre`;
 CREATE TABLE `Membre` (
-  `mail` varchar(100) DEFAULT NULL,
-  `idListe` int(10) DEFAULT NULL,
+  `mail` varchar(100),
+  `idListe` int(10),
   PRIMARY KEY (`mail`,`idListe`),
   KEY `FK_Membre1` (`mail`),
   KEY `FK_Membre2` (`idListe`),

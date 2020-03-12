@@ -244,7 +244,12 @@ class DB {
         $utilisateur = $this->loadUtilisateur($mail);
         $existe = 0;
 
-        $results = DB::getInstance()->getPDO()->prepare("UPDATE Utilisateur SET nomUser = :nomUser, prenomUser = :prenomUser, pseudoUser = :pseudoUser, mdp = :mdp, photo = :photo WHERE mail = :mail");
+        if ($mdp != null) {
+            $results = DB::getInstance()->getPDO()->prepare("UPDATE Utilisateur SET nomUser = :nomUser, prenomUser = :prenomUser, pseudoUser = :pseudoUser, mdp = :mdp, photo = :photo WHERE mail = :mail");
+            $results->bindParam('mdp', $mdp);
+        }else{
+            $results = DB::getInstance()->getPDO()->prepare("UPDATE Utilisateur SET nomUser = :nomUser, prenomUser = :prenomUser, pseudoUser = :pseudoUser, photo = :photo WHERE mail = :mail");
+        }
         $results->bindParam('mail', $mail);
         if ($nom != null) {
             $results->bindParam('nomUser', $nom);
@@ -257,12 +262,6 @@ class DB {
         }else {
             $prenom = $utilisateur->getPrenom();
             $results->bindParam('prenomUser', $prenom);
-        }
-        if ($mdp != null) {
-            $results->bindParam('mdp', $mdp);
-        }else {
-            $mdp = $utilisateur->getMotDePasse();
-            $results->bindParam('mdp', $mdp);
         }
         if ($pseudo != null) {
             $results->bindParam('pseudoUser', $pseudo);
