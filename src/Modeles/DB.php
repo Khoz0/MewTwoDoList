@@ -515,4 +515,20 @@ class DB {
 		$res->execute();
 	}
 
+	public function loadNotif($idNotif){
+		$res = DB::getInstance()->getPDO()->prepare("select $ from Notification where idNotification = :idNotif");
+        	$verifMail->bindParam(':idNotif', $idNotif);
+        	$res->execute();
+
+	/*
+
+while ($donnesListe = $getListeProp->fetch()) {
+                $liste = $this->loadListe($donnesListe['idListe']);
+                array_push($tabListes, $liste);
+
+            }
+
+*/
+	}
+
 }
