@@ -20,7 +20,7 @@ class DeleteTacheTestController extends TestCase {
 		$bdd = DB::getInstance()->getPDO();
 		$requete = $bdd->prepare("SELECT count(*) FROM Tache");
 		$requete->execute();
-		
+
 		$compteur = 0;
 		$compteur2 = 0;
 
@@ -34,7 +34,7 @@ class DeleteTacheTestController extends TestCase {
 		}
 
 		//Compte le nb de lignes apres l'insertion
-		$nblignes = $compteur;		
+		$nblignes = $compteur;
 
 		$fonction->supprimerTacheTest();
 
@@ -43,7 +43,7 @@ class DeleteTacheTestController extends TestCase {
 		}
 
 		if($compteur2 == $nblignes - 1){
-			$res = true;	
+			$res = true;
 		}
 
 		$fonction->supprimerListeTest();
