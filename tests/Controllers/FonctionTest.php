@@ -9,7 +9,7 @@ namespace Tests\Controllers;
 class UtilisateurFonctionTest {
 
 	//Fonction qui ajoute un utilisateur dans la BDD
-	public fonction ajouterUtilisateurTest()
+	public function ajouterUtilisateurTest()
 	{
 		$mail = 'abcd@abcd.com';
 		$nom_user = 'bonjour';
@@ -23,14 +23,14 @@ class UtilisateurFonctionTest {
 	}
 
 	//Fonction qui supprime un utilisateur de la BDD
-	public fonction supprimerUtilisateurTest()
+	public function supprimerUtilisateurTest()
 	{
 		$requete = $bdd->prepare("delete from utilisateur where mail = 'abcd@abcd.com'");
 		$requete->execute();
 	}
 
 	//Fonction qui ajoute une liste dans la BDD
-	public fonction ajouterListeTest()
+	public function ajouterListeTest()
 	{
 		$id = 5000;
 		$intitule = 'intitule';
@@ -44,14 +44,14 @@ class UtilisateurFonctionTest {
 	}
 
 	//Fonction qui supprimer une liste de la BDD
-	public fonction supprimerListeTest()
+	public function supprimerListeTest()
 	{
 		$requete = $bdd->prepare("delete from liste where idListe = 5000");
 		$requete->execute();
 	}
 
 	//Fonction qui ajoute une tâche dans la BDD
-	public fonction ajouterTacheTest()
+	public function ajouterTacheTest()
 	{
 		$idT = 6000;
 		$intitule = 'intituleT';
@@ -65,12 +65,10 @@ class UtilisateurFonctionTest {
 	}
 
 	//Fonction qui supprimer une tâche de la BDD
-	public fonction supprimerTacheTest()
+	public function supprimerTacheTest()
 	{
 		$requete = $bdd->prepare("delete from tache where idTache = 6000");
 		$requete->execute();
 	}
 
 }
-
-?>
