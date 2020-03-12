@@ -22,18 +22,19 @@ class CompteController extends Controller {
         $requete->execute();
         $donnees = $requete->fetch();
         if (isset($_POST['inputPassword']) && !empty($_POST["inputPassword"])){
-            if (($_POST["inputPassword"]) == $donnees['mdp']){
+            if (password_verify($_POST["inputPassword"], $donnees['mdp'])){
                 if (isset($_POST['inputPasswordConf']) && !empty($_POST["inputPasswordConf"]) && $_POST["inputPasswordConf"] != $_POST['inputPassword']){
                     if (isset($_POST['inputNewPassword']) && !empty($_POST["inputNewPassword"]) && $_POST['inputPasswordConf'] == $_POST['inputNewPassword']){
                         $loginSession = unserialize($_SESSION['user'])->getMail();
                         $mdpChanger = $_POST['inputNewPassword'];
 
                         $bdd = DB::getInstance();
-                        $bdd->updateUtilisateur($loginSession, null, null, $mdpChanger, null, null);
+                        $bdd->updateUtilisateur($loginSession, null, null, password_hash($mdpChanger, PASSWORD_DEFAULT), null, null);
 
                         $this->modifier = true;
                         $user = unserialize($_SESSION['user']);
-                        $user->setMotDePasse($mdpChanger);
+
+                        $user->setMotDePasse(password_hash($mdpChanger, PASSWORD_DEFAULT));
                         $_SESSION['user'] = serialize($user);
                     }else{
                         echo "<em> Mot de passe de confirmation manquant ou différents du nouveau mot de passe. </em>";
@@ -127,6 +128,8 @@ class CompteController extends Controller {
 
         $file_photo = $_FILES["inputPhoto"];
 
+        str_replace('http', '', $file_photo['name']);
+
         if(!is_dir("assests/uploads/")){
             mkdir("assests/uploads/", 0777, true);
         }
@@ -136,6 +139,8 @@ class CompteController extends Controller {
         $photo = "assests/uploads/".$file_photo['name'].$loginSession;
 
         $bdd = DB::getInstance();
+        echo "Je modifie la photo";
+        echo
         $bdd->updateUtilisateur($loginSession, null, null, null, null, $photo);
         $this->modifier = true;
 
