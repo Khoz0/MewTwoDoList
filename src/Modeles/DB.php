@@ -62,12 +62,27 @@ class DB {
     }
 
     public function deleteUser($mail){
+
+        //On supprime toutes les listes desquelles il est propriétaire
+        $resList = DB::getInstance()->getPDO()->prepare("SELECT idListe FROM Liste WHERE mailProprietaire = :mail");
+        $resList->bindParam(":mail", $mail);
+        $resList->execute();
+        while($donnees = $resList->fetch()){
+            $this->deleteListe($donnees["idListe"]);
+        }
+
+        //On le retire de toutes les listes dont il est membre
+        $resList = DB::getInstance()->getPDO()->prepare("SELECT idListe FROM Membre WHERE mail = :mail");
+        $resList->bindParam(":mail", $mail);
+        $resList->execute();
+        while($donnees = $resList->fetch()){
+            $this->deleteListMember($mail, $donnees["idListe"]);
+        }
+
+        //On le supprime de la base de données
         $resUser = DB::getInstance()->getPDO()->prepare("DELETE FROM Utilisateur WHERE mail = :mail");
         $resUser->bindParam(":mail", $mail);
         $resUser->execute();
-        $resList = DB::getInstance()->getPDO()->prepare("DELETE FROM Liste WHERE mailProprietaire = :mail");
-        $resList->bindParam(":mail", $mail);
-        $resList->execute();
     }
 
 	public function deleteListMember($mail, $idListe){
@@ -95,10 +110,10 @@ class DB {
     {
         switch ($criteria) {
             case "name":
-                $getUser = DB::getInstance()->getPDO()->prepare("SELECT * FROM Utilisateur 
-                        where nomUser like UPPER(CONCAT(:nomUser,'%')) or 
+                $getUser = DB::getInstance()->getPDO()->prepare("SELECT * FROM Utilisateur
+                        where nomUser like UPPER(CONCAT(:nomUser,'%')) or
                          prenomUser like UPPER(CONCAT(:nomUser,'%')) or
-                         ( :prenomUser not like '' and prenomUser like UPPER(CONCAT(:prenomUser,'%'))) or 
+                         ( :prenomUser not like '' and prenomUser like UPPER(CONCAT(:prenomUser,'%'))) or
                          ( :prenomUser not like '' and nomUser like UPPER(CONCAT(:prenomUser,'%'))) ");
 
 
@@ -381,14 +396,14 @@ class DB {
     }
 
     public function addUserTache($mail, $idTache){
-        $results = DB::getInstance()->getPDO()->prepare('UPDATE tache SET mailUtilisateur = :mail WHERE idTache = :id');
+        $results = DB::getInstance()->getPDO()->prepare('UPDATE Tache SET mailUtilisateur = :mail WHERE idTache = :id');
         $results->bindParam(':mail', $mail);
         $results->bindParam(':id', $idTache);
         $results->execute();
     }
 
     public function deleteUserTache($idTache){
-        $results = DB::getInstance()->getPDO()->prepare('UPDATE tache SET mailUtilisateur = NULL WHERE idTache = :id');
+        $results = DB::getInstance()->getPDO()->prepare('UPDATE Tache SET mailUtilisateur = NULL WHERE idTache = :id');
         $results->bindParam(':id', $idTache);
         $results->execute();
     }

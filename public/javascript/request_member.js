@@ -43,7 +43,7 @@ function setCriteria(criteria, liste, nom, id) {
             res = code_html.split("\\/");
 
             for (i = 0; i < res.length - 1; i += 5) {
-                if (res[i] != nom) {
+                if (res[i] != nom && i / 5 <= 10) {
                     document.getElementById("utilisateurs").innerHTML += '<div class="jumbotron col-auto" style="border: solid; order=-1;padding: 10px; margin: 20px;" id="lia@li.com">\n' +
                         '\n' +
                         '                        <br><table>\n' +
