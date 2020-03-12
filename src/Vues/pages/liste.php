@@ -148,7 +148,7 @@ $liste = DB::getInstance()->loadListe($_GET["id"]);
                         </form>
 
                         <form method="post" action="#">
-                            <a href="?page=deleteTache&mail=<?= $user->getMail() ?>&idTache=<?= $id;?>&idListe=<?= $_GET['id'];?>">
+                            <a href="?page=deleteTache&idTache=<?= $id;?>">
                             <button type="button" value="<?= $user->getMail() ?>" class="btn btn-danger btn-sm">
                                 Supprimer la tâche
                             </button>

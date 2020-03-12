@@ -8,6 +8,8 @@ class DeleteAccountController extends Controller
     public function deleteAccount()
     {
         if(isset($_SESSION['user'])) {
+            $user = unserialize($_SESSION['user']);
+            $user->supprimer();
             DB::getInstance()->deleteUser(unserialize($_SESSION['user'])->getMail());
             unset($_SESSION['user']);
         }
