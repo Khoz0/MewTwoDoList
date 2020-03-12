@@ -69,7 +69,7 @@ class InscriptionController extends Controller
             move_uploaded_file($photo['tmp_name'], 'assests/uploads/' . basename($photo['name']).$mail);
             $photo = "assests/uploads/".$photo['name'].$mail;
         } else {
-            $photo = "assests/profil";
+            $photo = "assests/profil.png";
         }
 
 
