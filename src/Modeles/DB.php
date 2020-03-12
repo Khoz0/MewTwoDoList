@@ -62,12 +62,27 @@ class DB {
     }
 
     public function deleteUser($mail){
+
+        //On supprime toutes les listes desquelles il est propriétaire
+        $resList = DB::getInstance()->getPDO()->prepare("SELECT idListe FROM Liste WHERE mailProprietaire = :mail");
+        $resList->bindParam(":mail", $mail);
+        $resList->execute();
+        while($donnees = $resList->fetch()){
+            $this->deleteListe($donnees["idListe"]);
+        }
+
+        //On le retire de toutes les listes dont il est membre
+        $resList = DB::getInstance()->getPDO()->prepare("SELECT idListe FROM Membre WHERE mail = :mail");
+        $resList->bindParam(":mail", $mail);
+        $resList->execute();
+        while($donnees = $resList->fetch()){
+            $this->deleteListMember($mail, $donnees["idListe"]);
+        }
+
+        //On le supprime de la base de données
         $resUser = DB::getInstance()->getPDO()->prepare("DELETE FROM Utilisateur WHERE mail = :mail");
         $resUser->bindParam(":mail", $mail);
         $resUser->execute();
-        $resList = DB::getInstance()->getPDO()->prepare("DELETE FROM Liste WHERE mailProprietaire = :mail");
-        $resList->bindParam(":mail", $mail);
-        $resList->execute();
     }
 
 	public function deleteListMember($mail, $idListe){

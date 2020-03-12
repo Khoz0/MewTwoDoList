@@ -29,7 +29,7 @@ class InscriptionController extends Controller
         }
 
         // On vérifie que les champs sont correctements entrés
-        if (!preg_match('/^[a-zA-Z0-9]{1,50}$/', $pseudoUser)) {
+        if (!preg_match('/^[a-zA-Zàéèëîïûü0-9]{1,50}$/', $pseudoUser)) {
             $_SESSION['error_syntx']['pseudo'] = 1;
         }
 
@@ -51,7 +51,7 @@ class InscriptionController extends Controller
         }
 
         if($mail) {
-            if(!preg_match('/^[a-zA-Z0-9\-]+@[a-zA-Z0-9\-]+\.[a-zA-Z0-9\-]+$/', $mail) || strlen($mail) > 100) {
+            if(!preg_match('/^[a-zA-Z0-9\-\.]+@[a-zA-Z0-9\-\.]+\.[a-zA-Z0-9\-]+$/', $mail) || strlen($mail) > 100) {
                 $_SESSION['error_syntx']['mail'] = 1;
             }
         }
@@ -66,6 +66,7 @@ class InscriptionController extends Controller
             if(!is_dir("assests/uploads/")){
                 mkdir("assests/uploads/", 0777, true);
             }
+            str_replace('http', '', $photo['name']);
             move_uploaded_file($photo['tmp_name'], 'assests/uploads/' . basename($photo['name']).$mail);
             $photo = "assests/uploads/".$photo['name'].$mail;
         } else {
