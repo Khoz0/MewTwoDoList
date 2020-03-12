@@ -22,7 +22,7 @@ if (isset($_POST['criteria'])) {
     $html = "";
 
     foreach ($res as $user) {
-        $html .= $user->getMail() . "\/" . $user->getPhoto() . "\/" . $user->getPrenom() . "\/" . $user->getNom() . "\/";
+        $html .= $user->getMail() . "\/" . $user->getPhoto() . "\/" . $user->getPrenom() . "\/" . $user->getNom() . "\/" . $user->getPseudo() . "\/";
     }
 
     echo $html;

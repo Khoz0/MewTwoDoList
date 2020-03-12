@@ -65,8 +65,9 @@ $membreSelection = new RechercheMembreController();
                         </table>
 
                         <br>
-                        <div class="row justify-content-center"><?php echo $user->getMail() ?></div>
+                        <div class="row justify-content-center"><?php echo $user->getPseudo() ?></div>
                         <div class="row justify-content-center"><?php echo $user->getPrenom() . " " . $user->getNom() ?></div>
+                        <div class="row justify-content-center"><?php echo $user->getMail() ?></div>
 
                     </div>
                 <?php }
@@ -77,5 +78,5 @@ $membreSelection = new RechercheMembreController();
 
 
 <div class="row justify-content-center">
-<button>Annuler</button>
+<button onclick="window.location.href = '?page=liste&id=<?php echo $_GET['id'] ?>'">Annuler</button>
 </div>
