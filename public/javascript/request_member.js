@@ -1,6 +1,7 @@
 function setCriteria(criteria, liste, nom, id) {
 
-    console.log(criteria + " " + liste + " " + nom + " " + id);
+    args = liste.split(" ");
+
     url = window.location.origin + "/mew_two_do_list/ajax/request_member.php";
     if (liste == undefined) {
 
@@ -8,13 +9,13 @@ function setCriteria(criteria, liste, nom, id) {
 
         arg1 = "";
     } else {
-        if (criteria == "name" && liste.split(" ").size >= 2) {
+        if (criteria == "name" && args.size >= 2) {
 
-            arg0 = liste[0];
+            arg0 = args[0];
 
-            arg1 = liste[1];
+            arg1 = args[1];
         } else {
-            arg0 = liste[0];
+            arg0 = args[0];
             arg1 = "";
 
         }
@@ -50,7 +51,9 @@ function setCriteria(criteria, liste, nom, id) {
                         '                                    <img src="' + res[i + 1] + '" width="60px" height="60px" alt="' + res[i] + '"> </td>\n' +
                         '                                <td width="30px"></td>\n' +
                         '                                <td>\n' +
-                        '                                    <button onclick="addMembre(\'' + res[i] + '\',\'' + id + '\')">Ajouter</button>\n' + //TODO Soucis, quel numéro de liste ?
+                        '<a href="?page=addUserList&amp;mail=' + res[i] + '&amp;idListe=' + id + '">\n' +
+                        '                                    <button>Ajouter</button>\n' +
+                        '                                    </a>' +
                         '                                </td>\n' +
                         '                            </tr>\n' +
                         '                            \n' +
@@ -61,7 +64,6 @@ function setCriteria(criteria, liste, nom, id) {
                         '                        <div class="row justify-content-center">' + res[i + 2] + ' ' + res[i + 3] + '</div>\n' + //Prenom + nom
                         '\n' +
                         '                    </div>';
-                    console.log(res[i]);
                 }
             }
 
