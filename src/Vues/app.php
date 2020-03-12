@@ -65,8 +65,9 @@ if ($page != "login" && $page != "disconnect" && $page != "inscription" && $page
                 <?php } ?>
             </div>
         </div>
+        </nav>
     <?php } ?>
-</nav>
+
 
 
 <main>
