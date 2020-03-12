@@ -12,20 +12,20 @@ abstract class NotificationAvecChoix extends Notification {
       $this->$repondu = false
     }
 
-    public ajouterBDD() {
+    public function ajouterBDD() {
       //AjouterBDD
     }
 
-    public supprimerBDD() {
+    public function supprimerBDD() {
       //SupprimerBDD
     }
 
-    public accepter(){
+    public function accepter(){
 
     }
 
-    public refuser(){
-      
+    public function refuser(){
+
     }
 
 }

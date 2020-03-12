@@ -10,15 +10,15 @@ abstract class NotificationAjoutMembre extends NotificationAvecChoix {
     }
 
 
-    public ajouterBDD() {
+    public function ajouterBDD() {
       //AjouterBDD
     }
 
-    public supprimerBDD() {
+    public function supprimerBDD() {
       //SupprimerBDD
     }
 
-    public ajoutMembre() {
+    public function ajoutMembre() {
 
     }
 

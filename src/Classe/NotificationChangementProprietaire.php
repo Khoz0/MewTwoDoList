@@ -10,16 +10,16 @@ abstract class NotificationChangementProprietaire extends NotificationAvecChoix 
     }
 
 
-    public ajouterBDD() {
+    public function ajouterBDD() {
       //AjouterBDD
     }
 
-    public supprimerBDD() {
+    public function supprimerBDD() {
       //SupprimerBDD
     }
 
-    public changementProprietaire() {
-      
+    public function changementProprietaire() {
+
     }
 }
 

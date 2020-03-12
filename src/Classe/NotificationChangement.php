@@ -9,11 +9,11 @@ class NotificationChangement extends Notification {
       parent::__construct($dateCreation, $contenu, $source);
     }
 
-    public ajouterBDD() {
+    public function ajouterBDD() {
       //AjouterBDD
     }
 
-    public supprimerBDD() {
+    public function supprimerBDD() {
       //SupprimerBDD
     }
 }
