@@ -106,15 +106,16 @@ class DB {
         $res->execute();
     }
 
-    public function getUtilisateurs($criteria, $args)
+    public function getUtilisateurs($criteria, $args, $id)
     {
         switch ($criteria) {
             case "name":
-                $getUser = DB::getInstance()->getPDO()->prepare("SELECT * FROM Utilisateur
-                        where nomUser like UPPER(CONCAT(:nomUser,'%')) or
+                $getUser = DB::getInstance()->getPDO()->prepare("SELECT * FROM Utilisateur 
+                        where mail not in (SELECT DISTINCT utilisateur.mail from utilisateur, membre where membre.mail like utilisateur.mail and membre.idListe = :id )
+                         and (nomUser like UPPER(CONCAT(:nomUser,'%')) or 
                          prenomUser like UPPER(CONCAT(:nomUser,'%')) or
-                         ( :prenomUser not like '' and prenomUser like UPPER(CONCAT(:prenomUser,'%'))) or
-                         ( :prenomUser not like '' and nomUser like UPPER(CONCAT(:prenomUser,'%'))) ");
+                         ( :prenomUser not like '' and prenomUser like UPPER(CONCAT(:prenomUser,'%'))) or 
+                         ( :prenomUser not like '' and nomUser like UPPER(CONCAT(:prenomUser,'%')))) ");
 
 
                 $name = $args[0];
@@ -122,18 +123,21 @@ class DB {
 
                 $getUser->bindParam(':nomUser', $name);
                 $getUser->bindParam(':prenomUser', $prenom);
+                $getUser->bindParam(':id', $id);
                 break;
             case "mail":
-                $getUser = DB::getInstance()->getPDO()->prepare("SELECT * FROM Utilisateur where mail like UPPER(CONCAT(:mail,'%'))");
+                $getUser = DB::getInstance()->getPDO()->prepare("SELECT * FROM Utilisateur where mail not in (SELECT DISTINCT utilisateur.mail from utilisateur, membre where membre.mail like utilisateur.mail and membre.idListe = :id ) and mail like UPPER(CONCAT(:mail,'%'))");
 
                 $mail = $args[0];
                 $getUser->bindParam(':mail', $mail);
+                $getUser->bindParam(':id', $id);
 
                 break;
             case "pseudo":
-                $getUser = DB::getInstance()->getPDO()->prepare("SELECT * FROM Utilisateur where pseudoUser  like UPPER(CONCAT(:users,'%'))");
+                $getUser = DB::getInstance()->getPDO()->prepare("SELECT * FROM Utilisateur where mail not in (SELECT DISTINCT utilisateur.mail from utilisateur, membre where membre.mail like utilisateur.mail and membre.idListe = :id ) and pseudoUser  like UPPER(CONCAT(:users,'%'))");
                 $user = $args[0];
                 $getUser->bindParam(':users', $user);
+                $getUser->bindParam(':id', $id);
                 break;
             default:
                 $getUser = DB::getInstance()->getPDO()->prepare("SELECT * FROM Utilisateur");
@@ -204,7 +208,7 @@ class DB {
                 $liste->ajouterTache($donneesTaches);
             }
 
-            $recupererMembre = DB::getInstance()->getPDO()->prepare("SELECT * FROM Membre WHERE idListe = :id");
+            $recupererMembre = DB::getInstance()->getPDO()->prepare("SELECT * FROM Membre WHERE idListe = :id ");
             $recupererMembre->bindParam(":id", $id);
             $recupererMembre->execute();
             while ($donneesMembre = $recupererMembre->fetch()) {
