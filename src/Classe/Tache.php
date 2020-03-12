@@ -4,6 +4,7 @@
 namespace App\Classe;
 
 use App\Modeles\DB;
+use function PHPSTORM_META\elementType;
 
 class Tache
 {
@@ -128,6 +129,20 @@ class Tache
     public function setValide($valide)
     {
         $this->valide = $valide;
+    }
+
+    public function setEtat(){
+        if($this->valide){
+            $this->etat = "Finie";
+        }
+        else{
+            if($this->mailUtilisateur != null){
+                $this->etat = "En cours";
+            }
+            else{
+                $this->etat = "En attente";
+            }
+        }
     }
 
 

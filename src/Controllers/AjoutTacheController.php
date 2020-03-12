@@ -24,7 +24,7 @@ class AjoutTacheController extends Controller
             $id = $donnees['idTache'];
         }
         $id += 1;
-        $tache = new Tache($id, $_POST['texte'], "stand by", $idListe, null, 0);
+        $tache = new Tache($id, $_POST['texte'], "En attente", $idListe, null, 0);
         $liste->ajouterTache($tache);
         $tache->sauvegarderBDD();
 
