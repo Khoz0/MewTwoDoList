@@ -14,7 +14,6 @@ class Utilisateur
     private $motDePasse;
     private $photo;
     private $listesProprietaire = array();
-    private $bdd;
 
     function __construct($nom, $prenom, $pseudo, $mail, $motDePasse, $urlPhoto)
     {
@@ -25,7 +24,6 @@ class Utilisateur
         $this->motDePasse = $motDePasse;
         $this->photo = $urlPhoto;
         $this->listesProprietaire = array();
-        $this->bdd=DB::getInstance();
     }
 
     /**
@@ -148,11 +146,12 @@ class Utilisateur
     }
 
     public function supprimer() {
+        $bdd = DB::getInstance();
         //On supprime toutes les listes desquelles il est propriétaire
         unset($this->listesProprietaire);
 
         //On le retire des listes desquelles il est membre
-        $listesTotal = $this->bdd->recupererListesMembres($this->mail);
+        $listesTotal = $bdd->recupererListesMembres($this->mail);
         foreach ($listesTotal as $liste) {
             $liste->supprimerMembre($this->mail);
         }
