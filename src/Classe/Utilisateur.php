@@ -145,6 +145,18 @@ class Utilisateur
         $this->listesProprietaire[$liste->getIdListe()] = $liste;
     }
 
+    public function supprimer() {
+        $bdd = DB::getInstance();
+        //On supprime toutes les listes desquelles il est propriétaire
+        unset($this->listesProprietaire);
+
+        //On le retire des listes desquelles il est membre
+        $listesTotal = $bdd->recupererListesMembres($this->mail);
+        foreach ($listesTotal as $liste) {
+            $liste->supprimerMembre($this->mail);
+        }
+    }
+
     public function supprimerListe($id)
     {
         unset($this->listesProprietaire[$id]);
