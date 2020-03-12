@@ -60,8 +60,9 @@ function setCriteria(criteria, liste, nom, id) {
                         '                        </tbody></table>\n' +
                         '\n' +
                         '                        <br>\n' +
-                        '                        <div class="row justify-content-center">' + res[i] + '</div>\n' +
-                        '                        <div class="row justify-content-center">' + res[i + 2] + ' ' + res[i + 3] + '</div>\n' + //Prenom + nom
+                                                 '<div class="row justify-content-center">'+res[i]+'</div>' +
+                        '                        <div class="row justify-content-center">' + res[i + 2] + ' ' + res[i + 3] + '</div>\n' +
+                        '                        <div class="row justify-content-center">' + res[i] + '</div>\n' + //Prenom + nom
                         '\n' +
                         '                    </div>';
                 }
