@@ -45,6 +45,7 @@ DROP TABLE IF EXISTS `Membre`;
 CREATE TABLE `Membre` (
   `mail` varchar(100) DEFAULT NULL,
   `idListe` int(10) DEFAULT NULL,
+  PRIMARY KEY (`mail`,`idListe`),
   KEY `FK_Membre1` (`mail`),
   KEY `FK_Membre2` (`idListe`),
   CONSTRAINT `FK_Membre1` FOREIGN KEY (`mail`) REFERENCES `Utilisateur` (`mail`),

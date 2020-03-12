@@ -65,8 +65,9 @@ $membreSelection = new RechercheMembreController();
                         </table>
 
                         <br>
-                        <div class="row justify-content-center"><?php echo $user->getMail() ?></div>
+                        <div class="row justify-content-center"><?php echo $user->getPseudo() ?></div>
                         <div class="row justify-content-center"><?php echo $user->getPrenom() . " " . $user->getNom() ?></div>
+                        <div class="row justify-content-center"><?php echo $user->getMail() ?></div>
 
                     </div>
                 <?php }

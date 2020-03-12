@@ -112,7 +112,7 @@ $liste = DB::getInstance()->loadListe($_GET["id"]);
 
                 if ($tache->getUtilisateurAssigne() == null) {
                     if (isset($_POST[$nom])) {
-                        //$tache->setUtilisateurAssigne($_POST[$nom]);
+                        $tache->setUtilisateurAssigne($_POST[$nom]);
                     }
 
                     ?>
