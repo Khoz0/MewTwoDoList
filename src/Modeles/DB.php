@@ -400,14 +400,14 @@ class DB {
     }
 
     public function addUserTache($mail, $idTache){
-        $results = DB::getInstance()->getPDO()->prepare('UPDATE tache SET mailUtilisateur = :mail WHERE idTache = :id');
+        $results = DB::getInstance()->getPDO()->prepare('UPDATE Tache SET mailUtilisateur = :mail WHERE idTache = :id');
         $results->bindParam(':mail', $mail);
         $results->bindParam(':id', $idTache);
         $results->execute();
     }
 
     public function deleteUserTache($idTache){
-        $results = DB::getInstance()->getPDO()->prepare('UPDATE tache SET mailUtilisateur = NULL WHERE idTache = :id');
+        $results = DB::getInstance()->getPDO()->prepare('UPDATE Tache SET mailUtilisateur = NULL WHERE idTache = :id');
         $results->bindParam(':id', $idTache);
         $results->execute();
     }

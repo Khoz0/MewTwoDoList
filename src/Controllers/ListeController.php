@@ -10,7 +10,7 @@ use App\Modeles\DB;
 class ListeController extends Controller {
 
     public function liste() {
-    	$id = $_GET['id'];
+    	$id = $_GET['id'] ?? $this->redirect('accueil');
     	$bdd = DB::getInstance()->loadListe($id);
 
         /*

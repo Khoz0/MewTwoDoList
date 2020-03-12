@@ -17,7 +17,7 @@ if ($page != "login" && $page != "disconnect" && $page != "inscription" && $page
 ?>
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <a class="navbar-brand" href="?page=accueil">MewTwoDoList</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedCon<tent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
 
@@ -42,10 +42,10 @@ if ($page != "login" && $page != "disconnect" && $page != "inscription" && $page
     <!-- affichage des icônes de menu -->
     <?php if (isset($_SESSION['user']) && $page != "modifTache") {?>
         <div class="btn-group">
-            <button class="btn float-right" type="button"><img src="assests/notif.png" alt="notification" width="20" height="20"></button>
+            <a class="btn float-right" href="?page=notification"><img src="assests/notif.png" alt="notification" width="20" height="20"></a>
         </div>
         <div class="btn-group">
-            <button class="btn btn-default dropdown-toggle mr-4 float-right" type="button" data-toggle="dropdown"
+            <button class="btn btn-default dropdown-toggle mr-4 float-right" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
                 <?php
                 $user = unserialize($_SESSION['user']);
@@ -65,8 +65,9 @@ if ($page != "login" && $page != "disconnect" && $page != "inscription" && $page
                 <?php } ?>
             </div>
         </div>
+        </nav>
     <?php } ?>
-</nav>
+
 
 
 <main>

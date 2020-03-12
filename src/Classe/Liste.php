@@ -48,10 +48,9 @@ class Liste {
     }
 
 
-	/*public function supprimerMembre($mail){
-        $bdd = DB::getInstance();
-        $bdd->deleteListMember($mail);
-    }*/
+	public function supprimerMembre($mail){
+        unset($this->tabUtilisateur[array_search($mail,$this->tabUtilisateur)]);
+    }
 
     public function changerProprietaire($mailUtilisateur){
         $this->mailProprietaire = $mailUtilisateur;
@@ -92,6 +91,7 @@ class Liste {
         $bdd = DB::getInstance();
         $bdd->addListe($this->idListe,$this->intituleListe,$this->dateCreation,$this->dateFin,$this->mailProprietaire);
     }
+
 
     /**
      * @return mixed

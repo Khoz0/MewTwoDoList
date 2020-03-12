@@ -138,10 +138,19 @@ $liste = DB::getInstance()->loadListe($_GET["id"]);
                     var_dump($tache->getUtilisateurAssigne());
                     ?><br><h5><?php echo $tache->getUtilisateurAssigne(); ?></h5><br>
                     <div>
-                        <form method="post" name="-<?php echo $nom ?> " action="#">
+
+                        <form method="post" action="#">
                             <a href="?page=deleteUserTache&mail=<?php echo $user->getMail() ?>&idTache=<?php echo $id;?>&idListe=<?php echo $_GET['id'];?>">
                             <button type="button" value="<?php echo $user->getMail() ?>" class="btn btn-primary btn-sm">
                                 Se retirer
+                            </button>
+                            </a>
+                        </form>
+
+                        <form method="post" action="#">
+                            <a href="?page=deleteTache&idTache=<?= $id;?>">
+                            <button type="button" value="<?= $user->getMail() ?>" class="btn btn-danger btn-sm">
+                                Supprimer la tâche
                             </button>
                             </a>
                         </form>

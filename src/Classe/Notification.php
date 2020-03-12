@@ -2,26 +2,27 @@
 namespace App\Classe;
 
 use App\Modeles\DB;
+use App\Classe\Utilisateur;
 
 abstract class Notification {
 
   protected $dateCreation;
   protected $contenu;
   protected $lu;
-  protected $source;
+  protected $sourceUtilisateur;
 
-  public function __construct($dateCreation, $contenu, $source) {
+  public function __construct($dateCreation, $contenu, $sourceUtilisateur) {
       $this->$dateCreation = $dateCreation;
       $this->$contenu = $contenu;
       $this->$lu = false;
       $this->$source = $source;
   }
 
-  public ajouterBDD() {
-    //AjouterBDD
+  public function ajouterBDD() {
+
   }
 
-  public supprimerBDD() {
+  public function supprimerBDD() {
     //SupprimerBDD
   }
 
