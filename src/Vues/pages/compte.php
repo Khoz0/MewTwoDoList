@@ -27,7 +27,7 @@ $user = unserialize($_SESSION['user']);
                         <br>
                         <label for="inputPseudo">Votre pseudo</label>
                         <div class="form-label-group">
-                            <input type="text" name="inputPseudo" class="form-control" placeholder=<?php echo $user->getPseudo() ?>
+                            <input type="text" name="inputPseudo" id="inputPseudo" class="form-control" placeholder=<?php echo $user->getPseudo() ?>
                                    autofocus>
                             <?php
                             if(isset($_SESSION['error_exist'])){
@@ -42,23 +42,23 @@ $user = unserialize($_SESSION['user']);
                         </div>
                         <label for="inputNom">Votre nom</label>
                         <div class="form-label-group">
-                            <input type="text" name="inputNom" class="form-control" placeholder=<?php echo $compte->getNom() ?>>
+                            <input type="text" name="inputNom" id="inputNom" class="form-control" placeholder=<?php echo $compte->getNom() ?>>
                         </div>
 
                         <label for="inputPrenom">Votre prénom</label>
                         <div class="form-label-group">
-                            <input type="text" name="inputPrenom" class="form-control" placeholder=<?php echo $compte->getPrenom() ?>>
+                            <input type="text" name="inputPrenom" id="inputPrenom" class="form-control" placeholder=<?php echo $compte->getPrenom() ?>>
                         </div>
 
                         <label for="inputEmail">Votre adresse mail</label>
                         <div class="form-label-group">
-                            <input type="email" name="inputEmail" class="form-control" placeholder="<?php echo $compte->getMail() ?>"
+                            <input type="email" name="inputEmail" id="inputEmail" class="form-control" placeholder="<?php echo $compte->getMail() ?>"
                                    disabled>
                         </div>
 
-                        <label for='inputPassword'>Votre photo de profil</label>
+                        <label for='inputPhoto'>Votre photo de profil</label>
                         <div class='form-label-group'>
-                            <input type='file' name='inputPhoto' class='form-control'>
+                            <input type='file' name='inputPhoto' id="inputPhoto" class='form-control'>
                         </div>
 
                         <div id=mdp>
