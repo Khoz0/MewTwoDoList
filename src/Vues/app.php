@@ -42,7 +42,7 @@ if ($page != "login" && $page != "disconnect" && $page != "inscription" && $page
     <!-- affichage des icônes de menu -->
     <?php if (isset($_SESSION['user']) && $page != "modifTache") {?>
         <div class="btn-group">
-            <button class="btn float-right" type="button"><img src="assests/notif.png" href="?page=notification" alt="notification" width="20" height="20"></button>
+            <a class="btn float-right" type="button" href="?page=notification"><img src="assests/notif.png" alt="notification" width="20" height="20"></a>
         </div>
         <div class="btn-group">
             <button class="btn btn-default dropdown-toggle mr-4 float-right" type="button" data-toggle="dropdown"
