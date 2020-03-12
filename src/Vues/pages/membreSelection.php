@@ -36,7 +36,7 @@ $membreSelection = new RechercheMembreController();
 
             $liste = DB::getInstance()->loadListe($_GET['id']);
 
-            foreach (DB::getInstance()->getUtilisateurs("", null) as $user) {
+            foreach (DB::getInstance()->getUtilisateurs("", null, $_GET['id']) as $user) {
                 if ($user->getMail() != unserialize($_SESSION['user'])->getMail() && $cpt < 10 && !$liste->contientUtilisateur($user->getMail())) {
                     $cpt++;
                     ?>
