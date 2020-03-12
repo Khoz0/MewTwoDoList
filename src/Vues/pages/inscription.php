@@ -1,6 +1,14 @@
 <script type="text/javascript" src="javascript/verification_inscription.js"></script>
 <?php
 use App\Controllers\InscriptionController;
+
+
+if(isset($_POST['submit'])){
+    $_SESSION['inscription']["nomUser"] = $_POST["nomUser"];
+    $_SESSION['inscription']["prenomUser"] = $_POST["prenomUser"];
+    $_SESSION['inscription']["pseudoUser"] = $_POST["pseudoUser"];
+    $_SESSION['inscription']["mail"] = $_POST["mail"];
+}
 ?>
 
 <div class="container">

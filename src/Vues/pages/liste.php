@@ -135,7 +135,6 @@ $liste = DB::getInstance()->loadListe($_GET["id"]);
                     </div>
                     <?php
                 } else {
-                    var_dump($tache->getUtilisateurAssigne());
                     ?><br><h5><?php echo $tache->getUtilisateurAssigne(); ?></h5><br>
                     <div>
 
