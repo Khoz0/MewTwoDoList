@@ -446,4 +446,21 @@ class DB {
         return $listes;
     }
 
+    public function addNotification($idNotif, $dateCreation, $contenu, $lu, $mail, $idListe){
+      $results = DB::getInstance()->getPDO()->prepare('INSERT INTO Tache(idNotification, dateEnvoi, contenu, lu, mail, idListe) VALUES (:id, :dateE, :contenu, :lu, :mail, :idL)');
+      $results->bindParam(":id", $idNotif);
+      $results->bindParam(":dateE", $dateCreation);
+      $results->bindParam(":contenu", $contenu);
+      $results->bindParam(":lu", $lu);
+      $results->bindParam(":mail", $mail);
+      $results->bindParam(":idL", $idListe);
+      $results->execute();
+    }
+
+    public function deleteNotification($idNotif) {
+      $results = DB::getInstance()->getPDO()->prepare('DELETE FROM Notification WHERE idNotification = :id ');
+      $results->bindParam(':id', $idNotif);
+      $results->execute();
+    }
+
 }
