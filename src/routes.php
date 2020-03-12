@@ -46,9 +46,7 @@ switch($page) {
         (new App\Controllers\ModificationTacheController)->modifTache();
         break;
 
-    case 'deleteTache':
-        (new App\Controllers\DeleteTacheController)->deleteTache();
-        break;
+
 
     case 'deleteAccount':
         (new App\Controllers\DeleteAccountController())->deleteAccount();
