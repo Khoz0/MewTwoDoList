@@ -2,11 +2,14 @@
 
 namespace App\Classe;
 
+use App\Modeles\DB;
 
-class NotificationChangement extends Notification {
+abstract class NotificationAvecChoix extends Notification {
+  protected $repondu;
 
   function __construct($dateCreation, $contenu, $source) {
       parent::__construct($dateCreation, $contenu, $source);
+      $this->$repondu = false
     }
 
     public ajouterBDD() {
@@ -16,7 +19,15 @@ class NotificationChangement extends Notification {
     public supprimerBDD() {
       //SupprimerBDD
     }
+
+    public accepter(){
+
+    }
+
+    public refuser(){
+      
+    }
+
 }
 
-
- ?>
+?>
