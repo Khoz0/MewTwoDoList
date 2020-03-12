@@ -110,10 +110,10 @@ class DB {
     {
         switch ($criteria) {
             case "name":
-                $getUser = DB::getInstance()->getPDO()->prepare("SELECT * FROM Utilisateur 
-                        where nomUser like UPPER(CONCAT(:nomUser,'%')) or 
+                $getUser = DB::getInstance()->getPDO()->prepare("SELECT * FROM Utilisateur
+                        where nomUser like UPPER(CONCAT(:nomUser,'%')) or
                          prenomUser like UPPER(CONCAT(:nomUser,'%')) or
-                         ( :prenomUser not like '' and prenomUser like UPPER(CONCAT(:prenomUser,'%'))) or 
+                         ( :prenomUser not like '' and prenomUser like UPPER(CONCAT(:prenomUser,'%'))) or
                          ( :prenomUser not like '' and nomUser like UPPER(CONCAT(:prenomUser,'%'))) ");
 
 
@@ -396,14 +396,14 @@ class DB {
     }
 
     public function addUserTache($mail, $idTache){
-        $results = DB::getInstance()->getPDO()->prepare('UPDATE tache SET mailUtilisateur = :mail WHERE idTache = :id');
+        $results = DB::getInstance()->getPDO()->prepare('UPDATE Tache SET mailUtilisateur = :mail WHERE idTache = :id');
         $results->bindParam(':mail', $mail);
         $results->bindParam(':id', $idTache);
         $results->execute();
     }
 
     public function deleteUserTache($idTache){
-        $results = DB::getInstance()->getPDO()->prepare('UPDATE tache SET mailUtilisateur = NULL WHERE idTache = :id');
+        $results = DB::getInstance()->getPDO()->prepare('UPDATE Tache SET mailUtilisateur = NULL WHERE idTache = :id');
         $results->bindParam(':id', $idTache);
         $results->execute();
     }

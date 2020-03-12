@@ -80,6 +80,9 @@ switch($page) {
     case 'deleteUserTache':
         (new App\Controllers\TacheController())->deleteUser();
         break;
+    case 'notification':
+        (new App\Controllers\NotifController())->notif();
+        break;
 
 
 	default: // Si, rien, alors erreur 404
