@@ -97,27 +97,28 @@ class DB {
             case "name":
                 $getUser = DB::getInstance()->getPDO()->prepare("SELECT * FROM Utilisateur 
                         where nomUser like UPPER(CONCAT(:nomUser,'%')) or 
-                         prenomUser like UPPER(CONCAT(:prenomUser,'%')) or nomUser like UPPER(CONCAT(:prenomUser,'%')) 
-                         or prenomUser like UPPER(CONCAT(:nomUser,'%')) ");
+                         prenomUser like UPPER(CONCAT(:nomUser,'%')) or
+                         ( :prenomUser not like '' and prenomUser like UPPER(CONCAT(:prenomUser,'%'))) or 
+                         ( :prenomUser not like '' and nomUser like UPPER(CONCAT(:prenomUser,'%'))) ");
+
 
                 $name = $args[0];
                 $prenom = $args[1];
-
 
                 $getUser->bindParam(':nomUser', $name);
                 $getUser->bindParam(':prenomUser', $prenom);
                 break;
             case "mail":
-                $getUser = DB::getInstance()->getPDO()->prepare("SELECT * FROM Utilisateur where mail = :mail");
+                $getUser = DB::getInstance()->getPDO()->prepare("SELECT * FROM Utilisateur where mail like UPPER(CONCAT(:mail,'%'))");
 
-                $mail = "%" . $args[0] . "%";
+                $mail = $args[0];
                 $getUser->bindParam(':mail', $mail);
 
                 break;
             case "pseudo":
-                $getUser = DB::getInstance()->getPDO()->prepare("SELECT * FROM Utilisateur where pseudoUser = :pseudoUser");
-                $user = $args[0] . "%";
-                $getUser->bindParam(':pseudoUser', $user);
+                $getUser = DB::getInstance()->getPDO()->prepare("SELECT * FROM Utilisateur where pseudoUser  like UPPER(CONCAT(:users,'%'))");
+                $user = $args[0];
+                $getUser->bindParam(':users', $user);
                 break;
             default:
                 $getUser = DB::getInstance()->getPDO()->prepare("SELECT * FROM Utilisateur");

@@ -1,6 +1,7 @@
 function setCriteria(criteria, liste, nom, id) {
 
-    console.log(criteria + " " + liste + " " + nom + " " + id);
+    args = liste.split(" ");
+
     url = window.location.origin + "/mew_two_do_list/ajax/request_member.php";
     if (liste == undefined) {
 
@@ -8,13 +9,13 @@ function setCriteria(criteria, liste, nom, id) {
 
         arg1 = "";
     } else {
-        if (criteria == "name" && liste.split(" ").size >= 2) {
+        if (criteria == "name" && args.size >= 2) {
 
-            arg0 = liste[0];
+            arg0 = args[0];
 
-            arg1 = liste[1];
+            arg1 = args[1];
         } else {
-            arg0 = liste[0];
+            arg0 = args[0];
             arg1 = "";
 
         }
