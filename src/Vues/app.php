@@ -69,11 +69,14 @@ if ($page != "login" && $page != "disconnect" && $page != "inscription" && $page
 
         </nav>
 
+
+
 <main>
     <section class="container">
         <?= $contenu ?>
     </section>
 </main>
+</body>
 
 <!-- Footer -->
 <footer class="page-footer font-small teal pt-4">
@@ -89,26 +92,12 @@ if ($page != "login" && $page != "disconnect" && $page != "inscription" && $page
 
         <!-- Content -->
         <h5 class="text-uppercase font-weight-bold">Footer text 1</h5>
-        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Expedita sapiente sint, nulla, nihil
-          repudiandae commodi voluptatibus corrupti animi sequi aliquid magnam debitis, maxime quam recusandae
-          harum esse fugiat. Itaque, culpa?</p>
+        <p>Projet PPIL réalisé par : </p>
 
       </div>
       <!-- Grid column -->
 
       <hr class="clearfix w-100 d-md-none pb-3">-
-
-      <!-- Grid column -->
-      <div class="col-md-6 mb-md-0 mb-3">
-
-        <!-- Content -->
-        <h5 class="text-uppercase font-weight-bold">Footer text 2</h5>
-        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Optio deserunt fuga perferendis modi earum
-          commodi aperiam temporibus quod nulla nesciunt aliquid debitis ullam omnis quos ipsam, aspernatur id
-          excepturi hic.</p>
-
-      </div>
-      <!-- Grid column -->
 
     </div>
     <!-- Grid row -->
@@ -124,8 +113,4 @@ if ($page != "login" && $page != "disconnect" && $page != "inscription" && $page
 
 </footer>
 <!-- Footer -->
-
-</body>
-
-
 </html>
