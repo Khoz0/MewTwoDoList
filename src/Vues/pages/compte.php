@@ -65,9 +65,9 @@ if(isset($_POST['submit'])){
                                    disabled value="<?php if (isset($_SESSION['inscription']["mail"])){echo $_SESSION['inscription']["mail"];} ?>">
                         </div>
 
-                        <label for='inputPassword'>Votre photo de profil</label>
+                        <label for='inputPhoto'>Votre photo de profil</label>
                         <div class='form-label-group'>
-                            <input type='file' name='inputPhoto' class='form-control'>
+                            <input type='file' name='inputPhoto' id="inputPhoto" class='form-control'>
                         </div>
 
                         <div id=mdp>
