@@ -79,7 +79,7 @@ $liste = DB::getInstance()->loadListe($_GET["id"]);
 
 <div>
 	<button type="button" class="btn btn-primary" id="tache"
-	onclick="pop_up();" value="<? htmlspecialchars($_GET["id"]) ?>">Ajout tâche </button>
+	onclick="pop_up();" value="<?= htmlspecialchars($_GET["id"]) ?>">Ajout tâche </button>
 </div>
 
 
@@ -125,10 +125,8 @@ $liste = DB::getInstance()->loadListe($_GET["id"]);
                     ?>
                     <div>
                         <form method="post" name="<?= htmlspecialchars($nom) ?> " action="#">
-                            <a href="?page=addUserTache&mail=<? htmlspecialchars($user->getMail()) ?>&idTache=<?= $id;?>&idListe=<?= $_GET['id'];?>">
-                            <button type="button" value="<?= htmlspecialchars($user->getMail()) ?>" class="btn btn-primary btn-sm">
+                            <a href="?page=addUserTache&mail=<?= htmlspecialchars($user->getMail()) ?>&idTache=<?= $id;?>&idListe=<?= $_GET['id'];?>" class="btn btn-primary btn-sm">
                                 Ajouter un Utilisateur
-                            </button>
                             </a>
                         </form>
                     </div>
