@@ -79,7 +79,7 @@ if ($page != "login" && $page != "disconnect" && $page != "inscription" && $page
 </body>
 
 <!-- Footer -->
-<footer class="page-footer font-small teal pt-4">
+<footer class="page-footer font-small blue pt-4">
 
   <!-- Footer Text -->
   <div class="container-fluid text-center text-md-left">
@@ -91,7 +91,7 @@ if ($page != "login" && $page != "disconnect" && $page != "inscription" && $page
       <div class="col-md-6 mt-md-0 mt-3">
 
         <!-- Content -->
-        <h5 class="text-uppercase font-weight-bold">Footer text 1</h5>
+        <h5 class="text-uppercase font-weight-bold">Projet PPIL</h5>
         <p>Projet PPIL réalisé par : </p>
 
       </div>
@@ -107,7 +107,7 @@ if ($page != "login" && $page != "disconnect" && $page != "inscription" && $page
 
   <!-- Copyright -->
   <div class="footer-copyright text-center py-3">© 2020 Copyright:
-    <a href="https://mdbootstrap.com/"> Mew-two-do-list</a>
+    <a href="https://bitbucket.org/mew_two_do_list/mew_two_do_list/src/master/"> Mew-two-do-list</a>
   </div>
   <!-- Copyright -->
 
