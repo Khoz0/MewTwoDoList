@@ -33,7 +33,7 @@ $modificationListe = new ModificationListeController();
                         <label for="nomListe">Nom de la liste</label>
                         <div class="form-label-group">
                             <?php echo $modificationListe->getAncienNom()?>
-                            <input type="text" id="nomListe" name="nomListe"  class="form-control" placeholder="<?php echo $liste->getIntituleListe();?>"
+                            <input type="text" id="nomListe" name="nomListe"  class="form-control" placeholder="<?= htmlspecialchars($liste->getIntituleListe()) ?>"
                                    required >
                         </div>
 
