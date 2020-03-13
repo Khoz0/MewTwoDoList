@@ -11,6 +11,8 @@ use App\Modeles\DB;
  */
 class InscriptionControllerTest extends TestCase {
 
+public function testInscription() {
+
 	$fonction = new FonctionTest();
     	
 		$res = false;
@@ -47,4 +49,5 @@ class InscriptionControllerTest extends TestCase {
 		$fonction->supprimerUtilisateurTest();
 
 		$this->assert($res, true, 'insertion reussie');
+	}
 }
