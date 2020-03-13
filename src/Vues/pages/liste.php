@@ -31,7 +31,7 @@ $liste = DB::getInstance()->loadListe($_GET["id"]);
                                     <p><?php echo $membre ?>
                                         <button class="btn">
                                             <img src="assests/changement.png" width="15"
-                                                                 height="15" alt="changement">
+                                                                 height="15" alt="changement2">
                                         </button>
                                         <a href="?page=supprimerUserList&mail=<?= $membre ?>&idListe=<?= $_GET['id'] ?>">
                                             <img
@@ -104,7 +104,7 @@ $liste = DB::getInstance()->loadListe($_GET["id"]);
 
                      <!--Bouton modifier tâche-->
                      <div class="col">
-                         <button class="btn"  id="modifTache" type="button" onclick="pop_up_modif(this)" value="<?php echo $id; ?>"><img src="assests/edit.png" width="20" height="20"></button>
+                         <button class="btn"  id="modifTache" type="button" onclick="pop_up_modif(this)" value="<?php echo $id; ?>"><img src="assests/edit.png" alt="edit" width="20" height="20"></button>
                      </div>
 
                      <!--Check box de tâche finie-->
@@ -170,7 +170,6 @@ $liste = DB::getInstance()->loadListe($_GET["id"]);
 
 <script>
 	function pop_up() {
-    console.log("test");
 		var id = document.getElementById("tache").value;
 		window.open('?page=ajoutTache&id='+id,'Ajout tâche', 'height=500, width=800, top=100, left=200, resizable = yes');
 	}
