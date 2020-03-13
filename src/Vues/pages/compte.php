@@ -3,6 +3,13 @@ use \App\Controllers\CompteController;
 
 $compte = (new App\Controllers\CompteController);
 $user = unserialize($_SESSION['user']);
+
+if(isset($_POST['submit'])){
+    $_SESSION['inscription']["nomUser"] = $_POST["inputNom"];
+    $_SESSION['inscription']["prenomUser"] = $_POST["inputPrenom"];
+    $_SESSION['inscription']["pseudoUser"] = $_POST["inputPseudo"];
+    $_SESSION['inscription']["mail"] = $_POST["inputEmail"];
+}
 ?>
 
 <div class="container">
@@ -27,8 +34,8 @@ $user = unserialize($_SESSION['user']);
                         <br>
                         <label for="inputPseudo">Votre pseudo</label>
                         <div class="form-label-group">
-                            <input type="text" name="inputPseudo" id="inputPseudo" class="form-control" placeholder=<?php echo $user->getPseudo() ?>
-                                   autofocus>
+                            <input type="text" name="inputPseudo" class="form-control" placeholder=<?php echo $user->getPseudo() ?>
+                                   autofocus value="<?php if (isset($_SESSION['inscription']["pseudoUser"])){echo $_SESSION['inscription']["pseudoUser"];} ?>">
                             <?php
                             if(isset($_SESSION['error_exist'])){
                                 if(isset($_SESSION['error_exist']['pseudo'])){
@@ -42,18 +49,20 @@ $user = unserialize($_SESSION['user']);
                         </div>
                         <label for="inputNom">Votre nom</label>
                         <div class="form-label-group">
-                            <input type="text" name="inputNom" id="inputNom" class="form-control" placeholder=<?php echo $compte->getNom() ?>>
+                            <input type="text" name="inputNom" class="form-control" placeholder=<?php echo $compte->getNom() ?>
+                            value="<?php if (isset($_SESSION['inscription']["nomUser"])){echo $_SESSION['inscription']["nomUser"];} ?>">
                         </div>
 
                         <label for="inputPrenom">Votre prénom</label>
                         <div class="form-label-group">
-                            <input type="text" name="inputPrenom" id="inputPrenom" class="form-control" placeholder=<?php echo $compte->getPrenom() ?>>
+                            <input type="text" name="inputPrenom" class="form-control" placeholder=<?php echo $compte->getPrenom() ?>
+                            value="<?php if (isset($_SESSION['inscription']["prenomUser"])){echo $_SESSION['inscription']["prenomUser"];} ?>">
                         </div>
 
                         <label for="inputEmail">Votre adresse mail</label>
                         <div class="form-label-group">
-                            <input type="email" name="inputEmail" id="inputEmail" class="form-control" placeholder="<?php echo $compte->getMail() ?>"
-                                   disabled>
+                            <input type="email" name="inputEmail" class="form-control" placeholder="<?php echo $compte->getMail() ?>"
+                                   disabled value="<?php if (isset($_SESSION['inscription']["mail"])){echo $_SESSION['inscription']["mail"];} ?>">
                         </div>
 
                         <label for='inputPhoto'>Votre photo de profil</label>
