@@ -22,7 +22,7 @@ if(isset($_POST['submit'])){
                         <label for="nomUser">Votre nom</label>
                         <div class="form-label-group">
                             <input type="text" id="nomUser" name="nomUser" onkeyup="verifLogin(this)" class="form-control" placeholder="Nom"
-                                   required autofocus >
+                                   required autofocus value="<?php if (isset($_SESSION['inscription']["nomUser"])){echo $_SESSION['inscription']["nomUser"];} ?>">
                         </div>
                         <?php
                         if(isset($_SESSION['error_syntx'])) {
@@ -37,7 +37,7 @@ if(isset($_POST['submit'])){
                         <label for="prenomUser">Votre prénom</label>
                         <div class="form-label-group">
                             <input type="text"  name="prenomUser" id="prenomUser" onkeyup="verifLogin(this)" class="form-control" placeholder="Prénom"
-                                   required autofocus>
+                                   required autofocus value="<?php if (isset($_SESSION['inscription']["prenomUser"])){echo $_SESSION['inscription']["prenomUser"];} ?>">
                         </div>
                         <?php
                         if(isset($_SESSION['error_syntx'])) {
@@ -52,7 +52,7 @@ if(isset($_POST['submit'])){
                         <label for="inputPseudo">Votre pseudo</label>
                         <div class="form-label-group">
                             <input type="text" name="pseudoUser" id="pseudoUser" onkeyup="verifLogin(this)" class="form-control" placeholder="Pseudo"
-                                   required autofocus>
+                                   required autofocus value="<?php if (isset($_SESSION['inscription']["pseudoUser"])){echo $_SESSION['inscription']["pseudoUser"];} ?>">
                         </div>
                         <?php
                         if(isset($_SESSION['error_syntx'])) {
@@ -74,7 +74,7 @@ if(isset($_POST['submit'])){
                         <label for="mail">Votre adresse mail</label>
                         <div class="form-label-group">
                             <input type="email" name="mail" id="mail" onkeyup="verifMail(this)" class="form-control" placeholder="Email"
-                                   required autofocus>
+                                   required autofocus value="<?php if (isset($_SESSION['inscription']["mail"])){echo $_SESSION['inscription']["mail"];} ?>">
                         </div>
                         <?php
                         if(isset($_SESSION['error_syntx'])) {
