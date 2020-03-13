@@ -98,7 +98,7 @@ $liste = DB::getInstance()->loadListe($_GET["id"]);
             ?>
             <div class="jumbotron-fluid col-auto" style="border: solid; ;padding: 30px; margin: 10px;"
                  id="<?php echo $nom ?>">
-                <nom_listes><?php echo $nom ?></nom_listes>
+                <div><?php echo $nom ?></div>
                 <div class="container">
                  <div class="row">
 
@@ -164,10 +164,9 @@ $liste = DB::getInstance()->loadListe($_GET["id"]);
 </div>
 <!--Fin affichage des tâches-->
 
-<script type="text/javascript" src="javascript/suppression_liste.js"></script>
-<script type="text/javascript" src="javascript/modification_liste.js"></script>
-<script type="text/javascript" src="cdn/jquery.js"> </script>
-<script type="text/javascript" src="javascript/valide_tache.js"></script>
+<script src="javascript/suppression_liste.js"></script>
+<script src="javascript/modification_liste.js"></script>
+<script src="javascript/valide_tache.js"></script>
 
 <script>
 	function pop_up() {
