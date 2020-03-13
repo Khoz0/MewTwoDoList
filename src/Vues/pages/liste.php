@@ -30,8 +30,10 @@ $liste = DB::getInstance()->loadListe($_GET["id"]);
                                 <div class="col-lg-auto">
                                     <p><?php echo $membre ?>
                                         <button class="btn">
+
                                             <img src="assests/changement.png" width="15"
                                                                  height="15" alt="changement2">
+
                                         </button>
                                         <a href="?page=supprimerUserList&mail=<?= $membre ?>&idListe=<?= $_GET['id'] ?>">
                                             <img
@@ -79,7 +81,7 @@ $liste = DB::getInstance()->loadListe($_GET["id"]);
 
 <div>
 	<button type="button" class="btn btn-primary" id="tache"
-	onclick="pop_up();" value="<?php echo $_GET["id"]; ?>">Ajout tâche </button>
+	onclick="pop_up();" value="<?= htmlspecialchars($_GET["id"]) ?>">Ajout tâche </button>
 </div>
 
 
@@ -124,23 +126,20 @@ $liste = DB::getInstance()->loadListe($_GET["id"]);
 
                     ?>
                     <div>
-                        <form method="post" name="<?php echo $nom ?> " action="#">
-                            <a href="?page=addUserTache&mail=<?php echo $user->getMail() ?>&idTache=<?php echo $id;?>&idListe=<?php echo $_GET['id'];?>">
-                            <button type="button" value="<?php echo $user->getMail() ?>" class="btn btn-primary btn-sm">
-                                Ajouter
-                                un Utilisateur
-                            </button>
+                        <form method="post" name="<?= htmlspecialchars($nom) ?> " action="#">
+                            <a href="?page=addUserTache&mail=<?= htmlspecialchars($user->getMail()) ?>&idTache=<?= $id;?>&idListe=<?= $_GET['id'];?>" class="btn btn-primary btn-sm">
+                                Ajouter un Utilisateur
                             </a>
                         </form>
                     </div>
                     <?php
                 } else {
-                    ?><br><h5><?php echo $tache->getUtilisateurAssigne(); ?></h5><br>
+                    ?><br><h5><?= $tache->getUtilisateurAssigne(); ?></h5><br>
                     <div>
 
                         <form method="post" action="#">
-                            <a href="?page=deleteUserTache&mail=<?php echo $user->getMail() ?>&idTache=<?php echo $id;?>&idListe=<?php echo $_GET['id'];?>">
-                            <button type="button" value="<?php echo $user->getMail() ?>" class="btn btn-primary btn-sm">
+                            <a href="?page=deleteUserTache&mail=<?= $user->getMail() ?>&idTache=<?= $id;?>&idListe=<?= $_GET['id'];?>">
+                            <button type="button" value="<?= $user->getMail() ?>" class="btn btn-primary btn-sm">
                                 Se retirer
                             </button>
                             </a>
