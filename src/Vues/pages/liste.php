@@ -71,7 +71,7 @@ $liste = DB::getInstance()->loadListe($_GET["id"]);
     <a href="#" onclick="conf_modification(<?php echo $_GET["id"]; ?>)"> Modifier la liste </a>
     <br>
 
-    <a href="#" onclick="conf_suppression(<?php echo $_GET["id"]; ?>, 'Liste <?php echo unserialize($bdd)->getIntituleListe();?>')"> Supprimer la liste </a>
+    <a href="#" onclick="conf_suppression(<?= htmlspecialchars($_GET["id"]) ?>, 'Liste <?= htmlspecialchars(unserialize($bdd)->getIntituleListe()) ?>')"> Supprimer la liste </a>
     <br>
     <br>
     <a href="#" onclick="window.location.href = '?page=accueil'"> Retour </a>
