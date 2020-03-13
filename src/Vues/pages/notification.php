@@ -1,8 +1,7 @@
 <?php
 use App\Modeles\DB;
 ?>
-<script type="text/javascript" src="cdn/jquery.js"></script>
-<script type="text/javascript" src="javascript/tri_liste.js"></script>
+<script src="javascript/tri_liste.js"></script>
 <div class="jumbotron-fluid text-center">
 
     <?php
@@ -38,10 +37,12 @@ if(isset($_SESSION["user"])){?>
               <td>Larry the Bird</td>
               <td>@twitter</td>
             </tr>
-    </div>
+          </tbody>
+        </table>
+      </div>
 
 <?php } ?>
-    <script language="JavaScript">sort_by_name("alphab");</script>
+    <script>sort_by_name("alphab");</script>
     <div class="jumbotron justify-content-center">
                         <button class="btn btn-dark float-left" type="reset" value="Reset"> Annuler </button>
                         <button class="btn btn-dark float-right" type="submit" value="Submit"> Supprimer </button>
