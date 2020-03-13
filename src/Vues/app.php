@@ -74,7 +74,6 @@ if ($page != "login" && $page != "disconnect" && $page != "inscription" && $page
         <?= $contenu ?>
     </section>
 </main>
-</body>
 
 <!-- Footer -->
 <footer class="page-footer font-small teal pt-4">
@@ -125,4 +124,8 @@ if ($page != "login" && $page != "disconnect" && $page != "inscription" && $page
 
 </footer>
 <!-- Footer -->
+
+</body>
+
+
 </html>
