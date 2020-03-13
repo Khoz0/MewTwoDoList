@@ -7,7 +7,8 @@ use App\Classe\Utilisateur;
 use App\Modeles\DB;
 
 class NotifController extends Controller
-{
+{	
+
     public function notif()
     {
 	/*
@@ -19,4 +20,30 @@ class NotifController extends Controller
 
         return $this->render('notification');
     }
+
+	public function deleteNotif(){
+		/*$idNotif = $_GET['idNotification'];
+
+		$bdd = DB::getInstance();
+    		$bdd->deleteNotification($idNotif);
+        	$liste = $bdd->loadNotif($idNotif);
+    		*/
+	}
+
+	public function createNotif($type){
+		//notif ajout membre
+		if($type == 'ajoutMembre'){
+			
+		//notif changement
+		}else if($type == 'changement'){
+		
+		//notif avec choix
+		}else if($type == 'avecChoix'){
+
+		//notif changement de proprio
+		}else{
+
+		}
+	}
+	
 }
