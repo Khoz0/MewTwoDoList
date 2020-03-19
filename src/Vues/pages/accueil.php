@@ -30,7 +30,7 @@ if(isset($_SESSION["user"])){?>
             $listes = $user->getListesProprietaire();
             foreach ($listes as $liste) {
                     ?>
-                    <div class="jumbotron col-auto" style="border: solid; padding: 30px; margin: 10px;"
+                    <div id="<?php echo $liste->getIntituleListe() ?>\<?php echo $liste->getDateCreation() ?>\<?php echo $liste->getDateFin() ?>" class="jumbotron col-auto" style="border: solid; padding: 30px; margin: 10px;"
                          onclick="window.location.href = '?page=liste&id=<?= $liste->getIdListe() ?>'">
                         <div><?= htmlspecialchars($liste->getIntituleListe()) ?></div>
                         <?php if ($liste->getDateFin() == null) { ?>
