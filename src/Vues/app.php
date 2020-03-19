@@ -76,17 +76,7 @@ if ($page != "login" && $page != "disconnect" && $page != "inscription" && $page
         <?= $contenu ?>
     </section>
 </main>
-<!-- Footer -->
-<footer class="footer page-footer font-small blue pt-4">
 
-  <!-- Copyright -->
-  <div class="footer-copyright text-center py-3">© 2020 Copyright:
-    <a href="https://bitbucket.org/mew_two_do_list/mew_two_do_list/src/master/"> Mew-two-do-list</a>
-  </div>
-  <!-- Copyright -->
-
-</footer>
-<!-- Footer -->
 </body>
 
 
