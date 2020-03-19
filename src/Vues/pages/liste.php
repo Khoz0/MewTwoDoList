@@ -11,6 +11,7 @@ use App\Modeles\DB;
 $bdd = serialize(DB::getInstance()->loadListe($_GET["id"]));
 $liste = DB::getInstance()->loadListe($_GET["id"]);
 
+$proprio = $liste->getMailProprietaire();
 ?>
 <div class="float-right">
     <?php
@@ -28,7 +29,12 @@ $liste = DB::getInstance()->loadListe($_GET["id"]);
                             ?>
                             <div class="dropdown-item">
                                 <div class="col-lg-auto">
-                                    <p><?php echo $membre ?>
+                                    <p>
+                                        <?php if($membre == $proprio){?>
+                                            <img src="assests/star.png" width="15" height="15" alt="etoile">
+                                        <?php
+                                            }
+                                            echo $membre ?>
                                         <a href="?page=changementProprietaire&mailProprio=<?= unserialize($_SESSION['user'])->getMail()?>&mailMembre=<?=$membre?>&id=<?=$_GET['id']?>">
                                             <img src="assests/changement.png" width="15" height="15" alt="changement">
                                         </a>
@@ -95,7 +101,6 @@ $liste = DB::getInstance()->loadListe($_GET["id"]);
         $id = $tache->getIdTache();
         $etat = $tache->getEtat();
         $user = unserialize($_SESSION['user']);
-        $proprio = $liste->getMailProprietaire();
         $userAssigne = $tache->getUtilisateurAssigne();
         ?>
         <div class="jumbotron-fluid col-auto" style="border: solid; ;padding: 30px; margin: 10px; "
