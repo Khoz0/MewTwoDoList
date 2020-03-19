@@ -32,12 +32,12 @@ if(isset($_SESSION["user"])){?>
                     ?>
                     <div id="<?php echo $liste->getIntituleListe() ?>\<?php echo $liste->getDateCreation() ?>\<?php echo $liste->getDateFin() ?>" class="jumbotron col-auto" style="border: solid; padding: 30px; margin: 10px;"
                          onclick="window.location.href = '?page=liste&id=<?= $liste->getIdListe() ?>'">
-                        <div><?= htmlspecialchars($liste->getIntituleListe()) ?></div>
+                        <nom_listes><?= htmlspecialchars($liste->getIntituleListe()) ?></nom_listes>
                         <?php if ($liste->getDateFin() == null) { ?>
-                            <div><br><br>A partir du <?= htmlspecialchars($liste->getDateCreation()) ?><br></div>
+                            <dates><br><br>A partir du <?= htmlspecialchars($liste->getDateCreation()) ?><br></dates>
                         <?php } else { ?>
-                            <div><br><br>Du <?= htmlspecialchars($liste->getDateCreation()) ?>
-                                <br>au <?= htmlspecialchars($liste->getDateFin()) ?></div>
+                            <dates><br><br>Du <?= htmlspecialchars($liste->getDateCreation()) ?>
+                                <br>au <?= htmlspecialchars($liste->getDateFin()) ?></dates>
                         <?php } ?>
                     </div>
                 <?php }
