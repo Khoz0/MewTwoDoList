@@ -47,10 +47,17 @@ if ($page != "login" && $page != "disconnect" && $page != "inscription" && $page
     <!-- affichage des icônes de menu -->
     <?php if (isset($_SESSION['user']) && $page != "modifTache") {?>
         <div class="btn-group">
+
             <button class="btn btn-default dropdown-toggle mr-4 float-right" type="button" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
+                <a class="btn float-right" href="?page=notification">
                 <img src="assests/notif.png" alt="notification" width="20" height="20">
-            </button>
+                <span class="badge badge-pill "><?php
+                    $user = unserialize($_SESSION['user']);
+                    $notif = $user->getTabNotification();
+                    $_SESSION['user'] = serialize($user);
+                    echo count($notif);?></span>
+            </button> </a>
             <?php
                 $user = unserialize($_SESSION['user']);
                 $mail = $user->getMail();
