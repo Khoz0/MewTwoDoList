@@ -6,7 +6,7 @@ namespace Tests\Controllers;
 	use PHPUnit\Framework\TestCase;
 	use App\Modeles\DB;
 
-class UtilisateurFonctionTest {
+class FonctionTest {
 
 	//Fonction qui ajoute un utilisateur dans la BDD
 	public function ajouterUtilisateurTest()
