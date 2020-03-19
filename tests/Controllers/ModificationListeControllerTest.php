@@ -6,11 +6,11 @@ use PHPUnit\Framework\TestCase;
 use App\Modeles\DB;
 
 /**
- * Tests CreationListeController
+ * Tests ModificationListeController
  */
-class CreationListeControllerTest extends TestCase {
+class ModificationListeControllerTest extends TestCase {
 
-	//Test si la liste a bien été créé
+	//Test si la liste a bien été modifié
     public function testmodificationListe() {
 
     	$fonction = new FonctionTest();

@@ -34,6 +34,7 @@ dates {
 body {
     margin:0;
     font:normal 75% Arial, Helvetica, sans-serif;
+    margin-bottom: 60px;
 }
 
 canvas {
@@ -103,4 +104,17 @@ img.small {
     width: 100px;
     margin: 0 auto;
     display: block;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  background-color: #007BFF;
+  color : white;
+}
+
+.footer a {
+    color: white; 
 }

@@ -3,6 +3,13 @@ use \App\Controllers\CompteController;
 
 $compte = (new App\Controllers\CompteController);
 $user = unserialize($_SESSION['user']);
+
+if(isset($_POST['submit'])){
+    $_SESSION['inscription']["nomUser"] = $_POST["inputNom"];
+    $_SESSION['inscription']["prenomUser"] = $_POST["inputPrenom"];
+    $_SESSION['inscription']["pseudoUser"] = $_POST["inputPseudo"];
+    $_SESSION['inscription']["mail"] = $_POST["inputEmail"];
+}
 ?>
 
 <div class="container">
@@ -28,7 +35,7 @@ $user = unserialize($_SESSION['user']);
                         <label for="inputPseudo">Votre pseudo</label>
                         <div class="form-label-group">
                             <input type="text" name="inputPseudo" class="form-control" placeholder=<?php echo $user->getPseudo() ?>
-                                   autofocus>
+                                   autofocus value="<?php if (isset($_SESSION['inscription']["pseudoUser"])){echo $_SESSION['inscription']["pseudoUser"];} ?>">
                             <?php
                             if(isset($_SESSION['error_exist'])){
                                 if(isset($_SESSION['error_exist']['pseudo'])){
@@ -42,23 +49,25 @@ $user = unserialize($_SESSION['user']);
                         </div>
                         <label for="inputNom">Votre nom</label>
                         <div class="form-label-group">
-                            <input type="text" name="inputNom" class="form-control" placeholder=<?php echo $compte->getNom() ?>>
+                            <input type="text" name="inputNom" class="form-control" placeholder=<?php echo $compte->getNom() ?>
+                            value="<?php if (isset($_SESSION['inscription']["nomUser"])){echo $_SESSION['inscription']["nomUser"];} ?>">
                         </div>
 
                         <label for="inputPrenom">Votre prénom</label>
                         <div class="form-label-group">
-                            <input type="text" name="inputPrenom" class="form-control" placeholder=<?php echo $compte->getPrenom() ?>>
+                            <input type="text" name="inputPrenom" class="form-control" placeholder=<?php echo $compte->getPrenom() ?>
+                            value="<?php if (isset($_SESSION['inscription']["prenomUser"])){echo $_SESSION['inscription']["prenomUser"];} ?>">
                         </div>
 
                         <label for="inputEmail">Votre adresse mail</label>
                         <div class="form-label-group">
                             <input type="email" name="inputEmail" class="form-control" placeholder="<?php echo $compte->getMail() ?>"
-                                   disabled>
+                                   disabled value="<?php if (isset($_SESSION['inscription']["mail"])){echo $_SESSION['inscription']["mail"];} ?>">
                         </div>
 
-                        <label for='inputPassword'>Votre photo de profil</label>
+                        <label for='inputPhoto'>Votre photo de profil</label>
                         <div class='form-label-group'>
-                            <input type='file' name='inputPhoto' class='form-control'>
+                            <input type='file' name='inputPhoto' id="inputPhoto" class='form-control'>
                         </div>
 
                         <div id=mdp>

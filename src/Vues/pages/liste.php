@@ -30,8 +30,10 @@ $liste = DB::getInstance()->loadListe($_GET["id"]);
                                 <div class="col-lg-auto">
                                     <p><?php echo $membre ?>
                                         <button class="btn">
+
                                             <img src="assests/changement.png" width="15"
-                                                                 height="15" alt="changement">
+                                                                 height="15" alt="changement2">
+
                                         </button>
                                         <a href="?page=supprimerUserList&mail=<?= $membre ?>&idListe=<?= $_GET['id'] ?>">
                                             <img
@@ -71,7 +73,7 @@ $liste = DB::getInstance()->loadListe($_GET["id"]);
     <a href="#" onclick="conf_modification(<?php echo $_GET["id"]; ?>)"> Modifier la liste </a>
     <br>
 
-    <a href="#" onclick="conf_suppression(<?php echo $_GET["id"]; ?>, 'Liste <?php echo unserialize($bdd)->getIntituleListe();?>')"> Supprimer la liste </a>
+    <a href="#" onclick="conf_suppression(<?= htmlspecialchars($_GET["id"]) ?>, 'Liste <?= htmlspecialchars(unserialize($bdd)->getIntituleListe()) ?>')"> Supprimer la liste </a>
     <br>
     <br>
     <a href="#" onclick="window.location.href = '?page=accueil'"> Retour </a>
@@ -79,7 +81,7 @@ $liste = DB::getInstance()->loadListe($_GET["id"]);
 
 <div>
 	<button type="button" class="btn btn-primary" id="tache"
-	onclick="pop_up();" value="<?php echo $_GET["id"]; ?>">Ajout tâche </button>
+	onclick="pop_up();" value="<?= htmlspecialchars($_GET["id"]) ?>">Ajout tâche </button>
 </div>
 
 
@@ -105,7 +107,7 @@ $liste = DB::getInstance()->loadListe($_GET["id"]);
 
                      <!--Bouton modifier tâche-->
                      <div class="col">
-                         <button class="btn"  id="modifTache" type="button" onclick="pop_up_modif(this)" value="<?php echo $id; ?>"><img src="assests/edit.png" width="20" height="20"></button>
+                         <button class="btn"  id="modifTache" type="button" onclick="pop_up_modif(this)" value="<?php echo $id; ?>"><img src="assests/edit.png" alt="edit" width="20" height="20"></button>
                      </div>
 
                      <!--Check box de tâche finie-->
@@ -125,12 +127,9 @@ $liste = DB::getInstance()->loadListe($_GET["id"]);
 
                     ?>
                     <div>
-                        <form method="post" name="<?php echo $nom ?> " action="#">
-                            <a href="?page=addUserTache&mail=<?php echo $user->getMail() ?>&idTache=<?php echo $id;?>&idListe=<?php echo $_GET['id'];?>">
-                            <button type="button" value="<?php echo $user->getMail() ?>" class="btn btn-primary btn-sm">
-                                Ajouter
-                                un Utilisateur
-                            </button>
+                        <form method="post" name="<?= htmlspecialchars($nom) ?> " action="#">
+                            <a href="?page=addUserTache&mail=<?= htmlspecialchars($user->getMail()) ?>&idTache=<?= $id;?>&idListe=<?= $_GET['id'];?>" class="btn btn-primary btn-sm">
+                                Ajouter un Utilisateur
                             </a>
                         </form>
                     </div>
@@ -140,8 +139,8 @@ $liste = DB::getInstance()->loadListe($_GET["id"]);
                     <div>
 
                         <form method="post" action="#">
-                            <a href="?page=deleteUserTache&mail=<?php echo $user->getMail() ?>&idTache=<?php echo $id;?>&idListe=<?php echo $_GET['id'];?>">
-                            <button type="button" value="<?php echo $user->getMail() ?>" class="btn btn-primary btn-sm">
+                            <a href="?page=deleteUserTache&mail=<?= $user->getMail() ?>&idTache=<?= $id;?>&idListe=<?= $_GET['id'];?>">
+                            <button type="button" value="<?= $user->getMail() ?>" class="btn btn-primary btn-sm">
                                 Se retirer
                             </button>
                             </a>
@@ -165,14 +164,12 @@ $liste = DB::getInstance()->loadListe($_GET["id"]);
 </div>
 <!--Fin affichage des tâches-->
 
-<script type="text/javascript" src="javascript/suppression_liste.js"></script>
-<script type="text/javascript" src="javascript/modification_liste.js"></script>
-<script type="text/javascript" src="cdn/jquery.js"> </script>
-<script type="text/javascript" src="javascript/valide_tache.js"></script>
+<script src="javascript/suppression_liste.js"></script>
+<script src="javascript/modification_liste.js"></script>
+<script src="javascript/valide_tache.js"></script>
 
 <script>
 	function pop_up() {
-    console.log("test");
 		var id = document.getElementById("tache").value;
 		window.open('?page=ajoutTache&id='+id,'Ajout tâche', 'height=500, width=800, top=100, left=200, resizable = yes');
 	}
