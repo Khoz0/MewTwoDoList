@@ -72,24 +72,22 @@ if ($page != "login" && $page != "disconnect" && $page != "inscription" && $page
                 $mail = $user->getMail();
                 $notifs = DB::getInstance()->loadNotif($mail);
                 $i = 0;
-                if (!empty($notifs)){
-                ?>
-                    <div class="dropdown-menu dropdown-menu-right">
-                        <?php
-                            foreach ($notifs as $notification){
-                                if ($i < 3) { ?>
-                                    <a class="dropdown-item"><?=$notification->getContenu()?></a>
+                ?><div class="dropdown-menu dropdown-menu-right"><?php
+                    if (!empty($notifs)) {
+                        foreach ($notifs as $notification) {
+                            if ($i < 3) { ?>
+                                <a class="dropdown-item"><?= $notification->getContenu() ?></a>
                                 <?php
-                                    if ($notification->typeNotif() == "changementProprietaire"){
+                                if ($notification->typeNotif() == "changementProprietaire") {
 
-                                    }
                                 }
-                                $i++;
                             }
-                        ?>
-                        <button class="btn" onclick="window.location.href='?page=notification'">Mes notifications</button>
-                    </div>
-                <?php } ?>
+                            $i++;
+                        }
+                    }
+                    ?>
+                    <button class="btn" onclick="window.location.href='?page=notification'">Mes notifications</button>
+                </div>
         </div>
         <div class="btn-group">
             <button class="btn btn-default dropdown-toggle mr-4 float-right" data-toggle="dropdown"

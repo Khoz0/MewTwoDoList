@@ -9,6 +9,7 @@ if(isset($_SESSION["user"])){
     $user = unserialize($_SESSION['user']);
     $notif = 0;
     $mail = $user->getMail();
+    //$notifications = DB::getInstance()->loadNotif($mail);
     $bddRequete = DB::getInstance()->getPDO();
     $requete = $bddRequete->prepare("SELECT * FROM Notification WHERE mailMembre = :mail");
     $requete->bindParam(':mail', $mail);
