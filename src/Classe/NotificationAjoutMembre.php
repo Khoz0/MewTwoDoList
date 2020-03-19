@@ -3,24 +3,13 @@ namespace App\Classe;
 
 use App\Modeles\DB;
 
-abstract class NotificationAjoutMembre extends NotificationAvecChoix {
+class NotificationAjoutMembre extends NotificationAvecChoix {
 
-  function __construct($dateCreation, $contenu, $source) {
-      parent::__construct($dateCreation, $contenu, $source);
-    }
-
-
-    public function ajouterBDD() {
-      //AjouterBDD
-    }
-
-    public function supprimerBDD() {
-      //SupprimerBDD
+  function __construct($idNotif,$dateCreation, $contenu, $sourceUtilisateur, $idListe, $mailMembre) {
+      parent::__construct($idNotif,$dateCreation, $contenu, $sourceUtilisateur, $idListe, $mailMembre);
     }
 
     public function ajoutMembre() {
-
-    }
-
-
-  ?>
+  }
+}
+?>

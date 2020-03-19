@@ -13,12 +13,6 @@ class ListeController extends Controller {
     	$id = $_GET['id'] ?? $this->redirect('accueil');
     	$bdd = DB::getInstance()->loadListe($id);
 
-        /*
-    	if (is_null($bdd)) {
-            return $this->render('404');
-        }
-        */
-
         return $this->render('liste', compact('bdd', 'id'));
     }
 
