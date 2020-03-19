@@ -9,12 +9,8 @@ if(isset($_SESSION["user"])){
     $user = unserialize($_SESSION['user']);
     $notif = 0;
     $mail = $user->getMail();
-    //$notifications = DB::getInstance()->loadNotif($mail);
-    $bddRequete = DB::getInstance()->getPDO();
-    $requete = $bddRequete->prepare("SELECT * FROM Notification WHERE mailMembre = :mail");
-    $requete->bindParam(':mail', $mail);
-    $requete->execute();
-    while ($donnees = $requete->fetch()){
+    $notifications = DB::getInstance()->loadNotif($mail);
+    foreach ($notifications as $not){
         $notif++;
     }
     $_SESSION['user'] = serialize($user); ?>
@@ -40,29 +36,15 @@ if(isset($_SESSION["user"])){
             <tbody>
             <?php
                 $cpt = 0;
-                $requete = $bddRequete->prepare("SELECT * FROM Notification WHERE mailMembre = :mail");
-                $requete->bindParam(':mail', $mail);
-                $requete->execute();
-                while ($donnees = $requete->fetch()) {
+                foreach ($notifications as $not){
                     echo "<tr>";
                     echo "<th scope=\"row\"> <input type=\"checkbox\" id=\"notif\".$cpt ></th>";
-                    echo "<td>".$donnees['idListe']."</td>";
-                    echo "<td>".$donnees['dateEnvoi']."</td>";
-                    echo "<td>".$donnees['contenu']."</td>";
+                    echo "<td>".$not->getIdListe()."</td>";
+                    echo "<td>".$not->getDateCreation()."</td>";
+                    echo "<td>".$not->getContenu()."</td>";
                     echo "</tr>";
                     $cpt++;
                 }
-                /*$cpt = 0;
-                foreach ($notif as $not){
-                    echo "<tr>";
-                    echo "<th scope=\"row\"> <input type=\"checkbox\" id=\"notif\".$cpt ></th>";
-                    echo "<td>$not->getIdListe()</td>";
-                    echo "<td>$not->getDateCreation()</td>";
-                    echo "<td>$not->getContenu()</td>";
-                    echo "</tr>";
-                    $cpt = $cpt + 1;
-                }*/
-
         ?>
             </tbody>
         </table>
