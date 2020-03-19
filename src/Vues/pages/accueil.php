@@ -30,14 +30,14 @@ if(isset($_SESSION["user"])){?>
             $listes = $user->getListesProprietaire();
             foreach ($listes as $liste) {
                     ?>
-                    <div id="<?php echo $liste->getIntituleListe() ?>\<?php echo $liste->getDateCreation() ?>\<?php echo $liste->getDateFin() ?>" class="jumbotron col-auto" style="border: solid; padding: 30px; margin: 10px;"
+                    <div class="jumbotron col-auto" style="border: solid; padding: 30px; margin: 10px;"
                          onclick="window.location.href = '?page=liste&id=<?= $liste->getIdListe() ?>'">
-                        <nom_listes><?= htmlspecialchars($liste->getIntituleListe()) ?></nom_listes>
+                        <div><?= htmlspecialchars($liste->getIntituleListe()) ?></div>
                         <?php if ($liste->getDateFin() == null) { ?>
-                            <dates><br><br>A partir du <?= htmlspecialchars($liste->getDateCreation()) ?><br></dates>
+                            <div><br><br>A partir du <?= htmlspecialchars($liste->getDateCreation()) ?><br></div>
                         <?php } else { ?>
-                            <dates><br><br>Du <?= htmlspecialchars($liste->getDateCreation()) ?>
-                                <br>au <?= htmlspecialchars($liste->getDateFin()) ?></dates>
+                            <div><br><br>Du <?= htmlspecialchars($liste->getDateCreation()) ?>
+                                <br>au <?= htmlspecialchars($liste->getDateFin()) ?></div>
                         <?php } ?>
                     </div>
                 <?php }
@@ -45,7 +45,7 @@ if(isset($_SESSION["user"])){?>
 
         </div>
         <div class="jumbotron-fluid col-auto">
-            <a onclick="window.location.href = '?page=creationListe'"><img src="assests/plus.png" alt="Ajouter une liste" width="140px" height="140px"/></a>
+            <a onclick="window.location.href = '?page=creationListe'"><img src="assests/plus.png" alt="Ajouter une liste"/></a>
         </div>
     </div>
     <div class="jumbotron-fluid">
