@@ -54,9 +54,9 @@ if ($page != "login" && $page != "disconnect" && $page != "inscription" && $page
                 <img src="assests/notif.png" alt="notification" width="20" height="20">
                 <span class="badge badge-pill "><?php
                     $user = unserialize($_SESSION['user']);
-                    $notif = $user->getTabNotification();
+                    $notif = $user->getNbNotifNonLues();
                     $_SESSION['user'] = serialize($user);
-                    echo count($notif);?></span>
+                    echo $notif;?></span>
             </button> </a>
             <?php
                 $user = unserialize($_SESSION['user']);
