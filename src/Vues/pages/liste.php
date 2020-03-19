@@ -92,7 +92,7 @@ $liste = DB::getInstance()->loadListe($_GET["id"]);
         $taches = $liste->getTabTache();
         $idListe = $liste->getIdListe();
         foreach ($taches as $elem) {
-        $tache = DB::getInstance()->loadTache($elem['idTache']);
+        $tache = DB::getInstance()->loadTache($elem->getIdTache());
         $nom = $tache->getIntituleTache();
         $valide = $tache->getValide();
         $id = $tache->getIdTache();
@@ -207,14 +207,6 @@ $liste = DB::getInstance()->loadListe($_GET["id"]);
                             <?php
                         }
                             ?>
-
-                            <form method="post" action="#">
-                                <a href="?page=deleteTache&idTache=<?= $id; ?>">
-                                    <button type="button" value="<?= $user->getMail() ?>" class="btn btn-danger btn-sm">
-                                        Supprimer la tâche
-                                    </button>
-                                </a>
-                            </form>
                         </div>
                         <?php
                     }

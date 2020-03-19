@@ -201,11 +201,12 @@ class DB {
         if ($donnees = $verifId->fetch()) {
             $liste = new Liste($donnees["idListe"], $donnees["intituleListe"], $donnees["dateCreation"], $donnees["dateFin"], $donnees["mailProprietaire"]);
 
-            $recupererTaches = DB::getInstance()->getPDO()->prepare("SELECT * FROM Tache where idListeT = :idVerification2");
+            $recupererTaches = DB::getInstance()->getPDO()->prepare("SELECT idTache FROM Tache where idListeT = :idVerification2");
             $recupererTaches->bindParam(':idVerification2', $donnees["idListe"]);
             $recupererTaches->execute();
-            while ($donneesTaches = $recupererTaches->fetch()) {
-                $liste->ajouterTache($donneesTaches);
+            while ($idTache = $recupererTaches->fetch()) {
+                $tache = $this->loadTache($idTache["idTache"]);
+                $liste->ajouterTache($tache);
             }
 
             $recupererMembre = DB::getInstance()->getPDO()->prepare("SELECT * FROM Membre WHERE idListe = :id ");

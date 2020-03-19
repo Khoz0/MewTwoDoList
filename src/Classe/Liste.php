@@ -33,6 +33,11 @@ class Liste {
 
     public function retirerUtilisateur($mailUtilisateur){
         if(in_array($mailUtilisateur, $this->tabUtilisateur)){
+            foreach($this->tabTache as $tache){
+                if($tache->getMailUtilisateur() == $mailUtilisateur){
+                    $tache->setUtilisateurAssigne(null);
+                }
+            }
             unset($this->tabUtilisateur[array_search($mailUtilisateur, $this->tabUtilisateur)]);
         }
     }

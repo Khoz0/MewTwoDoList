@@ -26,9 +26,9 @@ class ListeController extends Controller {
 		$mail = $_GET['mail'];
 		$idListe = $_GET['idListe'];
 		$bdd = DB::getInstance();
-    	$bdd->deleteListMember($mail, $idListe);
         $liste = $bdd->loadListe($idListe);
         $liste->retirerUtilisateur($mail);
+        $bdd->deleteListMember($mail, $idListe);
     	if($bdd->isMemberIn($mail, $idListe)) {
             $this->redirect("liste&id=$idListe");
         }
