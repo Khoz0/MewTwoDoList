@@ -76,16 +76,22 @@ if ($page != "login" && $page != "disconnect" && $page != "inscription" && $page
                     if (!empty($notifs)) {
                         foreach ($notifs as $notification) {
                             if ($i < 3) { ?>
+                                <div
                                 <a class="dropdown-item"><?= $notification->getContenu() ?></a>
                                 <?php
-                                if ($notification->typeNotif() == "changementProprietaire") {
-
+                                if ($notification->typeNotif() == "notificationChangementProprietaire") {
+                                    ?>
+                                    <button class="btn">Accepter</button>
+                                    <button class="btn">Refuser</button>
+                                    <?php
                                 }
+                                ?> </div> <?php
                             }
                             $i++;
                         }
                     }
                     ?>
+                    <br>
                     <button class="btn" onclick="window.location.href='?page=notification'">Mes notifications</button>
                 </div>
         </div>

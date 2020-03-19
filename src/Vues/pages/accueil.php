@@ -24,6 +24,7 @@ if(isset($_SESSION["user"])){?>
         <br>
     </div>
     <div class="jumbotron-fluid">
+        <p>Mes listes :</p>
         <div class="row justify-content-center" id="liste" style="display: flex">
             <?php
             $user = unserialize($_SESSION["user"]);
