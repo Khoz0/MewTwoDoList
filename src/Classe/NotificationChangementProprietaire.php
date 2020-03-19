@@ -3,23 +3,19 @@ namespace App\Classe;
 
 use App\Modeles\DB;
 
-abstract class NotificationChangementProprietaire extends NotificationAvecChoix {
+class NotificationChangementProprietaire extends NotificationAvecChoix {
 
-  function __construct($dateCreation, $contenu, $source) {
-      parent::__construct($dateCreation, $contenu, $source);
-    }
-
-
-    public function ajouterBDD() {
-      //AjouterBDD
-    }
-
-    public function supprimerBDD() {
-      //SupprimerBDD
+  function __construct($idNotif,$dateCreation, $contenu, $sourceUtilisateur, $idListe, $mailMembre) {
+      parent::__construct($idNotif,$dateCreation, $contenu, $sourceUtilisateur, $idListe, $mailMembre);
     }
 
     public function changementProprietaire() {
 
+    }
+
+    function typeNotif()
+    {
+        return "notificationChangementProprietaire";
     }
 }
 

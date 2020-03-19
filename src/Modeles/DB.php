@@ -3,6 +3,7 @@
 namespace App\Modeles;
 
 use App\Classe\Liste;
+use App\Classe\NotificationChangementProprietaire;
 use App\Classe\Tache;
 use App\Classe\Utilisateur;
 use Exception;
@@ -330,6 +331,28 @@ class DB {
         $results->execute();
     }
 
+    public function addNotification($notification){
+        $idNotif = $notification->getIdNotification();
+        $dateEnvoi = $notification->getDateCreation();
+        $valide = 0;
+        $contenu = $notification->getContenu();
+        $lu = $notification->getLu();
+        $mail = $notification->getSourceUtilisateur();
+        $idListe = $notification->getIdListe();
+        $mailMembre = $notification->getDestUtilisateur();
+        echo $idNotif." ".$dateEnvoi." ".$valide." ".$contenu." ".$lu." ".$mail." ".$idListe;
+        $requete = DB::getInstance()->getPDO()->prepare('INSERT INTO Notification(idNotification, dateEnvoi, valide, contenu, lu, mail, idListe, mailMembre) VALUES (:idNotif, :dateEnvoi, :valide, :contenu, :lu, :mail, :idListe, :mailMembre)');
+        $requete->bindParam(':idNotif', $idNotif);
+        $requete->bindParam(':dateEnvoi', $dateEnvoi);
+        $requete->bindParam(':valide', $valide);
+        $requete->bindParam(':contenu', $contenu);
+        $requete->bindParam(':lu', $lu);
+        $requete->bindParam(':mail', $mail);
+        $requete->bindParam(':idListe', $idListe);
+        $requete->bindParam(':mailMembre', $mailMembre);
+        $requete->execute();
+    }
+
     public function alterListe($idListe,$intituleListe,$dateCreation, $dateFin,$mailProprietaire)
     {
         $results = DB::getInstance()->getPDO()->prepare('UPDATE Liste SET idListe=:id, intituleListe=:intitule, dateCreation=:dateCrea, dateFin=:dateFin WHERE idListe = :id');
@@ -516,11 +539,16 @@ class DB {
 		$res->execute();
 	}
 
-	public function loadNotif($idNotif){
-		$res = DB::getInstance()->getPDO()->prepare("select $ from Notification where idNotification = :idNotif");
-        	$verifMail->bindParam(':idNotif', $idNotif);
-        	$res->execute();
-
+	public function loadNotif($mail){
+        $notifs = array();
+		$bdd = DB::getInstance()->getPDO()->prepare("select * from Notification where mailMembre = :mail");
+		$bdd->bindParam(':mail', $mail);
+        $bdd->execute();
+        while($donnees = $bdd->fetch()){
+            $notif = new NotificationChangementProprietaire($donnees['idNotification'], $donnees['dateEnvoi'], $donnees['contenu'], $donnees['mail'], $donnees['idListe'], $donnees['mailMembre']);
+            array_push($notifs, $notif);
+        }
+        return $notifs;
 	/*
 
 while ($donnesListe = $getListeProp->fetch()) {

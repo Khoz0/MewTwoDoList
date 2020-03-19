@@ -22,22 +22,19 @@ $liste = DB::getInstance()->loadListe($_GET["id"]);
 
             <div class="dropdown-menu dropdown-menu-right col-lg-2" id = "membres">
                 <?php
-                    $membres = $liste->recupererMembres($_GET["id"]);
+                    $membres = $liste->recupererMembres();
                     if ($liste->getMailProprietaire() == unserialize($_SESSION['user'])->getMail()){
                         foreach ($membres as $membre) {
                             ?>
                             <div class="dropdown-item">
                                 <div class="col-lg-auto">
                                     <p><?php echo $membre ?>
-                                        <button class="btn">
-
-                                            <img src="assests/changement.png" width="15"
-                                                                 height="15" alt="changement2">
-
-                                        </button>
+                                        <a href="?page=changementProprietaire&mailProprio=<?= unserialize($_SESSION['user'])->getMail()?>&mailMembre=<?=$membre?>&id=<?=$_GET['id']?>">
+                                            <img src="assests/changement.png" width="15" height="15" alt="changement">
+                                        </a>
                                         <a href="?page=supprimerUserList&mail=<?= $membre ?>&idListe=<?= $_GET['id'] ?>">
-                                            <img
-                                                    src="assests/croix.png" width="15" height="15" alt="croix"></a>
+                                            <img src="assests/croix.png" width="15" height="15" alt="croix">
+                                        </a>
                                     </p>
                                 </div>
                             </div>

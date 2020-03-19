@@ -1,3 +1,8 @@
+<?php
+
+use App\Modeles\DB;
+
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -42,7 +47,47 @@ if ($page != "login" && $page != "disconnect" && $page != "inscription" && $page
     <!-- affichage des icônes de menu -->
     <?php if (isset($_SESSION['user']) && $page != "modifTache") {?>
         <div class="btn-group">
-            <a class="btn float-right" href="?page=notification"><img src="assests/notif.png" alt="notification" width="20" height="20"></a>
+
+            <button class="btn btn-default dropdown-toggle mr-4 float-right" type="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                <img src="assests/notif.png" alt="notification" width="20" height="20">
+                <span class="badge badge-pill "><?php
+                    $user = unserialize($_SESSION['user']);
+                    $countNotif = 0;
+                    $bddRequete = DB::getInstance()->getPDO();
+                    $mail = $user->getMail();
+                    $requete = $bddRequete->prepare("SELECT * FROM Notification WHERE mailMembre = :mail");
+                    $requete->bindParam(':mail', $mail);
+                    $requete->execute();
+                    while ($donneesNotif = $requete->fetch()){
+                        if ($donneesNotif['lu'] == 0){
+                            $countNotif++;
+                        }
+                    }
+                    $_SESSION['user'] = serialize($user);
+                    echo $countNotif;?></span>
+            </button>
+            <?php
+                $user = unserialize($_SESSION['user']);
+                $mail = $user->getMail();
+                $notifs = DB::getInstance()->loadNotif($mail);
+                $i = 0;
+                ?><div class="dropdown-menu dropdown-menu-right"><?php
+                    if (!empty($notifs)) {
+                        foreach ($notifs as $notification) {
+                            if ($i < 3) { ?>
+                                <a class="dropdown-item"><?= $notification->getContenu() ?></a>
+                                <?php
+                                if ($notification->typeNotif() == "changementProprietaire") {
+
+                                }
+                            }
+                            $i++;
+                        }
+                    }
+                    ?>
+                    <button class="btn" onclick="window.location.href='?page=notification'">Mes notifications</button>
+                </div>
         </div>
         <div class="btn-group">
             <button class="btn btn-default dropdown-toggle mr-4 float-right" data-toggle="dropdown"

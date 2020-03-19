@@ -11,24 +11,27 @@ abstract class Notification {
   protected $contenu;
   protected $lu;
   protected $sourceUtilisateur;
+  protected $destUtilisateur;
   protected $idListe;
 
-  public function __construct($idNotif,$dateCreation, $contenu, $sourceUtilisateur, $idListe) {
+  public function __construct($idNotif,$dateCreation, $contenu, $sourceUtilisateur, $idListe, $mailMembre) {
       $this->idNotif = $idNotif;
       $this->dateCreation = $dateCreation;
       $this->contenu = $contenu;
       $this->lu = false;
       $this->sourceUtilisateur = $sourceUtilisateur;
       $this->idListe = $idListe;
+      $this->destUtilisateur = $mailMembre;
+      $this->idListe = $idListe;
   }
 
   public function ajouterBDD() {
-    $bbd = DB::getInstance();
-    $mail = $this->sourceUtilisateur->getMail();
-    $bdd->addNotification($this->idNotif, $this->dateCreation, $this->contenu, $this->sourceUtilisateur, $this->idListe);
-
+    $bdd = DB::getInstance();
+    $bdd->addNotification($this);
   }
 
+
+  abstract function typeNotif();
     /**
      * @return mixed
      */
@@ -80,7 +83,7 @@ abstract class Notification {
     /**
      * @return bool
      */
-    public function isLu(): bool
+    public function isLu()
     {
         return $this->lu;
     }
@@ -126,9 +129,33 @@ abstract class Notification {
     }
 
   public function supprimerBDD() {
-    $bbd = DB::getInstance();
-    $bdd->deleteNotification($idNotif);
+    $bdd = DB::getInstance();
+    $bdd->deleteNotification($this->idNotif);
   }
+
+    /**
+     * @return mixed
+     */
+    public function getIdNotification()
+    {
+        return $this->idNotif;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLu()
+    {
+        return $this->lu;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDestUtilisateur()
+    {
+        return $this->destUtilisateur;
+    }
 
 }
 ?>

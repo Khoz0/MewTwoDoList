@@ -5,16 +5,13 @@ namespace App\Classe;
 
 class NotificationChangement extends Notification {
 
-  function __construct($dateCreation, $contenu, $source) {
-      parent::__construct($dateCreation, $contenu, $source);
+  function __construct($idNotif,$dateCreation, $contenu, $sourceUtilisateur, $idListe, $mailMembre) {
+      parent::__construct($idNotif,$dateCreation, $contenu, $sourceUtilisateur, $idListe, $mailMembre);
     }
 
-    public function ajouterBDD() {
-      //AjouterBDD
-    }
-
-    public function supprimerBDD() {
-      //SupprimerBDD
+    function typeNotif()
+    {
+        return "notificationChangement";
     }
 }
 

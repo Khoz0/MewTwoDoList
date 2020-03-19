@@ -85,6 +85,9 @@ switch ($page) {
       	(new App\Controllers\RecuperationMDPController)->recuperation();
         break;
 
+    case 'changementProprietaire':
+        (new App\Controllers\ChangerProprietaire())->changerProprietaire();
+
     default: // Si, rien, alors erreur 404
         (new App\Controllers\ErreurController)->_404();
         break;

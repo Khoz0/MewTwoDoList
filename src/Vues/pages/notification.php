@@ -7,13 +7,22 @@ use App\Modeles\DB;
     <?php
 if(isset($_SESSION["user"])){
     $user = unserialize($_SESSION['user']);
-    $notif = $user->getTabNotification();
+    $notif = 0;
+    $mail = $user->getMail();
+    //$notifications = DB::getInstance()->loadNotif($mail);
+    $bddRequete = DB::getInstance()->getPDO();
+    $requete = $bddRequete->prepare("SELECT * FROM Notification WHERE mailMembre = :mail");
+    $requete->bindParam(':mail', $mail);
+    $requete->execute();
+    while ($donnees = $requete->fetch()){
+        $notif++;
+    }
     $_SESSION['user'] = serialize($user); ?>
     <div class="jumbotron justify-content-center">
         <h1>Mes Notifications :</h1>
 
         <?php
-            if(count($notif)==0){?>
+            if($notif==0){?>
         <p> Aucune notification ! </p>
 
         <?php
@@ -31,6 +40,19 @@ if(isset($_SESSION["user"])){
             <tbody>
             <?php
                 $cpt = 0;
+                $requete = $bddRequete->prepare("SELECT * FROM Notification WHERE mailMembre = :mail");
+                $requete->bindParam(':mail', $mail);
+                $requete->execute();
+                while ($donnees = $requete->fetch()) {
+                    echo "<tr>";
+                    echo "<th scope=\"row\"> <input type=\"checkbox\" id=\"notif\".$cpt ></th>";
+                    echo "<td>".$donnees['idListe']."</td>";
+                    echo "<td>".$donnees['dateEnvoi']."</td>";
+                    echo "<td>".$donnees['contenu']."</td>";
+                    echo "</tr>";
+                    $cpt++;
+                }
+                /*$cpt = 0;
                 foreach ($notif as $not){
                     echo "<tr>";
                     echo "<th scope=\"row\"> <input type=\"checkbox\" id=\"notif\".$cpt ></th>";
@@ -39,7 +61,7 @@ if(isset($_SESSION["user"])){
                     echo "<td>$not->getContenu()</td>";
                     echo "</tr>";
                     $cpt = $cpt + 1;
-                }
+                }*/
 
         ?>
             </tbody>

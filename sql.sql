@@ -62,11 +62,14 @@ CREATE TABLE `Notification` (
   `lu` tinyint(1) DEFAULT NULL,
   `mail` varchar(100) DEFAULT NULL,
   `idListe` int(10) DEFAULT NULL,
+  `mailMembre` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`idNotification`),
   KEY `FK_Notification1` (`mail`),
-  KEY `FK_Notification2` (`idListe`),
+  KEY `FK_Notification2` (`mailMembre`),
+  KEY `FK_Notification3` (`idListe`),
   CONSTRAINT `FK_Notification1` FOREIGN KEY (`mail`) REFERENCES `Utilisateur` (`mail`),
-  CONSTRAINT `FK_Notification2` FOREIGN KEY (`idListe`) REFERENCES `Liste` (`idListe`)
+  CONSTRAINT `FK_Notification2` FOREIGN KEY (`mailMembre`) REFERENCES `Utilisateur` (`mail`),
+  CONSTRAINT `FK_Notification3` FOREIGN KEY (`idListe`) REFERENCES `Liste` (`idListe`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 

@@ -191,6 +191,20 @@ class Utilisateur
         return $this->tabNotification;
     }
 
+    /**
+     * Renvoie le nombre de notification non lues
+     */
+    public function getNbNotifNonLues()
+    {
+        $cpt = 0;
+        foreach ($this->tabNotification as $not){
+            if($not->isLu()){
+                $cpt = $cpt + 1;
+            }
+        }
+        return $cpt;
+    }
+
     public function sauvegarderBDD()
     {
 
