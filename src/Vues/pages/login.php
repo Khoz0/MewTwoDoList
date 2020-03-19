@@ -25,7 +25,7 @@
 
 
                         <br>
-                        <h5 class="card-title text-center"><?= $err ?><?php echo '<br>' ?></h5>
+                        <em class="card-title text-center"><?= $err ?><?php echo '<br>' ?></em>
                         <hr class="my-4">
 
                     </form>
