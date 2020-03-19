@@ -1,7 +1,8 @@
 function sort_by_name(val) {
 
     var liste = [];
-    
+    var liste2 = [];
+
     $.each($('#liste'),
         function () {
             $(this).children().each(
@@ -14,6 +15,17 @@ function sort_by_name(val) {
         }
     );
 
+    $.each($('#liste2'),
+        function () {
+            $(this).children().each(
+                function () {
+                    if ($(this).attr("id").split("\\")[0] != null) {
+                        liste2.push($(this));
+                    }
+                }
+            );
+        }
+    );
 
 
             liste.sort(function (a, b) {
@@ -39,9 +51,37 @@ function sort_by_name(val) {
                 }
             });
 
+    liste2.sort(function (a, b) {
+        switch (val) {
+            case "alphabInverse":
+                return sort_alphabInverse(a, b);
+                break;
+            case "debRecent":
+                return sort_debRecent(a, b);
+                break;
+            case "finRecent":
+                return sort_finRecent(a, b);
+                break;
+            case "debAncien":
+                return sort_debAncien(a, b);
+                break;
+            case "finAncien":
+                return sort_finAncien(a, b);
+                break;
+            default:
+                return sort_alphab(a, b);
+                break;
+        }
+    });
+
 
     var order = 0;
     liste.forEach(element => {
+        element.css("order", order++);
+    });
+
+    var order = 0;
+    liste2.forEach(element => {
         element.css("order", order++);
     });
 
