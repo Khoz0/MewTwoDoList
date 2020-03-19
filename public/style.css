@@ -19,6 +19,12 @@ nom_listes {
     color : #005cbf;
 }
 
+etat_tache {
+    font-size: 10pt;
+    color : #858585;
+    font-style: italic;
+}
+
 dates {
     font-size: 10pt;
     color : #4b9fff;

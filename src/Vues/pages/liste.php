@@ -96,11 +96,12 @@ $liste = DB::getInstance()->loadListe($_GET["id"]);
             $nom = $tache->getIntituleTache();
             $valide = $tache->getValide();
             $id = $tache->getIdTache();
+            $etat = $tache->getEtat();
             $user = unserialize($_SESSION['user']);
             ?>
-            <div class="jumbotron-fluid col-auto" style="border: solid; ;padding: 30px; margin: 10px;"
-                 id="<?php echo $nom ?>">
-                <div><?php echo $nom ?></div>
+            <div class="jumbotron-fluid col-auto" style="border: solid; ;padding: 30px; margin: 10px; "id="<?php echo $nom ?>">
+                <nom_listes><?php echo $nom ?></nom_listes>
+                <br><etat_tache><?=$etat?></etat_tache>
                 <div class="container">
                  <div class="row">
 
@@ -134,7 +135,7 @@ $liste = DB::getInstance()->loadListe($_GET["id"]);
                     </div>
                     <?php
                 } else {
-                    ?><br><h5><?= $tache->getUtilisateurAssigne(); ?></h5><br>
+                    ?><br><h5><?php echo $tache->getUtilisateurAssigne(); ?></h5><br>
                     <div>
 
                         <form method="post" action="#">

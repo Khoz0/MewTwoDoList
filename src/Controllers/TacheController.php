@@ -21,6 +21,9 @@ class TacheController extends Controller {
         $id = $_GET['idTache'];
         $idListe = $_GET['idListe'];
         DB::getInstance()->addUserTache($mail,$id);
+        $tache = DB::getInstance()->loadTache($id);
+        $tache->setEtat();
+        $tache->modifBDD();
 
         $this->redirect("liste&id=$idListe");
     }
@@ -30,6 +33,9 @@ class TacheController extends Controller {
         $id = $_GET['idTache'];
         $idListe = $_GET['idListe'];
         DB::getInstance()->deleteUserTache($id);
+        $tache = DB::getInstance()->loadTache($id);
+        $tache->setEtat();
+        $tache->modifBDD();
 
         $this->redirect("liste&id=$idListe");
     }

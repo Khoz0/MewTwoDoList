@@ -25,6 +25,7 @@ function valide() {
       },
       timeout: 5000,
       success: function() {
+        window.location.reload(true);
 
       },
       error: (xhr) => {
