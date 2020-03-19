@@ -70,14 +70,14 @@ if(isset($_SESSION["user"])){?>
             foreach ($listesInvite as $listeInvite){
             ?>
 
-                <div class="jumbotron col-auto" style="border: solid; padding: 30px; margin: 10px;"
+                <div id="<?php echo $listeInvite->getIntituleListe() ?>\<?php echo $listeInvite->getDateCreation() ?>\<?php echo $listeInvite->getDateFin() ?>" class="jumbotron col-auto" style="border: solid; padding: 30px; margin: 10px;"
                      onclick="window.location.href = '?page=liste&id=<?= $listeInvite->getIdListe() ?>'">
-                    <h3><?= $listeInvite->getIntituleListe(); ?></h3>
+                    <nom_listes><?= $listeInvite->getIntituleListe(); ?></nom_listes>
                     <?php if ($listeInvite->getDateFin() == null) { ?>
-                        <div><br><br>A partir du <?= $listeInvite->getDateCreation() ?><br></div>
+                        <dates><br><br>A partir du <?= $listeInvite->getDateCreation() ?><br></dates>
                     <?php } else { ?>
-                        <div><br><br>Du <?= $listeInvite->getDateCreation() ?>
-                            <br>au <?= $listeInvite->getDateFin() ?></div>
+                        <dates><br><br>Du <?= $listeInvite->getDateCreation() ?>
+                            <br>au <?= $listeInvite->getDateFin() ?></dates>
                     <?php } ?>
                 </div>
 
