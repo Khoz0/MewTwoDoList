@@ -40,18 +40,20 @@ if(isset($_SESSION["user"])){
                     echo "</tr>";
                     $cpt = $cpt + 1;
                 }
-            }
+
         ?>
             </tbody>
         </table>
 
     </div>
-
-<?php } ?>
     <script>sort_by_name("alphab");</script>
     <div class="jumbotron justify-content-center">
-                        <button class="btn btn-dark float-left" type="reset" value="Reset"> Annuler </button>
-                        <button class="btn btn-dark float-right" type="submit" value="Submit"> Supprimer </button>
-                    </div>
+        <button class="btn btn-dark float-left" type="reset" value="Reset"> Annuler </button>
+        <button class="btn btn-dark float-right" type="submit" value="Submit"> Supprimer </button>
+    </div>
+    <?php } ?>
 </div>
+<?php } ?>
+
+
 
