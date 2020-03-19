@@ -5,41 +5,47 @@ use App\Modeles\DB;
 <div class="jumbotron-fluid text-center">
 
     <?php
-if(isset($_SESSION["user"])){?>
+if(isset($_SESSION["user"])){
+    $user = unserialize($_SESSION['user']);
+    $notif = $user->getTabNotification();
+    $_SESSION['user'] = serialize($user); ?>
     <div class="jumbotron justify-content-center">
         <h1>Mes Notifications :</h1>
+
+        <?php
+            if(count($notif)==0){?>
+        <p> Aucune notification ! </p>
+
+        <?php
+            }else{?>
         <button class="btn btn-dark float-left"> Tout sélectionner </button>
-        <table class="table table-hover table-dark">
-          <thead>
+        <table class="table">
+            <thead class="thead-dark">
             <tr>
-              <th scope="col">#</th>
-              <th scope="col">First</th>
-              <th scope="col">Last</th>
-              <th scope="col">Handle</th>
+                <th scope="col"></th>
+                <th scope="col">Liste</th>
+                <th scope="col">Date</th>
+                <th scope="col">Contenu</th>
             </tr>
-          </thead>
-          <tbody>
-            <tr class="table-dark">
-              <th scope="row">1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>Jacob</td>
-              <td>Thornton</td>
-              <td>@fat</td>
-            </tr>
-            <tr class="table-dark">
-              <th scope="row" >3</th>
-              <td>Larry the Bird</td>
-              <td>Larry the Bird</td>
-              <td>@twitter</td>
-            </tr>
-          </tbody>
+            </thead>
+            <tbody>
+            <?php
+                $cpt = 0;
+                foreach ($notif as $not){
+                    echo "<tr>";
+                    echo "<th scope=\"row\"> <input type=\"checkbox\" id=\"notif\".$cpt ></th>";
+                    echo "<td>$not->getIdListe()</td>";
+                    echo "<td>$not->getDateCreation()</td>";
+                    echo "<td>$not->getContenu()</td>";
+                    echo "</tr>";
+                    $cpt = $cpt + 1;
+                }
+            }
+        ?>
+            </tbody>
         </table>
-      </div>
+
+    </div>
 
 <?php } ?>
     <script>sort_by_name("alphab");</script>
