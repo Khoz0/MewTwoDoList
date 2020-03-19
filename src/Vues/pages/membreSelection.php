@@ -13,7 +13,7 @@ $membreSelection = new RechercheMembreController();
 
 <h4>Rechercher par:</h4>
 <select id="criteria"
-        onchange="setCriteria(document.getElementById('criteria').value,document.getElementById('site-search').value,'<?php echo unserialize($_SESSION['user'])->getMail(); ?>','<?php echo $_GET['id']; ?>');">
+        onchange="setCriteria(document.getElementById('criteria').value,document.getElementById('site-search').value,'<?php echo unserialize($_SESSION['user'])->getMail(); ?>','<?php echo $_GET['idListe']; ?>');">
     <option value="name" selected="selected">Nom & prénom</option>
     <option value="pseudo">Pseudo</option>
     <option value="mail">Mail</option>
@@ -22,7 +22,7 @@ $membreSelection = new RechercheMembreController();
 <div class="row justify-content-center">
 <input class="barre-recherche" type="search" id="site-search" name="q"
        placeholder="Rechercher un membre"
-       onkeyup="setCriteria(document.getElementById('criteria').value,document.getElementById('site-search').value,'<?php echo unserialize($_SESSION['user'])->getMail(); ?>','<?php echo $_GET['id']; ?>');">
+       onkeyup="setCriteria(document.getElementById('criteria').value,document.getElementById('site-search').value,'<?php echo unserialize($_SESSION['user'])->getMail(); ?>','<?php echo $_GET['idListe']; ?>');">
 
 </div>
 
@@ -34,9 +34,9 @@ $membreSelection = new RechercheMembreController();
             <?php
             $cpt = 0;
 
-            $liste = DB::getInstance()->loadListe($_GET['id']);
+            $liste = DB::getInstance()->loadListe($_GET['idListe']);
 
-            foreach (DB::getInstance()->getUtilisateurs("", null, $_GET['id']) as $user) {
+            foreach (DB::getInstance()->getUtilisateurs("", null, $_GET['idListe']) as $user) {
                 if ($user->getMail() != unserialize($_SESSION['user'])->getMail() && $cpt < 10 && !$liste->contientUtilisateur($user->getMail())) {
                     $cpt++;
                     ?>
@@ -56,9 +56,20 @@ $membreSelection = new RechercheMembreController();
                                     } ?> </td>
                                 <td width="30px"></td>
                                 <td>
-                                    <a href="?page=addUserList&mail=<?= $user->getMail() ?>&idListe=<?= $_GET['id'] ?>">
-                                    <button >Ajouter</button>
-                                    </a>
+                                    <?php
+                                    if($_GET["use"]=="ajoutListe") {
+                                        ?>
+                                        <a href="?page=addUserList&mail=<?= $user->getMail() ?>&idListe=<?= $_GET['idListe'] ?>">
+                                            <button>Ajouter</button>
+                                        </a>
+                                        <?php
+                                    }
+                                    else {?>
+                                        <a href=?page=addUserTache&mail=<?= htmlspecialchars($user->getMail()) ?>&idTache=<?=$_GET['idTache']?>&idListe=<?= $_GET['idListe']; ?>">
+                                            <button>Ajouter</button>
+                                        </a>
+                                    <?php }
+                                        ?>
                                 </td>
                             </tr>
                             <br>
@@ -78,5 +89,5 @@ $membreSelection = new RechercheMembreController();
 
 
 <div class="row justify-content-center">
-<button onclick="window.location.href = '?page=liste&id=<?php echo $_GET['id'] ?>'">Annuler</button>
+<button onclick="window.location.href = '?page=liste&id=<?php echo $_GET['idListe'] ?>'">Annuler</button>
 </div>

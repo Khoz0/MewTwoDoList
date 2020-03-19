@@ -45,7 +45,7 @@ $liste = DB::getInstance()->loadListe($_GET["id"]);
                         }
                         ?>
                         <div class="col-lg-auto text-center">
-                            <button class="btn dropdown-item" onclick="window.location.href='?page=memberSelect&id=<?php echo $_GET["id"] ?>'"><img src="assests/add_user.png" width="40" height="40" alt="add_user"></button>
+                            <button class="btn dropdown-item" onclick="window.location.href='?page=memberSelect&idListe=<?php echo $_GET["id"] ?>&use=ajoutListe&idTache=null'"><img src="assests/add_user.png" width="40" height="40" alt="add_user"></button>
                         </div>
                         <?php
                     }else{
@@ -92,24 +92,32 @@ $liste = DB::getInstance()->loadListe($_GET["id"]);
         $taches = $liste->getTabTache();
         $idListe = $liste->getIdListe();
         foreach ($taches as $elem) {
-            $tache = DB::getInstance()->loadTache($elem['idTache']);
-            $nom = $tache->getIntituleTache();
-            $valide = $tache->getValide();
-            $id = $tache->getIdTache();
-            $etat = $tache->getEtat();
-            $user = unserialize($_SESSION['user']);
-            ?>
-            <div class="jumbotron-fluid col-auto" style="border: solid; ;padding: 30px; margin: 10px; "id="<?php echo $nom ?>">
-                <nom_listes><?php echo $nom ?></nom_listes>
-                <br><etat_tache><?=$etat?></etat_tache>
-                <div class="container">
-                 <div class="row">
+        $tache = DB::getInstance()->loadTache($elem['idTache']);
+        $nom = $tache->getIntituleTache();
+        $valide = $tache->getValide();
+        $id = $tache->getIdTache();
+        $etat = $tache->getEtat();
+        $user = unserialize($_SESSION['user']);
+        $proprio = $liste->getMailProprietaire();
+        $userAssigne = $tache->getUtilisateurAssigne();
+        ?>
+        <div class="jumbotron-fluid col-auto" style="border: solid; ;padding: 30px; margin: 10px; "
+             id="<?php echo $nom ?>">
+            <nom_listes><?php echo $nom ?></nom_listes>
+            <br>
+            <etat_tache><?= $etat ?></etat_tache>
+            <div class="container">
+                <div class="row">
 
-                     <!--Bouton modifier tâche-->
-                     <div class="col">
-                         <button class="btn"  id="modifTache" type="button" onclick="pop_up_modif(this)" value="<?php echo $id; ?>"><img src="assests/edit.png" alt="edit" width="20" height="20"></button>
-                     </div>
-
+                    <?php
+                    if ($userAssigne == null || $user->getMail() == $proprio || $user->getMail() == $userAssigne) {
+                        ?>
+                        <!--Bouton modifier tâche-->
+                        <div class="col">
+                            <button class="btn" id="modifTache" type="button" onclick="pop_up_modif(this)"
+                                    value="<?php echo $id; ?>"><img src="assests/edit.png" alt="edit" width="20"
+                                                                    height="20"></button>
+                        </div>
                      <!--Check box de tâche finie-->
                      <div class="col">
                          <input type="checkbox" aria-label="..." class="valide" id="valide" value="<?php echo $id; ?>" <?php if ($valide == 1) {
@@ -117,44 +125,99 @@ $liste = DB::getInstance()->loadListe($_GET["id"]);
             } ?> >
                      </div>
 
+                        <?php
+                    }
+                    ?>
+
                  </div>
                 <?php
 
-                if ($tache->getUtilisateurAssigne() == null) {
+                //Si personne n'est assigné à cette tâche on peut ajouter quelqu'un
+                if ($userAssigne == null) {
                     if (isset($_POST[$nom])) {
                         $tache->setUtilisateurAssigne(unserialize($_SESSION['user']));
                     }
 
+                    //Si c'est le propriétaire il peut ajouter un utilisateur autre que lui
+                    if($user->getMail() == $proprio) {
+                        ?>
+                        <div>
+                            <form method="post" name="<?= htmlspecialchars($nom) ?> " action="#">
+                                <a href='?page=memberSelect&idListe=<?= $_GET["id"] ?>&use=ajoutTache&idTache=<?=$id?>'
+                                   class="btn btn-primary btn-sm">
+                                    Ajouter un Utilisateur
+                                </a>
+                            </form>
+                        </div>
+                        <?php
+                    }
+
+                    //Si c'est une autre personne il ne peut que se proposer lui même
+                    else {
+                        ?>
+                        <div>
+                            <form method="post" name="<?= htmlspecialchars($nom) ?> " action="#">
+                                <a href="?page=addUserTache&mail=<?= htmlspecialchars($user->getMail()) ?>&idTache=<?= $id; ?>&idListe=<?= $_GET['id']; ?>"
+                                   class="btn btn-primary btn-sm">
+                                    Se proposer
+                                </a>
+                            </form>
+                        </div>
+
+                    <?php
+                    }
                     ?>
-                    <div>
-                        <form method="post" name="<?= htmlspecialchars($nom) ?> " action="#">
-                            <a href="?page=addUserTache&mail=<?= htmlspecialchars($user->getMail()) ?>&idTache=<?= $id;?>&idListe=<?= $_GET['id'];?>" class="btn btn-primary btn-sm">
-                                Ajouter un Utilisateur
-                            </a>
-                        </form>
-                    </div>
                     <?php
                 } else {
-                    ?><br><h5><?php echo $tache->getUtilisateurAssigne(); ?></h5><br>
-                    <div>
 
-                        <form method="post" action="#">
-                            <a href="?page=deleteUserTache&mail=<?= $user->getMail() ?>&idTache=<?= $id;?>&idListe=<?= $_GET['id'];?>">
-                            <button type="button" value="<?= $user->getMail() ?>" class="btn btn-primary btn-sm">
-                                Se retirer
-                            </button>
-                            </a>
-                        </form>
+                    ?><br><h5><?=$userAssigne ?></h5><br>
 
-                        <form method="post" action="#">
-                            <a href="?page=deleteTache&idTache=<?= $id;?>">
-                            <button type="button" value="<?= $user->getMail() ?>" class="btn btn-danger btn-sm">
-                                Supprimer la tâche
-                            </button>
-                            </a>
-                        </form>
-                    </div>
                     <?php
+                    if($user->getMail() == $proprio || $user->getMail() == $userAssigne) {
+                        ?>
+
+                        <div>
+                        <?php
+
+                        //Si l'utilisateur assigné à la tâche est connecté
+                        if($user->getMail() == $userAssigne) {
+                            ?>
+                            <form method="post" action="#">
+                                <a href="?page=deleteUserTache&mail=<?= $user->getMail() ?>&idTache=<?= $id; ?>&idListe=<?= $_GET['id']; ?>">
+                                    <button type="button" value="<?= $user->getMail() ?>"
+                                            class="btn btn-primary btn-sm">
+                                        Se retirer
+                                    </button>
+                                </a>
+                            </form>
+                            <?php
+                        }
+
+                        //Si le propriétaire est connecté
+                        else {
+                            ?>
+                            <form method="post" action="#">
+                                <a href="?page=deleteUserTache&mail=<?= $user->getMail() ?>&idTache=<?= $id; ?>&idListe=<?= $_GET['id']; ?>">
+                                    <button type="button" value="<?= $user->getMail() ?>"
+                                            class="btn btn-primary btn-sm">
+                                        Retirer l'utilisateur
+                                    </button>
+                                </a>
+                            </form>
+                            <?php
+                        }
+                            ?>
+
+                            <form method="post" action="#">
+                                <a href="?page=deleteTache&idTache=<?= $id; ?>">
+                                    <button type="button" value="<?= $user->getMail() ?>" class="btn btn-danger btn-sm">
+                                        Supprimer la tâche
+                                    </button>
+                                </a>
+                            </form>
+                        </div>
+                        <?php
+                    }
                 }
                 ?>
             </div>
