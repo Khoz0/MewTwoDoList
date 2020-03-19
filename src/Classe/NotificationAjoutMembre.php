@@ -11,5 +11,10 @@ class NotificationAjoutMembre extends NotificationAvecChoix {
 
     public function ajoutMembre() {
   }
+
+    function typeNotif()
+    {
+        return "notificationAjoutMembre";
+    }
 }
 ?>

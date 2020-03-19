@@ -18,7 +18,7 @@ abstract class Notification {
       $this->idNotif = $idNotif;
       $this->dateCreation = $dateCreation;
       $this->contenu = $contenu;
-      $this->lu = 0;
+      $this->lu = false;
       $this->sourceUtilisateur = $sourceUtilisateur;
       $this->idListe = $idListe;
       $this->destUtilisateur = $mailMembre;
@@ -30,6 +30,8 @@ abstract class Notification {
     $bdd->addNotification($this);
   }
 
+
+  abstract function typeNotif();
     /**
      * @return mixed
      */

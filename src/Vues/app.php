@@ -50,14 +50,23 @@ if ($page != "login" && $page != "disconnect" && $page != "inscription" && $page
 
             <button class="btn btn-default dropdown-toggle mr-4 float-right" type="button" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
-                <a class="btn float-right" href="?page=notification">
                 <img src="assests/notif.png" alt="notification" width="20" height="20">
                 <span class="badge badge-pill "><?php
                     $user = unserialize($_SESSION['user']);
-                    $notif = $user->getNbNotifNonLues();
+                    $countNotif = 0;
+                    $bddRequete = DB::getInstance()->getPDO();
+                    $mail = $user->getMail();
+                    $requete = $bddRequete->prepare("SELECT * FROM Notification WHERE mailMembre = :mail");
+                    $requete->bindParam(':mail', $mail);
+                    $requete->execute();
+                    while ($donneesNotif = $requete->fetch()){
+                        if ($donneesNotif['lu'] == 0){
+                            $countNotif++;
+                        }
+                    }
                     $_SESSION['user'] = serialize($user);
-                    echo $notif;?></span>
-            </button> </a>
+                    echo $countNotif;?></span>
+            </button>
             <?php
                 $user = unserialize($_SESSION['user']);
                 $mail = $user->getMail();
@@ -71,10 +80,14 @@ if ($page != "login" && $page != "disconnect" && $page != "inscription" && $page
                                 if ($i < 3) { ?>
                                     <a class="dropdown-item"><?=$notification->getContenu()?></a>
                                 <?php
+                                    if ($notification->typeNotif() == "changementProprietaire"){
+
+                                    }
                                 }
                                 $i++;
                             }
                         ?>
+                        <button class="btn" onclick="window.location.href='?page=notification'">Mes notifications</button>
                     </div>
                 <?php } ?>
         </div>

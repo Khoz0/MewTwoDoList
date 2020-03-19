@@ -12,6 +12,11 @@ class NotificationChangementProprietaire extends NotificationAvecChoix {
     public function changementProprietaire() {
 
     }
+
+    function typeNotif()
+    {
+        return "notificationChangementProprietaire";
+    }
 }
 
  ?>
