@@ -14,6 +14,7 @@ class Utilisateur
     private $motDePasse;
     private $photo;
     private $listesProprietaire = array();
+    private $tabNotification = array();
 
     function __construct($nom, $prenom, $pseudo, $mail, $motDePasse, $urlPhoto)
     {
@@ -179,7 +180,15 @@ class Utilisateur
 
     public function notifier($notification)
     {
+        array_push($this->tabNotification, $notification);
+    }
 
+    /**
+     * @return array
+     */
+    public function getTabNotification()
+    {
+        return $this->tabNotification;
     }
 
     public function sauvegarderBDD()
