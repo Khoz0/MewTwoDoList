@@ -9,7 +9,7 @@ abstract class NotificationAvecChoix extends Notification {
 
   function __construct($dateCreation, $contenu, $source) {
       parent::__construct($dateCreation, $contenu, $source);
-      $this->$repondu = false
+      $this->repondu = false
     }
 
     public function ajouterBDD() {

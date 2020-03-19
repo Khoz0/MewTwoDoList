@@ -4,11 +4,11 @@ $page = $_GET['page'] ?? $_SERVER['argv'][1] ?? header('Location: index.php?page
 
 // Le router de l'application est ici
 
-switch($page) {
+switch ($page) {
 
-	case 'accueil':
-		(new App\Controllers\AccueilController)->index();
-		break;
+    case 'accueil':
+        (new App\Controllers\AccueilController)->index();
+        break;
 
     case 'login':
         (new App\Controllers\LoginController())->login();
@@ -66,7 +66,7 @@ switch($page) {
     case 'memberSelect':
         (new App\Controllers\RechercheMembreController())->memberSelect();
         break;
-	case 'supprimerUserList':
+    case 'supprimerUserList':
         (new App\Controllers\ListeController())->deleteListMember();
         break;
     case 'addUserList':
@@ -81,9 +81,11 @@ switch($page) {
     case 'notification':
         (new App\Controllers\NotifController())->notif();
         break;
+    case 'recuperation':
+      	(new App\Controllers\RecuperationMDPController)->recuperation();
+        break;
 
-
-	default: // Si, rien, alors erreur 404
-		(new App\Controllers\ErreurController)->_404();
-		break;
+    default: // Si, rien, alors erreur 404
+        (new App\Controllers\ErreurController)->_404();
+        break;
 }
