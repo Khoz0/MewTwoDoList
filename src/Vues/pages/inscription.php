@@ -1,3 +1,5 @@
+
+<link rel="icon" href="assests/favicon.ico" />
 <script type="text/javascript" src="javascript/verification_inscription.js"></script>
 <?php
 use App\Controllers\InscriptionController;

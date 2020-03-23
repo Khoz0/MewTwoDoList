@@ -1,4 +1,5 @@
 
+<link rel="icon" href="assests/favicon.ico" />
 <div class="container" id="particles-js">
     <div class="row">
         <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
@@ -36,7 +37,7 @@
                     <br>
 
 
-                        <button class="btn btn-lg btn-primary2 btn-block text-uppercase" onclick="window.location.href='?page=recuperation'">
+                        <button class="btn btn-lg btn-primary2 btn-block text-uppercase" onclick="window.location.href='?page=recuperationCompte'">
                             Mot de passe oublié ?
                           </button>
 
@@ -45,3 +46,4 @@
         </div>
     </div>
 </div>
+

@@ -1,3 +1,5 @@
+
+<link rel="icon" href="assests/favicon.ico" />
 <?php
 
 
