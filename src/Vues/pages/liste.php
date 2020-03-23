@@ -21,7 +21,7 @@ $proprio = $liste->getMailProprietaire();
             <button class="btn float-right " type="button" data-toggle="dropdown" data-target="membres"
                     aria-haspopup="listbox" aria-expanded="false"><img src="assests/membre_listes.png" width="20" height="20" alt="membre_liste"></button>
 
-            <div class="dropdown-menu dropdown-menu-right col-lg-2" id = "membres">
+            <div class="dropdown-menu dropdown-menu-right" id = "membres">
                 <?php
                     $membres = $liste->recupererMembres();
                     if ($liste->getMailProprietaire() == unserialize($_SESSION['user'])->getMail()){
@@ -29,7 +29,7 @@ $proprio = $liste->getMailProprietaire();
                             ?>
                             <div class="dropdown-item">
                                 <div class="col-lg-auto">
-                                    <p>
+                                    <p style="position: center">
                                         <?php if($membre == $proprio){?>
                                             <img src="assests/star.png" width="15" height="15" alt="etoile">
                                         <?php
