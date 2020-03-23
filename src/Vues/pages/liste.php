@@ -34,7 +34,8 @@ $proprio = $liste->getMailProprietaire();
                                             <img src="assests/star.png" width="15" height="15" alt="etoile">
                                         <?php
                                             }
-                                            echo $membre ?>
+                                            $membreUser = DB::getInstance()->loadUtilisateur($membre);
+                                            echo $membreUser->getPseudo() ?>
                                         <a href="?page=changementProprietaire&mailProprio=<?= unserialize($_SESSION['user'])->getMail()?>&mailMembre=<?=$membre?>&id=<?=$_GET['id']?>">
                                             <img src="assests/changement.png" width="15" height="15" alt="changement">
                                         </a>
@@ -62,7 +63,8 @@ $proprio = $liste->getMailProprietaire();
                                             <img src="assests/star.png" width="15" height="15" alt="etoile">
                                             <?php
                                         }
-                                        echo $membre ?>
+                                        $membreUser = DB::getInstance()->loadUtilisateur($membre);
+                                        echo $membreUser->getPseudo() ?>
                                     </p>
                                 </div>
                             </div>
