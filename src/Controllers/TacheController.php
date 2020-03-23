@@ -25,10 +25,11 @@ class TacheController extends Controller {
         $bdd->addUserTache($mail,$idTache);
         $tache = $bdd->loadTache($idTache);
         $liste = $bdd->loadListe($idListe);
+        $user = $bdd->loadUtilisateur($mail);
         $tache->setEtat();
         $tache->modifBDD();
 
-        $contenu = "L'utilisateur ".$mail." s'est proposé pour la tache ".$tache->getIntituleTache()." !";
+        $contenu = "L'utilisateur ".$user->getPseudo()." s'est proposé pour la tache ".$tache->getIntituleTache()." !";
         $membres = $liste->recupererMembres();
 
         $idNotif = 0;
@@ -38,8 +39,10 @@ class TacheController extends Controller {
             $idNotif = $donnees['idNotification'];
         }
         foreach ($membres as $membre){
-            $idNotif++;
-            $bdd->createNotif($idNotif, date("Y-m-d"), null, $contenu, 0, $mail, $idListe, $membre);
+            if ($membre != $mail) {
+                $idNotif++;
+                $bdd->createNotif($idNotif, date("Y-m-d"), null, $contenu, 0, $mail, $idListe, $membre);
+            }
         }
 
 
@@ -50,10 +53,29 @@ class TacheController extends Controller {
         $mail = $_GET['mail'];
         $id = $_GET['idTache'];
         $idListe = $_GET['idListe'];
-        DB::getInstance()->deleteUserTache($id);
+        $bdd = DB::getInstance();
+        $bdd->deleteUserTache($id);
         $tache = DB::getInstance()->loadTache($id);
         $tache->setEtat();
         $tache->modifBDD();
+        $liste = $bdd->loadListe($idListe);
+        $user = $bdd->loadUtilisateur($mail);
+
+        $contenu = "L'utilisateur ".$user->getPseudo()." s'est retiré de la tache ".$tache->getIntituleTache()." !";
+        $membres = $liste->recupererMembres();
+
+        $idNotif = 0;
+        $requeteBDD = DB::getInstance()->getPDO()->prepare("SELECT * FROM Notification");
+        $requeteBDD->execute();
+        while ($donnees = $requeteBDD->fetch()){
+            $idNotif = $donnees['idNotification'];
+        }
+        foreach ($membres as $membre){
+            if ($membre != $mail) {
+                $idNotif++;
+                $bdd->createNotif($idNotif, date("Y-m-d"), null, $contenu, 0, $mail, $idListe, $membre);
+            }
+        }
 
         $this->redirect("liste&id=$idListe");
     }
