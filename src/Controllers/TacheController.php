@@ -19,6 +19,8 @@ class TacheController extends Controller {
 
     public function addUser(){
         $mail = $_GET['mail'];
+        $user = DB::getInstance()->loadUtilisateur($mail);
+        $pseudo = $user->getPseudo();
         $idTache = $_GET['idTache'];
         $idListe = $_GET['idListe'];
         $bdd = DB::getInstance();
@@ -28,7 +30,7 @@ class TacheController extends Controller {
         $tache->setEtat();
         $tache->modifBDD();
 
-        $contenu = "L'utilisateur ".$mail." s'est proposé pour la tache ".$tache->getIntituleTache()." !";
+        $contenu = $pseudo." s'est proposé pour la tache ".$tache->getIntituleTache()." !";
         $membres = $liste->recupererMembres();
 
         $idNotif = 0;

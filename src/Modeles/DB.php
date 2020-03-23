@@ -609,9 +609,6 @@ while ($donnesListe = $getListeProp->fetch()) {
 */
 	}
 
-
-
-
 	public function isNotifAvecChoix($idNotif){
         $bdd = DB::getInstance()->getPDO()->prepare("select count(*) from notificationavecchoix where idNotification = :id");
         $bdd->bindParam(':id', $idNotif);
