@@ -3,6 +3,7 @@ use App\Modeles\DB;
 ?>
 <script src="javascript/notif.js"></script>
 <script src="javascript/tri_liste.js"></script>
+<script src="javascript/gestion_notif.js"></script>
 <div class="jumbotron-fluid text-center">
 
     <?php
@@ -44,10 +45,19 @@ if(isset($_SESSION["user"])){
                     echo "<th scope=\"row\"> <input type=\"checkbox\" data-id=".$not->getIdNotif()." id=\"notif\".$cpt ></th>";
                     echo "<td> Liste ".$not->getIdListe()."</td>";
                     echo "<td>".$not->getDateCreation()."</td>";
-                    if(DB::getInstance()->isNotifAvecChoix($not->getIdNotif())) {?>
-                        <td> <?php echo $not->getContenu() ?>  <a href="#" style="color:#70F92B;" onclick="conf_validation(<?php echo $not->getIdListe() ?>,<?php echo $not->getIdNotif() ?>)">accepter</a>
+                    if(DB::getInstance()->isNotifAvecChoix($not->getIdNotif())) {
+                        if(DB::getInstance()->isNotifProprio($not->getIdNotif())){?>
+
+                        <td> <?php echo $not->getContenu() ?>  <a href="#" style="color:#70F92B;" onclick="conf_validation_proprio(<?php echo $not->getIdListe() ?>, '<?php echo $mail ?>')">accepter</a>
                             <a href="#" style="color:#F73B1D;" onclick="conf_refus(<?php echo $not->getIdListe() ?>,<?php echo $not->getIdNotif() ?>)">refuser</a></td>
-                   <?php }else{
+
+                            <?php }else{ ?>
+
+                            <td> <?php echo $not->getContenu() ?>  <a href="#" style="color:#70F92B;" onclick="conf_validation_ajout(<?php echo $not->getIdListe() ?>,'<?php echo $mail ?>')">accepter</a>
+                                <a href="#" style="color:#F73B1D;" onclick="conf_refus(<?php echo $not->getIdListe() ?>,<?php echo $not->getIdNotif() ?>)">refuser</a></td>
+
+                         <?php }
+                    }else{
                         echo "<td>" . $not->getContenu() . "</td>";
                     }
                     echo "</tr>";

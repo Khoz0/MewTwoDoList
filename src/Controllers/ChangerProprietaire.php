@@ -9,7 +9,7 @@ use App\Modeles\DB;
 
 class ChangerProprietaire extends Controller {
 
-    public function changerProprietaire(){
+    public function changerProprietaireNotif(){
         $bdd = DB::getInstance();
         $bddRequete = DB::getInstance()->getPDO();
         $requete = $bddRequete->prepare("SELECT * FROM Notification");
@@ -28,6 +28,13 @@ class ChangerProprietaire extends Controller {
         $notification->ajouterBDD();
         header("Location: ?page=liste&id=".$idListe);
         //return $this->render('liste', compact('liste', 'id'));
+    }
+
+    public function changerProprietaire(){
+        $mail = $_GET['mailMembre'];
+        $id = $_GET['idListe'];
+        DB::getInstance()->changeProprietaire($mail,$id);
+        header("Location: ?page=notification");
     }
 
 }
