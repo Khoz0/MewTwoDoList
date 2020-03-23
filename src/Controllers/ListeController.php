@@ -23,6 +23,25 @@ class ListeController extends Controller {
         $liste = $bdd->loadListe($idListe);
         $liste->retirerUtilisateur($mail);
         $bdd->deleteListMember($mail, $idListe);
+        $user = $bdd->loadUtilisateur($mail);
+        $pseudo = $user->getPseudo();
+
+        $contenu = $pseudo." s'est retiré de ".$liste->getIntituleListe();
+        $membres = $liste->recupererMembres();
+
+        $idNotif = 0;
+        $requeteBDD = DB::getInstance()->getPDO()->prepare("SELECT * FROM Notification");
+        $requeteBDD->execute();
+        while ($donnees = $requeteBDD->fetch()){
+            $idNotif = $donnees['idNotification'];
+        }
+        foreach ($membres as $membre){
+            if ($membre != $mail) {
+                $idNotif++;
+                $bdd->createNotif($idNotif, date("Y-m-d"), null, $contenu, 0, $mail, $idListe, $membre);
+            }
+        }
+
     	if($bdd->isMemberIn($mail, $idListe)) {
             $this->redirect("liste&id=$idListe");
         }

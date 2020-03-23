@@ -24,6 +24,8 @@ $proprio = $liste->getMailProprietaire();
             <div class="dropdown-menu dropdown-menu-right" id = "membres">
                 <?php
                     $membres = $liste->recupererMembres();
+
+                    //Affichage pour le propriétaire de la liste
                     if ($liste->getMailProprietaire() == unserialize($_SESSION['user'])->getMail()){
                         foreach ($membres as $membre) {
                             ?>
@@ -53,6 +55,8 @@ $proprio = $liste->getMailProprietaire();
                         </div>
                         <?php
                     }else{
+
+                        //Affichage pour membre invité
                         foreach ($membres as $membre) {
                             ?>
                             <div class="dropdown-item">
@@ -70,7 +74,8 @@ $proprio = $liste->getMailProprietaire();
                             </div>
                             <?php
                         }
-                        echo "<button class=\"btn col-lg-auto\" onclick=\"window.location.href='?page=supprimerUserList&mail=".$membre."&idListe=".$_GET["id"]."'\">Quitter la liste</button>";
+
+                        echo "<button class=\"btn col-lg-auto\" onclick=\"window.location.href='?page=supprimerUserList&mail=".$user->getMail()."&idListe=".$_GET["id"]."'\">Quitter la liste</button>";
                     }
                 ?>
             </div>
