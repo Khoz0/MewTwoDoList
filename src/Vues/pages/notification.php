@@ -43,9 +43,10 @@ if(isset($_SESSION["user"])){
                 foreach ($notifications as $not){
                     $not->setLu(1);
                     $not->sauvegarderBDD();
+                    $nomListe = DB::getInstance()->loadListe($not->getIdListe())->getIntituleListe();
                     echo "<tr>";
                     echo "<th scope=\"row\"> <input type=\"checkbox\" data-id=".$not->getIdNotif()." id=\"notif\".$cpt ></th>";
-                    echo "<td> Liste ".$not->getIdListe()."</td>";
+                    echo "<td><a href='?page=liste&id=".$not->getIdListe()."'> ".$nomListe."</a></td>";
                     echo "<td>".$not->getDateCreation()."</td>";
                     if(DB::getInstance()->isNotifAvecChoix($not->getIdNotif())) {
                         if(DB::getInstance()->isNotifProprio($not->getIdNotif())){?>
