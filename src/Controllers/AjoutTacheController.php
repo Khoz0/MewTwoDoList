@@ -38,8 +38,10 @@ class AjoutTacheController extends Controller
             $idNotif = $donnees['idNotification'];
         }
         foreach ($membres as $membre){
-            $idNotif++;
-            $bdd->createNotif($idNotif, date("Y-m-d"), null, $contenu, 0, $user->getMail(), $idListe, $membre);
+            if ($membre != $user->getMail()) {
+                $idNotif++;
+                $bdd->createNotif($idNotif, date("Y-m-d"), null, $contenu, 0, $user->getMail(), $idListe, $membre);
+            }
         }
 
         $tache = new Tache($id, $_POST['texte'], "En attente", $idListe, null, 0);

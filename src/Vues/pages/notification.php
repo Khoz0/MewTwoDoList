@@ -41,6 +41,8 @@ if(isset($_SESSION["user"])){
             <?php
                 $cpt = 0;
                 foreach ($notifications as $not){
+                    $not->setLu(1);
+                    $not->sauvegarderBDD();
                     echo "<tr>";
                     echo "<th scope=\"row\"> <input type=\"checkbox\" data-id=".$not->getIdNotif()." id=\"notif\".$cpt ></th>";
                     echo "<td> Liste ".$not->getIdListe()."</td>";

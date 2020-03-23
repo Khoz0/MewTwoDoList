@@ -37,13 +37,20 @@ $proprio = $liste->getMailProprietaire();
                                         <?php
                                             }
                                             $membreUser = DB::getInstance()->loadUtilisateur($membre);
-                                            echo $membreUser->getPseudo() ?>
-                                        <a href="?page=changementProprietaire&mailProprio=<?= unserialize($_SESSION['user'])->getMail()?>&mailMembre=<?=$membre?>&id=<?=$_GET['id']?>">
-                                            <img src="assests/changement.png" width="15" height="15" alt="changement">
-                                        </a>
-                                        <a href="?page=supprimerUserList&mail=<?= $membre ?>&idListe=<?= $_GET['id'] ?>">
-                                            <img src="assests/croix.png" width="15" height="15" alt="croix">
-                                        </a>
+                                            echo $membreUser->getPseudo() ;
+                                        if($membre != $proprio) {
+
+                                            ?>
+                                            <a href="?page=changementProprietaire&mailProprio=<?= unserialize($_SESSION['user'])->getMail() ?>&mailMembre=<?= $membre ?>&id=<?= $_GET['id'] ?>">
+                                                <img src="assests/changement.png" width="15" height="15"
+                                                     alt="changement">
+                                            </a>
+                                            <a href="?page=supprimerUserList&mail=<?= $membre ?>&idListe=<?= $_GET['id'] ?>">
+                                                <img src="assests/croix.png" width="15" height="15" alt="croix">
+                                            </a>
+                                            <?php
+                                        }
+                                        ?>
                                     </p>
                                 </div>
                             </div>

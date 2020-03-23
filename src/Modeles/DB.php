@@ -372,6 +372,13 @@ class DB {
         $requete->execute();
     }
 
+    public function alterNotif($idNotif, $lu){
+        $results = DB::getInstance()->getPDO()->prepare('UPDATE Notification SET lu=:lu WHERE idNotification = :id');
+        $results->bindParam(':lu', $lu);
+        $results->bindParam(':id', $idNotif);
+        $results->execute();
+    }
+
     public function alterListe($idListe,$intituleListe,$dateCreation, $dateFin,$mailProprietaire)
     {
         $results = DB::getInstance()->getPDO()->prepare('UPDATE Liste SET idListe=:id, intituleListe=:intitule, dateCreation=:dateCrea, dateFin=:dateFin WHERE idListe = :id');

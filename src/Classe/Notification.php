@@ -133,6 +133,10 @@ abstract class Notification {
     $bdd->deleteNotification($this->idNotif);
   }
 
+  public function sauvegarderBDD(){
+        DB::getInstance()->alterNotif($this->idNotif, $this->lu);
+  }
+
     /**
      * @return mixed
      */
