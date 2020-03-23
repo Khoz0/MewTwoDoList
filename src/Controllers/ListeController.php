@@ -5,6 +5,7 @@ namespace App\Controllers;
 
 use App\Classe\Liste;
 use App\Modeles\DB;
+use App\Classe\NotificationAjoutMembre;
 
 
 class ListeController extends Controller {
@@ -54,9 +55,27 @@ class ListeController extends Controller {
         $mail = $_GET['mail'];
         $idListe = $_GET['idListe'];
         $bdd = DB::getInstance();
-        $bdd->addMembre($mail, $idListe);
+
+        $bddRequete = DB::getInstance()->getPDO();
+        $requete = $bddRequete->prepare("SELECT * FROM Notification");
+        $requete->execute();
+        $idNotif = 0;
         $liste = $bdd->loadListe($idListe);
-        $liste->ajouterUtilisateur($mail);
+
+        $idNotif = 0;
+
+        while ($donnees = $requete->fetch()){
+            $idNotif = $donnees['idNotification'];
+        }
+        $idNotif += 1;
+
+        $contenu = "Vous avez recu une invitation à rejoindre la liste ".$liste->getIntituleListe()." de ".unserialize($_SESSION['user'])->getPseudo()." !";
+        $user= unserialize($_SESSION['user']);
+        $notif  = new NotificationAjoutMembre($idNotif,date("Y-m-d"), $contenu,$user->getMail(), $idListe, $mail);
+        $notif->ajouterBDD();
+
+       // $bdd->addMembre($mail, $idListe);
+       // $liste->ajouterUtilisateur($mail);
 
         $this->redirect("liste&id=$idListe");
     }
