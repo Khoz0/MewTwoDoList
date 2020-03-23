@@ -609,6 +609,12 @@ while ($donnesListe = $getListeProp->fetch()) {
 */
 	}
 
+
+    /**
+     * Renvoie vrai si c'est une notification avec choix
+     * @param $idNotif
+     * @return bool
+     */
 	public function isNotifAvecChoix($idNotif){
         $bdd = DB::getInstance()->getPDO()->prepare("select count(*) from notificationavecchoix where idNotification = :id");
         $bdd->bindParam(':id', $idNotif);
@@ -621,5 +627,61 @@ while ($donnesListe = $getListeProp->fetch()) {
             return true;
         }
     }
+
+    /**
+     * Renvoie vrai si c'est une notification pour un changement de propriétaire
+     * @param $idNotif
+     * @return bool
+     */
+    public function isNotifProprio($idNotif){
+        $bdd = DB::getInstance()->getPDO()->prepare("select count(*) from notificationchangementproprietaire where idNotification = :id");
+        $bdd->bindParam(':id', $idNotif);
+        $bdd->execute();
+        $donnees = $bdd->fetch();
+        if($donnees[0] == 0){
+            // on n'a pas trouvé la notification dans la table des notifications avec choix
+            return false;
+        }else{
+            return true;
+        }
+    }
+
+    /**
+     * Renvoie vrai si c'est une notification d'invitation à rejoindre une liste
+     * @param $idNotif
+     * @return bool
+     */
+    public function isNotifAjoutMembre($idNotif){
+        $bdd = DB::getInstance()->getPDO()->prepare("select count(*) from notificationajoutmembre where idNotification = :id");
+        $bdd->bindParam(':id', $idNotif);
+        $bdd->execute();
+        $donnees = $bdd->fetch();
+        if($donnees[0] == 0){
+            // on n'a pas trouvé la notification dans la table des notifications avec choix
+            return false;
+        }else{
+            return true;
+        }
+    }
+
+    /**
+     * Renvoie le mail du propriétaire de la liste
+     */
+    public function getMailProprietaire($idListe){
+        $bdd = DB::getInstance()->getPDO()->prepare("select mailProprietaire from liste where idListe = :id");
+        $bdd->bindParam(':id', $idListe);
+        $bdd->execute();
+        $donnees = $bdd->fetch();
+        return $donnees[0];
+    }
+
+    public function changeProprietaire($mailUser, $idListe){
+        $bdd = DB::getInstance()->getPDO()->prepare("UPDATE Liste SET mailProprietaire = :mail WHERE idListe = :id");
+        $bdd->bindParam(':mail', $mailUser);
+        $bdd->bindParam(':id', $idListe);
+        $bdd->execute();
+    }
+
+
 
 }

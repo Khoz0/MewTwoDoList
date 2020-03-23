@@ -85,7 +85,10 @@ switch($page) {
         (new App\Controllers\RecuperationCompte())->recuperationCompte();
         break;
 
-    case 'changementProprietaire':
+    case 'changementProprietaire': // notification
+        (new App\Controllers\ChangerProprietaire())->changerProprietaireNotif();
+
+    case 'changementProprietaireBDD':
         (new App\Controllers\ChangerProprietaire())->changerProprietaire();
 
     default: // Si, rien, alors erreur 404
