@@ -4,9 +4,9 @@ function conf_validation_proprio(idListe, mailInvite) {
     }
 }
 
-function conf_validation_ajout(idListe, mailUser) {
+function conf_validation_ajout(idListe, idNotif) {
     if (confirm('Êtes vous sûr de vouloir rejoindre la liste ?')) {
-        window.location.href='?page=addUserList&mail='+mailUser+'&idListe='+idListe;
+        window.location.href='?page=confirmJoinList&idListe='+idListe+'&idNotif='+idNotif;
     }
 }
 
