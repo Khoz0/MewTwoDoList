@@ -10,6 +10,7 @@ abstract class Notification {
   protected $dateCreation;
   protected $contenu;
   protected $lu;
+  protected $valide;
   protected $sourceUtilisateur;
   protected $destUtilisateur;
   protected $idListe;
@@ -19,6 +20,7 @@ abstract class Notification {
       $this->dateCreation = $dateCreation;
       $this->contenu = $contenu;
       $this->lu = 0;
+      $this->valide = 0;
       $this->sourceUtilisateur = $sourceUtilisateur;
       $this->idListe = $idListe;
       $this->destUtilisateur = $mailMembre;

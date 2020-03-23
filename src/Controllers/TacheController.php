@@ -40,10 +40,8 @@ class TacheController extends Controller {
             $idNotif = $donnees['idNotification'];
         }
         foreach ($membres as $membre){
-            if ($membre != $mail) {
-                $idNotif++;
-                $bdd->createNotif($idNotif, date("Y-m-d"), null, $contenu, 0, $mail, $idListe, $membre);
-            }
+            $idNotif++;
+            $bdd->createNotif($idNotif, date("Y-m-d"), null, $contenu, 0, $mail, $idListe, $membre);
         }
 
 

@@ -1,9 +1,9 @@
 <?php
-
 use App\Modeles\DB;
 
 ?>
 <!DOCTYPE html>
+<link rel="icon" href="assests/favicon.png" />
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -19,7 +19,7 @@ use App\Modeles\DB;
 <body>
 
 <?php $page = $_GET['page'] ?? '';
-if ($page != "login" && $page != "recuperationCompte" && $page != "disconnect" && $page != "inscription" && $page != "modifTache"){
+if ($page != "login" && $page != "recuperationCompte" && $page != "disconnect" && $page != "inscription" && $page != "modifTache" && $page != "ajoutTache"){
 ?>
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <a class="navbar-brand" href="?page=accueil">MewTwoDoList</a>
@@ -46,7 +46,7 @@ if ($page != "login" && $page != "recuperationCompte" && $page != "disconnect" &
 
 
     <!-- affichage des icônes de menu -->
-    <?php if (isset($_SESSION['user']) && $page != "modifTache") {?>
+    <?php if (isset($_SESSION['user']) && $page != "modifTache" && $page != "ajoutTache") {?>
         <div class="btn-group">
 
             <button class="btn btn-default dropdown-toggle mr-4 float-right" type="button" data-toggle="dropdown"

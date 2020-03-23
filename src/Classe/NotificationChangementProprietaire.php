@@ -18,6 +18,13 @@ class NotificationChangementProprietaire extends NotificationAvecChoix {
         return "notificationChangementProprietaire";
     }
 
+    public function ajouterBDD() {
+        $bdd = DB::getInstance();
+        $bdd->addNotification($this);
+        $bdd->createNotifChangementProprietaire($this->idNotif);
+        $bdd->createNotifAvecChoix($this->idNotif,0);
+    }
+
 }
 
  ?>
