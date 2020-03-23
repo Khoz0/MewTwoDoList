@@ -67,8 +67,8 @@ class InscriptionController extends Controller
                 mkdir("assests/uploads/", 0777, true);
             }
             str_replace('http', '', $photo['name']);
-            move_uploaded_file($photo['tmp_name'], 'assests/uploads/' . basename($photo['name']).$mail);
-            $photo = "assests/uploads/".$photo['name'].$mail;
+            move_uploaded_file($photo['tmp_name'], 'assests/uploads/' .$mail. basename($photo['name']));
+            $photo = "assests/uploads/".$mail.$photo['name'];
         } else {
             $photo = "assests/profil.png";
         }
