@@ -1,8 +1,7 @@
 <?php
 use App\Modeles\DB;
 ?>
-<script src="javascript/delete_notif.js"></script>
-<script src="javascript/notif_check.js"></script>
+<script src="javascript/notif.js"></script>
 <script src="javascript/tri_liste.js"></script>
 <div class="jumbotron-fluid text-center">
 
@@ -62,7 +61,7 @@ if(isset($_SESSION["user"])){
     <script>sort_by_name("alphab");</script>
     <div class="jumbotron justify-content-center">
         <button class="btn btn-dark float-left" type="reset" value="Reset"> Annuler </button>
-        <button class="btn btn-dark float-right" type="submit" id="supprimer" value="Submit"> Supprimer </button>
+        <button class="btn btn-dark float-right" type="submit" id="suppr" value="Submit"> Supprimer </button>
     </div>
     <?php } ?>
 </div>
