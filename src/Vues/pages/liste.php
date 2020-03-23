@@ -8,7 +8,7 @@ namespace App\Vues;
 <?php
 use App\Modeles\DB;
 
-$bdd = serialize(DB::getInstance()->loadListe($_GET["id"]));
+$bdd = DB::getInstance();
 $liste = DB::getInstance()->loadListe($_GET["id"]);
 $user = unserialize($_SESSION['user']);
 $proprio = $liste->getMailProprietaire();
@@ -92,7 +92,7 @@ $proprio = $liste->getMailProprietaire();
 </div>
 
 <div class="jumbotron text-center">
-    <h1>Liste <?php echo htmlspecialchars(unserialize($bdd)->getIntituleListe()) ?></h1>
+    <h1>Liste <?php echo htmlspecialchars($liste->getIntituleListe()) ?></h1>
     <?php
     if($user->getMail() == $proprio) {
         ?>
@@ -100,7 +100,7 @@ $proprio = $liste->getMailProprietaire();
         <br>
 
         <a href="#"
-           onclick="conf_suppression(<?= htmlspecialchars($_GET["id"]) ?>, 'Liste <?= htmlspecialchars(unserialize($bdd)->getIntituleListe()) ?>')">
+           onclick="conf_suppression(<?= htmlspecialchars($_GET["id"]) ?>)">
             Supprimer la liste </a>
         <br>
         <br>
@@ -197,9 +197,10 @@ $proprio = $liste->getMailProprietaire();
                     }
                     ?>
                     <?php
+                    //Si quelqu'un est assigné à la tâche
                 } else {
-
-                    ?><br><h5><?=$userAssigne ?></h5><br>
+                    $pseudoUserAssigne = $bdd->loadUtilisateur($userAssigne)->getPseudo();
+                    ?><br><h5><?=$pseudoUserAssigne ?></h5><br>
 
                     <?php
                     if($user->getMail() == $proprio || $user->getMail() == $userAssigne) {
