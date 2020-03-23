@@ -70,7 +70,7 @@ class CompteController extends Controller {
         if ($donnees['pseudoUser'] != $_POST['inputPseudo'] && !empty($_POST['inputPseudo'])) {
             $this->modifierPseudo();
         }
-        if ($donnees['photo'] != "assests/uploads/".$_FILES['inputPhoto']['name'].$loginSession && !empty($_FILES['inputPhoto']['name'])) {
+        if ($donnees['photo'] != "assests/uploads/".$loginSession.$_FILES['inputPhoto']['name'] && !empty($_FILES['inputPhoto']['name'])) {
             $this->modifierPhoto();
         }
 
@@ -133,10 +133,10 @@ class CompteController extends Controller {
         if(!is_dir("assests/uploads/")){
             mkdir("assests/uploads/", 0777, true);
         }
-        if(!is_file("assests/uploads/".$file_photo['name'].$loginSession)){
-            move_uploaded_file($file_photo['tmp_name'], 'assests/uploads/' . basename($file_photo['name']).$loginSession);
+        if(!is_file("assests/uploads/".$loginSession.$file_photo['name'])){
+            move_uploaded_file($file_photo['tmp_name'], 'assests/uploads/' .$loginSession. basename($file_photo['name']));
         }
-        $photo = "assests/uploads/".$file_photo['name'].$loginSession;
+        $photo = "assests/uploads/".$loginSession.$file_photo['name'];
 
         $bdd = DB::getInstance();
         echo "Je modifie la photo";
