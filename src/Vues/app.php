@@ -80,7 +80,7 @@ if ($page != "login" && $page != "recuperationCompte" && $page != "disconnect" &
                                 <div
                                 <a class="dropdown-item"><?= $notification->getContenu() ?></a>
                                 <?php
-                                if ($notification->typeNotif() == "notificationChangementProprietaire") {
+                                if (DB::getInstance()->isNotifAvecChoix($notification->getIdNotif())) {
                                     ?>
                                     <button class="btn">Accepter</button>
                                     <button class="btn">Refuser</button>

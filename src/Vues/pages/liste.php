@@ -68,7 +68,7 @@ $proprio = $liste->getMailProprietaire();
                             </div>
                             <?php
                         }
-                        echo "<button class=\"btn col-lg-auto\" onclick=\"window.location.href='?page=supprimerUserList&mail=".$membre[0]."&idListe=".$_GET["id"]."'\">Quitter la liste</button>";
+                        echo "<button class=\"btn col-lg-auto\" onclick=\"window.location.href='?page=supprimerUserList&mail=".$membre."&idListe=".$_GET["id"]."'\">Quitter la liste</button>";
                     }
                 ?>
             </div>
@@ -158,7 +158,7 @@ $proprio = $liste->getMailProprietaire();
                         ?>
                         <div>
                             <form method="post" name="<?= htmlspecialchars($nom) ?> " action="#">
-                                <a href='?page=memberSelect&idListe=<?= $_GET["id"] ?>&use=ajoutTache&idTache=<?=$id?>'
+                                <a href=?page=memberSelect&idListe=<?= $_GET["id"] ?>&use=ajoutTache&idTache=<?=$id?>
                                    class="btn btn-primary btn-sm">
                                     Ajouter un Utilisateur
                                 </a>
@@ -172,7 +172,7 @@ $proprio = $liste->getMailProprietaire();
                         ?>
                         <div>
                             <form method="post" name="<?= htmlspecialchars($nom) ?> " action="#">
-                                <a href="?page=addUserTache&mail=<?= htmlspecialchars($user->getMail()) ?>&idTache=<?= $id; ?>&idListe=<?= $_GET['id']; ?>"
+                                <a href=?page=addUserTache&mail=<?= htmlspecialchars($user->getMail()) ?>&idTache=<?= $id ?>&idListe=<?= $_GET["id"] ?>
                                    class="btn btn-primary btn-sm">
                                     Se proposer
                                 </a>

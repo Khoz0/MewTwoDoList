@@ -65,7 +65,7 @@ $membreSelection = new RechercheMembreController();
                                         <?php
                                     }
                                     else {?>
-                                        <a href=?page=addUserTache&mail=<?= htmlspecialchars($user->getMail()) ?>&idTache=<?=$_GET['idTache']?>&idListe=<?= $_GET['idListe']; ?>">
+                                        <a href=?page=addUserTache&mail=<?= htmlspecialchars($user->getMail()) ?>&idTache=<?=$_GET['idTache']?>&idListe=<?= $_GET['idListe']; ?>>
                                             <button>Ajouter</button>
                                         </a>
                                     <?php }

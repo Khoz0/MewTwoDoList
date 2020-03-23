@@ -3,6 +3,7 @@
 namespace App\Modeles;
 
 use App\Classe\Liste;
+use App\Classe\NotificationChangement;
 use App\Classe\NotificationChangementProprietaire;
 use App\Classe\Tache;
 use App\Classe\Utilisateur;
@@ -488,14 +489,17 @@ class DB {
         return $listes;
     }
 
-	public function createNotif($date, $valide, $contenu, $lu, $mail, $idLis){
-		$results = DB::getInstance()->getPDO()->prepare('insert into Notification (dateEnvoi,valide,contenu,lu,mail,idListe) values (:date, :valide, :contenu, :lu, :mail, :idLis)');
+	public function createNotif($idNotif, $date, $valide, $contenu, $lu, $mail, $idLis, $mailMembre){
+		$results = DB::getInstance()->getPDO()->prepare('INSERT INTO Notification (idNotification, dateEnvoi,valide,contenu,lu,mail,idListe, mailMembre) VALUES (:idNotif, :date, :valide, :contenu, :lu, :mail, :idLis, :mailMembre)');
+        echo $idLis;
+		$results->bindParam(':idNotif', $idNotif);
         $results->bindParam(':date', $date);
         $results->bindParam(':valide', $valide);
 		$results->bindParam(':contenu', $contenu);
         $results->bindParam(':lu', $lu);
 		$results->bindParam(':mail', $mail);
         $results->bindParam(':idLis', $idLis);
+        $results->bindParam(':mailMembre', $mailMembre);
         $results->execute();
 	}
 
