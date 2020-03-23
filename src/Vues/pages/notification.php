@@ -2,6 +2,7 @@
 use App\Modeles\DB;
 ?>
 <script src="javascript/delete_notif.js"></script>
+<script src="javascript/notif_check.js"></script>
 <script src="javascript/tri_liste.js"></script>
 <div class="jumbotron-fluid text-center">
 
@@ -24,7 +25,9 @@ if(isset($_SESSION["user"])){
 
         <?php
             }else{?>
-        <button class="btn btn-dark float-left"> Tout sélectionner </button>
+        <button class="btn btn-dark float-left" id="check">
+          <span class="ui-button-text">Tout sélectionner</span>
+         </button>
         <table class="table">
             <thead class="thead-dark">
             <tr>
