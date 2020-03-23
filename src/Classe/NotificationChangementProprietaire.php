@@ -17,6 +17,7 @@ class NotificationChangementProprietaire extends NotificationAvecChoix {
     {
         return "notificationChangementProprietaire";
     }
+
 }
 
  ?>

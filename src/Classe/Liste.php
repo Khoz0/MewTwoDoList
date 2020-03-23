@@ -92,6 +92,14 @@ class Liste {
 
     }
 
+    public function supprimer(){
+        foreach ($this->tabUtilisateur as $userMail){
+            $user = DB::getInstance()->loadUtilisateur($userMail);
+            $user->supprimerListe($this->idListe);
+        }
+        DB::getInstance()->deleteListe($this->idListe);
+    }
+
     public function supprimerBDD(){
         $bdd = DB::getInstance();
         $bdd->addListe($this->idListe,$this->intituleListe,$this->dateCreation,$this->dateFin,$this->mailProprietaire);
