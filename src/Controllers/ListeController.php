@@ -74,8 +74,7 @@ class ListeController extends Controller {
         $notif  = new NotificationAjoutMembre($idNotif,date("Y-m-d"), $contenu,$user->getMail(), $idListe, $mail);
         $notif->ajouterBDD();
 
-       // $bdd->addMembre($mail, $idListe);
-       // $liste->ajouterUtilisateur($mail);
+
 
         $this->redirect("liste&id=$idListe");
     }
