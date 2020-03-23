@@ -20,6 +20,7 @@ abstract class NotificationAvecChoix extends Notification {
 
     }
 
+
 }
 
 ?>

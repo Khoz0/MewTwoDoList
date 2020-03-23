@@ -40,9 +40,14 @@ if(isset($_SESSION["user"])){
                 foreach ($notifications as $not){
                     echo "<tr>";
                     echo "<th scope=\"row\"> <input type=\"checkbox\" data-id=".$not->getIdNotif()." id=\"notif\".$cpt ></th>";
-                    echo "<td>".$not->getIdListe()."</td>";
+                    echo "<td> Liste ".$not->getIdListe()."</td>";
                     echo "<td>".$not->getDateCreation()."</td>";
-                    echo "<td>".$not->getContenu()."</td>";
+                    if(DB::getInstance()->isNotifAvecChoix($not->getIdNotif())) {?>
+                        <td> <?php echo $not->getContenu() ?>  <a href="#" style="color:#70F92B;" onclick="conf_validation(<?php echo $not->getIdListe() ?>,<?php echo $not->getIdNotif() ?>)">accepter</a>
+                            <a href="#" style="color:#F73B1D;" onclick="conf_refus(<?php echo $not->getIdListe() ?>,<?php echo $not->getIdNotif() ?>)">refuser</a></td>
+                   <?php }else{
+                        echo "<td>" . $not->getContenu() . "</td>";
+                    }
                     echo "</tr>";
                     $cpt++;
                 }

@@ -562,7 +562,7 @@ class DB {
     $res = DB::getInstance()->getPDO()->prepare("DELETE FROM NotificationChangementProprietaire WHERE idNotification = :idNotif");
     $res->bindParam(":idNotif", $idNotif);
     $res->execute();
-    
+
 
   }
 
@@ -588,5 +588,19 @@ while ($donnesListe = $getListeProp->fetch()) {
 	}
 
 
+
+
+	public function isNotifAvecChoix($idNotif){
+        $bdd = DB::getInstance()->getPDO()->prepare("select count(*) from notificationavecchoix where idNotification = :id");
+        $bdd->bindParam(':id', $idNotif);
+        $bdd->execute();
+        $donnees = $bdd->fetch();
+        if($donnees[0] == 0){
+            // on n'a pas trouvé la notification dans la table des notifications avec choix
+            return false;
+        }else{
+            return true;
+        }
+    }
 
 }
