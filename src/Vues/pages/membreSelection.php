@@ -37,7 +37,7 @@ $membreSelection = new RechercheMembreController();
             $liste = DB::getInstance()->loadListe($_GET['idListe']);
 
             foreach (DB::getInstance()->getUtilisateurs("", null, $_GET['idListe']) as $user) {
-                if ($user->getMail() != unserialize($_SESSION['user'])->getMail() && $cpt < 10 && !$liste->contientUtilisateur($user->getMail())) {
+                if (($_GET["use"]=="ajoutListe" && $user->getMail() != unserialize($_SESSION['user'])->getMail() && $cpt < 10 && !$liste->contientUtilisateur($user->getMail())) || $_GET["use"]=="ajoutTache" && $liste->contientUtilisateur($user->getMail()) ) {
                     $cpt++;
                     ?>
                     <div class="jumbotron col-auto" style="border: solid; order=-1;padding: 10px; margin: 20px;"

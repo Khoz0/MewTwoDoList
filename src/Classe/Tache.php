@@ -43,6 +43,7 @@ class Tache
     public function setUtilisateurAssigne($utilisateurAssigne)
     {
         $this->mailUtilisateur = $utilisateurAssigne;
+        $this->modifBDD();
     }
 
 
