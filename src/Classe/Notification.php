@@ -18,7 +18,7 @@ abstract class Notification {
       $this->idNotif = $idNotif;
       $this->dateCreation = $dateCreation;
       $this->contenu = $contenu;
-      $this->lu = false;
+      $this->lu = 0;
       $this->sourceUtilisateur = $sourceUtilisateur;
       $this->idListe = $idListe;
       $this->destUtilisateur = $mailMembre;

@@ -16,5 +16,13 @@ class NotificationAjoutMembre extends NotificationAvecChoix {
     {
         return "notificationAjoutMembre";
     }
+
+    public function ajouterBDD() {
+        $bdd = DB::getInstance();
+        $bdd->addNotification($this);
+        $bdd->createNotifAjoutMembre($this->idNotif);
+        $bdd->createNotifAvecChoix($this->idNotif,0);
+    }
+
 }
 ?>
