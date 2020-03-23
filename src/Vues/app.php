@@ -76,7 +76,7 @@ if ($page != "login" && $page != "recuperationCompte" && $page != "disconnect" &
                 ?><div class="dropdown-menu dropdown-menu-right"><?php
                     if (!empty($notifs)) {
                         foreach ($notifs as $notification) {
-                            if ($i < 3) { ?>
+                            if ($i >= $countNotif-3) { ?>
                                 <div
                                 <a class="dropdown-item"><?= $notification->getContenu() ?></a>
                                 <?php

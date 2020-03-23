@@ -27,6 +27,7 @@ class TacheController extends Controller {
         $bdd->addUserTache($mail,$idTache);
         $tache = $bdd->loadTache($idTache);
         $liste = $bdd->loadListe($idListe);
+        $user = $bdd->loadUtilisateur($mail);
         $tache->setEtat();
         $tache->modifBDD();
 
@@ -40,8 +41,10 @@ class TacheController extends Controller {
             $idNotif = $donnees['idNotification'];
         }
         foreach ($membres as $membre){
-            $idNotif++;
-            $bdd->createNotif($idNotif, date("Y-m-d"), null, $contenu, 0, $mail, $idListe, $membre);
+            if ($membre != $mail) {
+                $idNotif++;
+                $bdd->createNotif($idNotif, date("Y-m-d"), null, $contenu, 0, $mail, $idListe, $membre);
+            }
         }
 
 
