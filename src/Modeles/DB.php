@@ -111,11 +111,11 @@ class DB {
     {
         switch ($criteria) {
             case "name":
-                $getUser = DB::getInstance()->getPDO()->prepare("SELECT * FROM Utilisateur 
+                $getUser = DB::getInstance()->getPDO()->prepare("SELECT * FROM Utilisateur
                         where mail not in (SELECT DISTINCT utilisateur.mail from utilisateur, membre where membre.mail like utilisateur.mail and membre.idListe = :id )
-                         and (nomUser like UPPER(CONCAT(:nomUser,'%')) or 
+                         and (nomUser like UPPER(CONCAT(:nomUser,'%')) or
                          prenomUser like UPPER(CONCAT(:nomUser,'%')) or
-                         ( :prenomUser not like '' and prenomUser like UPPER(CONCAT(:prenomUser,'%'))) or 
+                         ( :prenomUser not like '' and prenomUser like UPPER(CONCAT(:prenomUser,'%'))) or
                          ( :prenomUser not like '' and nomUser like UPPER(CONCAT(:prenomUser,'%')))) ");
 
 
@@ -524,10 +524,12 @@ class DB {
 	}
 
 	public function deleteNotifAvecChoix($idNotif){
-        $res = DB::getInstance()->getPDO()->prepare("delete from NotificationAvecChoix where idNotification = :idNotif");
-        $res->execute();
+    $res = DB::getInstance()->getPDO()->prepare("DELETE from NotificationAvecChoix where idNotification = :idNotif");
+    $res->bindParam(":idNotif", $idNotif);
+    $res->execute();
 
 		$res = DB::getInstance()->getPDO()->prepare("delete from Notification where idNotification = :idNotif");
+    $res->bindParam(":idNotif", $idNotif);
 		$res->execute();
 	}
 
@@ -539,8 +541,33 @@ class DB {
 		$res->execute();
 	}
 
+  public function deleteNotif($idNotif){
+
+    $res = DB::getInstance()->getPDO()->prepare("DELETE FROM Notification WHERE idNotification = :idNotif");
+    $res->bindParam(":idNotif", $idNotif);
+    $res->execute();
+
+    $res = DB::getInstance()->getPDO()->prepare("DELETE FROM NotificationAjoutMembre WHERE idNotification = :idNotif");
+    $res->bindParam(":idNotif", $idNotif);
+    $res->execute();
+
+    $res = DB::getInstance()->getPDO()->prepare("DELETE FROM NotificationAvecChangement WHERE idNotification = :idNotif");
+    $res->bindParam(":idNotif", $idNotif);
+    $res->execute();
+
+    $res = DB::getInstance()->getPDO()->prepare("DELETE FROM NotificationAvecChoix WHERE idNotification = :idNotif");
+    $res->bindParam(":idNotif", $idNotif);
+    $res->execute();
+
+    $res = DB::getInstance()->getPDO()->prepare("DELETE FROM NotificationChangementProprietaire WHERE idNotification = :idNotif");
+    $res->bindParam(":idNotif", $idNotif);
+    $res->execute();
+    
+
+  }
+
 	public function loadNotif($mail){
-        $notifs = array();
+    $notifs = array();
 		$bdd = DB::getInstance()->getPDO()->prepare("select * from Notification where mailMembre = :mail");
 		$bdd->bindParam(':mail', $mail);
         $bdd->execute();
@@ -559,5 +586,7 @@ while ($donnesListe = $getListeProp->fetch()) {
 
 */
 	}
+
+
 
 }

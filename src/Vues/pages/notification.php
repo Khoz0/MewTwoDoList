@@ -1,6 +1,7 @@
 <?php
 use App\Modeles\DB;
 ?>
+<script src="javascript/delete_notif.js"></script>
 <script src="javascript/tri_liste.js"></script>
 <div class="jumbotron-fluid text-center">
 
@@ -38,7 +39,7 @@ if(isset($_SESSION["user"])){
                 $cpt = 0;
                 foreach ($notifications as $not){
                     echo "<tr>";
-                    echo "<th scope=\"row\"> <input type=\"checkbox\" id=\"notif\".$cpt ></th>";
+                    echo "<th scope=\"row\"> <input type=\"checkbox\" data-id=".$not->getIdNotif()." id=\"notif\".$cpt ></th>";
                     echo "<td>".$not->getIdListe()."</td>";
                     echo "<td>".$not->getDateCreation()."</td>";
                     echo "<td>".$not->getContenu()."</td>";
@@ -53,11 +54,8 @@ if(isset($_SESSION["user"])){
     <script>sort_by_name("alphab");</script>
     <div class="jumbotron justify-content-center">
         <button class="btn btn-dark float-left" type="reset" value="Reset"> Annuler </button>
-        <button class="btn btn-dark float-right" type="submit" value="Submit"> Supprimer </button>
+        <button class="btn btn-dark float-right" type="submit" id="supprimer" value="Submit"> Supprimer </button>
     </div>
     <?php } ?>
 </div>
 <?php } ?>
-
-
-
