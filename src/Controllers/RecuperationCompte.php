@@ -81,7 +81,7 @@ class RecuperationCompte extends Controller
     {
         $err = "";
         if(isset($_POST['submit'])){
-                if(isset($_POST['mail'])){
+                if(isset($_POST['mail']) && $_POST['mail']!=""){
 
 
 
@@ -95,7 +95,8 @@ class RecuperationCompte extends Controller
 
 
                 }else{
-                if(isset($_POST['pseudo'])){
+                if(isset($_POST['pseudo'])&& $_POST['pseudo']!=""){
+
 
                     $user = DB::getInstance()->getUtilisateur($_POST['pseudo']);
                     if(!$user==null)
