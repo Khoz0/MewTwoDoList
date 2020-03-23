@@ -160,6 +160,24 @@ class DB {
         return $utilisateurs;
     }
 
+    public function getUtilisateur($name)
+    {
+
+                $getUser = DB::getInstance()->getPDO()->prepare("SELECT * FROM Utilisateur where  pseudoUser  like :users");
+                $user = $name;
+                $getUser->bindParam(':users', $user);
+
+
+        $getUser->execute();
+
+        if($donnees = $getUser->fetch()) {
+            $utilisateur = new Utilisateur($donnees["nomUser"], $donnees["prenomUser"], $donnees["pseudoUser"], $donnees["mail"], null, $donnees['photo']);
+
+            return $utilisateur;
+        }
+
+        return null;
+    }
 
     public function loadUtilisateur($mail)
     {
