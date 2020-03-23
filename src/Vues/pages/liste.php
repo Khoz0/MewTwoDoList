@@ -10,7 +10,7 @@ use App\Modeles\DB;
 
 $bdd = serialize(DB::getInstance()->loadListe($_GET["id"]));
 $liste = DB::getInstance()->loadListe($_GET["id"]);
-
+$user = unserialize($_SESSION['user']);
 $proprio = $liste->getMailProprietaire();
 ?>
 <div class="float-right">
@@ -56,7 +56,13 @@ $proprio = $liste->getMailProprietaire();
                             ?>
                             <div class="dropdown-item">
                                 <div class="col-lg-auto">
-                                    <p><?php echo $membre ?>
+                                    <p>
+                                        <?php
+                                        if($membre == $proprio) { ?>
+                                            <img src="assests/star.png" width="15" height="15" alt="etoile">
+                                            <?php
+                                        }
+                                        echo $membre ?>
                                     </p>
                                 </div>
                             </div>
@@ -73,12 +79,20 @@ $proprio = $liste->getMailProprietaire();
 
 <div class="jumbotron text-center">
     <h1>Liste <?php echo htmlspecialchars(unserialize($bdd)->getIntituleListe()) ?></h1>
-    <a href="#" onclick="conf_modification(<?php echo $_GET["id"]; ?>)"> Modifier la liste </a>
-    <br>
+    <?php
+    if($user->getMail() == $proprio) {
+        ?>
+        <a href="#" onclick="conf_modification(<?php echo $_GET["id"]; ?>)"> Modifier la liste </a>
+        <br>
 
-    <a href="#" onclick="conf_suppression(<?= htmlspecialchars($_GET["id"]) ?>, 'Liste <?= htmlspecialchars(unserialize($bdd)->getIntituleListe()) ?>')"> Supprimer la liste </a>
-    <br>
-    <br>
+        <a href="#"
+           onclick="conf_suppression(<?= htmlspecialchars($_GET["id"]) ?>, 'Liste <?= htmlspecialchars(unserialize($bdd)->getIntituleListe()) ?>')">
+            Supprimer la liste </a>
+        <br>
+        <br>
+        <?php
+    }
+    ?>
     <a href="#" onclick="window.location.href = '?page=accueil'"> Retour </a>
 </div>
 
@@ -100,7 +114,6 @@ $proprio = $liste->getMailProprietaire();
         $valide = $tache->getValide();
         $id = $tache->getIdTache();
         $etat = $tache->getEtat();
-        $user = unserialize($_SESSION['user']);
         $userAssigne = $tache->getUtilisateurAssigne();
         ?>
         <div class="jumbotron-fluid col-auto" style="border: solid; ;padding: 30px; margin: 10px; "
