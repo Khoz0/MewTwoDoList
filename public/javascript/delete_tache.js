@@ -46,9 +46,8 @@ function deleteTache() {
         },
         timeout: 5000,
         success: function() {
-          console.log("test");
           window.opener.location.reload(true);
-          //window.close();
+          window.close();
 
         },
         error: (xhr) => {
