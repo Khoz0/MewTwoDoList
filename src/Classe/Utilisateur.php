@@ -165,7 +165,7 @@ class Utilisateur
 
     public function recupererListe($id)
     {
-        return $this->listesProprietaire[$id-1];
+        return $this->listesProprietaire[$id];
     }
 
     public function quitterListe($liste)

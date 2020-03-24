@@ -3,6 +3,7 @@
 namespace App\Vues;
 
 use App\Controllers\ModificationListeController;
+use App\Modeles\DB;
 
 $modificationListe = new ModificationListeController();
 ?>
@@ -16,7 +17,7 @@ $modificationListe = new ModificationListeController();
                     <?php
                     $id = $_GET['id'];
                     $user = unserialize($_SESSION['user']);
-                    $liste = $user->recupererListe($id);
+                    $liste = DB::getInstance()->loadListe($id);
                     $_SESSION['user'] = serialize($user);
                     ?>
                     <form class="form-sign_in" method="POST" action="?page=modificationListe&id=<?php echo $id; ?>">
