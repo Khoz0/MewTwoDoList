@@ -38,7 +38,7 @@ class FonctionTest {
 		$datefin = '2030-12-25';
 		$proprio = 'mdp123';
 
-		$requete = $bdd->prepare("INSERT INTO Liste(idListe,intituleListe,dateCreation,dateFin,mailProprietaire) values(" + $id + "," + $intitule + "," + $datecrea + "," + $datefin + "," + $proprio + ")");
+		$requete = $bdd->prepare("INSERT INTO liste(idListe,intituleListe,dateCreation,dateFin,mailProprietaire) values(" + $id + "," + $intitule + "," + $datecrea + "," + $datefin + "," + $proprio + ")");
 		$requete->execute();
 
 	}
@@ -60,7 +60,7 @@ class FonctionTest {
 		$mailUtilisateur = 'abcd@abcd.com';
 
 
-		$requete = $bdd->prepare("INSERT INTO Tache(idTache,intituleTache,valide,idListeT,mailUtilisateur) values(" + $idT + "," + $intitule + "," + $valide + "," + $idListeT + "," + $mailUtilisateur + ")");
+		$requete = $bdd->prepare("INSERT INTO tache(idTache,intituleTache,valide,idListeT,mailUtilisateur) values(" + $idT + "," + $intitule + "," + $valide + "," + $idListeT + "," + $mailUtilisateur + ")");
 		$requete->execute();
 	}
 
@@ -68,6 +68,31 @@ class FonctionTest {
 	public function supprimerTacheTest()
 	{
 		$requete = $bdd->prepare("delete from tache where idTache = 6000");
+		$requete->execute();
+	}
+
+	//Fonction qui ajouter une notification dans la bdd
+	public function ajouterNotificationTest()
+	{
+		$idNotif = 5555;
+		$dateenvoi = '1999-06-04';
+		$valide = "null"
+		$contenu = "ceci est un contenu"
+		$lu = 1;
+		$mailUtilisateur = 'abcd@abcd.com';
+		$idListe = 5000;
+		$mailMembre = 'abcd@abcd.com';
+
+		$requete = $bdd->prepare("INSERT INTO notification(idNotification,dateEnvoi,valide,contenu,lu,mail,idListe,mailMembre) values(" + $idNotif + "," + $dateenvoi + "," + $valide + "," + $contenu + "," + $lu + "," + $mailUtilisateur + "," + $idListe + "," + $mailMembre + ")");
+		$requete->execute();
+
+
+	}
+
+	//Fonction qui supprimer une notification dans la bdd
+	public function supprimerNotificationTest()
+	{
+		$requete = $bdd->prepare("delete from notification where idNotification = 5555");
 		$requete->execute();
 	}
 

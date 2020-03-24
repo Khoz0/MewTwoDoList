@@ -42,6 +42,14 @@ abstract class Notification {
         return $this->idNotif;
     }
 
+    public function setValide($bool){
+        $this->valide = $bool;
+    }
+
+    public function valide(){
+        return $this->valide ;
+    }
+
     /**
      * @param mixed $idNotif
      */
@@ -136,7 +144,8 @@ abstract class Notification {
   }
 
   public function sauvegarderBDD(){
-        DB::getInstance()->alterNotif($this->idNotif, $this->lu);
+        DB::getInstance()->alterNotif($this->idNotif, $this->lu,$this->valide);
+
   }
 
     /**

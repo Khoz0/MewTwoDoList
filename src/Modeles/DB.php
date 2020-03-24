@@ -372,12 +372,15 @@ class DB {
         $requete->execute();
     }
 
-    public function alterNotif($idNotif, $lu){
-        $results = DB::getInstance()->getPDO()->prepare('UPDATE Notification SET lu=:lu WHERE idNotification = :id');
+    public function alterNotif($idNotif, $lu,$valide){
+        $_SESSION['debug'].='save lu\n';
+        $results = DB::getInstance()->getPDO()->prepare('UPDATE Notification SET lu=:lu AND valide=:valide WHERE idNotification = :id');
         $results->bindParam(':lu', $lu);
+        $results->bindParam(':valide', $valide);
         $results->bindParam(':id', $idNotif);
         $results->execute();
     }
+
 
     public function alterListe($idListe,$intituleListe,$dateCreation, $dateFin,$mailProprietaire)
     {
@@ -604,6 +607,7 @@ class DB {
         $bdd->execute();
         while($donnees = $bdd->fetch()){
             $notif = new NotificationChangementProprietaire($donnees['idNotification'], $donnees['dateEnvoi'], $donnees['contenu'], $donnees['mail'], $donnees['idListe'], $donnees['mailMembre']);
+            $notif->setValide($donnees['valide']);
             array_push($notifs, $notif);
         }
         return $notifs;
