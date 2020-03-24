@@ -23,6 +23,5 @@ class NotificationAjoutMembre extends NotificationAvecChoix {
         $bdd->createNotifAjoutMembre($this->idNotif);
         $bdd->createNotifAvecChoix($this->idNotif,0);
     }
-
 }
 ?>

@@ -67,7 +67,9 @@ class ListeController extends Controller {
         while ($donnees = $requete->fetch()){
             $idNotif = $donnees['idNotification'];
         }
-        $idNotif += 1;
+        var_dump($idNotif);
+        $idNotif++;
+        var_dump($idNotif);
 
         $contenu = "Vous avez recu une invitation à rejoindre la liste ".$liste->getIntituleListe()." de ".unserialize($_SESSION['user'])->getPseudo()." !";
         $user= unserialize($_SESSION['user']);
@@ -76,6 +78,7 @@ class ListeController extends Controller {
 
 
 
+        var_dump("redirected");
         $this->redirect("liste&id=$idListe");
     }
 

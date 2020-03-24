@@ -401,6 +401,8 @@ class DB {
 
         $this->deleteAllListMembers($idListe);
 
+        $this->deleteAllListNotification($idListe);
+
         $results = DB::getInstance()->getPDO()->prepare('DELETE FROM Liste WHERE idListe = :id ');
         $results->bindParam(':id', $idListe);
         $results->execute();
@@ -689,6 +691,11 @@ while ($donnesListe = $getListeProp->fetch()) {
         $bdd->execute();
     }
 
+    private function deleteAllListNotification($idListe){
+        $bddRequete = DB::getInstance()->getPDO()->prepare("DELETE FROM Notification WHERE idListe = :idListe");
+        $bddRequete->bindParam(":idListe", $idListe);
+        $bddRequete->execute();
+    }
 
 
 }

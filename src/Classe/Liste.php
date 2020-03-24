@@ -93,6 +93,9 @@ class Liste {
     }
 
     public function supprimer(){
+        $user = unserialize($_SESSION['user']);
+        $user->supprimerListe($this->idListe);
+        $_SESSION['user'] = serialize($user);
         foreach ($this->tabUtilisateur as $userMail){
             $user = DB::getInstance()->loadUtilisateur($userMail);
             $user->supprimerListe($this->idListe);
