@@ -36,10 +36,12 @@ class ListeController extends Controller {
         while ($donnees = $requeteBDD->fetch()){
             $idNotif = $donnees['idNotification'];
         }
+
+
         foreach ($membres as $membre){
             if ($membre != $mail) {
                 $idNotif++;
-                $bdd->createNotif($idNotif, date("Y-m-d"), null, $contenu, 0, $mail, $idListe, $membre);
+                $bdd->createNotif($idNotif, date("Y-m-d"), 0, $contenu, 0, $mail, $idListe, $membre);
             }
         }
 
@@ -66,13 +68,13 @@ class ListeController extends Controller {
         while ($donnees = $requete->fetch()){
             $idNotif = $donnees['idNotification'];
         }
-        var_dump($idNotif);
+
         $idNotif++;
-        var_dump($idNotif);
 
         $contenu = "Vous avez recu une invitation à rejoindre la liste ".$liste->getIntituleListe()." de ".unserialize($_SESSION['user'])->getPseudo()." !";
         $user= unserialize($_SESSION['user']);
         $notif  = new NotificationAjoutMembre($idNotif,date("Y-m-d"), $contenu,$user->getMail(), $idListe, $mail);
+
         $notif->ajouterBDD();
 
 

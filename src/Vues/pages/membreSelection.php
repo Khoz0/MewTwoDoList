@@ -8,7 +8,7 @@ $membreSelection = new RechercheMembreController();
 
 <script type="text/javascript" src="cdn/jquery.js"></script>
 <script type="text/javascript" src="javascript/tri_membre.js"></script>
-<script type="text/javascript" src="javascript/ajouter_membre.js"></script>
+
 <script type="text/javascript" src="javascript/request_member.js"></script>
 
 <h4>Rechercher par:</h4>

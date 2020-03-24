@@ -2,7 +2,7 @@
 use App\Modeles\DB;
 ?>
 <script src="javascript/notif.js"></script>
-<script src="javascript/tri_liste.js"></script>
+
 <script src="javascript/gestion_notif.js"></script>
 <div class="jumbotron-fluid text-center">
 
@@ -42,29 +42,39 @@ if(isset($_SESSION["user"])){
             <?php
                 $cpt = 0;
                 foreach ($notifications as $not){
-                    $not->setLu(1);
-                    $not->sauvegarderBDD();
-                    $nomListe = DB::getInstance()->loadListe($not->getIdListe())->getIntituleListe();
-                    echo "<tr>";
-                    echo "<th scope=\"row\"> <input type=\"checkbox\" data-id=".$not->getIdNotif()." id=\"notif\".$cpt ></th>";
-                    echo "<td><a href='?page=liste&id=".$not->getIdListe()."'> ".$nomListe."</a></td>";
-                    echo "<td>".$not->getDateCreation()."</td>";
-                    if(DB::getInstance()->isNotifAvecChoix($not->getIdNotif())) {
-                        if(DB::getInstance()->isNotifProprio($not->getIdNotif())){?>
+            $not->setLu(1);
+            $not->sauvegarderBDD();
+            $nomListe = DB::getInstance()->loadListe($not->getIdListe())->getIntituleListe();
+            echo "<tr>";
+            echo "<th scope=\"row\"> <input type=\"checkbox\" data-id=" . $not->getIdNotif() . " id=\"notif\".$cpt ></th>";
 
-                        <td> <?php echo $not->getContenu() ?>  <a href="#" style="color:#70F92B;" onclick="conf_validation_proprio(<?php echo $not->getIdListe() ?>, '<?php echo $mail ?>')">accepter</a>
-                            <a href="#" style="color:#F73B1D;" onclick="conf_refus(<?php echo $not->getIdListe() ?>,<?php echo $not->getIdNotif() ?>)">refuser</a></td>
+            $liste = DB::getInstance()->loadListe($not->getIdListe());
 
-                            <?php }else{ ?>
+            if ($liste->contientUtilisateur($user->getMail())) {
+                echo "<td><a href='?page=liste&id=" . $not->getIdListe() . "'> " . $nomListe . "</a></td>";
+            } else {
+                echo "<td> " . $nomListe . "</td>";
+            }
+            echo "<td>" . $not->getDateCreation() . "</td>";
+            if (DB::getInstance()->isNotifAvecChoix($not->getIdNotif())) {
+            if (DB::getInstance()->isNotifProprio($not->getIdNotif())){
+            ?>
 
-                            <td> <?php echo $not->getContenu() ?>
-                                <?php if(!$not->valide()){?>
-                                <a href="#" style="color:#70F92B;" onclick="conf_validation_ajout(<?php echo $not->getIdListe() ?>,'<?php echo $not->getIdNotif() ?>')">accepter</a>
-                                <a href="#" style="color:#F73B1D;" onclick="conf_refus(<?php echo $not->getIdListe() ?>,<?php echo $not->getIdNotif() ?>)">refuser</a></td>
+            <td> <?php echo $not->getContenu() ?> <a href="#" class="btn btn-dark float-right"
+                                                     onclick="conf_validation_proprio(<?php echo $not->getIdListe() ?>, '<?php echo $mail ?>')">accepter</a>
+                <!-- <a href="#" style="color:#F73B1D;" onclick="conf_refus(<?php echo $not->getIdListe() ?>,<?php echo $not->getIdNotif() ?>)">refuser</a></td>-->
+
+                <?php }else{ ?>
+
+            <td> <?php echo $not->getContenu() ?>
+                                <?php if(!$not->valide()) { ?>
+                                    <a href="#" class="btn btn-dark float-right"
+                                       onclick="conf_validation_ajout(<?php echo $not->getIdListe() ?>,'<?php echo $not->getIdNotif() ?>')">accepter</a>
+                                    <!--<a href="#" style="color:#F73B1D;" onclick="conf_refus(<?php echo $not->getIdListe() ?>,<?php echo $not->getIdNotif() ?>)">refuser</a></td>-->
                                 <?php }else{?>
-                                <a href="#" style="color:#70F92B;" >accepter</a>
-                                <a href="#" style="color:#F73B1D;">refuser</a></td>
-                            <?php }?>
+                                    <a href="#" class="btn btn-dark float-right">accepter</a>
+                                    <!--<a href="#" style="color:#F73B1D;">refuser</a></td>-->
+                                <?php }?>
                          <?php }
                     }else{
                         echo "<td>" . $not->getContenu() . "</td>";
@@ -75,13 +85,10 @@ if(isset($_SESSION["user"])){
         ?>
             </tbody>
         </table>
+        <br>
 
+        <button class="btn btn-dark float-right" type="submit" id="suppr" value="Submit"> Supprimer</button>
     </div>
-    <script>sort_by_name("alphab");</script>
-    <div class="jumbotron justify-content-center">
-        <button class="btn btn-dark float-left" type="reset" value="Reset"> Annuler </button>
-        <button class="btn btn-dark float-right" type="submit" id="suppr" value="Submit"> Supprimer </button>
-    </div>
-    <?php } ?>
+<?php } ?>
 </div>
 <?php } ?>

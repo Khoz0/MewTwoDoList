@@ -48,7 +48,7 @@ class ConfirmJoin extends Controller
 
 
             if($ok) {
-                if(isset($notif)){
+                if (isset($notif)) {
 
                     $notif->setValide(1);
                     $notif->sauvegarderBDD();
@@ -58,6 +58,8 @@ class ConfirmJoin extends Controller
                 $this->redirect("liste&id=$idListe");
                 $liste->ajouterUtilisateur($user->getMail());
                 $notif->sauvegarderBDD();
+            } else {
+                $this->redirect("notification");
             }
             exit();
         }

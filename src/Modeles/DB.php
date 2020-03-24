@@ -355,7 +355,7 @@ class DB {
         $dateEnvoi = $notification->getDateCreation();
         $valide = 0;
         $contenu = $notification->getContenu();
-        $lu = $notification->getLu();
+        $lu = $notification->isLu();
         $mail = $notification->getSourceUtilisateur();
         $idListe = $notification->getIdListe();
         $mailMembre = $notification->getDestUtilisateur();
@@ -373,7 +373,7 @@ class DB {
     }
 
     public function alterNotif($idNotif, $lu,$valide){
-        $_SESSION['debug'].='save lu\n';
+
         $results = DB::getInstance()->getPDO()->prepare('UPDATE Notification SET lu=:lu AND valide=:valide WHERE idNotification = :id');
         $results->bindParam(':lu', $lu);
         $results->bindParam(':valide', $valide);
@@ -502,7 +502,8 @@ class DB {
     }
 
 	public function createNotif($idNotif, $date, $valide, $contenu, $lu, $mail, $idLis, $mailMembre){
-		$results = DB::getInstance()->getPDO()->prepare('INSERT INTO Notification (idNotification, dateEnvoi,valide,contenu,lu,mail,idListe, mailMembre) VALUES (:idNotif, :date, :valide, :contenu, :lu, :mail, :idLis, :mailMembre)');
+        $lu = 0;
+        $results = DB::getInstance()->getPDO()->prepare('INSERT INTO Notification (idNotification, dateEnvoi,valide,contenu,lu,mail,idListe, mailMembre) VALUES (:idNotif, :date, :valide, :contenu, :lu, :mail, :idLis, :mailMembre)');
         echo $idLis;
 		$results->bindParam(':idNotif', $idNotif);
         $results->bindParam(':date', $date);
@@ -600,26 +601,28 @@ class DB {
 
   }
 
-	public function loadNotif($mail){
-    $notifs = array();
-		$bdd = DB::getInstance()->getPDO()->prepare("select * from Notification where mailMembre = :mail");
-		$bdd->bindParam(':mail', $mail);
+	public function loadNotif($mail)
+    {
+        $notifs = array();
+        $bdd = DB::getInstance()->getPDO()->prepare("select * from Notification where mailMembre = :mail order by idNotification DESC");
+        $bdd->bindParam(':mail', $mail);
         $bdd->execute();
-        while($donnees = $bdd->fetch()){
+        while ($donnees = $bdd->fetch()) {
             $notif = new NotificationChangementProprietaire($donnees['idNotification'], $donnees['dateEnvoi'], $donnees['contenu'], $donnees['mail'], $donnees['idListe'], $donnees['mailMembre']);
             $notif->setValide($donnees['valide']);
+            $notif->setLu($donnees['lu']);
             array_push($notifs, $notif);
         }
         return $notifs;
-	/*
+        /*
 
-while ($donnesListe = $getListeProp->fetch()) {
-                $liste = $this->loadListe($donnesListe['idListe']);
-                array_push($tabListes, $liste);
+    while ($donnesListe = $getListeProp->fetch()) {
+                    $liste = $this->loadListe($donnesListe['idListe']);
+                    array_push($tabListes, $liste);
 
-            }
+                }
 
-*/
+    */
 	}
 
 

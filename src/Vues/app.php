@@ -56,36 +56,37 @@ if ($page != "login" && $page != "recuperationCompte" && $page != "disconnect" &
                     $user = unserialize($_SESSION['user']);
                     $countNotif = 0;
                     $countNotifNonRead = 0;
-                    $bddRequete = DB::getInstance()->getPDO();
+                    $bdd = DB::getInstance();
                     $mail = $user->getMail();
-                    $requete = $bddRequete->prepare("SELECT * FROM Notification WHERE mailMembre = :mail");
-                    $requete->bindParam(':mail', $mail);
-                    $requete->execute();
-                    while ($donneesNotif = $requete->fetch()){
-                        if ($donneesNotif['lu'] == 0){
+                    $requete = $bdd->loadNotif($mail);
+
+                    foreach ($requete as $donneesNotif) {
+                        if (!$donneesNotif->isLu()) {
                             $countNotifNonRead++;
                         }
                         $countNotif++;
                     }
                     $_SESSION['user'] = serialize($user);
-                    echo $countNotifNonRead;?></span>
+                    echo $countNotifNonRead; ?></span>
             </button>
             <?php
-                $user = unserialize($_SESSION['user']);
-                $mail = $user->getMail();
+            $user = unserialize($_SESSION['user']);
+            $mail = $user->getMail();
                 $notifs = DB::getInstance()->loadNotif($mail);
                 $i = 0;
                 ?><div class="dropdown-menu dropdown-menu-right"><?php
                     if (!empty($notifs)) {
-                        foreach ($notifs as $notification) {
-                            if ($i >= $countNotif-3) { ?>
-                                <div
-                                <a class="dropdown-item"><?= $notification->getContenu() ?></a>
-                                 </div> <?php
-                            }
-                            $i++;
-                        }
-                    }
+
+                for ($i = 0;
+                $i < 3;
+                $i++) {
+                if ($i < $countNotif) { ?>
+                <div
+                <a class="dropdown-item"><?= $notifs[$i]->getContenu() ?></a>
+            </div> <?php
+        }
+        }
+        }
                     ?>
                     <br>
                     <button class="btn" onclick="window.location.href='?page=notification'">Mes notifications</button>

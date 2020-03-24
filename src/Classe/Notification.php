@@ -101,7 +101,7 @@ abstract class Notification {
     /**
      * @param bool $lu
      */
-    public function setLu(bool $lu)
+    public function setLu($lu)
     {
         $this->lu = $lu;
     }
