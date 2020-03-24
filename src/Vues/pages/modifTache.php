@@ -15,6 +15,19 @@ $modifTache = new App\Controllers\ModificationTacheController;
    $id = $tache->getIdTache();
    $idListe = $tache->getIdListeTache();
 
+   if (isset($_SESSION["user"]))
+   {
+     $user = unserialize($_SESSION["user"]);
+     $liste = DB::getInstance()->loadListe($idListe);
+     if ($user->getMail() == $liste->getMailProprietaire()){
+       $proprio = "true";
+     } else {
+       $proprio = "false";
+     }
+     $mail = $user->getMail();
+   }
+
+
    if (isset($_POST['texte'])){
        if (!empty($_POST['texte'])) {
            $tache->setIntituleTache($_POST['texte']);
@@ -36,7 +49,7 @@ $modifTache = new App\Controllers\ModificationTacheController;
 <div class="jumbotron text-center">
 <h1 class="display-4"> Modification de la tâche </h1>
 </div>
-<button class="btn float-right " type="button" data-toggle="dropdown" data-target="membres"
+<button class="btn float-right " type="button" data-toggle="dropdown" data-target="membres" data-proprio="<?php echo $proprio; ?>" data-mail="<?php echo $mail; ?>"
         aria-haspopup="listbox" aria-expanded="false" id="delete" value="<?php echo $id.' '.$idListe; ?>"><img src="assests/delete.png" width="20" height="20"></button>
 
 

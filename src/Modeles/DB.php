@@ -531,7 +531,7 @@ class DB {
 	public function createNotifAvecChoix($idNotif, $repondu){
         $results = DB::getInstance()->getPDO()->prepare('insert into NotificationAvecChoix values (:idNotif, :repondu)');
         $results->bindParam(':idNotif', $idNotif);
-		$results->bindParam(':repondu', $repondu);
+		     $results->bindParam(':repondu', $repondu);
         $results->execute();
     }
 
@@ -540,6 +540,13 @@ class DB {
         $results->bindParam(':idNotif', $idNotif);
         $results->execute();
     }
+
+  public function createNotifSupprTache($idNotif, $idTache){
+    $results = DB::getInstance()->getPDO()->prepare('insert into NotificationSupprTache values (:idNotif, :idTache)');
+    $results->bindParam(':idNotif', $idNotif);
+     $results->bindParam(':idTache', $idTache);
+    $results->execute();
+  }
 
 
 	public function deleteNotifAjoutMembre($idNotif){
@@ -595,6 +602,10 @@ class DB {
     $res->execute();
 
     $res = DB::getInstance()->getPDO()->prepare("DELETE FROM NotificationChangementProprietaire WHERE idNotification = :idNotif");
+    $res->bindParam(":idNotif", $idNotif);
+    $res->execute();
+
+    $res = DB::getInstance()->getPDO()->prepare("DELETE FROM NotificationSupprTache WHERE idNotification = :idNotif");
     $res->bindParam(":idNotif", $idNotif);
     $res->execute();
 

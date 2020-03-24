@@ -101,6 +101,13 @@ CREATE TABLE `NotificationChangementProprietaire` (
   PRIMARY KEY (`idNotification`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+DROP TABLE IF EXISTS `NotificationSupprTache`;
+CREATE TABLE `NotificationSupprTache` (
+  `idNotification` int(10) NOT NULL,
+  `idTache` int(10) NOT NULL,
+  PRIMARY KEY (`idNotification`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 DROP TABLE IF EXISTS `Tache`;
 CREATE TABLE `Tache` (
