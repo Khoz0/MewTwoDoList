@@ -10,6 +10,7 @@ abstract class Notification {
   protected $dateCreation;
   protected $contenu;
   protected $lu;
+  protected $valide;
   protected $sourceUtilisateur;
   protected $destUtilisateur;
   protected $idListe;
@@ -18,7 +19,8 @@ abstract class Notification {
       $this->idNotif = $idNotif;
       $this->dateCreation = $dateCreation;
       $this->contenu = $contenu;
-      $this->lu = false;
+      $this->lu = 0;
+      $this->valide = 0;
       $this->sourceUtilisateur = $sourceUtilisateur;
       $this->idListe = $idListe;
       $this->destUtilisateur = $mailMembre;
@@ -131,6 +133,10 @@ abstract class Notification {
   public function supprimerBDD() {
     $bdd = DB::getInstance();
     $bdd->deleteNotification($this->idNotif);
+  }
+
+  public function sauvegarderBDD(){
+        DB::getInstance()->alterNotif($this->idNotif, $this->lu);
   }
 
     /**

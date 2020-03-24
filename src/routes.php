@@ -90,6 +90,8 @@ switch($page) {
 
     case 'changementProprietaireBDD':
         (new App\Controllers\ChangerProprietaire())->changerProprietaire();
+    case 'confirmJoinList':
+        (new App\Controllers\ConfirmJoin())->confirm();
 
     default: // Si, rien, alors erreur 404
         (new App\Controllers\ErreurController)->_404();

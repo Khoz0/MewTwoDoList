@@ -8,7 +8,7 @@ namespace App\Vues;
 <?php
 use App\Modeles\DB;
 
-$bdd = serialize(DB::getInstance()->loadListe($_GET["id"]));
+$bdd = DB::getInstance();
 $liste = DB::getInstance()->loadListe($_GET["id"]);
 $user = unserialize($_SESSION['user']);
 $proprio = $liste->getMailProprietaire();
@@ -24,6 +24,8 @@ $proprio = $liste->getMailProprietaire();
             <div class="dropdown-menu dropdown-menu-right" id = "membres">
                 <?php
                     $membres = $liste->recupererMembres();
+
+                    //Affichage pour le propriétaire de la liste
                     if ($liste->getMailProprietaire() == unserialize($_SESSION['user'])->getMail()){
                         foreach ($membres as $membre) {
                             ?>
@@ -35,13 +37,20 @@ $proprio = $liste->getMailProprietaire();
                                         <?php
                                             }
                                             $membreUser = DB::getInstance()->loadUtilisateur($membre);
-                                            echo $membreUser->getPseudo() ?>
-                                        <a href="?page=changementProprietaire&mailProprio=<?= unserialize($_SESSION['user'])->getMail()?>&mailMembre=<?=$membre?>&id=<?=$_GET['id']?>">
-                                            <img src="assests/changement.png" width="15" height="15" alt="changement">
-                                        </a>
-                                        <a href="?page=supprimerUserList&mail=<?= $membre ?>&idListe=<?= $_GET['id'] ?>">
-                                            <img src="assests/croix.png" width="15" height="15" alt="croix">
-                                        </a>
+                                            echo $membreUser->getPseudo() ;
+                                        if($membre != $proprio) {
+
+                                            ?>
+                                            <a href="?page=changementProprietaire&mailProprio=<?= unserialize($_SESSION['user'])->getMail() ?>&mailMembre=<?= $membre ?>&id=<?= $_GET['id'] ?>">
+                                                <img src="assests/changement.png" width="15" height="15"
+                                                     alt="changement">
+                                            </a>
+                                            <a href="?page=supprimerUserList&mail=<?= $membre ?>&idListe=<?= $_GET['id'] ?>">
+                                                <img src="assests/croix.png" width="15" height="15" alt="croix">
+                                            </a>
+                                            <?php
+                                        }
+                                        ?>
                                     </p>
                                 </div>
                             </div>
@@ -53,6 +62,8 @@ $proprio = $liste->getMailProprietaire();
                         </div>
                         <?php
                     }else{
+
+                        //Affichage pour membre invité
                         foreach ($membres as $membre) {
                             ?>
                             <div class="dropdown-item">
@@ -70,7 +81,8 @@ $proprio = $liste->getMailProprietaire();
                             </div>
                             <?php
                         }
-                        echo "<button class=\"btn col-lg-auto\" onclick=\"window.location.href='?page=supprimerUserList&mail=".$membre."&idListe=".$_GET["id"]."'\">Quitter la liste</button>";
+
+                        echo "<button class=\"btn col-lg-auto\" onclick=\"window.location.href='?page=supprimerUserList&mail=".$user->getMail()."&idListe=".$_GET["id"]."'\">Quitter la liste</button>";
                     }
                 ?>
             </div>
@@ -80,7 +92,7 @@ $proprio = $liste->getMailProprietaire();
 </div>
 
 <div class="jumbotron text-center">
-    <h1>Liste <?php echo htmlspecialchars(unserialize($bdd)->getIntituleListe()) ?></h1>
+    <h1>Liste <?php echo htmlspecialchars($liste->getIntituleListe()) ?></h1>
     <?php
     if($user->getMail() == $proprio) {
         ?>
@@ -88,7 +100,7 @@ $proprio = $liste->getMailProprietaire();
         <br>
 
         <a href="#"
-           onclick="conf_suppression(<?= htmlspecialchars($_GET["id"]) ?>, 'Liste <?= htmlspecialchars(unserialize($bdd)->getIntituleListe()) ?>')">
+           onclick="conf_suppression(<?= htmlspecialchars($_GET["id"]) ?>)">
             Supprimer la liste </a>
         <br>
         <br>
@@ -185,9 +197,10 @@ $proprio = $liste->getMailProprietaire();
                     }
                     ?>
                     <?php
+                    //Si quelqu'un est assigné à la tâche
                 } else {
-
-                    ?><br><h5><?=$userAssigne ?></h5><br>
+                    $pseudoUserAssigne = $bdd->loadUtilisateur($userAssigne)->getPseudo();
+                    ?><br><h5><?=$pseudoUserAssigne ?></h5><br>
 
                     <?php
                     if($user->getMail() == $proprio || $user->getMail() == $userAssigne) {

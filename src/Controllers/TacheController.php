@@ -19,15 +19,14 @@ class TacheController extends Controller {
 
     public function addUser(){
         $mail = $_GET['mail'];
-        $user = DB::getInstance()->loadUtilisateur($mail);
+        $bdd = DB::getInstance();
+        $user = $bdd->loadUtilisateur($mail);
         $pseudo = $user->getPseudo();
         $idTache = $_GET['idTache'];
         $idListe = $_GET['idListe'];
-        $bdd = DB::getInstance();
         $bdd->addUserTache($mail,$idTache);
         $tache = $bdd->loadTache($idTache);
         $liste = $bdd->loadListe($idListe);
-        $user = $bdd->loadUtilisateur($mail);
         $tache->setEtat();
         $tache->modifBDD();
 
@@ -41,10 +40,8 @@ class TacheController extends Controller {
             $idNotif = $donnees['idNotification'];
         }
         foreach ($membres as $membre){
-            if ($membre != $mail) {
-                $idNotif++;
-                $bdd->createNotif($idNotif, date("Y-m-d"), null, $contenu, 0, $mail, $idListe, $membre);
-            }
+            $idNotif++;
+            $bdd->createNotif($idNotif, date("Y-m-d"), null, $contenu, 0, $mail, $idListe, $membre);
         }
 
 

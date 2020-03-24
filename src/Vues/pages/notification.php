@@ -41,9 +41,12 @@ if(isset($_SESSION["user"])){
             <?php
                 $cpt = 0;
                 foreach ($notifications as $not){
+                    $not->setLu(1);
+                    $not->sauvegarderBDD();
+                    $nomListe = DB::getInstance()->loadListe($not->getIdListe())->getIntituleListe();
                     echo "<tr>";
                     echo "<th scope=\"row\"> <input type=\"checkbox\" data-id=".$not->getIdNotif()." id=\"notif\".$cpt ></th>";
-                    echo "<td> Liste ".$not->getIdListe()."</td>";
+                    echo "<td><a href='?page=liste&id=".$not->getIdListe()."'> ".$nomListe."</a></td>";
                     echo "<td>".$not->getDateCreation()."</td>";
                     if(DB::getInstance()->isNotifAvecChoix($not->getIdNotif())) {
                         if(DB::getInstance()->isNotifProprio($not->getIdNotif())){?>
@@ -53,7 +56,7 @@ if(isset($_SESSION["user"])){
 
                             <?php }else{ ?>
 
-                            <td> <?php echo $not->getContenu() ?>  <a href="#" style="color:#70F92B;" onclick="conf_validation_ajout(<?php echo $not->getIdListe() ?>,'<?php echo $mail ?>')">accepter</a>
+                            <td> <?php echo $not->getContenu() ?>  <a href="#" style="color:#70F92B;" onclick="conf_validation_ajout(<?php echo $not->getIdListe() ?>,'<?php echo $not->getIdNotif() ?>')">accepter</a>
                                 <a href="#" style="color:#F73B1D;" onclick="conf_refus(<?php echo $not->getIdListe() ?>,<?php echo $not->getIdNotif() ?>)">refuser</a></td>
 
                          <?php }

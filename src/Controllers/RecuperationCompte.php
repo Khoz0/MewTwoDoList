@@ -32,7 +32,6 @@ class RecuperationCompte extends Controller
         $password = $this->generatePass();
 
         $bdd = DB::getInstance();
-        $bdd->updateUtilisateur($str, null, null, password_hash($password, PASSWORD_DEFAULT), null, null);
 
 
 
@@ -68,10 +67,12 @@ class RecuperationCompte extends Controller
 
         $mail->addReplyTo('mewtwodolist@gmail.com','Support');
 
+
         if(!$mail->send()) {
             $err = 'Erreur, message non envoyé.';
         } else {
             $err = 'Le message a bien été envoyé !';
+            $bdd->updateUtilisateur($str, null, null, password_hash($password, PASSWORD_DEFAULT), null, null);
         }
 
         return $err;
@@ -116,7 +117,7 @@ class RecuperationCompte extends Controller
     }
 
     function generatePass() {
-        $charactersList = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ&(-_)=$!@%£+°[]#';
+        $charactersList = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
         $pass = '';
         for ($cpt = 0; $cpt < 8; $cpt++) {
