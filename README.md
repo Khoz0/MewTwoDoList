@@ -20,3 +20,13 @@ Un exemple de configuration est fourni dans **src/Config/config-exemple.ini**.
 
 	; Le nom d'hôte de la base de donnees
 	host=localhost
+
+## Mise en place de la BDD
+
+	php install.php
+	
+## Mise en place du serveur HTTP
+
+	php -S localhost:8080 -t ./public/
+	
+Puis se rendre sur la page : **//localhost:8080**
