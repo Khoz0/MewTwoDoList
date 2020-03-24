@@ -5,7 +5,7 @@
         <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
             <div class="card card-sign_in my-5">
                 <div class="card-body">
-                    <h5 class="card-title text-center">Connexion / Déconnexion</h5>
+                    <h5 class="card-title text-center">Connexion</h5>
                     <form class="form-sign_in" method="post" action="?page=sessioncreate">
                         <div class="form-label-group">
                             <input type="email" id="inputEmail" name="mail" class="form-control"

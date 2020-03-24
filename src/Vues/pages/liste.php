@@ -147,11 +147,11 @@ $proprio = $liste->getMailProprietaire();
                                     value="<?php echo $id; ?>"><img src="assests/edit.png" alt="edit" width="20"
                                                                     height="20"></button>
                         </div>
+
                      <!--Check box de tâche finie-->
                      <div class="col">
                          <input type="checkbox" aria-label="..." class="valide" id="valide" value="<?php echo $id; ?>" <?php if ($valide == 1) {
-                echo 'checked';
-            } ?> >
+                            echo 'checked'; } ?> >
                      </div>
 
                         <?php
@@ -168,7 +168,7 @@ $proprio = $liste->getMailProprietaire();
                     }
 
                     //Si c'est le propriétaire il peut ajouter un utilisateur autre que lui
-                    if($user->getMail() == $proprio) {
+                    if($user->getMail() == $proprio && $tache->getEtat()!="Finie") {
                         ?>
                         <div>
                             <form method="post" name="<?= htmlspecialchars($nom) ?> " action="#">
@@ -182,7 +182,7 @@ $proprio = $liste->getMailProprietaire();
                     }
 
                     //Si c'est une autre personne il ne peut que se proposer lui même
-                    else {
+                    elseif ($tache->getEtat()!="Finie") {
                         ?>
                         <div>
                             <form method="post" name="<?= htmlspecialchars($nom) ?> " action="#">
@@ -210,7 +210,7 @@ $proprio = $liste->getMailProprietaire();
                         <?php
 
                         //Si l'utilisateur assigné à la tâche est connecté
-                        if($user->getMail() == $userAssigne) {
+                        if($user->getMail() == $userAssigne && $tache->getEtat()!="Finie") {
                             ?>
                             <form method="post" action="#">
                                 <a href="?page=deleteUserTache&mail=<?= $user->getMail() ?>&idTache=<?= $id; ?>&idListe=<?= $_GET['id']; ?>">
@@ -224,7 +224,7 @@ $proprio = $liste->getMailProprietaire();
                         }
 
                         //Si le propriétaire est connecté
-                        else {
+                        elseif($tache->getEtat()!="Finie") {
                             ?>
                             <form method="post" action="#">
                                 <a href="?page=deleteUserTache&mail=<?= $user->getMail() ?>&idTache=<?= $id; ?>&idListe=<?= $_GET['id']; ?>">

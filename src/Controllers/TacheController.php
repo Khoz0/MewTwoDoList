@@ -44,7 +44,6 @@ class TacheController extends Controller {
             $bdd->createNotif($idNotif, date("Y-m-d"), null, $contenu, 0, $mail, $idListe, $membre);
         }
 
-
         $this->redirect("liste&id=$idListe");
     }
 
