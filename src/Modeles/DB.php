@@ -701,5 +701,30 @@ while ($donnesListe = $getListeProp->fetch()) {
         $bddRequete->execute();
     }
 
+    public function getListeProprietaire($mail){
+        $listes = array();
+        $bdd = DB::getInstance()->getPDO()->prepare("select * from Liste where mailProprietaire = :mail");
+        $bdd->bindParam(':mail', $mail);
+        $bdd->execute();
+        while($donnees = $bdd->fetch()){
+            $liste = DB::getInstance()->loadListe($donnees['idListe']);
+            array_push($listes, $liste);
+        }
+        return $listes;
+    }
+
+    public function getListeInvite($mail){
+        $listes = array();
+        $bdd = DB::getInstance()->getPDO()->prepare("select * from Membre where mail = :mailMembre and idListe not in (select idListe from Liste where mailProprietaire = :mail)");
+        $bdd->bindParam(':mailMembre', $mail);
+        $bdd->bindParam(':mail', $mail);
+        $bdd->execute();
+        while($donnees = $bdd->fetch()){
+            $liste = DB::getInstance()->loadListe($donnees['idListe']);
+            array_push($listes, $liste);
+        }
+        return $listes;
+    }
+
 
 }

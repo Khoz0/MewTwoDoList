@@ -59,7 +59,6 @@ class ListeController extends Controller {
         $bddRequete = DB::getInstance()->getPDO();
         $requete = $bddRequete->prepare("SELECT * FROM Notification");
         $requete->execute();
-        $idNotif = 0;
         $liste = $bdd->loadListe($idListe);
 
         $idNotif = 0;
