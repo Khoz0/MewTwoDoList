@@ -9,6 +9,8 @@ class NotificationChangementProprietaire extends NotificationAvecChoix {
       parent::__construct($idNotif,$dateCreation, $contenu, $sourceUtilisateur, $idListe, $mailMembre);
     }
 
+
+
     public function changementProprietaire() {
 
     }

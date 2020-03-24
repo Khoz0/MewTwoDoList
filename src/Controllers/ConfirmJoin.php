@@ -26,23 +26,39 @@ class ConfirmJoin extends Controller
             $notifs = $bdd->loadNotif($user->getMail());
 
             foreach($notifs as $notif){
-                if($notif->getIdNotif()==$_GET['idNotif']){
+
+                if($notif->getIdNotif()==$_GET['idNotif'] && !$notif->valide()){
+
                     $ok = true;
                 }
             }
 
+
+
             foreach ($liste->getTabUtilisateur() as $usr){
-                if($user->getMail()==$usr)
+                if($user->getMail()==$usr) {
+                    if(isset($notif)){
+
+                        $notif->setValide(1);
+                        $notif->sauvegarderBDD();
+                    }
                     $ok = false;
+                }
             }
 
 
             if($ok) {
-                $bdd->addMembre($user->getMail(), $idListe);
+                if(isset($notif)){
 
+                    $notif->setValide(1);
+                    $notif->sauvegarderBDD();
+                }
+
+                $bdd->addMembre($user->getMail(), $idListe);
+                $this->redirect("liste&id=$idListe");
                 $liste->ajouterUtilisateur($user->getMail());
+                $notif->sauvegarderBDD();
             }
-            $this->redirect("liste&id=$idListe");
             exit();
         }
     }

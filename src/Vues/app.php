@@ -55,6 +55,7 @@ if ($page != "login" && $page != "recuperationCompte" && $page != "disconnect" &
                 <span class="badge badge-pill "><?php
                     $user = unserialize($_SESSION['user']);
                     $countNotif = 0;
+                    $countNotifNonRead = 0;
                     $bddRequete = DB::getInstance()->getPDO();
                     $mail = $user->getMail();
                     $requete = $bddRequete->prepare("SELECT * FROM Notification WHERE mailMembre = :mail");
@@ -62,11 +63,12 @@ if ($page != "login" && $page != "recuperationCompte" && $page != "disconnect" &
                     $requete->execute();
                     while ($donneesNotif = $requete->fetch()){
                         if ($donneesNotif['lu'] == 0){
-                            $countNotif++;
+                            $countNotifNonRead++;
                         }
+                        $countNotif++;
                     }
                     $_SESSION['user'] = serialize($user);
-                    echo $countNotif;?></span>
+                    echo $countNotifNonRead;?></span>
             </button>
             <?php
                 $user = unserialize($_SESSION['user']);
@@ -78,9 +80,8 @@ if ($page != "login" && $page != "recuperationCompte" && $page != "disconnect" &
                         foreach ($notifs as $notification) {
                             if ($i >= $countNotif-3) { ?>
                                 <div
-                                    <a class="dropdown-item"><?= $notification->getContenu() ?></a>
-                                </div>
-                            <?php
+                                <a class="dropdown-item"><?= $notification->getContenu() ?></a>
+                                 </div> <?php
                             }
                             $i++;
                         }
