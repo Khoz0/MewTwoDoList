@@ -78,15 +78,9 @@ if ($page != "login" && $page != "recuperationCompte" && $page != "disconnect" &
                         foreach ($notifs as $notification) {
                             if ($i >= $countNotif-3) { ?>
                                 <div
-                                <a class="dropdown-item"><?= $notification->getContenu() ?></a>
-                                <?php
-                                if (DB::getInstance()->isNotifAvecChoix($notification->getIdNotif())) {
-                                    ?>
-                                    <button class="btn">Accepter</button>
-                                    <button class="btn">Refuser</button>
-                                    <?php
-                                }
-                                ?> </div> <?php
+                                    <a class="dropdown-item"><?= $notification->getContenu() ?></a>
+                                </div>
+                            <?php
                             }
                             $i++;
                         }
