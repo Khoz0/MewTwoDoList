@@ -10,6 +10,12 @@ function conf_validation_ajout(idListe, idNotif) {
     }
 }
 
+function conf_validation_del(idListe, idNotif) {
+    if (confirm('Êtes vous sûr de vouloir supprimer la tâche ?')) {
+        window.location.href='?page=deleteTache&idListe='+idListe+'&idNotif='+idNotif;
+    }
+}
+
 
 function conf_refus(idListe, idNotif) {
     if (confirm('Êtes vous sûr de vouloir refuser cette notification ?')) {
