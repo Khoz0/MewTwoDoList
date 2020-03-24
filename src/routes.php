@@ -93,6 +93,9 @@ switch($page) {
     case 'confirmJoinList':
         (new App\Controllers\ConfirmJoin())->confirm();
 
+		case 'deleteTache':
+		      (new App\Controllers\DeleteTache())->deleteTache();
+
     default: // Si, rien, alors erreur 404
         (new App\Controllers\ErreurController)->_404();
         break;

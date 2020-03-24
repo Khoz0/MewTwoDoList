@@ -636,6 +636,10 @@ class DB {
     */
 	}
 
+  
+
+
+
 
     /**
      * Renvoie vrai si c'est une notification avec choix
@@ -691,6 +695,21 @@ class DB {
         }
     }
 
+    public function isNotifSupprTache($idNotif){
+        $bdd = DB::getInstance()->getPDO()->prepare("SELECT count(*) FROM NotificationSupprTache where idNotification = :id");
+        $bdd->bindParam(':id', $idNotif);
+        $bdd->execute();
+        $donnees = $bdd->fetch();
+        if($donnees[0] == 0){
+            // on n'a pas trouvé la notification dans la table des notifications avec choix
+            return false;
+        }else{
+            return true;
+        }
+    }
+
+
+
     /**
      * Renvoie le mail du propriétaire de la liste
      */
@@ -738,6 +757,16 @@ class DB {
             array_push($listes, $liste);
         }
         return $listes;
+    }
+
+    public function getNotifTache($idNotif){
+      $bdd = DB::getInstance()->getPDO()->prepare("SELECT * from NotificationSupprTache WHERE idNotification = :idNotif");
+      $bdd->bindParam(":idNotif", $idNotif);
+      $bdd->execute();
+      if ($donnes = $bdd->fetch()){
+        $tache = DB::getInstance()->loadTache($donnes['idTache']);
+      }
+      return $tache;
     }
 
 
