@@ -28,7 +28,7 @@ if(isset($_SESSION["user"])){?>
         <div class="row justify-content-center" id="liste" style="display: flex">
             <?php
             $user = unserialize($_SESSION["user"]);
-            $listes = $user->getListesProprietaire();
+            $listes = DB::getInstance()->getListeProprietaire($user->getMail());
             foreach ($listes as $liste) {
                     ?>
                     <div class="jumbotron col-auto" id="<?= $liste->getIntituleListe() ?>\<?= $liste->getDateCreation() ?>\<?= $liste->getDateFin() ?>" style="border: solid; padding: 30px; margin: 10px;"
@@ -57,7 +57,7 @@ if(isset($_SESSION["user"])){?>
             $user = unserialize($_SESSION["user"]);
             $mail = $user->getMail();
             $bdd = DB::getInstance();
-            $listesTotal = $bdd->recupererListesMembres($mail);
+            /*$listesTotal = $bdd->recupererListesMembres($mail);
             $listesInvite = array();
             foreach ($listesTotal as $listeMembre){
                 if (!empty($listes)) {
@@ -67,7 +67,8 @@ if(isset($_SESSION["user"])){?>
                 }else{
                     array_push($listesInvite, $listeMembre);
                 }
-            }
+            }*/
+            $listesInvite = $bdd->getListeInvite($mail);
             foreach ($listesInvite as $listeInvite){
             ?>
 

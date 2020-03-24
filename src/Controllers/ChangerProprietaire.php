@@ -34,6 +34,13 @@ class ChangerProprietaire extends Controller {
         $mail = $_GET['mailMembre'];
         $id = $_GET['idListe'];
         DB::getInstance()->changeProprietaire($mail,$id);
+
+        // Ajout de la liste dans l'objet Utilisateur
+        $liste = DB::getInstance()->loadListe($id);
+        $user = unserialize($_SESSION['user']);
+        $user->ajouterListe($liste);
+        $_SESSION['user'] = serialize($user);
+
         header("Location: ?page=notification");
     }
 

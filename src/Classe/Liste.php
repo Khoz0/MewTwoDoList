@@ -213,5 +213,18 @@ class Liste {
         return $this->tabUtilisateur;
     }
 
+    /**
+     * Regarde si toutes les tâches sont validées
+     */
+    public function checkEtatTaches(){
+        $toutesTaches = true;
+        foreach ($this->tabTache as $tache){
+            if($tache->getEtat() != "Finie"){
+                $toutesTaches = false;
+            }
+        }
+        return $toutesTaches;
+    }
+
 
 }

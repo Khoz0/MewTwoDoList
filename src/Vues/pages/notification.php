@@ -7,6 +7,7 @@ use App\Modeles\DB;
 <div class="jumbotron-fluid text-center">
 
     <?php
+
 if(isset($_SESSION["user"])){
     $user = unserialize($_SESSION['user']);
     $notif = 0;
@@ -56,9 +57,14 @@ if(isset($_SESSION["user"])){
 
                             <?php }else{ ?>
 
-                            <td> <?php echo $not->getContenu() ?>  <a href="#" style="color:#70F92B;" onclick="conf_validation_ajout(<?php echo $not->getIdListe() ?>,'<?php echo $not->getIdNotif() ?>')">accepter</a>
+                            <td> <?php echo $not->getContenu() ?>
+                                <?php if(!$not->valide()){?>
+                                <a href="#" style="color:#70F92B;" onclick="conf_validation_ajout(<?php echo $not->getIdListe() ?>,'<?php echo $not->getIdNotif() ?>')">accepter</a>
                                 <a href="#" style="color:#F73B1D;" onclick="conf_refus(<?php echo $not->getIdListe() ?>,<?php echo $not->getIdNotif() ?>)">refuser</a></td>
-
+                                <?php }else{?>
+                                <a href="#" style="color:#70F92B;" >accepter</a>
+                                <a href="#" style="color:#F73B1D;">refuser</a></td>
+                            <?php }?>
                          <?php }
                     }else{
                         echo "<td>" . $not->getContenu() . "</td>";
