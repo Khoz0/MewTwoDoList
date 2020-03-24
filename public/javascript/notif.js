@@ -7,7 +7,7 @@ function init() {
 function deleteNotif() {
   var path = window.location.pathname;
   if (path == "/") {
-    url = url = window.location.origin + "/ajax/delete_notif.php";
+    url = window.location.origin + "/ajax/delete_notif.php";
   } else {
     var base = path.split("/");
     url = window.location.origin + "/" + base[1] + "/ajax/delete_notif.php";
