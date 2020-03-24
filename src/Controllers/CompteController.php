@@ -123,8 +123,6 @@ class CompteController extends Controller {
         $loginSession = unserialize($_SESSION['user'])->getMail();
 
         //On supprime l'ancienne photo de profil
-        $oldPhoto = unserialize($_SESSION['user'])->getPhoto();
-        unlink($oldPhoto);
 
         $file_photo = $_FILES["inputPhoto"];
 
