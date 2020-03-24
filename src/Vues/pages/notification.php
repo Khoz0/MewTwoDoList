@@ -46,7 +46,7 @@ if(isset($_SESSION["user"])){
             $not->sauvegarderBDD();
             $nomListe = DB::getInstance()->loadListe($not->getIdListe())->getIntituleListe();
             echo "<tr>";
-            echo "<th scope=\"row\"> <input type=\"checkbox\" data-id=" . $not->getIdNotif() . " id=\"notif\".$cpt ></th>";
+            echo "<th scope=\"row\"> <input type=\"checkbox\" data-id=". $not->getIdNotif()." id=\"notif\".$cpt onclick=\"disableNoChecked()\"></th>";
 
             $liste = DB::getInstance()->loadListe($not->getIdListe());
 

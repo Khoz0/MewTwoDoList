@@ -2,6 +2,8 @@ function init() {
   $("#suppr").click(deleteNotif);
   $("#check").off('click');
   $("#check").click(check);
+  disableNoChecked();
+
 }
 
 function deleteNotif() {
@@ -12,10 +14,8 @@ function deleteNotif() {
     var base = path.split("/");
     url = window.location.origin + "/" + base[1] + "/ajax/delete_notif.php";
   }
-  var notif = [];
-  $(":checked").each(function() {
-    notif.push($(this).data("id"));
-  });
+
+  disableNoChecked();
 
   if (notif.length > 0) {
     $.ajax({
@@ -45,10 +45,11 @@ function check() {
   } else {
     checkAll();
     $("#check").html("Tout désélectionner");
+
   }
+  disableNoChecked();
 
 }
-
 
 function checkAll() {
   $("[type=checkbox]").each(function(){
@@ -60,6 +61,21 @@ function uncheckAll() {
   $("[type=checkbox]").each(function(){
       $(this).prop("checked", false);
   });
+}
+
+function disableNoChecked(){
+
+  var notif = [];
+  $(":checked").each(function() {
+    notif.push($(this).data("id"));
+  });
+
+  if(notif.length > 0){
+    $("#suppr").removeAttr('disabled');
+  }
+  else{
+    $("#suppr").attr('disabled', 'disabled');
+  }
 }
 
 $(document).ready(function() {
