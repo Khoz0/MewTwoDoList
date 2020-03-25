@@ -82,14 +82,18 @@ if ($page != "login" && $page != "recuperationCompte" && $page != "disconnect" &
                 $i++) {
                 if ($i < $countNotif) { ?>
                 <div
-                <a class="dropdown-item"><?= $notifs[$i]->getContenu() ?></a>
+                <button  onclick="window.location.href='?page=notification'" class="dropdown-item"><?= $notifs[$i]->getContenu() ?></button>
             </div> <?php
         }
         }
         }
-                    ?>
-                    <br>
-                    <button class="btn" onclick="window.location.href='?page=notification'">Mes notifications</button>
+                    if($countNotif == 0) {
+                        ?>
+                        <button class="btn dropdown-item" onclick="window.location.href='?page=notification'">Mes notifications
+                        </button>
+                        <?php
+                    }
+            ?>
                 </div>
         </div>
         <div class="btn-group">
