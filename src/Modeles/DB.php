@@ -374,7 +374,7 @@ class DB {
 
     public function alterNotif($idNotif, $lu,$valide){
 
-        $results = DB::getInstance()->getPDO()->prepare('UPDATE Notification SET lu=:lu AND valide=:valide WHERE idNotification = :id');
+        $results = DB::getInstance()->getPDO()->prepare('UPDATE Notification SET lu=:lu, valide=:valide WHERE idNotification = :id');
         $results->bindParam(':lu', $lu);
         $results->bindParam(':valide', $valide);
         $results->bindParam(':id', $idNotif);
@@ -612,10 +612,10 @@ class DB {
 
   }
 
-	public function loadNotif($mail)
+	public function loadNotifs($mail)
     {
         $notifs = array();
-        $bdd = DB::getInstance()->getPDO()->prepare("select * from Notification where mailMembre = :mail order by idNotification DESC");
+        $bdd = DB::getInstance()->getPDO()->prepare("SELECT * FROM Notification WHERE mailMembre = :mail ORDER BY idNotification DESC");
         $bdd->bindParam(':mail', $mail);
         $bdd->execute();
         while ($donnees = $bdd->fetch()) {
@@ -635,6 +635,18 @@ class DB {
 
     */
 	}
+
+	public function loadNotif($idNotif){
+        $bdd = DB::getInstance()->getPDO()->prepare("SELECT * FROM Notification WHERE idNotification = :idNotif ");
+        $bdd->bindParam(':idNotif', $idNotif);
+        $bdd->execute();
+        $notif = null;
+        if($donnees = $bdd->fetch()){
+            $notif = new NotificationChangementProprietaire($donnees['idNotification'], $donnees['dateEnvoi'], $donnees['contenu'], $donnees['mail'], $donnees['idListe'], $donnees['mailMembre']);
+        }
+        return $notif;
+
+    }
 
   
 

@@ -12,7 +12,7 @@ if(isset($_SESSION["user"])){
     $user = unserialize($_SESSION['user']);
     $notif = 0;
     $mail = $user->getMail();
-    $notifications = DB::getInstance()->loadNotif($mail);
+    $notifications = DB::getInstance()->loadNotifs($mail);
     foreach ($notifications as $not){
         $notif++;
     }
@@ -61,29 +61,29 @@ if(isset($_SESSION["user"])){
             ?>
 
             <td> <?php echo $not->getContenu() ?> <a href="#" class="btn btn-dark float-right"
-                                                     onclick="conf_validation_proprio(<?php echo $not->getIdListe() ?>, '<?php echo $mail ?>')">accepter</a>
+                                                     onclick="conf_validation_proprio(<?php echo $not->getIdListe() ?>, '<?php echo $mail ?>')">Accepter</a>
                 <!-- <a href="#" style="color:#F73B1D;" onclick="conf_refus(<?php echo $not->getIdListe() ?>,<?php echo $not->getIdNotif() ?>)">refuser</a></td>-->
 
               <?php }else if (DB::getInstance()->isNotifSupprTache($not->getIdNotif())){?>
                   <td> <?php echo $not->getContenu() ?>
                                     <?php if(!$not->valide()) { ?>
                                         <a href="#" class="btn btn-dark float-right"
-                                           onclick="conf_validation_del(<?php echo $not->getIdListe() ?>,'<?php echo $not->getIdNotif() ?>')">accepter</a>
+                                           onclick="conf_validation_del(<?php echo $not->getIdListe() ?>,'<?php echo $not->getIdNotif() ?>')">Accepter</a>
                                         <!--<a href="#" style="color:#F73B1D;" onclick="conf_refus(<?php echo $not->getIdListe() ?>,<?php echo $not->getIdNotif() ?>)">refuser</a></td>-->
                                     <?php }else{?>
-                                        <a href="#" class="btn btn-dark float-right">accepter</a>
-                                        <!--<a href="#" style="color:#F73B1D;">refuser</a></td>-->
+                                        <!--<a href="#" class="btn btn-dark float-right">Accepter</a>
+                                        <a href="#" style="color:#F73B1D;">refuser</a></td>-->
                                     <?php }?>
                              <?php } else {?>
 
             <td> <?php echo $not->getContenu() ?>
                                 <?php if(!$not->valide()) { ?>
                                     <a href="#" class="btn btn-dark float-right"
-                                       onclick="conf_validation_ajout(<?php echo $not->getIdListe() ?>,'<?php echo $not->getIdNotif() ?>')">accepter</a>
+                                       onclick="conf_validation_ajout(<?php echo $not->getIdListe() ?>,'<?php echo $not->getIdNotif() ?>')">Accepter</a>
                                     <!--<a href="#" style="color:#F73B1D;" onclick="conf_refus(<?php echo $not->getIdListe() ?>,<?php echo $not->getIdNotif() ?>)">refuser</a></td>-->
                                 <?php }else{?>
-                                    <a href="#" class="btn btn-dark float-right">accepter</a>
-                                    <!--<a href="#" style="color:#F73B1D;">refuser</a></td>-->
+                                    <!--<a href="#" class="btn btn-dark float-right" >Accepter</a>
+                                    <a href="#" style="color:#F73B1D;">refuser</a></td>-->
                                 <?php }?>
                          <?php }
                     }else{

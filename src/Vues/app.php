@@ -58,7 +58,7 @@ if ($page != "login" && $page != "recuperationCompte" && $page != "disconnect" &
                     $countNotifNonRead = 0;
                     $bdd = DB::getInstance();
                     $mail = $user->getMail();
-                    $requete = $bdd->loadNotif($mail);
+                    $requete = $bdd->loadNotifs($mail);
 
                     foreach ($requete as $donneesNotif) {
                         if (!$donneesNotif->isLu()) {
@@ -72,7 +72,7 @@ if ($page != "login" && $page != "recuperationCompte" && $page != "disconnect" &
             <?php
             $user = unserialize($_SESSION['user']);
             $mail = $user->getMail();
-                $notifs = DB::getInstance()->loadNotif($mail);
+                $notifs = DB::getInstance()->loadNotifs($mail);
                 $i = 0;
                 ?><div class="dropdown-menu dropdown-menu-right"><?php
                     if (!empty($notifs)) {

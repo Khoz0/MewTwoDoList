@@ -14,6 +14,9 @@ class ConfirmJoin extends Controller
        $err = "";
         if (isset($_SESSION["user"]) && isset($_GET['idListe']) && isset($_GET['idNotif'])) {
 
+
+            echo "Tous les champs sont remplis<br>";
+
             $bdd = DB::getInstance();
 
             $idListe= $_GET['idListe'];
@@ -23,7 +26,7 @@ class ConfirmJoin extends Controller
 
             $ok = false;
 
-            $notifs = $bdd->loadNotif($user->getMail());
+            /*$notifs = $bdd->loadNotifs($user->getMail());
 
             foreach($notifs as $notif){
 
@@ -31,14 +34,17 @@ class ConfirmJoin extends Controller
 
                     $ok = true;
                 }
-            }
+            }*/
 
+            $notif = $bdd->loadNotif($_GET['idNotif']);
+            if($notif != null){
+                $ok = true;
+            }
 
 
             foreach ($liste->getTabUtilisateur() as $usr){
                 if($user->getMail()==$usr) {
-                    if(isset($notif)){
-
+                    if($notif != null){
                         $notif->setValide(1);
                         $notif->sauvegarderBDD();
                     }
@@ -48,12 +54,8 @@ class ConfirmJoin extends Controller
 
 
             if($ok) {
-                if (isset($notif)) {
 
-                    $notif->setValide(1);
-                    $notif->sauvegarderBDD();
-                }
-
+                $notif->setValide(1);
                 $bdd->addMembre($user->getMail(), $idListe);
                 $this->redirect("liste&id=$idListe");
                 $liste->ajouterUtilisateur($user->getMail());
