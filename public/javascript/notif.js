@@ -1,3 +1,5 @@
+var notification = [];
+
 function init() {
   $("#suppr").click(deleteNotif);
   $("#check").off('click');
@@ -16,13 +18,13 @@ function deleteNotif() {
   }
 
   disableNoChecked();
-
-  if (notif.length > 0) {
+  
+  if (notification.length > 0) {
     $.ajax({
       type: 'POST',
       url: url,
       data: {
-        id: JSON.stringify(notif)
+        id: JSON.stringify(notification)
       },
       timeout: 5000,
       success: function() {
@@ -65,12 +67,12 @@ function uncheckAll() {
 
 function disableNoChecked(){
 
-  var notif = [];
   $(":checked").each(function() {
-    notif.push($(this).data("id"));
+    notification.push($(this).data("id"));
+
   });
 
-  if(notif.length > 0){
+  if(notification.length > 0){
     $("#suppr").removeAttr('disabled');
   }
   else{
