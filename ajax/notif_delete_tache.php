@@ -6,6 +6,7 @@ require_once('../src/Modeles/DB.php');
 require_once('../src/Classe/Tache.php');
 require_once('../src/Classe/Liste.php');
 require_once('../src/Classe/Notification.php');
+require_once('../src/Classe/Utilisateur.php');
 
 
 
