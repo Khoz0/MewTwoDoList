@@ -33,6 +33,8 @@ class ChangerProprietaire extends Controller {
     public function changerProprietaire(){
         $mail = $_GET['mailMembre'];
         $id = $_GET['idListe'];
+        $idNotif = $_GET['idNotif'];
+
         DB::getInstance()->changeProprietaire($mail,$id);
 
         // Ajout de la liste dans l'objet Utilisateur
@@ -40,6 +42,11 @@ class ChangerProprietaire extends Controller {
         $user = unserialize($_SESSION['user']);
         $user->ajouterListe($liste);
         $_SESSION['user'] = serialize($user);
+
+        //On passe la notification comme validée
+        $not = DB::getInstance()->loadNotif($idNotif);
+        $not->setValide(1);
+        $not->sauvegarderBDD();
 
         header("Location: ?page=notification");
     }

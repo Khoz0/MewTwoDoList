@@ -16,7 +16,7 @@ abstract class Controller {
 	protected function render(string $vue, array $variables = []): void {
 
 		// Variables des vues ici
-		$titre = 'Projet PPIL - groupe 1';
+		$titre = 'MewTwoDoList';
 		extract($variables);
 
 		// On recupere le contenu

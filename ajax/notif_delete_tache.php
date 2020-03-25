@@ -34,11 +34,12 @@ if (isset($_POST['id'])) {
             $mailMembre = $_POST['mail'];
 
             $mailProprio =  $liste->getMailProprietaire();
+            $membre = DB::getInstance()->loadUtilisateur($mailMembre);
             $idListe = $liste->getIdListe();
             $idTache = $tache->getIdTache();
 
 
-            $contenu = "Demande de suppression de la tâche ".$tache->getIntituleTache()." de la part de ".$mailProprio.", pour la liste ".$liste->getIntituleListe();
+            $contenu = "Demande de suppression de la tâche ".$tache->getIntituleTache()." de la part de ".$membre->getPseudo().", pour la liste ".$liste->getIntituleListe();
             $date = date("Y-m-d");
 
 

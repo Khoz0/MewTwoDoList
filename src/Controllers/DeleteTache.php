@@ -15,12 +15,19 @@ class DeleteTache extends Controller
             $idNotif = $_GET['idNotif'];
             $idListe = $_GET['idListe'];
             $tache = DB::getInstance()->getNotifTache($idNotif);
+
             if (isset($tache)) {
                 DB::getInstance()->deleteTache($tache->getIdTache());
                 $this->redirect("liste&id=$idListe");
             } else {
                 $this->redirect("notification");
             }
+
+            //On passe la notification comme validée
+            $not = DB::getInstance()->loadNotif($idNotif);
+            $not->setValide(1);
+            $not->sauvegarderBDD();
+
             exit();
         }
     }

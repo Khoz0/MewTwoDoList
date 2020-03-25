@@ -1,6 +1,6 @@
-function conf_validation_proprio(idListe, mailInvite) {
+function conf_validation_proprio(idListe, mailInvite, idNotif) {
     if (confirm('Êtes vous sûr de vouloir devenir le nouveau propriétaire ?')) {
-        window.location.href='?page=changementProprietaireBDD&idListe='+idListe+'&mailMembre='+mailInvite;
+        window.location.href='?page=changementProprietaireBDD&idListe='+idListe+'&mailMembre='+mailInvite+'&idNotif='+idNotif;
     }
 }
 
