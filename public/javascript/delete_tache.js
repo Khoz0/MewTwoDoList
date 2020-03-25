@@ -9,7 +9,8 @@ function deleteTache() {
   var base = path.split("/");
   url = window.location.origin + "/" + base[1] + "/ajax/delete_tache.php";
 
-  if ($(this).data("proprio") == "true") {
+
+  if ($(this).data("proprio") == true) {
     url = window.location.origin + "/" + base[1] + "/ajax/delete_tache.php";
     if (confirm('Êtes vous sûr de vouloir supprimer votre tâche ?\nCette action est définitive !')) {
 
