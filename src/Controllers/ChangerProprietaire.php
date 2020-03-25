@@ -46,6 +46,7 @@ class ChangerProprietaire extends Controller {
         //On passe la notification comme validée
         $not = DB::getInstance()->loadNotif($idNotif);
         $not->setValide(1);
+        $not->setLu(1);
         $not->sauvegarderBDD();
 
         header("Location: ?page=notification");

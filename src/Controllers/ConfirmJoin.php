@@ -46,6 +46,7 @@ class ConfirmJoin extends Controller
                 if($user->getMail()==$usr) {
                     if($notif != null){
                         $notif->setValide(1);
+                        $notif->setLu(1);
                         $notif->sauvegarderBDD();
                     }
                     $ok = false;
