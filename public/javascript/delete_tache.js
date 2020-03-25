@@ -7,7 +7,6 @@ function deleteTache() {
   var res = id.split(" ");
   var path = window.location.pathname;
   var base = path.split("/");
-  url = window.location.origin + "/" + base[1] + "/ajax/delete_tache.php";
 
 
   if ($(this).data("proprio") == true) {
