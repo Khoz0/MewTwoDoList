@@ -56,6 +56,7 @@ class ConfirmJoin extends Controller
             if($ok) {
 
                 $notif->setValide(1);
+                $notif->setLu(1);
                 $bdd->addMembre($user->getMail(), $idListe);
                 $this->redirect("liste&id=$idListe");
                 $liste->ajouterUtilisateur($user->getMail());
